@@ -1,0 +1,981 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Protecting Yourself</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-grid.cols-5{grid-template-columns:1fr 1fr 1fr 1fr 1fr;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary.warn{background:transparent; border-color:var(--coral); color:var(--coral);}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .goal-summary.warn b{color:var(--coral);}
+  .calc-btn-row{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(2,1fr);} .goal-grid{grid-template-columns:1fr;} .goal-grid.cols-5{grid-template-columns:1fr 1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} .goal-grid.cols-5{grid-template-columns:1fr;} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Protecting Yourself</h1>
+      </div>
+      <p class="subtitle">Unit 8 — Risk, Insurance &amp; Fraud Awareness I · 4 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/4"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Understanding Risk</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Types of Insurance</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Spotting Fraud &amp; Scams</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Unit Review: Protect Yourself</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Understanding Risk &amp; the Purpose of Insurance</h2>
+        <span class="standard-badge">NJSLS 9.1.8.RM.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain the concept of financial risk and describe how insurance uses risk pooling to protect individuals and families from major financial loss.</div></div>
+
+      <article class="lesson">
+        <p>Think of a time something unexpected and costly happened to you or your family &mdash; a broken phone, a car accident, a trip to the emergency room. Whoever ended up paying for it was dealing with <strong>risk</strong>: the possibility of financial loss from an unplanned, often unpredictable event. A car accident, a house fire, a medical emergency, a stolen bike &mdash; none of these are scheduled in advance, and that's exactly what makes them financially dangerous. A single one can cost far more than most families keep on hand.</p>
+        <p><strong>Insurance</strong> is how people manage that danger without each person having to absorb the full cost alone. A large group of people each pay a smaller, predictable amount &mdash; a <strong>premium</strong> &mdash; into a shared pool, so that when a smaller number of people in the pool experience a big unplanned loss, there's enough money in the pool to help cover it. This is called <strong>risk pooling</strong>, and it's the single idea every type of insurance is built on, whether it's protecting a car, a home, a person's health, or a family's income. Along with premium, five more vocabulary words come up constantly once real coverage is involved: <strong>deductible</strong> (the amount a policyholder pays out of pocket before insurance starts paying), <strong>co-pay</strong> (a fixed amount paid at the time of a covered service, common with health insurance &mdash; think $25 for a doctor visit), <strong>coverage</strong> or <strong>policy</strong> (the contract describing exactly what is, and isn't, protected), <strong>claim</strong> (a formal request asking the insurance company to pay for a covered loss), and <strong>beneficiary</strong> (the person who receives a payout, most relevant to life insurance).</p>
+        <p>Here's risk pooling with real numbers. Twenty-five classmates each contribute a $20 premium into a shared pool: 25 &times; $20 = <strong>$500</strong> total. During the year, one classmate has an unplanned $350 loss &mdash; a broken laptop needed for a class project. The pool easily covers it: $500 &minus; $350 = <strong>$150</strong> left over. That leftover $150 isn't wasted &mdash; it stays in the pool as a cushion. Now stretch the scenario: what if three classmates each had a $350 loss in the same year? Three losses would total $1,050, but the pool only holds $500 &mdash; nowhere near enough. This is exactly why real insurance companies don't pool premiums from 25 people; they pool them from many thousands or even millions of policyholders, and they keep large financial reserves on top of that, so that even when a lot of claims arrive at once &mdash; a hurricane, a bad flu season &mdash; there's still enough money to cover them. The logic is identical to the classroom pool; only the scale changes.</p>
+        <p>Not every possible loss is something insurance is built to cover, and the distinction matters. An <strong>insurable risk</strong> is unplanned, unpredictable, and financially significant &mdash; a house catching fire, a car accident, a serious illness requiring surgery, a break-in that results in stolen electronics. Something that <strong>isn't</strong> a good fit for insurance is either a planned expense (a family paying for a vacation six months in advance), ordinary wear and tear (a phone battery gradually wearing out after years of normal use), or a personal choice or debt (losing a bet with a friend, or simply overspending on a shopping trip). Insurance exists for the first category &mdash; sudden, costly, and outside anyone's control &mdash; not the second.</p>
+        <p>One more piece completes the picture: insurance companies don't charge every policyholder the same premium for the same coverage, even when the coverage itself is identical. A brand-new 16-year-old driver typically pays a noticeably higher auto insurance premium than a 40-year-old with twenty years of clean driving history, for the exact same car. That's not arbitrary &mdash; insurers set premiums based on the estimated <em>likelihood</em> and <em>typical cost</em> of a future claim for that specific policyholder, and a new, inexperienced driver statistically represents a higher chance of an accident. The same risk-based logic explains why a smoker often pays more for health or life insurance, or why a home in a flood zone costs more to insure than an identical home on higher ground: the price of managing risk is tied to how much risk is actually being managed.</p>
+        <p>Tomorrow's lesson builds directly on today's foundation, comparing the major types of insurance people actually buy and the trade-off between paying more now (a higher premium) versus paying more later if something goes wrong (a higher deductible).</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The Chen Family's Kitchen Fire</h4>
+        <p>The Chen family has paid $45 a month for homeowners insurance for six years and never once filed a claim. One evening, a small kitchen fire causes $4,000 in damage. Their policy has a $500 deductible, so after the Chens pay that $500 themselves, insurance covers the remaining $3,500.</p>
+        <p class="prompt">Using this month's vocabulary &mdash; risk pooling, premium, deductible, claim &mdash; explain why the six years of premiums the Chens paid without ever filing a claim weren't wasted money.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB Money as You Grow &amp; NGPF</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of risk and insurance, or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Risk, in the sense used in insurance, is best described as:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The possibility of financial loss from an unplanned, often unpredictable event</button>
+            <button class="quiz-opt" data-correct="false">A type of insurance policy</button>
+            <button class="quiz-opt" data-correct="false">The amount of a claim payout</button>
+            <button class="quiz-opt" data-correct="false">A guaranteed future expense</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Risk is about uncertainty &mdash; the chance of an unplanned, costly event, not a scheduled or guaranteed expense.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. What does risk pooling actually accomplish?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It lets a large group each contribute a smaller, predictable amount so the pool can cover a smaller number of members' larger unplanned losses</button>
+            <button class="quiz-opt" data-correct="false">It guarantees no one in the group will ever experience a loss</button>
+            <button class="quiz-opt" data-correct="false">It eliminates the need to pay any premium at all</button>
+            <button class="quiz-opt" data-correct="false">It only works if every single member files a claim every year</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Risk pooling spreads the cost of a few big unplanned losses across many smaller, predictable contributions &mdash; it doesn't prevent loss, it manages the cost of it.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. 28 neighbors each pay a $25 premium into a shared pool. One neighbor has an unplanned $400 loss. How much is left in the pool after covering the loss?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$300</button>
+            <button class="quiz-opt" data-correct="false">$700</button>
+            <button class="quiz-opt" data-correct="false">$400</button>
+            <button class="quiz-opt" data-correct="false">$25</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>28 &times; $25 = $700 total pool. $700 &minus; $400 = $300 left over.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. Which pair correctly matches a commonly insurable risk with something insurance typically does NOT cover?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A car totaled in an accident (insurable) vs. a phone battery wearing out after years of normal use (not insurable)</button>
+            <button class="quiz-opt" data-correct="false">A planned vacation (insurable) vs. a house fire (not insurable)</button>
+            <button class="quiz-opt" data-correct="false">Losing a bet with a friend (insurable) vs. a serious illness (not insurable)</button>
+            <button class="quiz-opt" data-correct="false">Ordinary wear and tear (insurable) vs. a break-in and theft (not insurable)</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Insurance covers sudden, unplanned, costly events (like an accident) &mdash; not planned expenses, personal debts, or ordinary wear and tear like a battery gradually wearing out.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. A brand-new 16-year-old driver usually pays a higher auto insurance premium than a 40-year-old with 20 years of clean driving history, for the exact same car and coverage. What best explains why?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Insurers price premiums based on the estimated likelihood and cost of future claims, and a new, inexperienced driver statistically represents higher risk</button>
+            <button class="quiz-opt" data-correct="false">New drivers are legally required to pay exactly double</button>
+            <button class="quiz-opt" data-correct="false">Older drivers automatically get a discount for no particular reason</button>
+            <button class="quiz-opt" data-correct="false">Premiums are assigned randomly and have nothing to do with risk</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Premiums are risk-based: insurers estimate how likely and how costly a claim is for a given policyholder, and price accordingly.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Think of something you, or your family, own or depend on that would be a major financial problem if it were suddenly lost, damaged, or stolen. Is it currently insured? Why do you think that decision was made?</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfntJEK4Uo3LmNp580wuUfp0TpcAzyOFqwwdIs7NBe1kYyYeQ/viewform" target="_blank" rel="noopener">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Types of Insurance &amp; the Premium-Deductible Trade-off</h2>
+        <span class="standard-badge">NJSLS 9.1.8.RM.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare major types of insurance and evaluate the trade-off between premium cost and deductible amount when choosing coverage.</div></div>
+
+      <article class="lesson">
+        <p>Imagine choosing between two insurance plans: one costs more every month but almost nothing if something goes wrong, and the other costs less every month but a lot out of pocket if something happens. Neither choice is automatically "better" &mdash; today's lesson is about understanding exactly what that trade-off means, using yesterday's risk-pooling foundation.</p>
+        <p>Four major types of insurance cover most of what people actually protect. <strong>Health insurance</strong> helps cover the cost of medical care &mdash; doctor visits, hospital stays, prescriptions &mdash; and almost everyone benefits from having it. <strong>Auto insurance</strong> covers damage or injury from vehicle accidents and is legally required to drive in nearly every state. <strong>Homeowners or renters insurance</strong> covers damage or loss to a home and its contents (homeowners) or to a renter's own belongings (renters) &mdash; importantly, a landlord's insurance typically only covers the building itself, not a tenant's possessions, which is exactly why renters insurance exists as its own category. <strong>Life insurance</strong> pays a beneficiary a sum of money if the policyholder dies, and it's most often used by adults who have people depending on their income, like a spouse or young children.</p>
+        <p>Now the core trade-off, with real numbers. Three plans offer the same basic coverage with different premiums and deductibles: Plan A costs $30/month with a $1,000 deductible; Plan B costs $60/month with a $400 deductible; Plan C costs $100/month with a $150 deductible. Calculating the total yearly cost (yearly premium = monthly premium &times; 12) under two scenarios makes the trade-off click. <strong>Scenario 1 &mdash; no claims filed all year</strong> (total cost = yearly premium only): Plan A = $30 &times; 12 = <strong>$360.00</strong>. Plan B = $60 &times; 12 = <strong>$720.00</strong>. Plan C = $100 &times; 12 = <strong>$1,200.00</strong>. Plan A is clearly cheapest here. <strong>Scenario 2 &mdash; one claim filed, exactly equal to the deductible</strong> (total cost = yearly premium + deductible): Plan A = $360.00 + $1,000 = <strong>$1,360.00</strong>. Plan B = $720.00 + $400 = <strong>$1,120.00</strong>. Plan C = $1,200.00 + $150 = <strong>$1,350.00</strong>. Now Plan B is cheapest &mdash; Plan A's low premium is outweighed by its high deductible the moment even one claim happens. That's the whole trade-off in one comparison: <strong>a lower deductible usually pairs with a higher premium, and a higher deductible usually pairs with a lower premium</strong>, and which plan actually saves money the most depends entirely on how many claims get filed &mdash; something no one can know in advance.</p>
+        <p>What a person or family needs, and what they end up paying, also depends on several other factors: age, health, driving history, where they live, and the value of what's being protected (a car, a home, a family's income). This connects straight back to yesterday's risk-based pricing idea &mdash; a driver with a clean record for twenty years represents lower risk than a brand-new driver, and their premium reflects that difference even for identical coverage.</p>
+        <p>Applying all four insurance types to a real situation makes the pattern concrete. Maya is 24, works full-time, and just had a baby who depends entirely on her income. Before the baby, Maya's insurance priorities might have looked different &mdash; but now, life insurance moves up in importance, because someone else's financial well-being depends on Maya's income continuing. Health insurance remains essential too. Meanwhile, Maya rents her apartment rather than owning it, so renters insurance &mdash; not homeowners insurance &mdash; is what protects her own belongings. Notice how a single life change (a new dependent) shifted which type of coverage matters most &mdash; that's exactly the kind of reasoning today's Coverage Cost Calculator and self-check ask you to practice.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Mr. Osei's Decision</h4>
+        <p>Mr. Osei owns his house outright, lives alone, and has no dependents relying on his income. A salesperson is trying to convince him to buy a life insurance policy in addition to his existing homeowners insurance.</p>
+        <p class="prompt">Using today's vocabulary, explain whether homeowners insurance or life insurance should be Mr. Osei's priority right now, and why his situation &mdash; no dependents &mdash; changes the answer compared to someone like Maya from today's lesson.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of insurance types or the premium-deductible trade-off, or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. Which type of insurance is legally required to drive in nearly every state?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Auto insurance</button>
+            <button class="quiz-opt" data-correct="false">Health insurance</button>
+            <button class="quiz-opt" data-correct="false">Renters insurance</button>
+            <button class="quiz-opt" data-correct="false">Life insurance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Auto insurance is legally required to drive in nearly every state, unlike the other three types covered today.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. What's the general rule of thumb for the premium-deductible trade-off?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A lower deductible usually pairs with a higher premium, and a higher deductible usually pairs with a lower premium</button>
+            <button class="quiz-opt" data-correct="false">Premium and deductible always move in the same direction together</button>
+            <button class="quiz-opt" data-correct="false">Deductibles only apply to life insurance</button>
+            <button class="quiz-opt" data-correct="false">Premium and deductible are unrelated to each other</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The two typically move in opposite directions: pay more regularly (premium) for less risk if something happens (deductible), or the reverse.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. A plan costs $50/month with an $800 deductible. What's the total yearly cost if exactly one claim, equal to the deductible, is filed?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$1,400</button>
+            <button class="quiz-opt" data-correct="false">$600</button>
+            <button class="quiz-opt" data-correct="false">$800</button>
+            <button class="quiz-opt" data-correct="false">$2,000</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Yearly premium: $50 &times; 12 = $600. Total with one claim: $600 + $800 deductible = $1,400.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. In today's Plan A/B/C example, which plan becomes cheapest once a single claim is filed, even though it wasn't the cheapest with zero claims?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Plan B</button>
+            <button class="quiz-opt" data-correct="false">Plan A</button>
+            <button class="quiz-opt" data-correct="false">Plan C</button>
+            <button class="quiz-opt" data-correct="false">All three plans cost the same either way</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Plan A is cheapest with zero claims ($360.00), but Plan B becomes cheapest once one claim is filed ($1,120.00 vs. Plan A's $1,360.00).</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. The Garcia family rents their apartment and doesn't own the building. Which insurance protects their own furniture and belongings if something happens?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Renters insurance</button>
+            <button class="quiz-opt" data-correct="false">Homeowners insurance</button>
+            <button class="quiz-opt" data-correct="false">Their landlord's insurance automatically covers it</button>
+            <button class="quiz-opt" data-correct="false">Auto insurance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Renters insurance protects a tenant's own belongings; a landlord's insurance typically only covers the building itself, not what a tenant owns inside it.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Coverage Cost Calculator</h3>
+        <p class="prompt">Enter the monthly premium and deductible for two plans, choose a claims scenario, then compare the total yearly cost for each.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="ccP1Premium">Plan 1 — Monthly premium ($)</label>
+            <input id="ccP1Premium" type="number" min="1" step="1" placeholder="e.g., 30">
+          </div>
+          <div class="goal-field">
+            <label for="ccP1Deductible">Plan 1 — Deductible ($)</label>
+            <input id="ccP1Deductible" type="number" min="0" step="1" placeholder="e.g., 1000">
+          </div>
+          <div class="goal-field">
+            <label for="ccP2Premium">Plan 2 — Monthly premium ($)</label>
+            <input id="ccP2Premium" type="number" min="1" step="1" placeholder="e.g., 100">
+          </div>
+          <div class="goal-field">
+            <label for="ccP2Deductible">Plan 2 — Deductible ($)</label>
+            <input id="ccP2Deductible" type="number" min="0" step="1" placeholder="e.g., 150">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-ghost" type="button" id="ccNoClaim" data-scenario="none">No claims this year</button>
+          <button class="btn btn-ghost" type="button" id="ccOneClaim" data-scenario="one">One claim, equal to the deductible</button>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="ccBtn" type="button">Compare my plans</button>
+        </div>
+        <div class="goal-summary" id="ccSummary" hidden>
+          <b>Your comparison</b>
+          <span id="ccSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">If you were choosing insurance for yourself right now, would you lean toward a lower premium/higher deductible plan, or a higher premium/lower deductible plan? What about your own situation makes you lean that way?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, calculator, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdWVAMJObTBtFbrM2hY4-qbTDzqmWKY1Oulnf-QCtFMbkG_bw/viewform" target="_blank" rel="noopener">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions and run the Coverage Cost Calculator above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Recognizing Fraud &amp; Shared Responsibility for Consumer Protection</h2>
+        <span class="standard-badge">NJSLS 9.1.8.EG.9; CR.4</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify common types of fraud and scams, describe practical steps to protect personal information, and explain how consumers, businesses, and government share responsibility for consumer protection.</div></div>
+
+      <article class="lesson">
+        <p>Unit 5 covered fake or deceptive advertising &mdash; ads that exaggerate, mislead, or hide the real cost of something. Today broadens beyond ads to five common ways someone might try to trick a person out of money or personal information directly. <strong>Phishing</strong> is fake emails, texts, or messages designed to trick someone into revealing personal information or passwords, often by pretending to be a trusted company. <strong>Identity theft</strong> is someone using another person's personal information without permission, often to open accounts, make purchases, or get loans in that person's name. <strong>Imposter scams</strong> involve someone pretending to be a government agency, bank, tech company, or even a family member to pressure a victim into sending money or information. <strong>Prize or lottery scams</strong> dangle a fake promise of winnings that requires paying a "fee" or providing personal information first to claim it. <strong>Tech-support scams</strong> use a fake pop-up, email, or call claiming a device has a virus or problem, pressuring the victim to pay for unnecessary "fixes" or grant remote access.</p>
+        <p>Nearly every scam type above shares a small set of <strong>red flags</strong>, and learning to spot them matters more than memorizing every possible scam. Watch for: urgency or pressure to act immediately; requests for payment in unusual forms like gift cards, wire transfers, or cryptocurrency; requests for personal information or passwords out of the blue; offers that seem too good to be true; and contact coming from an unfamiliar number, email address, or pop-up. Here's a worked comparison showing the difference in action. <strong>Likely a scam:</strong> a text message claims to be from your bank, says your account will be frozen in one hour, and asks you to click a link to "verify" your account immediately &mdash; two red flags stack up at once: urgency ("one hour," "immediately") and a request to click a link and hand over account information. <strong>Likely legitimate, for contrast:</strong> an email confirms a book you actually just ordered online, includes your correct order number, and has no links asking you to log in or verify anything &mdash; it matches something real, and it doesn't pressure you into any action at all. Comparing a real scam side by side with a real legitimate message, rather than just memorizing a list, is what actually builds the instinct to catch one in the moment.</p>
+        <p>Fraud awareness connects to a bigger civic idea: <strong>9.1.8.CR.4</strong> &mdash; consumers, businesses, and government all share responsibility for consumer protection. <strong>Consumers</strong> are responsible for protecting their own personal information, verifying who they're really talking to before acting, and reporting fraud when it happens. <strong>Businesses</strong> are responsible for securing customer data and dealing honestly with customers. <strong>Government</strong> is responsible for regulating markets and providing protection through agencies like the <strong>Federal Trade Commission (FTC)</strong>, which investigates fraud and takes reports at reportfraud.ftc.gov, and the <strong>Consumer Financial Protection Bureau (CFPB)</strong>, which accepts complaints about financial products and services at consumerfinance.gov/complaint. The nonprofit Better Business Bureau (BBB) also tracks business reputations and runs a public Scam Tracker at bbb.org. None of these three roles &mdash; consumer, business, government &mdash; can fully replace either of the other two.</p>
+        <p>Here's all three ideas working together in one worked example. A phone caller claims to be from a federal tax agency, insists you'll be arrested within the hour unless you pay a fine immediately using gift cards. This is an <strong>imposter scam</strong>, and the red flags are loud: urgency and threats, plus an unusual payment method that real government agencies never actually use &mdash; they don't accept gift cards, and they don't threaten immediate arrest over the phone. A consumer's job here is to hang up and independently verify by calling the agency back using an official number found separately (never a number the caller provides). A business's job &mdash; say, the store selling the gift cards &mdash; increasingly includes training cashiers to ask questions when someone tries to buy a large amount of gift cards while on the phone, since that's a well-known scam pattern. Government's job is providing the FTC and CFPB as places to report exactly this kind of scam, so patterns can be tracked and warnings issued to protect others.</p>
+        <p>Protecting personal information day to day comes down to a short list of practical habits: never sharing passwords, even with friends; using different passwords for different accounts; checking bank or account statements regularly for unfamiliar charges; being cautious entering personal information on public Wi-Fi; never clicking links or opening attachments from unknown senders; and verifying a caller's identity independently before giving any information &mdash; for example, calling a bank back using the number printed on your own card, never a number the caller gives you. None of this requires being suspicious of everyone all the time &mdash; it just means slowing down for exactly the situations where today's red flags show up. Try spotting the difference yourself in the Scam Red-Flag Spotter below.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>DeShawn's Pop-Up Warning</h4>
+        <p>While DeShawn is doing homework on the family computer, a pop-up suddenly fills the screen: "YOUR COMPUTER IS INFECTED! Call this number NOW!" with a loud alarm sound. It won't go away, and it looks official, with logos DeShawn doesn't quite recognize.</p>
+        <p class="prompt">Using today's red flags, explain what DeShawn should NOT do, and what he should do instead.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FTC Consumer.gov</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of scam types or reporting fraud, or some extra practice.</p>
+          <a href="https://consumer.gov/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. Phishing is best defined as:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Fake emails, texts, or messages designed to trick someone into revealing personal information or passwords</button>
+            <button class="quiz-opt" data-correct="false">Someone using your information without permission to open accounts</button>
+            <button class="quiz-opt" data-correct="false">A fake promise of winnings that requires paying a fee first</button>
+            <button class="quiz-opt" data-correct="false">A pop-up claiming your device has a virus</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Phishing specifically refers to fake messages designed to trick someone into handing over information or passwords, often by pretending to be a trusted company.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. Which is a red flag shared across most types of scams?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Creating urgency or pressure to act immediately</button>
+            <button class="quiz-opt" data-correct="false">Sending a receipt after a purchase you actually made</button>
+            <button class="quiz-opt" data-correct="false">A message from a contact already saved in your phone</button>
+            <button class="quiz-opt" data-correct="false">Taking several days to respond to a routine question</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Urgency and pressure to act right now shows up across nearly every scam type &mdash; it's designed to stop a victim from stopping to think or verify.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. A caller claims to be from a government agency and demands immediate payment using gift cards or you'll be arrested. What kind of scam is this, and what's the clearest red flag?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Imposter scam &mdash; an unusual payment method (gift cards) combined with urgency and threats</button>
+            <button class="quiz-opt" data-correct="false">Tech-support scam &mdash; an unfamiliar pop-up</button>
+            <button class="quiz-opt" data-correct="false">Prize/lottery scam &mdash; a promise of winnings</button>
+            <button class="quiz-opt" data-correct="false">Not a scam &mdash; government agencies commonly accept gift cards</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Someone pretending to be a government agency to pressure payment is an imposter scam; real agencies never demand gift cards or threaten immediate arrest by phone.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. Which best describes the government's role under 9.1.8.CR.4?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Regulating markets and investigating fraud through agencies like the FTC and CFPB</button>
+            <button class="quiz-opt" data-correct="false">Handling every individual fraud report personally with no agencies involved</button>
+            <button class="quiz-opt" data-correct="false">Leaving all consumer protection entirely to individual consumers</button>
+            <button class="quiz-opt" data-correct="false">Requiring businesses to never interact with government at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Government's CR.4 role is regulating markets and providing protection through agencies like the FTC and CFPB, which investigate complaints and enforce consumer protection laws.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. An email confirms an order you actually placed, includes your correct order number, and has no links asking you to log in or verify anything. What's the most accurate assessment?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Likely legitimate &mdash; it matches a real purchase and doesn't pressure you into any action</button>
+            <button class="quiz-opt" data-correct="false">Likely a phishing attempt regardless of the details</button>
+            <button class="quiz-opt" data-correct="false">Likely an imposter scam because it mentions an order number</button>
+            <button class="quiz-opt" data-correct="false">Impossible to tell without more information</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Accurate details matching a real purchase, with no urgent request or link to click, is exactly what a legitimate message looks like.</p>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Scam Red-Flag Spotter</h3>
+        <div class="quiz-q" data-qid="d3sr1">
+          <p class="quiz-question">Message 1: "ALERT: Your account will be frozen in 1 hour. Click here to verify your identity immediately." (appears to be from your bank, sent by text)</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Likely a scam</button>
+            <button class="quiz-opt" data-correct="false">Likely legitimate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Two red flags stack up: urgency ("1 hour," "immediately") and a link asking you to "verify" account info &mdash; real banks don't threaten to freeze your account within the hour by text.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3sr2">
+          <p class="quiz-question">Message 2: An email confirming a book you just ordered online, with your correct order number and no links to click.</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Likely a scam</button>
+            <button class="quiz-opt" data-correct="true">Likely legitimate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This matches a purchase you actually made, includes accurate details, and doesn't pressure you to click anything or hand over information &mdash; no red flags.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3sr3">
+          <p class="quiz-question">Message 3: A phone caller claims to be from a federal tax agency and says you'll be arrested within the hour unless you pay immediately using gift cards.</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Likely a scam</button>
+            <button class="quiz-opt" data-correct="false">Likely legitimate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Real government agencies don't threaten immediate arrest over the phone or demand payment in gift cards &mdash; an unusual payment method plus urgency and threats are classic imposter-scam red flags.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3sr4">
+          <p class="quiz-question">Message 4: A friend calls you from a phone number already saved in your contacts to confirm weekend plans you'd already talked about in person.</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Likely a scam</button>
+            <button class="quiz-opt" data-correct="true">Likely legitimate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A known contact, no request for money or personal information, and nothing urgent or suspicious &mdash; this is just an ordinary phone call.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Look back at the Identity Theft Protection habits described in today's lesson (unique passwords, checking statements, verifying callers independently, and so on). Which one do you already do, and which one are you going to start doing?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, spotter, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe3C_5di1CCQZzMqLyaahalFocGjTMKZPtm0gvF3pvTKTnegw/viewform" target="_blank" rel="noopener">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions and all 4 Scam Red-Flag Spotter messages above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Unit Review &amp; Assessment: Protect Yourself Plan</h2>
+        <span class="standard-badge">Synthesis: RM.1; EG.9; CR.4</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can demonstrate understanding of risk, insurance, fraud awareness, and shared consumer-protection responsibility by building a Protect Yourself plan for a realistic profile.</div></div>
+
+      <article class="lesson">
+        <p>Three days ago you started with the idea that unexpected, costly events happen to everyone, and that risk pooling &mdash; a large group each paying smaller premiums &mdash; is how insurance manages the cost of those events (Day 1). From there, you learned to compare insurance types and weigh the premium-deductible trade-off, seeing that the "best" plan actually depends on what happens, not on a single always-right answer (Day 2). Then the lens widened from accidental risk to deliberate deception: recognizing phishing, imposter scams, and other fraud, and understanding that consumers, businesses, and government all share responsibility for consumer protection under 9.1.8.CR.4 (Day 3). Today connects all three days into one idea: <strong>protecting yourself financially means preparing before something happens</strong>, whether the threat is an accident no one saw coming or a scam designed to look convincing.</p>
+        <p>Two misconceptions are worth clearing up directly before today's task. First, insurance does not guarantee that nothing bad will ever cost money &mdash; it manages the financial risk of bad things happening, spreading the cost across a pool rather than eliminating the possibility of loss entirely. Second, scams are not always obviously fake: many use real-looking logos, spoofed caller ID that displays a trusted name or number, or urgency specifically designed to feel legitimate in the moment. The whole point of learning red flags (Day 3) is having a reliable way to catch a scam that doesn't rely on it looking obviously fake.</p>
+        <p>Today's official check-in is different from the first three days &mdash; it's the unit's full written assessment, covering multiple-choice questions, short-answer questions, and a Protect Yourself performance task where you'll be given a short profile and asked to recommend insurance coverage and identify fraud-protection habits for that specific person, explaining how consumers, businesses, and government each play a role in keeping that person's money and information safe.</p>
+        <p>Before you get there, here's a quick recap of this unit's core vocabulary: <strong>risk</strong> (the possibility of financial loss from an unplanned event), <strong>premium</strong> (the regular amount paid to keep insurance active), <strong>deductible</strong> (the amount paid out of pocket before insurance starts paying), <strong>co-pay</strong> (a fixed amount paid at the time of a covered service), <strong>claim</strong> (a formal request asking an insurance company to pay for a covered loss), <strong>phishing</strong> (fake messages designed to trick someone into revealing personal information), <strong>identity theft</strong> (someone using another person's information without permission), and <strong>imposter scam</strong> (someone pretending to be a trusted source to pressure a victim into sending money or information). Use the checkpoint below to see how solidly these have stuck, then head into the official assessment.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Sofia's New Chapter</h4>
+        <p>Sofia just moved into her first apartment, started a part-time job, and began using a debit card for the first time in her life.</p>
+        <p class="prompt">Which insurance should Sofia consider first, and name two fraud-protection habits from this unit that are especially relevant to her new financial responsibilities.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB &mdash; Consumer Tools</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of any Unit 8 concept or some extra review before the check-in.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 8 checkpoint</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. What is the primary purpose of insurance?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">To use risk pooling so a large group can help cover a smaller number of members' major unplanned losses</button>
+            <button class="quiz-opt" data-correct="false">To guarantee that nothing bad will ever happen</button>
+            <button class="quiz-opt" data-correct="false">To eliminate the need to ever pay a premium</button>
+            <button class="quiz-opt" data-correct="false">To replace the need for a bank account</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Insurance manages the financial risk of unplanned loss through risk pooling &mdash; it doesn't prevent loss, it spreads the cost of it.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Which best explains why a lower deductible usually means a higher premium?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Paying more predictably now (premium) trades off against paying more out of pocket later if something happens (deductible)</button>
+            <button class="quiz-opt" data-correct="false">Insurance companies set these two numbers completely at random</button>
+            <button class="quiz-opt" data-correct="false">A lower deductible always means a lower premium too</button>
+            <button class="quiz-opt" data-correct="false">Deductibles and premiums apply to completely different kinds of insurance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The premium-deductible trade-off means paying more regularly (a higher premium) generally buys a lower deductible, and the reverse.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. A pop-up says your device is infected and demands you call a number immediately. What type of scam is this, and what red flag stands out most?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A tech-support scam &mdash; an unsolicited, urgent pop-up demanding immediate action</button>
+            <button class="quiz-opt" data-correct="false">A prize/lottery scam &mdash; a promise of winnings</button>
+            <button class="quiz-opt" data-correct="false">Identity theft &mdash; someone already used your information</button>
+            <button class="quiz-opt" data-correct="false">Not a scam &mdash; devices commonly display this kind of alert</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A fake pop-up pressuring an immediate call about a device "problem" is a tech-support scam &mdash; the urgency and unsolicited nature are the clearest red flags.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. Under 9.1.8.CR.4, which best describes a business's responsibility for consumer protection?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Securing customer data and dealing honestly with customers</button>
+            <button class="quiz-opt" data-correct="false">Handling every consumer's individual fraud report personally</button>
+            <button class="quiz-opt" data-correct="false">Regulating the entire market through federal agencies</button>
+            <button class="quiz-opt" data-correct="false">Nothing &mdash; businesses have no role in consumer protection</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Businesses share responsibility for consumer protection by securing customer data and dealing honestly &mdash; a distinct role from government's regulatory function.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. Which statement about insurance is most accurate?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Insurance manages financial risk &mdash; it doesn't guarantee nothing bad will ever happen or cost money</button>
+            <button class="quiz-opt" data-correct="false">Insurance guarantees nothing bad will ever cost you money once you're covered</button>
+            <button class="quiz-opt" data-correct="false">Insurance eliminates all financial risk completely</button>
+            <button class="quiz-opt" data-correct="false">Insurance is only useful for people who never experience any losses</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A common misconception is that insurance eliminates risk entirely &mdash; it actually manages the cost of risk through pooling, not the possibility of loss itself.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back across all four days, which single habit or piece of knowledge from this unit do you think will matter most to you personally in the next few years, and why?</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress &mdash; multiple-choice and short-answer questions plus the full Protect Yourself performance task with written justification.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfuBGbj24I71ael4i1fJYc0LTE245oh0iHyMG5Y152WO-R8Yg/viewform" target="_blank" rel="noopener">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 8 complete 🌱</h3>
+        <p>You've covered financial risk and risk pooling, the major types of insurance and the premium-deductible trade-off, common fraud and scam types and practical protection habits, and how consumers, businesses, and government share responsibility for consumer protection &mdash; the same standards your classmates covered in class (NJSLS 9.1.8.RM.1, EG.9, CR.4). Show your teacher this page or your notebook reflections, and check in about Unit 9.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 8 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u8-selfstudy-v1';
+  var TOTAL_DAYS = 4;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, cc: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function ccCompleteForDay2(){
+    return !!(state.cc && typeof state.cc.p1Total !== 'undefined');
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && ccCompleteForDay2();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  // ---- Day 2: Coverage Cost Calculator ----
+  function setScenario(which){
+    state.cc.scenario = which;
+    saveState();
+    var noBtn = document.getElementById('ccNoClaim');
+    var oneBtn = document.getElementById('ccOneClaim');
+    noBtn.classList.toggle('btn-primary', which === 'none');
+    noBtn.classList.toggle('btn-ghost', which !== 'none');
+    oneBtn.classList.toggle('btn-primary', which === 'one');
+    oneBtn.classList.toggle('btn-ghost', which !== 'one');
+  }
+
+  function runCoverageCalc(){
+    var p1p = parseFloat(document.getElementById('ccP1Premium').value);
+    var p1d = parseFloat(document.getElementById('ccP1Deductible').value);
+    var p2p = parseFloat(document.getElementById('ccP2Premium').value);
+    var p2d = parseFloat(document.getElementById('ccP2Deductible').value);
+    var summaryEl = document.getElementById('ccSummary');
+    var textEl = document.getElementById('ccSummaryText');
+    var scenario = state.cc.scenario;
+
+    if (!(p1p > 0) || isNaN(p1d) || p1d < 0 || !(p2p > 0) || isNaN(p2d) || p2d < 0){
+      summaryEl.hidden = false;
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Fill in a monthly premium (greater than zero) and a deductible (zero or more) for both plans to compare.';
+      return;
+    }
+    if (scenario !== 'none' && scenario !== 'one'){
+      summaryEl.hidden = false;
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Choose a claims scenario above (no claims, or one claim) before comparing.';
+      return;
+    }
+
+    var p1Yearly = Math.round(p1p * 12 * 100) / 100;
+    var p2Yearly = Math.round(p2p * 12 * 100) / 100;
+    var p1Total = scenario === 'one' ? Math.round((p1Yearly + p1d) * 100) / 100 : p1Yearly;
+    var p2Total = scenario === 'one' ? Math.round((p2Yearly + p2d) * 100) / 100 : p2Yearly;
+
+    state.cc = { p1p: p1p, p1d: p1d, p2p: p2p, p2d: p2d, scenario: scenario, p1Yearly: p1Yearly, p2Yearly: p2Yearly, p1Total: p1Total, p2Total: p2Total };
+    saveState();
+
+    displayCoverageResult(p1Yearly, p2Yearly, p1Total, p2Total, scenario, p1d, p2d);
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+  }
+
+  function displayCoverageResult(p1Yearly, p2Yearly, p1Total, p2Total, scenario, p1d, p2d){
+    var summaryEl = document.getElementById('ccSummary');
+    var textEl = document.getElementById('ccSummaryText');
+    summaryEl.hidden = false;
+    summaryEl.classList.remove('warn');
+    var scenarioLabel = scenario === 'one' ? 'One claim this year, equal to the deductible' : 'No claims this year';
+    var p1Line = 'Plan 1 — yearly premium $' + p1Yearly.toFixed(2) + (scenario === 'one' ? ' + $' + p1d.toFixed(2) + ' deductible' : '') + ' = $' + p1Total.toFixed(2) + ' total.';
+    var p2Line = 'Plan 2 — yearly premium $' + p2Yearly.toFixed(2) + (scenario === 'one' ? ' + $' + p2d.toFixed(2) + ' deductible' : '') + ' = $' + p2Total.toFixed(2) + ' total.';
+    var cheaper;
+    if (p1Total < p2Total) cheaper = 'Plan 1 is cheaper by $' + (p2Total - p1Total).toFixed(2) + ' under this scenario.';
+    else if (p2Total < p1Total) cheaper = 'Plan 2 is cheaper by $' + (p1Total - p2Total).toFixed(2) + ' under this scenario.';
+    else cheaper = 'Both plans cost exactly the same under this scenario.';
+    textEl.textContent = 'Scenario: ' + scenarioLabel + '. ' + p1Line + ' ' + p2Line + ' ' + cheaper + ' Try the other scenario to see whether the cheaper plan changes — that\'s the premium-deductible trade-off in action.';
+  }
+
+  function restoreCoverageCalc(){
+    var map = { p1p: 'ccP1Premium', p1d: 'ccP1Deductible', p2p: 'ccP2Premium', p2d: 'ccP2Deductible' };
+    Object.keys(map).forEach(function(k){
+      var el = document.getElementById(map[k]);
+      if (el && state.cc && typeof state.cc[k] !== 'undefined') el.value = state.cc[k];
+    });
+    if (state.cc && state.cc.scenario) setScenario(state.cc.scenario);
+    if (state.cc && typeof state.cc.p1Total !== 'undefined'){
+      displayCoverageResult(state.cc.p1Yearly, state.cc.p2Yearly, state.cc.p1Total, state.cc.p2Total, state.cc.scenario, state.cc.p1d, state.cc.p2d);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.getElementById('ccNoClaim').addEventListener('click', function(){ setScenario('none'); });
+    document.getElementById('ccOneClaim').addEventListener('click', function(){ setScenario('one'); });
+    document.getElementById('ccBtn').addEventListener('click', runCoverageCalc);
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '2' && !ccCompleteForDay2()){
+          var hint2 = document.querySelector('[data-hint-for="2"]');
+          if (hint2) hint2.textContent = 'Run the Coverage Cost Calculator above at least once, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreCoverageCalc();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,903 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Smart Spending</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .spotcheck{background:var(--surface-2); border-radius:18px; padding:22px 22px 24px; display:flex; flex-direction:column; gap:16px;}
+  .spotcheck h3{font-size:1.2rem; font-weight:700; margin:0;}
+  .spotcheck > p.intro{margin:0; font-size:1rem; color:var(--ink-muted); max-width:62ch;}
+  .spotcheck-item{background:var(--surface); border:2px solid var(--line); border-radius:14px; padding:16px 18px;}
+  .spotcheck-item .ad-snippet{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.05rem; margin:0 0 12px; padding:10px 14px; background:var(--paper); border-radius:10px; border:1.5px dashed var(--gold-deep); color:var(--ink);}
+  .spotcheck-opts{display:flex; flex-wrap:wrap; gap:8px;}
+  .spotcheck-opt{font-size:.92rem; font-weight:700; padding:8px 13px; border-radius:999px; border:2px solid var(--line); background:var(--paper); color:var(--ink); cursor:pointer; transition:border-color .12s ease, background .12s ease;}
+  .spotcheck-opt:hover{border-color:var(--moss);}
+  .spotcheck-opt.selected.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep);}
+  .spotcheck-opt.selected.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through;}
+  .spotcheck-feedback{margin:10px 0 0; font-size:.95rem; font-weight:700;}
+  .spotcheck-feedback.is-correct{color:var(--moss-deep);}
+  .spotcheck-feedback.is-incorrect{color:var(--coral);}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(2,1fr);} .topbar{align-items:flex-start;} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Smart Spending</h1>
+      </div>
+      <p class="subtitle">Unit 5 — Consumer Skills &amp; Media Literacy · 4 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/4"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">How Advertising Works</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Deceptive Advertising</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Is This Sale Real?</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Unit Review: Ad Detective</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · How Advertising Works: Comparing Ad Messages</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.6</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare and contrast advertising messages to identify the technique(s) they use and understand what the ad is trying to accomplish.</div></div>
+
+      <article class="lesson">
+        <p>Every ad you scroll past, every commercial you sit through, and every sponsored post in your feed has a job to do: persuade you to buy something, support something, or believe something. But not every ad has the <strong>same</strong> job. Some ads push a direct, immediate sale &mdash; a banner screaming "50% off today only" wants you to click and buy right now. Others are playing a longer game: a soft-drink commercial with no price, no discount, and no "buy now" button at all is just trying to keep the brand's name and feeling in your head, so that next time you're standing in front of a cooler, you reach for that can without even thinking about it. Learning to ask "what is this ad actually trying to get me to do &mdash; buy now, or just like the brand?" is the first step to reading an ad clearly instead of just absorbing it.</p>
+        <p>A quick way to tell which goal you're looking at: does the ad tell you exactly what to do right now &mdash; a price, a deadline, a "buy" or "shop" button? That's a direct-sale ad. Does it just make you feel good about the brand without asking for anything specific today? That's brand-building. Most ads you'll analyze this week lean clearly one way or the other, and naming which one you're looking at helps you understand what the ad actually wants from you before you even get to its technique.</p>
+        <p>Ads rely on a handful of repeatable techniques, and once you know them, you'll start spotting them everywhere. <strong>Emotional appeal</strong> makes you feel something &mdash; happiness, nostalgia, fear of missing out &mdash; instead of giving you facts. Picture a commercial for soup that shows a cozy kitchen, a warm bowl, and a voiceover saying "nothing says home like this simmering on the stove" &mdash; it never mentions ingredients, price, or nutrition, because it doesn't need to; it's selling a feeling. <strong>Testimonial/endorsement</strong> has a person vouch for the product so you'll trust it too &mdash; like a pro skateboarder saying "these are the only shoes I trust on the ramp," even though plenty of other shoes would work just as well. <strong>Bandwagon</strong> tells you "everyone else already has one," the way a phone ad might say "join the millions who've already switched &mdash; don't get left behind!" It's not evidence the product is good; it's peer pressure dressed up as marketing.</p>
+        <p><strong>Scarcity/urgency</strong> pressures a fast decision with phrases like "limited time" or "only 3 left in stock," so you buy before you've had a chance to think it through &mdash; a doorbuster banner that reads "sale ends TONIGHT &mdash; only 5 left!" is designed to make your decision faster than your judgment. <strong>Humor</strong> makes an ad memorable through a joke or a funny character rather than any real information about the product &mdash; think of a cereal mascot who trips over his own shoelaces in every single commercial; it's entertaining, but it tells you nothing about how the cereal tastes. <strong>Comparison</strong> positions a product directly against a competitor, like a phone company claiming its battery lasts "2 hours longer than the other guys" &mdash; which can be honest and useful information, or can quietly leave out the details that would make the comparison less flattering.</p>
+        <p>Here's a worked example of reading two ads side by side, the same way you'll be asked to on today's self-check. <strong>Ad A</strong>, for a sneaker brand, says: "Worn by 3 Olympic gold medalists. Feel like a champion the moment you lace up. Limited pairs available this week &mdash; order now before they're gone!" <strong>Ad B</strong>, for a competing sneaker brand, says: "Breathable mesh upper, extra arch support, and a 90-day comfort guarantee. Rated 4.6 out of 5 stars by over 12,000 verified buyers." Reading Ad A closely, you can spot testimonial/endorsement ("worn by 3 Olympic gold medalists"), emotional appeal ("feel like a champion"), and scarcity/urgency ("limited pairs&hellip;before they're gone") all stacked together &mdash; and notice that it never once describes the actual shoe. Ad B barely uses persuasion technique at all; it just states specific, checkable facts: the material, a support feature, a guarantee length, and a large, verifiable rating. Neither approach is automatically dishonest, but Ad B gives you far more real information to evaluate before you buy.</p>
+        <p>Every ad is also built with a specific <strong>target audience</strong> in mind &mdash; the particular group of people the ad is designed to reach and persuade. A cleat commercial airing during a soccer match, full of fast cuts and stadium noise, is aimed at a very different audience than a quiet, slow-paced ad for a retirement savings plan airing during a nightly news broadcast. Advertisers choose where an ad appears, what music plays, which techniques it leans on, and even what app or platform it shows up in based on who they think is watching. Once you notice who an ad seems to be talking to, it gets easier to notice how it's talking to them &mdash; a lot of ads aimed at people your age lean hard on bandwagon and humor, because those techniques tend to land well with a younger audience, while ads aimed at adults making a big purchase, like a car or an insurance plan, more often lean on comparison and specific numbers.</p>
+        <p>It also helps to name the exact moment an ad wants you to act &mdash; advertisers call this the <strong>call to action</strong>: the specific instruction an ad gives you, like "Shop now," "Sign up today," "Swipe up," or "Call this number." A call to action is a useful clue on its own. If an ad's call to action is something soft like "Learn more" or has no call to action at all, that's a sign it's leaning toward brand-building. If the call to action is sharp and immediate &mdash; "Buy now before midnight" &mdash; that's a strong sign it's a direct-sale ad, and probably worth a slower, more careful look before you follow it.</p>
+        <p>Put all three ideas together &mdash; goal, technique, and audience &mdash; and you have a simple three-question routine you can run on any ad you see this week: What is this ad's goal (a direct sale, or brand-building)? What technique or techniques is it using to get there? And who does it seem to be aimed at, based on where you saw it and how it's written? Try running that routine on the very next ad you notice, whether it's a video, a poster, or a sponsored post &mdash; the more ads you practice on, the faster naming these pieces becomes.</p>
+        <p>None of the six techniques above are automatically dishonest &mdash; that's an important distinction for tomorrow. A funny commercial, a genuine celebrity endorsement, or an honest comparison is just persuasion doing its normal job, and recognizing the technique doesn't mean the ad is lying to you. What separates ordinary persuasion like this from something sneakier &mdash; a claim that's actually false, or a detail that's deliberately hidden &mdash; is exactly what Day 2 digs into.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The video that popped up twice</h4>
+        <p>You're scrolling and a video ad plays: a group of friends laughing on a beach, upbeat music, and a voiceover saying "Life's better with SunRay sunglasses." No price, no discount, no "buy now" button &mdash; just the logo at the end. Ten minutes later, the exact same ad plays again in a different app.</p>
+        <p class="prompt">What's this ad's goal &mdash; a direct sale or brand-building &mdash; and what makes you say so? What technique is it leaning on, and why might the company want you to see it more than once?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FTC Consumer.gov</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of how advertising works, or some extra practice.</p>
+          <a href="https://consumer.ftc.gov/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. A commercial says "You'll feel amazing and confident like never before!" without giving any facts about the product. This is an example of:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Comparison</button>
+            <button class="quiz-opt" data-correct="false">Bandwagon</button>
+            <button class="quiz-opt" data-correct="true">Emotional appeal</button>
+            <button class="quiz-opt" data-correct="false">Scarcity/urgency</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Emotional appeal uses feelings &mdash; here, confidence and excitement &mdash; instead of facts to make you want the product.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which of these is the best example of the bandwagon technique?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">"Doctors recommend this brand 9 out of 10 times"</button>
+            <button class="quiz-opt" data-correct="true">"Everyone in your school already has one — don't be the last!"</button>
+            <button class="quiz-opt" data-correct="false">"Only 2 left in stock"</button>
+            <button class="quiz-opt" data-correct="false">A funny mascot falling down in every commercial</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Bandwagon suggests "everyone else is doing it," so you should too &mdash; it plays on the fear of missing out on what's popular.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. An ad's specific goal is best described as:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Always to make you laugh</button>
+            <button class="quiz-opt" data-correct="false">Always to make an immediate sale</button>
+            <button class="quiz-opt" data-correct="true">Either a direct sale or building long-term brand loyalty, depending on the ad</button>
+            <button class="quiz-opt" data-correct="false">Only ever to inform you of plain facts</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Not every ad pushes an immediate purchase &mdash; some are built to build awareness or loyalty over time instead.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. An ad's call to action says only "Learn more" and never mentions a price, a deadline, or a "buy" button anywhere. This call to action is a clue that the ad's goal is most likely:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A direct, immediate sale</button>
+            <button class="quiz-opt" data-correct="true">Brand-building rather than an immediate sale</button>
+            <button class="quiz-opt" data-correct="false">Scarcity/urgency</button>
+            <button class="quiz-opt" data-correct="false">Undisclosed sponsorship</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A soft call to action with no price, deadline, or "buy" button is a strong clue that an ad is aiming to build brand loyalty rather than push a purchase today.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Malik notices a video game ad that plays fast-paced music, uses gamer slang, and appears only inside apps popular with people his age. This tells you the ad was built with a specific:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Call to action</button>
+            <button class="quiz-opt" data-correct="true">Target audience in mind</button>
+            <button class="quiz-opt" data-correct="false">Comparison technique</button>
+            <button class="quiz-opt" data-correct="false">Fine print</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Choices like music, slang, and which apps an ad appears in are all signs of a target audience &mdash; the specific group of people the ad is designed to reach.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Describe one real ad you've seen recently, name a technique it uses, and explain what you think its specific goal was &mdash; a direct sale, or building brand loyalty?</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="spotcheck" id="adSpotcheck">
+        <h3>Bonus practice: Ad Technique Spot-Check</h3>
+        <p class="intro">Just for fun &mdash; not graded, and not part of today's required work. Read each short ad snippet below and click the technique you think it's using.</p>
+        <div class="spotcheck-item" data-answer="Scarcity-urgency">
+          <p class="ad-snippet">"Only 3 left in stock &mdash; order in the next 10 minutes to guarantee delivery!"</p>
+          <div class="spotcheck-opts">
+            <button class="spotcheck-opt" data-tech="Emotional appeal">Emotional appeal</button>
+            <button class="spotcheck-opt" data-tech="Bandwagon">Bandwagon</button>
+            <button class="spotcheck-opt" data-tech="Scarcity-urgency">Scarcity-urgency</button>
+            <button class="spotcheck-opt" data-tech="Testimonial">Testimonial</button>
+          </div>
+          <p class="spotcheck-feedback" hidden></p>
+        </div>
+        <div class="spotcheck-item" data-answer="Bandwagon">
+          <p class="ad-snippet">"Join over 2 million people who've already made the switch &mdash; don't be the last one!"</p>
+          <div class="spotcheck-opts">
+            <button class="spotcheck-opt" data-tech="Comparison">Comparison</button>
+            <button class="spotcheck-opt" data-tech="Bandwagon">Bandwagon</button>
+            <button class="spotcheck-opt" data-tech="Humor">Humor</button>
+            <button class="spotcheck-opt" data-tech="Scarcity-urgency">Scarcity-urgency</button>
+          </div>
+          <p class="spotcheck-feedback" hidden></p>
+        </div>
+        <div class="spotcheck-item" data-answer="Testimonial">
+          <p class="ad-snippet">"As a pro gamer, I only trust these headphones on stream." &mdash; a sponsored streamer</p>
+          <div class="spotcheck-opts">
+            <button class="spotcheck-opt" data-tech="Testimonial">Testimonial</button>
+            <button class="spotcheck-opt" data-tech="Emotional appeal">Emotional appeal</button>
+            <button class="spotcheck-opt" data-tech="Comparison">Comparison</button>
+            <button class="spotcheck-opt" data-tech="Humor">Humor</button>
+          </div>
+          <p class="spotcheck-feedback" hidden></p>
+        </div>
+        <div class="spotcheck-item" data-answer="Comparison">
+          <p class="ad-snippet">"Our battery lasts 2 hours longer than the other leading brand."</p>
+          <div class="spotcheck-opts">
+            <button class="spotcheck-opt" data-tech="Bandwagon">Bandwagon</button>
+            <button class="spotcheck-opt" data-tech="Comparison">Comparison</button>
+            <button class="spotcheck-opt" data-tech="Scarcity-urgency">Scarcity-urgency</button>
+            <button class="spotcheck-opt" data-tech="Emotional appeal">Emotional appeal</button>
+          </div>
+          <p class="spotcheck-feedback" hidden></p>
+        </div>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdJwxscUyxlPuLCJOjd2-NvHJWHySLj3H3Hwshpsms8ECDkKA/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Deceptive Advertising: Spotting the Techniques</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.7</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify the techniques and effects of deceptive advertising, and explain what separates a persuasive technique from a deceptive claim.</div></div>
+
+      <article class="lesson">
+        <p><strong>Deceptive advertising</strong> is advertising that uses misleading claims or hidden information to trick a buyer, rather than honestly persuading them. That's an important line to draw: a persuasive technique alone &mdash; like yesterday's emotional appeal or humor &mdash; isn't automatically deceptive. Deception specifically requires something to be false, exaggerated beyond what's true, or hidden from you on purpose. If you can't point to a specific claim that's untrue or a detail that's been concealed, it's probably just ordinary persuasion, not deception.</p>
+        <p>Six techniques show up again and again, and each one is easier to spot once you've seen a concrete example of it in action.</p>
+        <p><strong>Bait-and-switch</strong> advertises one product at a great price to get you in the door, then claims it's unavailable and pushes a pricier item instead. Picture a store advertising a TV for $199; you show up, and a salesperson tells you it "just sold out" and steers you toward a $599 model instead. The $199 TV may never have really been in stock at all &mdash; its whole purpose was to get you into the store.</p>
+        <p><strong>Exaggerated or unsubstantiated claims</strong> make a big promise &mdash; "clinically proven," "doctors agree," "erases wrinkles overnight" &mdash; with no real evidence behind it: no named study, no source, no way to check it. Compare that to a claim like "9 out of 10 dentists recommend this toothpaste, according to a 2024 survey of 500 dentists" &mdash; that's specific, sourced, and checkable, which is what turns a claim from a guess you're asked to trust into a fact you could actually verify.</p>
+        <p><strong>Hidden fees or fine print</strong> advertise a low headline price, then tack on extra costs only revealed at checkout. Here's a worked example: an online ad lists a jacket at "$19.99!" You click buy, and at checkout you discover $15 shipping, $10 handling, and a $5 processing fee &mdash; none of it mentioned anywhere in the ad. Add it up: $19.99 + $15 + $10 + $5 = <strong>$49.99</strong>. The real price is more than double the advertised one, and you only find out after you've already decided to buy.</p>
+        <p><strong>Fake urgency</strong> claims a deal is "limited time" or "limited edition" when it isn't actually limited at all. A hoodie advertised with a banner reading "Limited Edition &mdash; Buy Now!" that has actually been in stock, completely unchanged, for over a year is a textbook example &mdash; the word "limited" is doing all the persuading, and none of it is true.</p>
+        <p><strong>Misleading before/after</strong> uses staged conditions, filters, or unrealistic demonstrations so a product looks far better than it performs in real life. A blender commercial might show a whole watermelon turning into smooth juice in 3 seconds flat &mdash; but the actual product on store shelves takes several minutes, can't handle a rind, and would burn out trying what the commercial showed.</p>
+        <p>And <strong>undisclosed sponsorship</strong> is an ad that doesn't clearly say it's an ad &mdash; like a video that looks like a genuine, unpaid recommendation from someone you follow, when in reality the brand paid them to say it and never required them to disclose that. Because it doesn't look like an ad, you evaluate it the way you'd evaluate a friend's honest opinion, which is exactly the trust the sponsor is quietly borrowing.</p>
+        <p>A simple three-question check works for spotting deception in almost any ad. First: is there a specific, checkable claim, or just a vague promise dressed up in confident-sounding words? Second: is any part of the real cost, terms, or availability hidden until later, revealed only in fine print or at checkout? Third: does the "limited" or "urgent" framing match reality, or would the exact same deal probably still be there tomorrow, next week, or next month? If the answer to any of those three raises a red flag, that's your signal to slow down before you buy. Deceptive advertising works best on a rushed decision made in the moment &mdash; pausing just long enough to ask these three questions is often enough to break its effect completely, even before you can prove anything is wrong.</p>
+        <p>Let's run that three-question check on a full example, step by step, the way you'll be asked to on today's self-check. Here's the ad: <em>"NEW mystery box &mdash; guaranteed $100+ value inside for just $19.99! Free shipping included. Order today!"</em> When you click "order today," a new screen appears with a box labeled "Standard Shipping &mdash; $12.99" already checked, and the only way to get the advertised "free shipping" is a separate $9.99 "membership" you'd have to notice and decline. Question one: is there a checkable claim? "Guaranteed $100+ value" sounds specific, but nobody has said what's actually inside, so there's nothing to check &mdash; that's an exaggerated, unsubstantiated claim on its own. Question two: is any cost hidden? Yes &mdash; the "free" shipping turns out to require paying for something else, which is exactly the hidden-fee pattern from a few paragraphs above, just dressed up in a new shape. Question three: is anything falsely urgent? "Order today" implies the deal disappears tomorrow, but a mystery box with a made-up "guaranteed value" almost certainly doesn't actually run out on any particular day. All three checks raise a flag here, which is a strong sign this ad is worth skipping entirely, not just reading more carefully.</p>
+        <p>It's worth noticing that a single ad rarely uses just one deceptive technique in isolation &mdash; the mystery-box example above stacked an unsubstantiated claim, a hidden fee, and fake urgency all at once, and that stacking is common. Techniques reinforce each other: fake urgency makes you less likely to slow down and notice the hidden fee, and an unsubstantiated claim gives urgency something exciting to attach itself to. The more techniques you can name working together in a single ad, the more confident you can be that something about it deserves a second, slower look before you trust it or pay for anything.</p>
+        <p>These techniques matter beyond just being annoying &mdash; they cost people money, waste their time, and erode trust in advertising generally. Recognizing them is the actual defense: once you can name the technique at work, and point to the exact claim that's false or the exact detail that's hidden, it's a lot harder for it to work on you.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The "sponsored" post that didn't say so</h4>
+        <p>Malik follows a creator who posts a video raving about a new energy drink &mdash; "I never drink this stuff, but I actually love it, you guys need to try it." There's no "#ad" tag, no "sponsored" label, and no disclosure anywhere in the post or caption. Malik later finds out the brand paid the creator $2,000 to post it.</p>
+        <p class="prompt">Which deceptive technique is this, and why does it matter that Malik didn't know the post was paid for while he was watching it?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FTC Consumer.gov</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of deceptive advertising, or some extra practice.</p>
+          <a href="https://consumer.ftc.gov/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. A furniture store advertises a couch for $199, but when you arrive, they say that couch is sold out and try to sell you a $499 one instead. This is:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Bandwagon</button>
+            <button class="quiz-opt" data-correct="true">Bait-and-switch</button>
+            <button class="quiz-opt" data-correct="false">Humor</button>
+            <button class="quiz-opt" data-correct="false">Comparison</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Bait-and-switch advertises one product to get you in the door, then claims it's unavailable and pushes a pricier item instead.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. An ad for a skincare product claims "clinically proven to erase wrinkles in 24 hours!" but cites no actual study. This is:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">An exaggerated or unsubstantiated claim</button>
+            <button class="quiz-opt" data-correct="false">Undisclosed sponsorship</button>
+            <button class="quiz-opt" data-correct="false">Scarcity/urgency</button>
+            <button class="quiz-opt" data-correct="false">A testimonial</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A big claim with no real study, source, or evidence backing it up is an exaggerated or unsubstantiated claim.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. What's the key difference between a persuasive technique (like emotional appeal) and deceptive advertising?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">There is no difference — all persuasion is deceptive</button>
+            <button class="quiz-opt" data-correct="true">Deception requires a false or misleading claim, not just an appeal to emotion</button>
+            <button class="quiz-opt" data-correct="false">Persuasive techniques are illegal</button>
+            <button class="quiz-opt" data-correct="false">Deceptive ads never use emotion at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Persuasive technique alone isn't automatically deceptive &mdash; deception specifically requires a false or misleading claim.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. A creator posts a glowing, unlabeled review of a product, with no "#ad" or "sponsored" tag anywhere, even though the brand paid them to post it. This is:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Fake urgency</button>
+            <button class="quiz-opt" data-correct="false">Misleading before/after</button>
+            <button class="quiz-opt" data-correct="true">Undisclosed sponsorship</button>
+            <button class="quiz-opt" data-correct="false">A hidden fee</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>When a paid post doesn't clearly disclose that it's an ad, viewers trust it like an honest personal opinion instead of paid persuasion &mdash; that's undisclosed sponsorship.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. An online ad advertises a jacket for "$19.99!" but checkout reveals $15 shipping, $10 handling, and a $5 processing fee. Before clicking buy on any similar ad, the smartest move is to:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Trust the headline price and buy immediately, since it's advertised in big letters</button>
+            <button class="quiz-opt" data-correct="true">Get to the actual checkout total before deciding, since extra fees can double the real price</button>
+            <button class="quiz-opt" data-correct="false">Assume all online ads include every fee up front</button>
+            <button class="quiz-opt" data-correct="false">Ignore shipping costs, since they never affect the total</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Hidden fees revealed only at checkout can add up to far more than the advertised headline price, so the real total &mdash; not the headline number &mdash; is what actually matters.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Describe one deceptive advertising technique and one way you could protect yourself from falling for it.</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Oe8lmPBb38kCrSv4-e59L6PdPAGx7mYTxZi6KH0rkm28gQ/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Comparing Prices When Ads Are Trying to Trick You</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CP.1, EG.9</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can apply comparison-shopping skills to verify an advertised discount, and identify common types of advertising-related consumer fraud.</div></div>
+
+      <article class="lesson">
+        <p>Back in Unit 3 you learned to comparison shop &mdash; checking price, quality, and total value across different sellers before buying. Today that skill gets a trickier job, because sometimes the advertised <strong>discount itself</strong> needs to be verified in two different ways: is the percentage math actually correct, and was the "original" price ever a real, typical price to begin with?</p>
+        <p>Start with the math. Stores use a specific formula to calculate a real percent off: <strong>(Original Price &minus; Sale Price) &divide; Original Price &times; 100</strong>. Here's a full worked example. A skincare serum is advertised with "Was $80, now only $60 &mdash; that's 50% OFF!" Let's check that claim: $80 &minus; $60 = $20. Then $20 &divide; $80 = 0.25. Then 0.25 &times; 100 = 25%. The real discount is <strong>25% off, not 50%</strong>. The math in the ad simply doesn't add up &mdash; and once you can run this calculation yourself in under a minute, you never have to take a store's claimed percentage on faith again.</p>
+        <p>Now the second check: even when the percentage math is correct, the "original" price itself can be fake. Picture a backpack advertised as "Was $60, now $54 &mdash; Huge Savings!" Running the formula: ($60 &minus; $54) &divide; $60 &times; 100 = 10% off. Ten percent isn't nothing, but it's a long way from "huge savings" &mdash; a vague phrase is often standing in for a small, unimpressive number. Worse, a seller can simply invent an inflated "original" price that was never real to begin with, just to make any discount off of it look bigger. That's why the second half of verifying a deal is comparing the <em>sale price</em> &mdash; not the claimed discount &mdash; to what similar items typically cost elsewhere. If headphones are "on sale" for $25 and every other store sells the same or similar headphones for $22&ndash;$28 anyway, the "sale" isn't really saving you anything; the store just picked a bigger number to write down as the "original" price. A deal is only genuine when both checks pass: the percentage math is accurate, <em>and</em> the sale price is actually lower than what you'd pay elsewhere for a comparable item.</p>
+        <p>Finding a "typical market price" doesn't require anything fancy: search the exact item name (or a close match) on two or three different retailer websites, note the range of prices you see, and use that range &mdash; not the single "original" price the ad gave you &mdash; as your reality check. If three different stores all sell something similar for around $25, and an ad's "sale" price is $25, the original "$50" price tag was probably inflated. If the ad's price is genuinely below that range, the deal may be real &mdash; though an unusually low price from an unfamiliar seller is also exactly the pattern fake online stores and counterfeit sellers use, which is why price alone is never the only thing worth checking.</p>
+        <p>That same skepticism is the first line of defense against a narrow but important slice of consumer fraud tied directly to advertising. A <strong>fake online store</strong> is a slick-looking website that takes your payment for items that are low quality, wrong, or never arrive at all &mdash; then the site disappears. <strong>Counterfeit goods</strong> are fake "brand-name" items sold as if they were genuine, often through social media or pop-up ads at prices dramatically lower than any real retailer would ever charge &mdash; think a "designer" bag at 90% off from a website you've never heard of, with no listed return policy. A <strong>"free trial" trap</strong> requires your card number up front and quietly starts charging it automatically once the trial period ends, with the auto-renewal terms often buried in a long paragraph of fine print you'd have to go looking for. And <strong>phishing disguised as a promotion</strong> uses a fake "you've won!" message or an urgent prize pop-up &mdash; like "You're our 1,000,000th visitor &mdash; claim your prize!" &mdash; to get you to type in personal or payment information, for a prize that was never real to begin with.</p>
+        <p>The habit that protects you against all four fraud types and both discount tricks is the same: before trusting an advertised price or claim, slow down and check it &mdash; run the percentage math yourself, compare the price to what similar items cost elsewhere, and ask whether you actually recognize and trust the seller. If a deal looks dramatically better than everywhere else, or a message creates pressure to act <em>immediately</em>, that combination is the red flag worth pausing on &mdash; not automatic proof of a scam, but always worth a second look before you buy or enter any information. (Full detail on reporting fraud and consumer protection law is coming in Unit 8 &mdash; today is just about recognizing the advertising-related warning signs.)</p>
+        <p>Let's put the whole process together on one more full example, start to finish. An ad reads: <em>"Was $150, NOW $70 &mdash; 60% OFF! Limited stock, free returns."</em> First, the math: ($150 &minus; $70) &divide; $150 &times; 100 = $80 &divide; $150 = 0.533&hellip;, so 0.533 &times; 100 &asymp; <strong>53%</strong>. That's actually close to the advertised 60% &mdash; not exact, but not a wild exaggeration either, so the percentage check comes back mostly fine. Second, the market check: you search the item on three other retailer sites and find it typically sells for $65&ndash;$75. Since $70 falls right in that normal range, the "sale" price is a genuinely typical price, not a special bargain &mdash; the item was probably never really $150 to begin with, and the "original" price was likely inflated just to make the math look more dramatic. Notice that even though the percentage was roughly accurate, the deal still isn't the steal it's advertised to be, because the sale price matches what you'd pay anywhere else anyway. Both checks matter, and they can point in different directions on the very same ad.</p>
+        <p>One more habit worth building alongside the math: read who's selling the item, not just what it costs. A familiar, established retailer offering $70 on an item that typically runs $65&ndash;$75 is just an ordinary, reasonable price &mdash; nothing suspicious there. But that exact same price, from a brand-new website you've never heard of, with no listed return address and only one payment option, deserves a second look before you buy, even though the number itself checked out. The math tells you whether a discount is real; the seller tells you whether the purchase itself is safe. A smart shopper checks both, every time, not just whichever one is easier to look up.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The "flash sale" from a store you've never heard of</h4>
+        <p>You're scrolling and see an ad: "Wireless earbuds &mdash; Was $180, NOW $35! Flash sale ends in 2 hours!" from a store called "TechBargainZoneNow" that you've never seen before. The same earbuds sell for $60&ndash;$70 on three other, more familiar sites.</p>
+        <p class="prompt">Run both checks from today's lesson on this ad: is the discount math believable, and does the sale price actually match the typical market price? What would you do before buying?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FTC Consumer.gov</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of price verification and advertising-related fraud, or some extra practice.</p>
+          <a href="https://consumer.ftc.gov/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. A website advertises "Was $120, NOW $40!" but similar items typically sell for $45 everywhere else. This most likely means:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">It's a genuine can't-miss deal</button>
+            <button class="quiz-opt" data-correct="true">The "original" price was probably inflated to make the discount look bigger</button>
+            <button class="quiz-opt" data-correct="false">The item is definitely counterfeit</button>
+            <button class="quiz-opt" data-correct="false">You should buy several immediately</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>When the "sale" price is close to the normal market price, the inflated "original" price is likely just there to make the discount look bigger than it is.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. Which of these is a red flag for an advertising-related scam?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A store with an easy-to-find return policy</button>
+            <button class="quiz-opt" data-correct="true">A "free trial" that requires your credit card and doesn't clearly explain when charges start</button>
+            <button class="quiz-opt" data-correct="false">A sale with a clearly stated end date</button>
+            <button class="quiz-opt" data-correct="false">Verified customer reviews</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A free-trial trap quietly starts charging your card once the trial ends, often without making that clear upfront &mdash; a classic advertising-related fraud pattern.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. Before trusting an advertised "discount," the most useful thing to check is:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">How many likes the ad has</button>
+            <button class="quiz-opt" data-correct="true">Whether the price seems reasonable compared to typical market prices for similar items</button>
+            <button class="quiz-opt" data-correct="false">The ad's color scheme</button>
+            <button class="quiz-opt" data-correct="false">How many times you've seen the ad</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Comparing an advertised price against typical market prices elsewhere is exactly the comparison-shopping skill from Unit 3, applied to verifying a claimed discount.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. An ad says "Was $50, now $45!" Using the discount formula, what is the actual percent off?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">50%</button>
+            <button class="quiz-opt" data-correct="true">10%</button>
+            <button class="quiz-opt" data-correct="false">25%</button>
+            <button class="quiz-opt" data-correct="false">90%</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>($50 &minus; $45) &divide; $50 &times; 100 = $5 &divide; $50 &times; 100 = 10%.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. A student finds an ad for a jacket at an unbelievably low price from a website they've never heard of, with no return policy listed. Before buying, the smartest next step is to:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Buy immediately, since the price is the best they've found</button>
+            <button class="quiz-opt" data-correct="true">Compare the price to typical prices elsewhere and look into whether the seller is legitimate before paying</button>
+            <button class="quiz-opt" data-correct="false">Assume any unfamiliar seller is automatically a scam and never check further</button>
+            <button class="quiz-opt" data-correct="false">Only check the seller's logo design</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>An unusually low price from an unfamiliar seller with no return policy is exactly the pattern worth checking &mdash; both the market price and the seller's legitimacy &mdash; before paying.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Think of a "deal" you've seen advertised — online or otherwise. How could you verify whether the discount was genuine before buying?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScK7Igtt1cAYem2JiLcEq4C-LaO56qxTkXWk4MNNrgard3UOw/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Unit Review &amp; Assessment: Ad Detective</h2>
+        <span class="standard-badge">Synthesis: FP.6&ndash;7; CP.1; EG.9</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can analyze an advertisement for technique, deception, and fraud risk, and verify whether its price claim looks genuine.</div></div>
+
+      <article class="lesson">
+        <p>Three days ago you started with the basic techniques every ad uses (Day 1), then learned what separates ordinary persuasion from outright deception (Day 2), and applied comparison shopping to verify advertised discounts and spot fraud red flags (Day 3). Today pulls all three together into one skill: reading a single ad closely enough to catch everything going on inside it &mdash; exactly what "Ad Detective" work means, and exactly what today's official check-in will ask you to do.</p>
+        <p>Let's walk through a full example the way a real Ad Detective would. Here's the ad under investigation: <em>"FLASH SALE! Everyone's grabbing the new GlowSkin Serum before it's gone &mdash; clinically proven to erase wrinkles in just ONE night! Was $80, now only $60 &mdash; that's 50% OFF! As seen recommended by top influencers. Only a few bottles left &mdash; act now!"</em></p>
+        <p><strong>Step 1 &mdash; find the techniques.</strong> Read it line by line. "Everyone's grabbing" is <strong>bandwagon</strong>. "Clinically proven to erase wrinkles in just ONE night," with no study or source named, is an <strong>unsubstantiated claim</strong> &mdash; a specific, science-sounding word like "clinically" is doing a lot of work with nothing behind it. "Only a few bottles left &mdash; act now" is <strong>scarcity/urgency</strong>. And "recommended by top influencers" is a vague, uncredited <strong>endorsement</strong> &mdash; which influencers, and were they paid to say it? The ad doesn't say.</p>
+        <p><strong>Step 2 &mdash; verify the math.</strong> The ad claims 50% off from $80 to $60. Run the formula from Day 3: ($80 &minus; $60) &divide; $80 &times; 100. That's $20 &divide; $80 = 0.25, then 0.25 &times; 100 = <strong>25%</strong>. The real discount is 25% off, not 50%. This alone tells you the ad is willing to state a number that's flatly untrue, not just exaggerate a feeling.</p>
+        <p><strong>Step 3 &mdash; deliver a verdict.</strong> Putting it together: this ad stacks bandwagon, an unsubstantiated medical-sounding claim, manufactured urgency, and a vague endorsement &mdash; and its one specific, checkable number turns out to be wrong by double. A reasonable verdict: this ad is <strong>not trustworthy</strong>, and the inaccurate discount math is the strongest single piece of evidence, because everything else is a feeling or a vague claim, while the math is something you proved false yourself.</p>
+        <p>Notice that all three steps above reuse skills from earlier days: Step 1 is the technique-spotting from Day 1 and Day 2, and Step 2 is the percent-off formula from Day 3. That's the whole point of an Ad Detective &mdash; it isn't a new skill, it's the same moves, run one after another, on a single ad. Don't forget Day 3's fraud check either: even an ad with an accurate discount and no obviously deceptive technique can still be a fraud risk if the seller is unfamiliar, the price is dramatically below anywhere else, or the payment method offers no buyer protection. A complete Ad Detective verdict weighs technique, honesty, math, <em>and</em> seller trustworthiness together &mdash; not just one of the four. When your official check-in gives you a new ad to investigate, run these same steps: read it line by line and name every technique you spot, verify any specific number using (Original &minus; Sale) &divide; Original &times; 100, and write a verdict that points to specific evidence &mdash; not just a feeling that the ad seems "sketchy" or "fine."</p>
+        <p>A few mix-ups worth clearing up before this unit wraps. First: not every persuasive technique is deceptive &mdash; emotional appeal, humor, and honest comparison are normal advertising, and deception specifically requires a claim that's actually false, exaggerated past what's true, or deliberately hidden. Second: not every online sale is a scam &mdash; most aren't, and treating all advertising as fraudulent is just as unhelpful as trusting all of it blindly; the goal is checking, not assuming either way. Third: a claimed "discount" is only meaningful once you've both run the percentage math yourself <em>and</em> checked the price against what similar items typically cost elsewhere &mdash; a technically accurate percentage can still be calculated off of a fake "original" price.</p>
+        <p>It's worth practicing this on one more ad before your official check-in, this time with a twist: an ad that looks mostly clean at first glance. <em>"NatureBrew Iced Tea &mdash; made with real ingredients you can pronounce. Now available at a store near you."</em> Run the routine: any techniques? Not much &mdash; "real ingredients you can pronounce" leans slightly toward comparison against artificial-sounding competitors, but it's mild and there's no call to action pushing urgency. Any false or hidden claim? None stated, and nothing to verify, because the ad makes no specific numeric or scientific claim at all. Any price or math to check? There isn't one &mdash; no price is mentioned anywhere. Any fraud risk? Almost none, since it names a specific, findable retail presence ("a store near you") rather than an unfamiliar website. The verdict here looks very different from the GlowSkin serum example: this ad is mostly just ordinary, low-pressure brand-building, with nothing to substantiate and nothing to be wary of. Not every ad you investigate will turn out deceptive &mdash; part of being a good Ad Detective is correctly clearing an ad, too, not just catching problems that aren't really there.</p>
+        <p>A few mix-ups worth clearing up before this unit wraps. First: not every persuasive technique is deceptive &mdash; emotional appeal, humor, and honest comparison are normal advertising, and deception specifically requires a claim that's actually false, exaggerated past what's true, or deliberately hidden. Second: not every online sale is a scam &mdash; most aren't, and treating all advertising as fraudulent is just as unhelpful as trusting all of it blindly; the goal is checking, not assuming either way. Third: a claimed "discount" is only meaningful once you've both run the percentage math yourself <em>and</em> checked the price against what similar items typically cost elsewhere &mdash; a technically accurate percentage can still be calculated off of a fake "original" price.</p>
+        <p>This unit doesn't repeat directly in Grade 8, so today's checkpoint and reflection are your last formal practice with this skill in this course &mdash; worth taking seriously, since you'll be applying it on your own from here forward, every time you see an ad, a "flash sale," or a message urging you to act right now.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>One last ad to investigate</h4>
+        <p>You're scrolling and see: "SUMMER CLEARANCE! Was $200, NOW $90 &mdash; that's 70% OFF! As worn by your favorite creators. Only a few left, don't miss out!" from an online store you don't recognize, with similar items typically selling for $95&ndash;$110 elsewhere.</p>
+        <p class="prompt">Using all three days of this unit, list every technique you spot, check the discount math yourself, and write a one-sentence verdict backed by specific evidence &mdash; not just a feeling.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's review &mdash; everything you need is already above. Open it if you'd like another explanation of this unit's ideas, or some extra practice before your check-in.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 5 checkpoint</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. An ad claims "9 out of 10 people prefer this brand!" with a small note that only 10 people were surveyed. What's the biggest concern here?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">It's not persuasive enough</button>
+            <button class="quiz-opt" data-correct="true">The claim is technically true but misleading due to the tiny, unrepresentative sample</button>
+            <button class="quiz-opt" data-correct="false">It doesn't use enough color</button>
+            <button class="quiz-opt" data-correct="false">It's an example of scarcity/urgency</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A technically-true statistic built on a tiny, unrepresentative sample is a classic way advertising misleads without technically lying.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. A student sees an online ad for sneakers at an unbelievably low price from a store they've never heard of, with only a Venmo payment option. This combination is most likely:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A great deal worth grabbing fast</button>
+            <button class="quiz-opt" data-correct="true">A possible fake online store — a common advertising-related fraud red flag</button>
+            <button class="quiz-opt" data-correct="false">Bandwagon advertising</button>
+            <button class="quiz-opt" data-correct="false">A perfectly ordinary small business</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>An unfamiliar store, an unbelievably low price, and an unusual payment method with no buyer protection together are a classic fake-online-store pattern.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. Which best captures this unit's central skill?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Ignoring all advertising completely</button>
+            <button class="quiz-opt" data-correct="true">Reading an ad carefully enough to tell technique from deception and verify claims before buying</button>
+            <button class="quiz-opt" data-correct="false">Only trusting ads that feature a celebrity</button>
+            <button class="quiz-opt" data-correct="false">Assuming every online sale is fake</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The whole unit builds toward this one habit: read closely, tell persuasion from deception, and verify a claim before acting on it.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. An ad claims "Was $200, NOW $90 — 70% OFF!" Using the discount formula, what is the actual percent off, and what does that tell you?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">70% off — the ad's math is accurate</button>
+            <button class="quiz-opt" data-correct="true">55% off — the ad is overstating the real discount</button>
+            <button class="quiz-opt" data-correct="false">90% off — the ad understates the discount</button>
+            <button class="quiz-opt" data-correct="false">There's no way to check this without visiting the store</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>($200 &minus; $90) &divide; $200 &times; 100 = $110 &divide; $200 &times; 100 = 55%, not 70% &mdash; the ad is overstating the real discount, just like the GlowSkin serum example.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. Priya is investigating an ad and finds: an unsubstantiated health claim, manufactured urgency, and a discount that doesn't match the real math — but she also notices the seller is a large, familiar store with a clear return policy. What should her verdict weigh?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Only the seller's reputation — everything else can be ignored</button>
+            <button class="quiz-opt" data-correct="false">Only the discount math — technique and seller trust don't matter</button>
+            <button class="quiz-opt" data-correct="true">All of it together — technique, honest math, and seller trustworthiness — before deciding</button>
+            <button class="quiz-opt" data-correct="false">Whichever single factor is easiest to check</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A complete Ad Detective verdict weighs technique, honesty of claims, math, and seller trustworthiness together &mdash; not just whichever one is easiest to check.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back across this whole unit, what's one specific thing you'll do differently next time you see an ad or an online "deal," and why?</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress &mdash; an Ad Detective scenario plus 2 extra review questions covering the whole unit.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd1CQOTD_u_u0Kb0UBSP9t5fFbqH4tcndbqFeR9TKIA8kGcDA/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 5 complete 🌱</h3>
+        <p>You've covered how advertising works, spotting deceptive techniques, verifying advertised discounts, and recognizing advertising-related fraud &mdash; the same standards your classmates covered in class (NJSLS 9.1.8.FP.6&ndash;7, CP.1, EG.9). Show your teacher this page or your notebook reflections, and check in about Unit 6.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 5 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u5-selfstudy-v1';
+  var TOTAL_DAYS = 4;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  function onSpotcheckOptionClick(e){
+    var btn = e.currentTarget;
+    var item = btn.closest('.spotcheck-item');
+    var correctTech = item.dataset.answer;
+    var isCorrect = btn.dataset.tech === correctTech;
+    item.querySelectorAll('.spotcheck-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    btn.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
+    var feedback = item.querySelector('.spotcheck-feedback');
+    feedback.hidden = false;
+    feedback.className = 'spotcheck-feedback ' + (isCorrect ? 'is-correct' : 'is-incorrect');
+    feedback.textContent = isCorrect ? 'Correct — that\'s ' + correctTech + '.' : 'Not quite — this one is ' + correctTech + '.';
+  }
+
+  function wireSpotcheck(){
+    document.querySelectorAll('.spotcheck-opt').forEach(function(btn){ btn.addEventListener('click', onSpotcheckOptionClick); });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    wireSpotcheck();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

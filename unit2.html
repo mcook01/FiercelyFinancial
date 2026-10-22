@@ -1,0 +1,1025 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Earning &amp; Careers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.94rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.66rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:700px){ .day-nav{grid-template-columns:repeat(3,1fr);} .goal-grid{grid-template-columns:1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Earning &amp; Careers</h1>
+      </div>
+      <p class="subtitle">Unit 2 — Income, Careers &amp; the World of Work · 5 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/5"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Where Money Comes From</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Exploring Careers</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Pathways to Your Career</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Paychecks &amp; Your Digital Footprint</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+    <button class="day-btn" data-day="5">
+      <span class="num mono">DAY 5</span>
+      <span class="title">Unit Wrap-Up</span>
+      <span class="status-pill" data-status-for="5">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Where Does Money Come From?</h2>
+        <span class="standard-badge">NJSLS 9.2.8.CAP.3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify different types of income and explain how career choice, education, economic conditions, and personal behavior can affect how much a person earns.</div></div>
+
+      <article class="lesson">
+        <p>Unit 1 was about the money decisions you make. This unit starts one step earlier: <strong>where does the money come from in the first place?</strong> Before you can budget, save, or set a goal, you need income — money coming in, from somewhere.</p>
+        <p>There are four main types of income, and it helps to picture a real person earning each one. <strong>Wages</strong> are paid by the hour: Maria works 15 hours a week at a grocery store for $12 an hour, so her pay changes with her schedule — more hours worked means more pay, fewer hours means less. <strong>Salary</strong> is a fixed amount paid on a regular schedule no matter how many hours the work actually takes: a graphic designer paid $52,000 a year gets the exact same amount every two weeks whether that stretch was slow or slammed. <strong>Tips and commission</strong> are pay tied to service or sales: a server might earn $8 an hour plus whatever tips customers leave, while a car salesperson earns a percentage of the price of every car they sell — do more business, earn more money. And <strong>self-employment or gig work</strong> means you're your own boss: think of someone mowing five neighbors' lawns for $25 each, or selling handmade jewelry online and keeping the profit — you set the terms, but there's no guaranteed paycheck if business is slow. (There's a fifth type, investment income — money your money itself earns, like interest — but that's a Grade 8 topic. For now, just know it exists.)</p>
+        <p>Wages and salary might sound similar, but the trade-off between them matters in real life. Maria's wage job means if she picks up an extra 5-hour shift, she earns extra money — 5 hours × $12 = $60 more that week. But it also means if the store is slow and cuts her hours to 8, her paycheck shrinks right along with it. The graphic designer's salary works the opposite way: predictable pay every two weeks, but no extra pay just because a project ran late and required extra hours to finish. Neither structure is automatically "better" — a wage gives you a direct payoff for extra effort but less certainty, while a salary gives you certainty but no extra reward for extra hours. That trade-off is worth understanding now, because it's one more thing to weigh when you're comparing two real job offers someday.</p>
+        <p>Some real situations blend more than one type, and that's normal. A food-delivery driver who earns a per-delivery rate plus tips is really doing gig work and earning tips at the same time. The point of learning these four categories isn't to force every job into exactly one box — it's to recognize the pattern behind any way a person gets paid, so you can talk about income accurately instead of just calling everything "a job."</p>
+        <p>Here's the bigger idea this unit builds on: how much a person earns over time isn't random luck. It's shaped by four things working together, and each one is easier to see with a real example. <strong>Career choice</strong> matters because different careers simply pay differently for the same number of hours worked. <strong>Education and skills</strong> matter too — picture two friends who both wanted to become dental hygienists: one took biology and health-science electives in high school and finished a dental hygiene training program, while the other skipped that extra training and took a different job instead. The one with the training got hired at a higher starting wage — not luck, but the direct result of a specific skill an employer needed. <strong>Economic conditions</strong> — the job market, minimum wage, how in-demand a skill is — work on a bigger scale: when a local factory closes because of automation and cheaper overseas competition, the workers who already had extra technical certifications tend to get hired into new positions faster than workers without them, simply because employers still need those particular skills somewhere else. And <strong>personal behavior</strong> — showing up on time, being professional, doing solid work — plays out day to day: imagine two employees doing the exact same job, where one is reliable and takes on extra responsibility while the other is frequently late and does the bare minimum. After a year, it's usually the reliable one who gets offered the raise and the promotion — because of what they consistently did, not who they know.</p>
+        <p>You don't control all four factors equally — you can't single-handedly change the whole job market. But understanding all four means you can make more informed choices about your own path, starting now, instead of leaving your future income up to chance.</p>
+        <p>One more real detail before you move on: New Jersey has child labor laws that limit the hours and type of work people under 16 can legally do — for example, restrictions on how late you can work on a school night, and which jobs aren't open to you yet at your age. Workers under 16 generally need a "working paper" — a permit signed by a school official — before they can legally start a job, and there are limits on how many hours they can work per week and how late into the evening they can work once school is in session. Certain jobs, like operating heavy machinery, simply aren't legally open to a worker under 18, no matter how capable that person might be — the law treats those jobs as too risky for a younger worker, full stop, regardless of individual skill. That's worth knowing now, before you ever start job-hunting for real; it protects you, and it explains why some jobs just aren't available to you yet, not because of anything about you personally.</p>
+        <p>Today's self-check and reflection will connect these income types back to the SMART goal you built in Unit 1 — now that you know where money can actually come from, you can start thinking about which of these income types might realistically help you reach that goal.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Deon's Two Summer Offers</h4>
+        <p>Deon gets two summer job offers on the same day. Neighbor #1 wants him to walk their dog every weekday afternoon for a flat $60 a week, no matter how many days he actually shows up. Neighbor #2 wants him to mow lawns for $18 per lawn, on his own schedule, whenever he has free time — no set hours at all.</p>
+        <p class="prompt">Which income type is each offer? If Deon knows this summer will be unpredictable — some packed weeks, some wide-open weeks — which offer protects him better in a busy week, and which one could pay off more in a wide-open week?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC — Money Smart for Young People, Grades 6&ndash;8</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation of income types or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/grades-6-8" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. A neighbor pays you $20 to mow their lawn this weekend, one time. This is an example of...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Wages</button>
+            <button class="quiz-opt" data-correct="false">Salary</button>
+            <button class="quiz-opt" data-correct="false">Tips/commission</button>
+            <button class="quiz-opt" data-correct="true">Self-employment/gig work</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>You set your own hours, found your own customer, and take on the work yourself — that's gig work, not a wage or salary from an employer.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Someone spends a summer learning a new skill so they can qualify for a higher-paying job next year. Which factor is most directly affecting their future income?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Economic conditions</button>
+            <button class="quiz-opt" data-correct="true">Education/skills</button>
+            <button class="quiz-opt" data-correct="false">Career choice</button>
+            <button class="quiz-opt" data-correct="false">Luck</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Building a new skill on purpose is a direct example of education/skills shaping future income — not luck, and not the job market itself.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Which of these is the best example of personal behavior affecting someone's income?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The minimum wage in their state goes up</button>
+            <button class="quiz-opt" data-correct="true">They consistently show up on time and get offered more shifts because of it</button>
+            <button class="quiz-opt" data-correct="false">They switch to a career that typically pays more</button>
+            <button class="quiz-opt" data-correct="false">They finish a training program</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Reliability and professionalism are things you control day to day — that's personal behavior, distinct from the job market or your education level.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. Look at Deon's two offers from the scenario above. The dog-walking job pays a flat $60 a week no matter how many days he shows up. Which income type is that closest to?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Self-employment/gig work</button>
+            <button class="quiz-opt" data-correct="true">Salary — a fixed amount on a regular schedule</button>
+            <button class="quiz-opt" data-correct="false">Tips/commission</button>
+            <button class="quiz-opt" data-correct="false">Investment income</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A fixed amount paid on a set schedule, regardless of small changes in the work, is the defining feature of salary — even for an informal job like dog-walking.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. If Deon expects a busy, unpredictable summer with only a little free time some weeks, which offer better protects his income during a slow week?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The $18-per-lawn mowing gig, because gig work always pays more</button>
+            <button class="quiz-opt" data-correct="true">The flat $60-a-week dog-walking job, because it doesn't depend on how much time he has that week</button>
+            <button class="quiz-opt" data-correct="false">Neither — both pay the exact same no matter what</button>
+            <button class="quiz-opt" data-correct="false">It's impossible to know without a written contract</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Because the dog-walking pay doesn't shrink when Deon's schedule gets tight, it's more predictable in a busy week — the mowing gig only pays for lawns he actually has time to mow.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Look back at your Unit 1 SMART goal. Name one type of income (wage, salary, tips/commission, or self-employment/gig) you could realistically earn as a teenager right now, and explain how it could help you reach that goal.</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSep4_TW_plBLLhwFshbz5lgXnohtUyTzqgDKzeVnmD1BDrp4g/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Exploring Careers</h2>
+        <span class="standard-badge">NJSLS 9.2.8.CAP.11&ndash;12</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can assess my own strengths and interests, and use a real career-research tool to learn about a career's education, pay, and daily tasks.</div></div>
+
+      <article class="lesson">
+        <p>Yesterday was about income in general. Today gets personal: <strong>what career might actually fit you?</strong></p>
+        <p>Careers tend to cluster around six broad interest areas, and most people lean toward more than one. <strong>Building/Making</strong> fits someone who likes working with their hands — building, fixing, or taking things apart (think construction, mechanics, manufacturing). <strong>Helping People</strong> fits someone who cares about others' wellbeing and likes teaching or listening (healthcare, teaching, counseling). <strong>Organizing/Business</strong> suits someone who likes planning, managing details, or leading a group (management, finance, logistics). <strong>Creating/Performing</strong> is for people drawn to drawing, writing, music, or design (art, design, music, writing). <strong>Investigating/Science</strong> fits someone curious about how things work and good at solving problems (research, engineering, medicine). And <strong>Persuading/Leading</strong> suits someone who enjoys convincing others, public speaking, or taking charge (sales, law, politics, entrepreneurship). If you read all six and thought "that's basically three of me," that's completely normal — interests overlap, and that's a strength, not a problem to fix.</p>
+        <p>Your interests aren't locked in forever, either — they're worth revisiting every year or two, because what excites you at 12 can shift by 15, and that's completely expected, not a sign you did anything wrong now. It's also common for one interest area to point toward several very different careers. Someone drawn to both Investigating/Science and Helping People, for example, might end up considering nursing, biomedical engineering, or even veterinary medicine — three different careers that all combine curiosity about how living things work with a desire to help. The point of naming your top interest area isn't to lock in a single career today; it's to narrow a huge list of possible careers down to a smaller, more manageable handful actually worth researching.</p>
+        <p>Once you have a sense of your interests, the next step is real research, not guessing. <strong>CareerOneStop</strong> and <strong>My Next Move</strong> are free tools run by the U.S. Department of Labor — the same government agency that tracks real employment data nationwide. Search a career on either site and you'll find four things: its median pay (the middle salary people in that job actually earn), the education or training it typically requires, what people in that job actually do day to day, and whether the field is projected to grow, hold steady, or shrink over the next several years. That's a far more reliable picture than a guess based on TV shows or something you heard secondhand.</p>
+        <p>Here's what that research actually looks like, worked through for one real career: a registered nurse. Median pay: around $77,000 a year. Education required: an associate's or bachelor's degree in nursing, plus passing a licensing exam. Typical daily tasks: caring for patients, giving medication, and monitoring their health. Outlook: growing, meaning demand for this job is expected to increase. Notice how specific that is — not "nurses make good money," but an actual number, an actual credential, and actual daily tasks. That's the kind of detail you're looking for when you research your own career below. A few more quick examples of that same kind of detail: an automotive service technician typically needs a postsecondary certificate plus on-the-job training and earns around $47,000 a year in a stable field; a software developer typically needs a bachelor's degree (or a coding bootcamp) and often earns well over $100,000 a year in a fast-growing field; an electrician usually trains through a paid apprenticeship rather than a college degree and earns around $60,000 a year in a growing field. Four different careers, four different combinations of education and pay — none of them "better" in general, just different trade-offs.</p>
+        <p>It helps to compare two real research results side by side to see how much this varies even within one interest area. Imagine two students who both picked Investigating/Science as their top interest. One researches marine biologist and finds: median pay around $68,000, a bachelor's degree required (often a master's for many roles), daily tasks involving studying ocean life and collecting field data, and a stable outlook. The other researches software developer and finds: median pay often over $100,000, a bachelor's degree or coding bootcamp, daily tasks involving writing and testing code, and a fast-growing outlook. Same interest area, two completely different careers, two completely different sets of facts — and neither student could have known any of that without actually looking it up. That's exactly why research beats a guess: two people who share an interest can still land on very different real-world trade-offs.</p>
+        <p>That "outlook" detail — growing, stable, or declining — is worth pausing on, because it connects straight back to Day 1's idea about economic conditions shaping income. A field can be declining because a task is being automated or handled more cheaply elsewhere (some retail and manufacturing roles look like this), while a field can be growing because the population and demand for it keep increasing (healthcare and technology often look like this). Neither pattern is a life sentence — plenty of people build great careers in fields that aren't "growing" — but it's exactly the kind of real information that guessing could never give you, and exactly why research beats a hunch.</p>
+        <p>Use the tool below to research one career connected to your top interest area. This isn't a commitment — it's information-gathering. You're allowed to research a career today and feel differently about it next year; that's exactly what this process is for.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Choosing What to Research First</h4>
+        <p>You've narrowed your top interest area down to Persuading/Leading, but three careers all seem to fit: lawyer, entrepreneur, and marketing manager. You only have time to research one of them deeply today.</p>
+        <p class="prompt">Which single fact — median pay, education required, daily tasks, or job outlook — matters most to you personally right now, and how could checking that one fact for all three careers help you decide which to research first?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>My Next Move — U.S. Department of Labor</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. It's a genuinely useful (and free) tool for the career research below if you'd like to use it, but if you already know another reliable career-search site, that works too.</p>
+          <a href="https://www.mynextmove.org/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. Someone who loves comforting a friend when they're upset and is curious about how the human body works is probably most drawn to which interest area?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Organizing/Business</button>
+            <button class="quiz-opt" data-correct="true">Helping People</button>
+            <button class="quiz-opt" data-correct="false">Persuading/Leading</button>
+            <button class="quiz-opt" data-correct="false">Building/Making</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Comforting others and caring about wellbeing are classic signs of a Helping People interest — careers like nursing, counseling, or teaching often fit here.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. What can a free tool like My Next Move tell you about a career?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Whether your specific friends have that job</button>
+            <button class="quiz-opt" data-correct="true">Its median pay, required education, and typical daily tasks</button>
+            <button class="quiz-opt" data-correct="false">Your personal chances of getting hired</button>
+            <button class="quiz-opt" data-correct="false">Nothing useful — it's just for adults already working</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>These government-run tools compile real labor-market data: pay, education needed, day-to-day tasks, and job outlook — useful for anyone starting to explore careers, at any age.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. Why is it useful to research a career's required education before deciding to pursue it?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">It guarantees you'll get the job</button>
+            <button class="quiz-opt" data-correct="true">It helps you plan realistically for the steps you'd actually need to take</button>
+            <button class="quiz-opt" data-correct="false">It's required by law before age 18</button>
+            <button class="quiz-opt" data-correct="false">It has no real effect on your planning</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Knowing what education a career actually requires — a certificate, a 2-year degree, a 4-year degree — helps you plan concrete next steps instead of guessing.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. Two students both picked Investigating/Science as their top interest area, but one researched marine biology and the other researched software development — completely different pay, education, and daily tasks. What does that best show?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">One of them must have picked the wrong interest area</button>
+            <button class="quiz-opt" data-correct="true">One interest area can point toward many different careers, so research is what narrows the choices down</button>
+            <button class="quiz-opt" data-correct="false">Interest areas stop mattering once you start researching</button>
+            <button class="quiz-opt" data-correct="false">Only one of the two careers can really be correct</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A shared interest area can lead to very different careers — that's exactly why real research on a specific career matters more than the interest area alone.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. In the scenario above, you're deciding between researching lawyer, entrepreneur, or marketing manager, and how soon you could start earning matters most to you. Which piece of research data should you compare first across all three?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Their typical daily tasks</button>
+            <button class="quiz-opt" data-correct="false">Their job titles</button>
+            <button class="quiz-opt" data-correct="true">The education or training each one requires before you could start</button>
+            <button class="quiz-opt" data-correct="false">Whether the job sounds interesting on TV</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>If timing matters most, the required education or training tells you how long the path to that paycheck actually is — a direct-entry option gets you earning sooner than one requiring years of schooling first.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Research a career</h3>
+        <p class="prompt">Use My Next Move or CareerOneStop to research one career connected to your top interest area, then fill in what you find below.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="careerName">Career you researched</label>
+            <input id="careerName" data-goal="what" type="text" placeholder="e.g., veterinary technician">
+          </div>
+          <div class="goal-field">
+            <label for="careerInterest">Interest area it matches</label>
+            <input id="careerInterest" data-goal="cost" type="text" placeholder="e.g., Helping People">
+          </div>
+          <div class="goal-field">
+            <label for="careerTasks">One typical daily task</label>
+            <input id="careerTasks" data-goal="source" type="text" placeholder="e.g., examining animals, assisting the vet">
+          </div>
+          <div class="goal-field">
+            <label for="careerEd">Education/training required</label>
+            <input id="careerEd" data-goal="amount" type="text" placeholder="e.g., 2-year associate degree">
+          </div>
+          <div class="goal-field">
+            <label for="careerPay">Typical starting pay (optional — extra depth)</label>
+            <input id="careerPay" data-goal="pay" type="text" placeholder="e.g., about $38,000/year">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="careerSkill">One skill or class you could pursue now to move toward it</label>
+            <input id="careerSkill" data-goal="deadline" type="text" placeholder="e.g., take a biology elective">
+          </div>
+        </div>
+        <div class="goal-summary" id="goalSummary" hidden>
+          <b>Your career research</b>
+          <span id="goalSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Based on today's research, what surprised you most about this career — the pay, the education required, the daily tasks, or something else? Explain.</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress. It also collects your career research, so have it ready before you start.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdI5ORK_0BOn4kSCy60UqByW66Le0yzcC2Q0KY0eETR2VW6GQ/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions and research a career above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Pathways to Your Career</h2>
+        <span class="standard-badge">NJSLS 9.2.8.CAP.1&ndash;2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify different education and training pathways and connect one to a career I'm interested in.</div></div>
+
+      <article class="lesson">
+        <p>You researched a career on Day 2. Today's question: <strong>how do you actually get there?</strong></p>
+        <p>There's no single "right" path — most careers can be reached more than one way, and the path you pick depends on the specific career and what fits you. <strong>CTE (Career and Technical Education)</strong> programs are courses or whole academies, often available in high school, that teach job-specific skills directly in a field like health sciences, engineering, culinary arts, cosmetology, or automotive work — sometimes leading straight to an industry certification. <strong>Apprenticeships</strong> pair paid on-the-job training with related classroom instruction — you earn a paycheck while you learn the trade, which is common in fields like electrician, plumber, and HVAC technician work. <strong>Dual enrollment</strong> lets you take real college-level courses while still in high school, earning high school and college credit for the same class at the same time — a genuine head start. <strong>Military training programs</strong> teach technical and leadership skills in many fields, often building skills that transfer into a related civilian career afterward. Then there's the more familiar route of <strong>college</strong> — a two-year associate degree, which can lead directly to a career or transfer into a four-year program, or a four-year bachelor's degree, which many professional careers (like engineering, teaching, or nursing) require outright. And finally, <strong>direct-entry jobs</strong> hire people with no additional schooling required first and train them on the job.</p>
+        <p>Here's why "no single right path" is more than a nice phrase — look at how differently two careers can actually be reached. Someone aiming to become a surgeon needs four years of college, then medical school, then years of additional hands-on training — there's really one long route, and it doesn't skip steps. Compare that to becoming an electrician: most electricians get there through a paid apprenticeship, learning on the job and in a classroom at the same time, with no four-year degree required at all. And some careers can genuinely be reached more than one way — take someone who wants to become a veterinary technician. They could complete a two-year associate degree program in veterinary science, or they could pursue a CTE animal-science program in high school combined with on-the-job training. Both are legitimate, realistic paths to the exact same career; which one fits better depends on things like cost, how quickly someone wants to start earning, and how they learn best.</p>
+        <p>Cost is often the hidden factor behind these choices, and it's worth naming directly. A four-year public college can cost tens of thousands of dollars including room and board, though scholarships, grants, and programs that help cover community college tuition for eligible students can significantly lower that number. An apprenticeship, by contrast, typically costs the apprentice nothing — the employer pays for the training because they need the skill, and the apprentice earns a wage the entire time they're learning. Neither path is automatically the "smart money" choice; it depends on the specific career, how much cost (if any) a family is comfortable taking on, and how quickly someone wants to be earning a full paycheck.</p>
+        <p>None of these paths is "better" in general. A four-year degree isn't automatically the smartest move, and skipping college altogether isn't automatically a shortcut, either — it depends entirely on what the specific career actually requires and what setup works for you. A graphic designer, for instance, might build toward that career through a two-year design program, a four-year degree, or a self-taught portfolio plus freelance work — employers in creative fields often care more about the portfolio than about which path produced it.</p>
+        <p>When two pathways both seem realistic for the same career, it usually comes down to a few practical questions: How soon do you want (or need) to start earning money? An apprenticeship pays you while you train; a four-year degree usually costs money for years before you earn anything from that career. How much does each path cost, and is any of that cost covered — some CTE programs and apprenticeships are free or even paid, while college usually isn't. And how do you learn best — some people thrive with hands-on, on-the-job training, while others do better with a more traditional classroom setting. There's no universal right answer to any of these questions; the point is knowing they exist so you can actually weigh them, instead of assuming there's only one door into any career.</p>
+        <p>This is also where your choices in the next few years start to matter, even before you pick a career for real. High schools often let students choose electives, and some offer whole CTE academies inside the building — a health-sciences academy, an engineering academy, a culinary program. Picking one of those isn't a lifelong commitment, but it is a low-risk way to test-drive a field before investing years and money in it. Someone who spends two years in a health-sciences academy and realizes partway through that it's not for them hasn't wasted anything — they've learned something true about themselves for a fraction of the cost of switching majors partway through college, which is one of the more common (and expensive) mistakes people make when they skip this kind of early exploration.</p>
+        <p>Today, connect the pathways above to the career you researched yesterday, and think about one small, real step you could take now or in high school to move toward it — something as concrete as signing up for a related elective, joining a related club, or looking up whether a local CTE program or apprenticeship connects to your interest.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Marcus Weighs Two Pathways</h4>
+        <p>Marcus wants to become an HVAC technician. His high school offers a CTE building-trades program he could start next year, but his older cousin insists a four-year college degree is "the safer bet" no matter what career you want. Marcus looks it up and finds that HVAC technicians typically train through a paid apprenticeship or a CTE program — a four-year degree isn't required or even common in that field at all.</p>
+        <p class="prompt">Was Marcus's cousin's advice correct for this specific career? What should Marcus base his decision on instead of general advice like "college is always the safer bet"?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CareerOneStop — Apprenticeship Finder</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like to browse real, paid apprenticeship programs by field and location.</p>
+          <a href="https://www.careeronestop.org/Toolkit/Training/find-apprenticeships.aspx" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. What best describes an apprenticeship?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Unpaid volunteer work</button>
+            <button class="quiz-opt" data-correct="true">Paid on-the-job training combined with related classroom instruction</button>
+            <button class="quiz-opt" data-correct="false">A 4-year college degree</button>
+            <button class="quiz-opt" data-correct="false">A one-day job shadow</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Apprenticeships are distinctive because they're paid — you're earning money while learning the trade through a mix of hands-on work and instruction.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. Which statement about career pathways is TRUE?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">There is exactly one correct path to every career</button>
+            <button class="quiz-opt" data-correct="true">Many careers can be reached through more than one pathway</button>
+            <button class="quiz-opt" data-correct="false">College is required for every career</button>
+            <button class="quiz-opt" data-correct="false">Apprenticeships don't pay</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Most careers have multiple realistic routes in — CTE, apprenticeship, dual enrollment, military training, college, or direct-entry — depending on the field.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. Dual enrollment means...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Taking two high school electives at once</button>
+            <button class="quiz-opt" data-correct="true">Earning real college credit while still in high school</button>
+            <button class="quiz-opt" data-correct="false">Enrolling in two different high schools</button>
+            <button class="quiz-opt" data-correct="false">Repeating a grade</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Dual enrollment programs let high schoolers take courses that count for actual college credit, getting a head start before graduating.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. In the scenario above, what does Marcus's own research actually show about the typical pathway to becoming an HVAC technician?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A four-year college degree is required, no exceptions</button>
+            <button class="quiz-opt" data-correct="true">A paid apprenticeship or CTE program is the typical pathway, not a four-year degree</button>
+            <button class="quiz-opt" data-correct="false">No training of any kind is needed</button>
+            <button class="quiz-opt" data-correct="false">Only military training leads to this career</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Marcus's research shows the field is typically reached through a paid apprenticeship or CTE program — his cousin's general advice didn't match this specific career.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Why is it a mistake to apply advice like "always get a four-year degree" to every career, the way Marcus's cousin did?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Because college is never worth attending for any career</button>
+            <button class="quiz-opt" data-correct="true">Because different careers genuinely require different pathways, and the right one depends on the specific career</button>
+            <button class="quiz-opt" data-correct="false">Because apprenticeships always pay more than any college graduate earns</button>
+            <button class="quiz-opt" data-correct="false">Because CTE programs are only open to adults</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>One-size-fits-all advice ignores that pathways are career-specific — what's realistic for a surgeon is very different from what's realistic for an electrician or HVAC technician.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Which pathway (CTE, apprenticeship, dual enrollment, military training, 2-year college, 4-year college, or a direct-entry job) seems most connected to the career you researched on Day 2? What's one concrete step you could take now or in high school toward it?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf21tSUv_xkRYx520CyfmXF8S0sJeBzp2yb_CAER5IljOR9TQ/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Paychecks &amp; Your Digital Footprint</h2>
+        <span class="standard-badge">NJSLS 9.1.8.EG.1 &amp; 9.2.8.CAP.4</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain the difference between gross and net pay, and describe how my online activity could affect future opportunities.</div></div>
+
+      <article class="lesson">
+        <p>If you earned $200 this week at a job, would you get to keep all $200? Most people's first guess is yes — but the honest answer is no, and today explains exactly why, with real numbers.</p>
+        <p><strong>Gross pay</strong> is the total amount you earn before anything is taken out — just your hourly rate times your hours (or your salary amount). <strong>Net pay</strong> — also called take-home pay — is what's actually left after deductions come out. The most common deductions are <strong>federal income tax</strong>, <strong>state income tax</strong>, and <strong>Social Security and Medicare</strong> (often labeled together as FICA on a pay stub). Whatever remains after all of that is your <strong>disposable income</strong> — the money you actually get to spend or save.</p>
+        <p>Let's walk through a real, complete example so this math is never a mystery. Imagine a pay stub for an employee named Jordan, who worked 40 hours over a two-week pay period at an hourly rate of $14.00.</p>
+        <p><strong>Step 1 — find gross pay.</strong> Multiply hours by hourly rate: 40 hours × $14.00 = <strong>$560.00 gross pay</strong>. That's the number before anything gets subtracted.</p>
+        <p><strong>Step 2 — add up each deduction.</strong> Federal income tax on this paycheck comes to $56.00. State income tax (in New Jersey) comes to $16.80. Social Security is 6.2% of gross pay: 6.2% of $560.00 works out to $34.72. Medicare is 1.45% of gross pay: 1.45% of $560.00 works out to $8.12. Add all four together: $56.00 + $16.80 + $34.72 + $8.12 = <strong>$115.64 in total deductions</strong>.</p>
+        <p><strong>Step 3 — subtract total deductions from gross pay.</strong> $560.00 − $115.64 = <strong>$444.36 net pay</strong>. That $444.36 is what actually lands in Jordan's bank account — a little over 20% of the gross pay never even reaches it.</p>
+        <p>Try the same three steps with a simpler example. Casey works 20 hours at $13 an hour, so gross pay is 20 × $13.00 = $260.00. If total deductions come out to about 18% of gross pay, that's 0.18 × $260.00 = $46.80 in deductions. Net pay is $260.00 − $46.80 = <strong>$213.20</strong>. Multiply to find gross pay, add up the deductions, subtract — same pattern every time, and once you've worked it with real numbers, it stops feeling abstract.</p>
+        <p>One common misconception is that only hourly or salaried pay gets taxed, while cash tips somehow don't count. They do — tip income is legally taxable too, even when a customer hands cash directly to a server, which is one more reason the deductions above apply across almost every kind of paid work, not just a traditional hourly job.</p>
+        <p>So on that $200 paycheck from the opening question, your real net pay would likely land somewhere around $160&ndash;$170, depending on where you live and how much you earn. (Real tax math has more detail than this — different tax brackets, other possible deductions — but this unit keeps it simple on purpose; Unit 7 goes deeper into how taxes actually work.)</p>
+        <p>The second half of today is a different kind of paycheck readiness: your <strong>digital footprint</strong> — everything you post, like, comment on, or get tagged in online. It doesn't disappear just because you moved on from it, and it's more public than it feels in the moment. Future employers and college admissions offices really do look — not to spy, but because a public online presence is, well, public. Picture four job applicants side by side. One has a public profile showing photos of community volunteer work and a post about finishing a coding project — that reads as responsible and engaged. Another's public profile includes posts using disrespectful language about coworkers from a past job — that's a red flag before the person even lands an interview. A third applicant has no public social media at all — every account is private — which simply tells an employer nothing either way. And a fourth posts publicly about being "so bored" at their current job, tagging the employer by name — which could easily get back to that very employer, or the next one who searches their name later. Same kind of platform, four very different impressions, and probably only one of those four people actually meant for an employer to see what they posted.</p>
+        <p>A simple habit helps here: before posting anything publicly, pause and ask three questions. Would you be comfortable with a teacher, a future employer, or a college admissions officer seeing this exact post? Could this post be shared or screenshotted by someone else, even if you delete it later? And does this post represent how you actually want to be seen, or just how you feel in this one moment? None of this means never posting anything — it means posting on purpose instead of by accident, which is a skill worth building well before your first job application actually depends on it.</p>
+        <p>This isn't about being scared of the internet — it's about knowing that what you post now becomes part of how people who've never met you might form a first impression later. Today's self-check covers both halves: the math of a paycheck, and the judgment call of an online presence.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Your First Real Paycheck</h4>
+        <p>You just got your first pay stub from a part-time job: 25 hours at $13.50 an hour. Before opening the envelope, you tell a friend you're expecting exactly $337.50 to land in your bank account.</p>
+        <p class="prompt">Is your prediction right? What's actually going to happen to that $337.50 before it reaches your bank account, and roughly how much smaller should you expect the real deposit to be?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Youth Financial Education Tools</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation of paychecks and taxes or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/educator-tools/youth-financial-education/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. Gross pay is...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The amount you actually take home</button>
+            <button class="quiz-opt" data-correct="true">The total amount earned before any deductions</button>
+            <button class="quiz-opt" data-correct="false">Only the tips portion of your paycheck</button>
+            <button class="quiz-opt" data-correct="false">The amount left after you pay your own bills</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Gross pay is the starting number, before taxes and other deductions reduce it down to your net (take-home) pay.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Which of these is a typical deduction taken out of a paycheck?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A tip from a customer</button>
+            <button class="quiz-opt" data-correct="true">Federal income tax</button>
+            <button class="quiz-opt" data-correct="false">A bonus for good performance</button>
+            <button class="quiz-opt" data-correct="false">Your hourly wage rate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Federal income tax, state income tax, and Social Security/Medicare are the common deductions that turn gross pay into net pay.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. A student posts a public rant about a teacher, tagging the school. A future employer sees it during a background check. This is an example of...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Disposable income</button>
+            <button class="quiz-opt" data-correct="false">A tax deduction</button>
+            <button class="quiz-opt" data-correct="true">A digital footprint affecting an opportunity</button>
+            <button class="quiz-opt" data-correct="false">Gross pay</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Public posts stay part of your digital footprint and can shape how someone who's never met you — like a future employer — sees you.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. In the scenario above, $337.50 (25 hours × $13.50) is which number?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Gross pay</button>
+            <button class="quiz-opt" data-correct="false">Net pay</button>
+            <button class="quiz-opt" data-correct="false">Disposable income</button>
+            <button class="quiz-opt" data-correct="false">A tax deduction</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Hours times hourly rate gives you the total before anything is taken out — that's gross pay, not what actually reaches the bank account.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. Based on today's lesson, roughly how much of that $337.50 should you realistically expect to see actually deposited?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Exactly $337.50 — nothing ever gets taken out of a first paycheck</button>
+            <button class="quiz-opt" data-correct="true">Somewhat less than $337.50 — likely around 80&ndash;85% of it, after deductions</button>
+            <button class="quiz-opt" data-correct="false">More than $337.50, since tips get added on top</button>
+            <button class="quiz-opt" data-correct="false">$0 — paychecks are never deposited directly to a bank account</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Just like Jordan's and Casey's pay stubs earlier, federal and state taxes plus Social Security/Medicare typically take out roughly 15&ndash;20% of gross pay, leaving net pay somewhat lower.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Imagine you earned $200 this week. Name one deduction you'd expect to see come out of your paycheck, and explain in your own words why you wouldn't get to keep the full $200. Then name one thing you'll keep in mind about your own online activity going forward.</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScFPMNgqcSWfVOpAg9XV8dz-rZLgpQTwgE30fLNpP2GffVeOA/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-panel" data-panel="5" hidden>
+      <div class="day-head">
+        <h2>Day 5 · Unit Wrap-Up: Earning &amp; Careers Review</h2>
+        <span class="standard-badge">Synthesis: CAP.1&ndash;4, 11&ndash;12; EG.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can connect what I've learned about income, careers, education pathways, and paychecks into one overall picture of how earning works.</div></div>
+
+      <article class="lesson">
+        <p>Four days ago you asked "where does money come from?" Here's the full picture you've built since: income comes in different <strong>types</strong> — wages, salary, tips/commission, and self-employment or gig work (Day 1). The career you choose to pursue should connect to your own <strong>strengths and interests</strong>, and real research (not guessing) tells you what a career actually pays, requires, and involves day to day (Day 2). There are multiple real <strong>pathways</strong> to get there — CTE, apprenticeships, dual enrollment, military training, college, or direct-entry jobs — and most careers can be reached more than one way (Day 3). And once you're actually earning, your paycheck involves <strong>gross pay, deductions, and net pay</strong>, plus a digital footprint that follows you into that working world (Day 4).</p>
+        <p>Two common mix-ups worth clearing up before you move on. First: gross pay and net pay are <em>not</em> the same thing — net pay is always less than or equal to gross pay, never more, because deductions only ever subtract. If someone tells you their "salary" is $50,000, that's their gross pay for the year; their actual take-home pay will be noticeably less once taxes and other deductions come out. Second: a four-year college degree is not the only path to a solid career. Apprenticeships, CTE programs, and direct-entry jobs are all legitimate routes into real, well-paying careers, depending on the field — the right pathway depends on the specific career, not on which path sounds the most impressive. A third mix-up is worth naming too: a career's median pay is a middle number, not a guarantee — half of everyone in that job earns more, and half earns less, depending on things like location, employer, years of experience, and everything Day 1 covered about career choice, education, economic conditions, and personal behavior. Two people with the exact same job title can end up on very different paychecks for real, explainable reasons — median pay is a helpful starting estimate, not a promise.</p>
+        <p>Here's how all four days connect in one example. Amir wants to become a veterinary technician. From Day 3, he knows a realistic pathway might be a two-year associate degree program in veterinary science, or a CTE animal-science program combined with on-the-job training — there's more than one legitimate way in. From Day 1, he knows his future income as a vet tech will be shaped by things like how much training he completes and how reliable he is as an employee, not just luck. And from Day 4, once he actually starts that job, he'll need to understand that his paycheck won't match his hourly rate times his hours worked exactly — taxes and other deductions will come out first, leaving him with a smaller net pay than his gross pay. Notice how answering one simple question, "how do I prepare for this career?", pulls together income types, pathways, and paycheck basics all at once — that's exactly the kind of connected thinking this unit was building toward.</p>
+        <p>Now imagine a version of Amir who skipped this process entirely — picked "vet tech" because it sounded nice, never researched the actual pay or education required, and never thought about pathways at all. He might discover months into a training program that it requires more schooling than he expected, or that the starting pay is lower than he assumed, or that it doesn't connect to any of his actual strengths after all. None of that is guaranteed to happen — but it's a lot more likely when a decision skips research entirely. That's the real value of this unit: not guaranteeing the "right" career, but replacing guesswork with information you can actually act on.</p>
+        <p>Here's one more way today's ideas connect directly to your Unit 1 SMART goal. Suppose your goal involves saving $150 for something specific. If you took on a part-time job earning $12 an hour for 10 hours a week, your gross pay would be $120 a week — but as Day 4 covered, your real net pay would be closer to $96&ndash;$102 a week, roughly 80&ndash;85% of that gross amount, once deductions come out. That means reaching your $150 goal would realistically take about a week and a half of real paychecks, not exactly one week like the gross number alone might suggest. That's the whole unit in miniature: income type, paycheck math, and your own goal, all in one calculation.</p>
+        <p>It's worth naming why this unit came before the ones on budgeting and taxes, not after. You can't realistically plan a budget (Unit 3) around income you don't understand, and you can't make sense of how taxes work (Unit 7) without already knowing the difference between gross and net pay. Everything you learned this week — income types, career fit, pathways, and paycheck basics — is the foundation the rest of this course keeps building on, so it's worth actually knowing this material solidly rather than rushing past it.</p>
+        <p>Today's self-check pulls together ideas from across the whole unit, and the reflection connects everything back to your Unit 1 SMART goal — the goal earning money is ultimately supposed to help you reach.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Jasmine Plans Her Next Two Years</h4>
+        <p>Jasmine wants to become a veterinary technician. She knows her top interest area is Helping People, she found a two-year associate degree pathway when she researched it, and she just calculated that her eventual paycheck will be smaller than her hourly rate times her hours once deductions come out.</p>
+        <p class="prompt">Using everything from this unit — income types, career research, pathways, and paycheck basics — what's one concrete thing Jasmine could realistically do in the next school year to move toward this goal?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation of anything from this unit or some extra review.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 2 checkpoint</h3>
+        <div class="quiz-q" data-qid="d5q1">
+          <p class="quiz-question">1. Which pair correctly matches an income type to its definition?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Salary — paid per hour worked</button>
+            <button class="quiz-opt" data-correct="true">Wages — paid per hour worked</button>
+            <button class="quiz-opt" data-correct="false">Gig work — a fixed amount regardless of hours</button>
+            <button class="quiz-opt" data-correct="false">Commission — always guaranteed regardless of sales</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Wages are the income type tied directly to hours worked — more hours generally means more pay.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q2">
+          <p class="quiz-question">2. Priya wants to become a physical therapist. Which combination of facts would actually help her plan?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Her horoscope and her favorite color</button>
+            <button class="quiz-opt" data-correct="true">The career's required education, typical tasks, and a realistic pathway to get there</button>
+            <button class="quiz-opt" data-correct="false">Only what her friends think she should do</button>
+            <button class="quiz-opt" data-correct="false">Nothing — there's no way to research this in advance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Real career planning combines research (education required, daily tasks, pay) with a concrete pathway — exactly what Days 2 and 3 walked through.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q3">
+          <p class="quiz-question">3. Net pay is always...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Higher than gross pay</button>
+            <button class="quiz-opt" data-correct="false">Exactly equal to gross pay</button>
+            <button class="quiz-opt" data-correct="true">Less than or equal to gross pay</button>
+            <button class="quiz-opt" data-correct="false">Unrelated to gross pay</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Deductions only subtract from gross pay, so net pay can never be more than gross pay — usually it's noticeably less.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q4">
+          <p class="quiz-question">4. Which sequence correctly matches the order of ideas this unit built, day by day?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Income types &rarr; career interests &amp; research &rarr; pathways &rarr; paycheck basics</button>
+            <button class="quiz-opt" data-correct="false">Paycheck basics &rarr; income types &rarr; pathways &rarr; career research</button>
+            <button class="quiz-opt" data-correct="false">Pathways &rarr; paycheck basics &rarr; income types &rarr; career research</button>
+            <button class="quiz-opt" data-correct="false">Career research &rarr; pathways &rarr; income types &rarr; paycheck basics</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The unit builds in order: what income even is, what career might fit you, how to actually reach it, and then what your real paycheck looks like once you're there.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q5">
+          <p class="quiz-question">5. In the scenario above, why is Jasmine's two-year associate degree pathway just as legitimate a plan as a four-year degree route would be for a different career?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Because two-year degrees are always faster and therefore always better</button>
+            <button class="quiz-opt" data-correct="true">Because the right pathway depends on what a specific career actually requires, not on which path sounds the most impressive</button>
+            <button class="quiz-opt" data-correct="false">Because four-year degrees don't count as real education</button>
+            <button class="quiz-opt" data-correct="false">Because vet techs aren't required to have any training</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Day 3's key idea applies directly here: the right pathway is the one that matches what the specific career requires, not the one that seems most prestigious in general.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back at all 5 days of Unit 2, connect it to your Unit 1 SMART goal: how might your income type, chosen career, and educational path affect whether you reach that goal?</p>
+        <textarea data-reflection="5" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 5 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress. It includes a short cumulative section covering the whole unit — separate from the self-check above.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfqDMdpB1aKuj8C9FYielaWku_pnNvQQh4wNxT0mt-vbQTKsA/viewform">Open Day 5 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="5">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="5" disabled>Mark Day 5 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 2 complete 🌱</h3>
+        <p>You've covered income types, career research, education pathways, and paycheck basics — the same standards your classmates covered in class (NJSLS 9.2.8.CAP.1&ndash;4, 11&ndash;12, 9.1.8.EG.1). Show your teacher this page or your notebook reflections, and check in about Unit 3.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 2 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u2-selfstudy-v1';
+  var TOTAL_DAYS = 5;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, goal: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function goalCompleteForDay2(){
+    var g = state.goal;
+    return !!(g.what && g.cost && g.source && g.amount && g.deadline);
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && goalCompleteForDay2();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  function renderGoalSummary(){
+    var g = state.goal;
+    var summaryEl = document.getElementById('goalSummary');
+    var textEl = document.getElementById('goalSummaryText');
+    if (g.what && g.cost && g.source && g.amount && g.deadline){
+      textEl.textContent = 'Career: ' + g.what + ' (' + g.cost + ' interest area). Typical task: ' + g.source + '. Education needed: ' + g.amount + '. Next step: ' + g.deadline + '.';
+      summaryEl.hidden = false;
+    } else { summaryEl.hidden = true; }
+  }
+
+  function restoreGoal(){
+    document.querySelectorAll('[data-goal]').forEach(function(input){
+      var key = input.dataset.goal;
+      if (state.goal[key]) input.value = state.goal[key];
+      input.addEventListener('input', function(){
+        state.goal[key] = input.value;
+        saveState();
+        renderGoalSummary();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+      });
+    });
+    renderGoalSummary();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '2' && !goalCompleteForDay2()){
+          var hint = document.querySelector('[data-hint-for="2"]');
+          if (hint) hint.textContent = 'Fill in all five fields of your career research above, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreGoal();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

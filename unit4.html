@@ -1,0 +1,1049 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Saving &amp; Banking I</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(3,1fr);} .goal-grid{grid-template-columns:1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Saving &amp; Banking I</h1>
+      </div>
+      <p class="subtitle">Unit 4 — Financial Institutions 101 · 5 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/5"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Choosing an Institution</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Savings vs. Checking</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">How Banks Work</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Products &amp; Services</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+    <button class="day-btn" data-day="5">
+      <span class="num mono">DAY 5</span>
+      <span class="title">Unit Review: Choose-a-Bank</span>
+      <span class="status-pill" data-status-for="5">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Choosing a Financial Institution: Banks, Credit Unions &amp; More</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FI.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify the factors to consider when choosing a financial service provider and compare different types of institutions using those factors.</div></div>
+
+      <article class="lesson">
+        <p>A <strong>financial service provider</strong> is any institution that offers a place to save, access, and borrow money. There are four common types, and each one is really a different trade-off dressed up as a business. A <strong>traditional bank</strong> is a full-service institution with physical branches you can walk into, talk to a real person, and get help with almost anything &mdash; but some banks charge a monthly fee if your balance ever dips below a minimum. A <strong>credit union</strong> is member-owned rather than owned by outside shareholders, which usually means lower fees and better interest rates, but you have to qualify for membership first, often by living in a certain area or working for a certain employer. An <strong>online-only bank</strong> has no physical branches at all; everything happens through an app or website. Because it doesn't have to pay for buildings and tellers, it can often afford to pay you a higher interest rate on your savings &mdash; the trade-off is no in-person help, plus depositing cash can be slower or more complicated. And a <strong>check-cashing or prepaid-card store</strong> will cash a paycheck or load a prepaid card for a fee, with no account required at all. It's fast and doesn't ask many questions, but it charges high fees, pays no interest, and isn't really a full financial institution, since your money doesn't grow there or have anywhere permanent to live.</p>
+        <p>Choosing between them comes down to six factors: fees, interest rates, branch/ATM access, mobile/online tools, customer service, and safety. Fees might mean a monthly maintenance charge or a fee every time you use a machine outside your bank's network. Interest rates matter more the longer your money sits somewhere, since a better rate means it grows faster on its own &mdash; something you'll calculate for yourself on Day 2. Branch and ATM access matters if you like handling cash or want to talk to a person face to face, while mobile and online tools matter if you'd rather manage everything from your phone. Customer service is about how easy it is to get real help when something goes wrong, like a lost card or a mistaken charge.</p>
+        <p>Safety is its own factor, and it specifically means <strong>FDIC insurance</strong> (for banks) or <strong>NCUA insurance</strong> (for credit unions) &mdash; federal protection that covers your deposit up to $250,000 if the institution itself ever fails. Picture it this way: if you had $800 sitting in a savings account and that bank shut down tomorrow, FDIC insurance guarantees you'd still get every one of those dollars back, because the government, not the bank, stands behind that promise. A lot of people don't know this protection exists, and it directly answers the question that drives a lot of provider choice: "is my money actually safe there?" It's also worth knowing this protection works exactly the same way whether or not the bank has a branch you can walk into, so an online-only bank is not automatically less safe just because there's no building &mdash; a mix-up worth remembering all the way to the end of this unit.</p>
+        <p>Here's how those six factors actually play out for three different people. Amara wants the highest possible interest rate on her savings and doesn't mind managing everything from her phone, so an online-only bank fits her best since it trades branches for a stronger rate. Malik needs to cash a paycheck today and doesn't have a bank account yet, so a check-cashing store fits his immediate need, even though it costs more, because speed and no account requirement matter more to him right now than growing his money slowly. Mr. Diaz values walking into a branch, talking to the same staff member every time, and getting in-person help filling out paperwork like a loan application, so a traditional bank or credit union fits him best, since both offer the face-to-face relationship a check-cashing store or online-only bank simply can't.</p>
+        <p>Let's put actual numbers on that trade-off, because "lower fees" can sound small until you add it up over a full year. Imagine two options for holding $150: Bank A charges a $5 monthly maintenance fee unless your balance stays above $300, and Bank B (a credit union) charges no monthly fee at all once you're a member. If your balance mostly stays under $300, Bank A's fee hits every single month: $5 &times; 12 months = $60 a year, just to keep your own money in an account. Bank B charges $0 &times; 12 = $0 for the exact same job. That $60 difference isn't a rounding error &mdash; it's more than a third of the $150 you started with, gone before you ever spent a dollar or earned a cent of interest. This is exactly why reading a fee schedule (the list of charges a bank or credit union publishes) before opening an account is worth the five minutes it takes: a fee you don't notice on day one can quietly outweigh everything else about an account.</p>
+        <p>It's also worth knowing that these six factors don't all matter equally to every person, and they can matter differently to the same person at different points in life. A middle schooler with $40 in birthday money probably cares most about avoiding fees and knowing the money is safe, since $40 isn't likely to earn much interest either way. An adult managing a paycheck might care much more about a strong interest rate or free access to ATMs everywhere they travel. Neither person is wrong &mdash; they're just weighing the same six factors differently based on what their money actually needs to do for them right now. That's a habit worth building early: instead of asking "which bank is best," get in the practice of asking "best for what, and best for whom."</p>
+        <p>One more thing worth knowing before you compare providers on your own: opening any account &mdash; whether a checking account, a savings account, or a membership at a credit union &mdash; almost always requires an adult, since minors typically can't open an account entirely on their own. Many banks and credit unions offer a joint or custodial account specifically built for this, where a parent or guardian is a co-owner on the account alongside you. That doesn't change any of the six factors above; it just means the actual decision usually happens as a conversation with a trusted adult, using the same reasoning you're practicing in this unit.</p>
+        <p>None of the four types is simply "the best" one; each trades some factors away to gain others. A check-cashing store trades cost and growth for speed and no account requirement &mdash; a real trade-off, not a mistake, depending on what someone needs right now. The right provider is the one that fits a person's actual priorities among those six factors, not a single correct answer everyone is supposed to pick. As you go through the rest of this unit, keep asking yourself which of these six factors would matter most to you.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Deysi's Birthday Money</h4>
+        <p>Deysi just got $85 in birthday money and wants to open her first account with a parent as co-owner. A big traditional bank near her house charges a $5 monthly fee unless her balance stays above $300 &mdash; which hers won't, at least not for a while. A credit union her older cousin belongs to charges no monthly fee at all, but the nearest branch is a 20-minute drive, and she'd need to qualify for membership first through her cousin's family connection.</p>
+        <p class="prompt">Using the six factors from today's lesson, which one or two matter most for Deysi's exact situation, and which provider would you point her toward &mdash; and why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC &mdash; Money Smart for Young People</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/money-smart-young-people" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Which specifically protects your deposit if your bank or credit union fails?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">FDIC or NCUA insurance, up to $250,000</button>
+            <button class="quiz-opt" data-correct="false">Having a good mobile app</button>
+            <button class="quiz-opt" data-correct="false">The number of branch locations</button>
+            <button class="quiz-opt" data-correct="false">Nothing protects a deposit</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>FDIC insurance (banks) and NCUA insurance (credit unions) are federal protections that cover deposits up to $250,000 if the institution fails &mdash; regardless of app quality or branch count.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which best describes a credit union?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Member-owned, often with lower fees and better rates, but membership is required</button>
+            <button class="quiz-opt" data-correct="false">A store that only cashes checks for a fee</button>
+            <button class="quiz-opt" data-correct="false">A bank with no physical branches at all</button>
+            <button class="quiz-opt" data-correct="false">A type of account, not an institution</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Credit unions are owned by their members rather than shareholders, which often means lower fees and better rates &mdash; but you have to qualify for and join membership.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Amir needs cash right now and doesn't have a bank account yet. Which provider type best fits that immediate need, even though it costs more?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A check-cashing or prepaid-card store</button>
+            <button class="quiz-opt" data-correct="false">A credit union, since membership approval is instant</button>
+            <button class="quiz-opt" data-correct="false">An online-only bank, since it has the highest interest rate</button>
+            <button class="quiz-opt" data-correct="false">No provider can help without an account already open</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Check-cashing stores trade a higher cost for speed and no account requirement &mdash; exactly the trade-off that fits an immediate cash need.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. Bank A charges a $5 monthly fee unless your balance stays above $300. If your balance mostly stays below $300, about how much would that fee cost over a full year?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$60</button>
+            <button class="quiz-opt" data-correct="false">$5</button>
+            <button class="quiz-opt" data-correct="false">$12</button>
+            <button class="quiz-opt" data-correct="false">$300</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$5 a month &times; 12 months = $60 a year &mdash; a fee that can quietly outweigh everything else about an account if it goes unnoticed.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Deysi has $85 and mostly cares about avoiding fees, even though it means a longer drive to reach her account. Based on the six factors, which provider fits her priorities best?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A credit union with no monthly fee, even with less convenient branch access</button>
+            <button class="quiz-opt" data-correct="false">A traditional bank with a $5 monthly fee and a branch next door</button>
+            <button class="quiz-opt" data-correct="false">A check-cashing store, since it's the fastest option</button>
+            <button class="quiz-opt" data-correct="false">It doesn't matter &mdash; all providers charge the same fees</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Since Deysi's balance is small and fee-avoidance matters most to her, the no-fee credit union fits her stated priorities better, even though it costs her some convenience.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Where does your family keep most of its money right now &mdash; or where would you keep yours if you were choosing today? Name two of the six factors that mattered (or would matter) most, and explain why.</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSccG_Kr-TrIFx1m3ELEQ_IwHedITHjtC-A7gVvh---xYpSWGA/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Savings vs. Checking: Matching Accounts to Your Goals</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FI.3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can evaluate which account type and financial institution best fits a variety of personal financial needs and goals.</div></div>
+
+      <article class="lesson">
+        <p>A <strong>checking account</strong> is built for frequent, everyday access. It often comes with a debit card, lets you pay for things constantly, and usually pays little or no interest. A <strong>savings account</strong> is built for growing money toward a goal over time. It earns interest, but typically limits how many withdrawals you can make each month &mdash; which nudges you to leave the money alone and let it grow. Neither is "better" in general; they're built for different jobs, the same way a backpack and a filing cabinet both hold your stuff but aren't interchangeable.</p>
+        <p><strong>Simple interest</strong> is the reward a bank pays you just for keeping your money in a savings account &mdash; a small percentage of your balance, paid to you over time. The formula is: <strong>Interest = Principal &times; Rate &times; Time</strong>, where the principal is your starting balance, the rate is the annual interest rate written as a decimal, and time is however many years your money sits there.</p>
+        <p>Let's work through a full example, step by step. Say you open a savings account with a $200 starting balance (that's your principal) at a bank offering a 4% annual interest rate. First, turn the percentage into a decimal by dividing by 100: 4% becomes 0.04. Next, multiply principal by rate: $200 &times; 0.04 = $8. That means after one full year, the bank would pay you $8 in interest with zero effort from you, on top of the $200 you started with, giving you a new balance of $208. Now compare that to a different bank offering a much smaller 0.01% rate on that same $200: 0.01% becomes 0.0001 as a decimal, and $200 &times; 0.0001 = $0.02 &mdash; just two cents for the whole year. A bank offering 0.5% would become 0.005, and $200 &times; 0.005 = $1 for the year. Same $200, same amount of time, three completely different results ($0.02, $1, or $8) just because the interest rate was different. That's exactly why the rate is one of the six factors from Day 1: a higher rate means your money grows faster for doing absolutely nothing extra.</p>
+        <p>Notice something important buried in that example: if that same $200 had been sitting in a checking account instead, at 0% interest, it would still be exactly $200 at the end of the year, no matter how good a bank's savings rate was elsewhere, because checking accounts usually aren't built to pay interest at all. That's the real cost of using the wrong account for a long-term goal &mdash; not a fee you can see, but growth you quietly miss out on.</p>
+        <p>CDs (certificates of deposit) and money market accounts take this a step further. They lock your money in for a set period of time &mdash; say, one year &mdash; in exchange for a better rate than a regular savings account. You can't touch the money early without a penalty, but you know exactly what you'll earn by the time it's unlocked. They're worth knowing about now, even though you won't need them for a goal you might reach in a few months, because they show that "savings account" isn't the only option once your money has been growing for a while.</p>
+        <p>Time matters too, not just the rate. Let's extend the earlier example: that same $200 at 4% earned $8 after one year. What if you left it alone for two years instead of one, and didn't add or remove a single dollar? Using the same formula, Interest = Principal &times; Rate &times; Time, time is now 2 instead of 1: $200 &times; 0.04 &times; 2 = $16 &mdash; exactly double the one-year amount, since simple interest grows in a straight line with time. That's worth sitting with for a second: the $200 didn't change, and the 4% rate didn't change, but simply waiting longer, without doing anything else, turned $8 into $16. This is why "start saving early" is such common advice &mdash; even a small amount, given more time, earns more, with zero extra effort from you.</p>
+        <p>Banks sometimes advertise a slightly different number called <strong>APY</strong> (annual percentage yield) instead of a plain interest rate. For the simple-interest math in this unit, you can treat the two as close enough to compare, but it's worth knowing the term exists: APY accounts for the fact that many real accounts pay interest on your interest too (called compounding), which you'll dig into more in a later unit. For now, the bigger number is still the better deal, and the simple-interest formula you just used gives you a solid estimate either way.</p>
+        <p>The real question from Standard FI.3 isn't "which account is best." It's which account and institution best fits a specific goal. Need the money again in a day or a week? That points toward checking. Saving toward something months or years away &mdash; a bike, a car, an emergency fund &mdash; points toward savings, possibly at an institution with a stronger rate, the same way Amara from Day 1 chose an online-only bank partly for its rate. Bring the short-term, long-term, and giving goals you set in Unit 3 into today's builder below &mdash; you'll decide where each one would actually live, and whether the account you pick would even earn you anything while you wait.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Your Two Envelopes</h4>
+        <p>You're trying to decide where to put $60. You want $20 of it available any time for snacks or bus fare over the next month. The other $40 is money you don't plan to touch for at least eight months, while you save up for a pair of headphones. A friend suggests just leaving all $60 in one checking account so it's "simple."</p>
+        <p class="prompt">Is your friend's "keep it simple" advice actually the best move for both parts of your $60? What would you do differently, and why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. Which account is built for frequent, everyday spending?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A checking account</button>
+            <button class="quiz-opt" data-correct="false">A savings account</button>
+            <button class="quiz-opt" data-correct="false">A CD</button>
+            <button class="quiz-opt" data-correct="false">None of these allow spending</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Checking accounts are built for frequent access and everyday purchases, often with a debit card attached.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. Which account is designed to grow money over time through interest, for a longer-term goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A savings account</button>
+            <button class="quiz-opt" data-correct="false">A checking account</button>
+            <button class="quiz-opt" data-correct="false">A debit card</button>
+            <button class="quiz-opt" data-correct="false">None of these earn interest</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Savings accounts earn interest and typically limit withdrawals &mdash; built for growing money toward a goal, not everyday spending.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. You put $200 in a savings account with a 4% simple annual interest rate. About how much interest would you earn in one year?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">About $8</button>
+            <button class="quiz-opt" data-correct="false">About $2</button>
+            <button class="quiz-opt" data-correct="false">About $20</button>
+            <button class="quiz-opt" data-correct="false">About $80</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Simple interest is principal &times; rate: $200 &times; 0.04 = $8 &mdash; a small amount, but it grows on its own without you adding anything.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. If that same $200 at 4% is left untouched for 2 years instead of 1, about how much total interest would it earn?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$16</button>
+            <button class="quiz-opt" data-correct="false">$8</button>
+            <button class="quiz-opt" data-correct="false">$4</button>
+            <button class="quiz-opt" data-correct="false">$32</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Interest = Principal &times; Rate &times; Time, so $200 &times; 0.04 &times; 2 = $16 &mdash; simple interest grows in a straight line as time increases.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. You have $20 you'll need for bus fare next week and $40 you won't touch for eight months. A friend says just keep it all in one checking account to keep things simple. What's the strongest response?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Split it &mdash; keep the $20 in checking for easy access, and move the $40 to savings so it can earn interest while you wait</button>
+            <button class="quiz-opt" data-correct="false">Agree completely &mdash; checking and savings work exactly the same way</button>
+            <button class="quiz-opt" data-correct="false">Put all $60 in savings so none of it is easy to reach</button>
+            <button class="quiz-opt" data-correct="false">It doesn't matter, since neither account type earns interest</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Matching each part of the money to its actual job &mdash; quick access versus long-term growth &mdash; uses both account types for what they're built for, instead of forcing one account to do both jobs.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Build your savings plan</h3>
+        <p class="prompt">Bring one of your Unit 3 goals forward and decide where it would actually live.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="bankGoal">Which Unit 3 goal are you planning for</label>
+            <input id="bankGoal" data-goal="what" type="text" placeholder="e.g., saving $150 for a bike">
+          </div>
+          <div class="goal-field">
+            <label for="bankAccount">Account type you'd choose</label>
+            <input id="bankAccount" data-goal="cost" type="text" placeholder="e.g., savings account">
+          </div>
+          <div class="goal-field">
+            <label for="bankInstitution">Institution type that fits best</label>
+            <input id="bankInstitution" data-goal="source" type="text" placeholder="e.g., credit union &mdash; better rate, low fees">
+          </div>
+          <div class="goal-field">
+            <label for="bankStarting">Starting balance you'd put in</label>
+            <input id="bankStarting" data-goal="amount" type="text" placeholder="e.g., $40 to start">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="bankDeadline">How long until you reach that goal</label>
+            <input id="bankDeadline" data-goal="deadline" type="text" placeholder="e.g., about 10 weeks">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="bankInterestEstimate">Stretch: estimate the interest you'd earn while you wait (optional)</label>
+            <input id="bankInterestEstimate" data-goal="interestEstimate" type="text" placeholder="e.g., about $2 using Principal × Rate × Time at a 1% rate">
+          </div>
+        </div>
+        <div class="goal-summary" id="goalSummary" hidden>
+          <b>Your savings plan</b>
+          <span id="goalSummaryText"></span>
+        </div>
+        <p class="save-note" id="bankCoachNote" hidden></p>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Between your Unit 3 short-term goal and long-term goal, which one would benefit most from sitting in an account that earns interest, and why?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, savings plan, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeeKjP5iV0otn-ou-ZyYSV7MfBgF8yXDdxL3XxRITDwtHD_iA/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions and fill in your savings plan above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · How Banks Work: Deposits, Loans &amp; the Circular Flow of Money</h2>
+        <span class="standard-badge">NJSLS 9.1.8.EG.6</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain the circular flow of money, describing how a bank deposit gets loaned back out and how buying local, national, or imported goods changes where that money ends up.</div></div>
+
+      <article class="lesson">
+        <p>When you deposit money in a bank, it doesn't just sit in a vault waiting for you. Banks lend most of it back out &mdash; to people buying homes or cars, and to businesses opening or expanding. That's actually how banks can afford to pay savers interest at all: they charge borrowers a somewhat higher rate than they pay depositors, and the difference between those two rates is how the whole system keeps working and keeps the bank in business. It's also why the interest rates you calculated on Day 2 exist in the first place: your bank isn't just being generous &mdash; it's sharing a small slice of what it earns from lending your money back out.</p>
+        <p>This process has a name: the <strong>circular flow of money</strong>. It goes like this: households deposit savings &rarr; banks lend that money to borrowers and businesses &rarr; those borrowers spend the money on goods and services &rarr; that spending becomes someone else's income &rarr; which gets saved or spent again, continuing the cycle. It's called "circular" because the money doesn't disappear after one step; it just keeps changing hands and starting the cycle over.</p>
+        <p>Here's exactly how that plays out with a single $100 deposit, step by step. Step 1: you deposit $100 into your savings account. Step 2: the bank doesn't let that $100 sit still &mdash; it loans it to a small business down the street that needs cash to restock. Step 3: that business spends the $100 buying supplies from a local supplier. Step 4: the supplier uses part of that money to pay an employee's wages. Step 5: the employee takes their paycheck and spends it locally, maybe on groceries or a haircut. Step 6: the shop owner who received that spending deposits their own earnings back into a bank, and the exact same cycle starts again with a brand-new deposit. Your original $100 never vanished; it just kept moving &mdash; touching a business, a supplier, an employee, and a shop owner along the way, and generating a little economic activity at every single stop.</p>
+        <p>You might wonder: if the bank loans out most of your deposit, is your money still safe and available whenever you want it? Yes. The FDIC or NCUA insurance from Day 1 protects your deposit no matter how the bank uses it behind the scenes, and banks are required to keep enough cash on hand to cover everyday withdrawals, so you can still take out your own money on demand even while the rest of it is out working in the economy.</p>
+        <p>Where you spend changes where that cycle lands. Buy produce from a nearby farm stand or hire a local plumber, and that money tends to recirculate <strong>locally</strong> &mdash; staying in your community's version of the cycle above, getting spent and re-spent close to home. Buy a product from a big national chain store, and some of that money stays local, paying the store's local employees, while some travels to the company's headquarters elsewhere in the country. That's buying <strong>national</strong>, and it falls in between. Buy a car that was built overseas, and a much bigger share of that money leaves the country entirely, flowing into another country's economy instead of recirculating in yours. That's an <strong>imported</strong> purchase.</p>
+        <p>Let's put real numbers on that difference with a simple $20 grocery run. Spend that $20 at a locally owned farm stand, and roughly all $20 stays in the area &mdash; it pays the farmer, who then spends much of it at other local businesses, restarting the cycle close to home. Spend the same $20 at a large national grocery chain, and it splits: maybe $8 pays the store's local employees and local delivery costs (staying nearby), while the other $12 travels to the company's headquarters somewhere else in the country to cover things like corporate overhead and profit. Spend $20 on a toy that was manufactured overseas, and a much bigger share &mdash; maybe $16 or more &mdash; leaves the country entirely to pay the overseas factory, leaving only a small slice behind for the local store that sold it to you. Same $20 bill every time, three very different paths, depending only on where you chose to spend it.</p>
+        <p>It helps to picture the circular flow of money as ripples spreading out from a single drop in a pond. The first ripple &mdash; your deposit or your purchase &mdash; is easy to see. But each ripple keeps triggering another one: the business that received your money pays its own bills, its employees spend their paychecks, and the businesses they spend at do the same thing all over again. Economists actually have a name for this repeating effect &mdash; the <strong>multiplier effect</strong> &mdash; the idea that one dollar spent or deposited can generate more than one dollar's worth of total economic activity as it keeps changing hands. You don't need to calculate a multiplier for this unit; just remember that a single deposit or purchase rarely stops mattering after just one step.</p>
+        <p>This connects directly back to Day 1's six factors and Day 2's interest math. Every dollar a bank lends out at a slightly higher rate than it pays depositors is a dollar taking part in this exact cycle &mdash; which means the interest you calculated by hand on Day 2 isn't free money the bank invents; it's the bank sharing a small slice of what it earns by keeping this whole cycle moving. Understanding the circular flow doesn't just explain the broader economy &mdash; it explains where your own account's interest rate actually comes from in the first place.</p>
+        <p>None of this makes one choice wrong; you still need groceries, cars, and everything else in between, and no one expects every dollar to stay local. It's simply about understanding where the money actually goes next after you spend it, the same way Day 1 asked where your money goes once you deposit it somewhere. A community where more money recirculates locally tends to have more local jobs and local businesses staying open, since each dollar gets spent again close to home instead of leaving right away &mdash; exactly why so many neighborhoods encourage shopping local even for small everyday purchases.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Coach Rivera's Team Order</h4>
+        <p>Coach Rivera needs to order 20 team water bottles for $8 each &mdash; $160 total. Option A is a shop three blocks from school, family-owned, that charges the same $160. Option B is a giant online marketplace shipping the bottles from overseas, also $160, with free two-day shipping. The team has a fixed $160 budget either way, so the price itself won't decide it.</p>
+        <p class="prompt">Using what you learned about the circular flow of money, how would choosing Option A versus Option B change where that $160 actually ends up, even though the price is identical?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>St. Louis Fed &mdash; Econ Lowdown</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.stlouisfed.org/education" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. What happens to most of the money you deposit in a bank?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It gets loaned back out to other borrowers and businesses</button>
+            <button class="quiz-opt" data-correct="false">It sits untouched in a vault until you withdraw it</button>
+            <button class="quiz-opt" data-correct="false">It disappears from the economy entirely</button>
+            <button class="quiz-opt" data-correct="false">It immediately becomes the bank's own profit</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Banks lend most deposited money back out to borrowers and businesses &mdash; that lending is what keeps the circular flow of money moving.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. In the circular flow of money, what happens right after a bank lends money to a borrower?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The borrower spends it on goods and services, which becomes someone else's income</button>
+            <button class="quiz-opt" data-correct="false">The money vanishes from the economy</button>
+            <button class="quiz-opt" data-correct="false">The bank keeps it permanently without lending or spending</button>
+            <button class="quiz-opt" data-correct="false">The original depositor loses access to their account</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Once loaned out, the money gets spent on goods and services &mdash; and that spending becomes someone else's income, continuing the cycle.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. How does buying an imported good affect the local circular flow of money, compared to buying local?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Money spent on imports flows out to another country's economy instead of recirculating locally</button>
+            <button class="quiz-opt" data-correct="false">There's no difference at all</button>
+            <button class="quiz-opt" data-correct="false">Imported goods always cost less, so more money stays local</button>
+            <button class="quiz-opt" data-correct="false">Local purchases always leave the community instead</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Money spent locally tends to recirculate within the community; money spent on imports flows out to another country's economy instead.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. What does the "multiplier effect" describe in the circular flow of money?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">One dollar spent or deposited can generate more than one dollar's worth of total economic activity as it keeps changing hands</button>
+            <button class="quiz-opt" data-correct="false">Banks are legally required to double every deposit</button>
+            <button class="quiz-opt" data-correct="false">Interest rates always multiply by ten each year</button>
+            <button class="quiz-opt" data-correct="false">Money disappears after being spent once</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The multiplier effect describes how one dollar keeps triggering more spending and income as it moves from person to person, generating more than one dollar's worth of total activity.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Coach Rivera can spend the same $160 on team water bottles at a local family-owned shop or from an overseas online marketplace. How does the circular flow of money differ between these two equal-price options?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The local shop keeps more of the $160 recirculating nearby; the overseas order sends a much bigger share out of the local economy entirely</button>
+            <button class="quiz-opt" data-correct="false">There's no difference, since the price is the same either way</button>
+            <button class="quiz-opt" data-correct="false">The overseas order automatically creates more local jobs</button>
+            <button class="quiz-opt" data-correct="false">The circular flow of money only applies to bank deposits, not purchases</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Even at an identical price, where you spend money changes where it recirculates &mdash; a local purchase tends to stay and re-spend nearby, while an imported purchase sends a larger share out of the local economy.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">In your own words, explain what happens to $100 after you deposit it in a bank, and how buying locally versus buying an imported good changes where that money ends up.</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdSAmrrkP7K8NscVMiRG24hE234Lz3AN5ZRfSbRjAXggVYbdg/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Using Financial Products &amp; Services Wisely</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FI.2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can determine the most appropriate financial product or service to use for accessing or borrowing money in a given situation.</div></div>
+
+      <article class="lesson">
+        <p>Once you have an account, a handful of everyday tools connect you to it. A <strong>debit card</strong> gives you direct access to your own money for purchases: swipe it or tap it, and the amount comes straight out of your checking account, with no borrowing involved. An <strong>ATM</strong> gives you cash access. If it's "in-network" &mdash; owned by or partnered with your own bank &mdash; it's usually free; if it's "out-of-network" &mdash; a different bank's machine &mdash; it usually charges a fee, often somewhere between $2 and $5 per withdrawal. <strong>Mobile/online banking</strong> lets you transfer money, deposit a check just by photographing it with your phone, check your balance in seconds, and pay bills from anywhere, with no branch visit required.</p>
+        <p><strong>Overdraft protection</strong> is a safety net. If you try to spend a little more than what's actually in your account, it lets the purchase go through anyway instead of getting declined &mdash; but the bank usually charges a fee for that safety net, often around $30 or more per use. Here's what that adds up to. Imagine your account is $10 short right before your paycheck clears, and you rely on overdraft protection twice this year to cover moments like that. At $30 a use, that's $30 &times; 2 = $60 spent just to briefly borrow $20 &mdash; a steep price for convenience. Now compare that to an out-of-network ATM habit. If the fee is $3 per withdrawal and you use one three times a month instead of planning ahead to find an in-network machine, that's $3 &times; 3 = $9 a month, and $9 &times; 12 = $108 over a full year: real money, lost just from not checking which machine you're using. Both of these costs share the same fix: a two-second check before you tap "confirm" &mdash; either your balance on the mobile app or the map of nearby in-network ATMs &mdash; is usually enough to avoid the fee entirely.</p>
+        <p>And here's a brief preview of something you'll go much deeper on later: small loans and lines of credit exist for borrowing money beyond what you currently have, usually for a bigger purchase than everyday spending covers, like a car or an unexpected repair. Unlike a debit card, which only spends money you already own, a loan is money someone else lends you that you agree to pay back over time, plus extra for the privilege of borrowing it. You'll learn a lot more about how borrowing and credit actually work in Unit 6 &mdash; for now, just know these tools exist, that they solve a different problem than a debit card does, and that using them means paying the lender back, plus extra, over time.</p>
+        <p>The real skill here is matching the product to the situation. Think about a few ordinary moments: buying a $4 coffee calls for a debit card, since it's a small, immediate purchase; needing cash for a friend's birthday gift calls for an ATM, ideally an in-network one; and wanting to know your balance while sitting in class calls for the mobile app instead of waiting until you get home to check. Borrowing tools like overdraft or a loan may make sense for a genuinely larger need, but they come with a real cost that's worth weighing carefully first, since &mdash; as the ATM and overdraft math above shows &mdash; small fees used repeatedly add up fast, often without anyone noticing until months later.</p>
+        <p>Mobile check deposit is worth walking through step by step, since it's one of the tools you'll likely use the most. Step 1: open your bank's app and choose "deposit a check." Step 2: sign the back of the check, since an unsigned check usually won't be accepted. Step 3: take a clear photo of the front, then a clear photo of the back, following the app's on-screen guide lines. Step 4: enter the exact dollar amount shown on the check, and double-check it matches. Step 5: submit, and the app confirms it received your deposit &mdash; though the money usually isn't available to spend immediately, since banks typically take one to a few business days to fully process a deposited check. That short delay isn't a glitch; it's the bank confirming the check is real before letting you spend against it.</p>
+        <p>There's also a simple way to avoid an overdraft fee entirely, without giving up the safety net: many banks let you link a savings account to your checking account, so if checking ever runs short, the bank quietly pulls the difference from savings first, usually for a much smaller fee than a full overdraft charge &mdash; or sometimes no fee at all. It won't help if both accounts are empty, but for the kind of brief, small shortfall from the earlier example, it's often a cheaper safety net than overdraft protection alone, and it's worth asking about when you open an account.</p>
+        <p>The real skill here is matching the product to the situation. Think about a few ordinary moments: buying a $4 coffee calls for a debit card, since it's a small, immediate purchase; needing cash for a friend's birthday gift calls for an ATM, ideally an in-network one; and wanting to know your balance while sitting in class calls for the mobile app instead of waiting until you get home to check. Borrowing tools like overdraft or a loan may make sense for a genuinely larger need, but they come with a real cost that's worth weighing carefully first, since &mdash; as the ATM and overdraft math above shows &mdash; small fees used repeatedly add up fast, often without anyone noticing until months later.</p>
+        <p>None of this is about judgment. Overdrafts and fees affect real families, and a fee isn't a personal failing &mdash; it's just a cost worth being aware of so you can plan around it on purpose, the same practical, no-blame lens this whole unit tries to use.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>You're At the Register</h4>
+        <p>You're checking out with $18 worth of groceries. Your debit card gets declined &mdash; your balance is only $14, about $4 short. You have overdraft protection linked to the card, which would cover the $4 gap for a $32 fee. You also have $30 sitting untouched in a linked savings account.</p>
+        <p class="prompt">Based on today's lesson, is letting the overdraft cover this really your only option? What would you actually do at the register, and why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC Money Smart &amp; CFPB</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/money-smart-young-people" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. Which tool gives you direct access to your own money for everyday purchases?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A debit card</button>
+            <button class="quiz-opt" data-correct="false">Overdraft protection</button>
+            <button class="quiz-opt" data-correct="false">A line of credit</button>
+            <button class="quiz-opt" data-correct="false">None of these connect to your money</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A debit card pulls directly from your own account balance &mdash; it's the everyday-purchase tool, not a borrowing tool.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Which is generally true about ATM fees?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">In-network ATMs are usually free; out-of-network ones usually charge a fee</button>
+            <button class="quiz-opt" data-correct="false">All ATMs are always free everywhere</button>
+            <button class="quiz-opt" data-correct="false">All ATMs always charge a fee</button>
+            <button class="quiz-opt" data-correct="false">ATMs only work at your home bank's building</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Planning ahead to use an in-network ATM is one of the simplest ways to avoid a fee that adds up over repeated use.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. Your account is briefly $10 short right before a paycheck clears. Which product is designed for exactly this situation, usually for a fee?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Overdraft protection</button>
+            <button class="quiz-opt" data-correct="false">A debit card</button>
+            <button class="quiz-opt" data-correct="false">Mobile check deposit</button>
+            <button class="quiz-opt" data-correct="false">An in-network ATM</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Overdraft protection exists specifically as a short-term safety net for a brief shortfall &mdash; but it typically comes with a fee worth weighing.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. After submitting a mobile check deposit, why isn't the money usually available to spend right away?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The bank typically takes one to a few business days to process and confirm the check is real</button>
+            <button class="quiz-opt" data-correct="false">Mobile check deposit never actually works</button>
+            <button class="quiz-opt" data-correct="false">The check has to be mailed to the bank first</button>
+            <button class="quiz-opt" data-correct="false">Banks only accept mobile deposits once a year</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The short delay after a mobile check deposit is the bank confirming the check is legitimate before letting you spend against it &mdash; not a technical glitch.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. At the register, you're $4 short. Overdraft would cover it for a $32 fee, but you also have $30 sitting in a linked savings account. What's the smartest move, based on today's lesson?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Use the linked savings transfer to cover the $4 gap instead, avoiding the much larger overdraft fee</button>
+            <button class="quiz-opt" data-correct="false">Let the overdraft cover it, since $32 is a small price to pay</button>
+            <button class="quiz-opt" data-correct="false">Leave the groceries at the register with no other options</button>
+            <button class="quiz-opt" data-correct="false">Ask the store to waive the $18 charge entirely</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A linked savings transfer typically costs far less than a full overdraft fee for covering the exact same small shortfall &mdash; the cheaper safety net when both options are available.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Describe one situation where using your debit card is the right tool, and one situation where you'd want to think carefully before using overdraft or a loan.</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdvnpFCESdPsSDDo4MPjtF8x5d00k7C08cse2UqFJ0-4mNLWQ/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-panel" data-panel="5" hidden>
+      <div class="day-head">
+        <h2>Day 5 · Unit Review &amp; Assessment: Choose-a-Bank Simulation</h2>
+        <span class="standard-badge">Synthesis: FI.1&ndash;3; EG.6</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can evaluate financial institutions and products against a set of personal needs and goals, and explain the circular flow of money.</div></div>
+
+      <article class="lesson">
+        <p>Five days ago you started with the basics of choosing where to keep your money. Since then you've matched accounts to real goals and calculated exactly how much interest a savings account earns (Day 2), traced what actually happens to a $100 deposit as it moves through the circular flow of money (Day 3), and learned which everyday product fits which situation, down to the real cost of fees (Day 4). Today pulls all four days together into one connected picture, the same way the official check-in will.</p>
+        <p>Two mix-ups worth clearing up before this unit wraps. First: an online-only bank isn't automatically less safe just because it has no branch &mdash; FDIC and NCUA insurance apply the exact same way regardless of whether there's a building you can walk into, protecting your deposit up to $250,000 either way, whether that bank has a hundred branches or zero. Second: a deposit doesn't sit still in a vault &mdash; remember the $100 from Day 3 that got loaned to a small business, spent on supplies, paid to an employee, and spent again locally? That lending and re-spending is the whole engine behind the circular flow of money, and it's also exactly how a bank earns enough to pay you interest in the first place, which is the very thing you calculated by hand on Day 2.</p>
+        <p>Here's what putting it all together looks like in practice. Imagine a new persona: Priya wants an account for her weekly babysitting money. She needs to pay for the occasional bus fare or snack right away, which is a checking need from Day 2, but she's also saving toward a $150 telescope she wants in about eight months, which is a savings need. She's nervous about fees, since her balance is usually pretty low, and she likes being able to check her balance on her phone. Working through this the way you would on today's check-in: her fee sensitivity and comfort with an app point toward a credit union or online-only bank, using Day 1's factors, over a traditional bank that might charge a monthly fee. Splitting her money &mdash; some in checking for spending, some in savings earning interest toward the telescope &mdash; fits both of her goals at once, using Day 2's thinking. And whichever bank she picks, her deposits are protected the same way and get put to work in the local economy the moment they're loaned back out, tying together Days 1 and 3. Notice that reasoning through Priya's situation didn't require memorizing a single new fact; it just meant reusing what each earlier day already taught, one factor at a time.</p>
+        <p>This unit also sets up what comes next: Unit 5 shifts into consumer skills and spotting misleading ads, and Unit 6 goes deep on the credit and borrowing tools Day 4 only previewed.</p>
+        <p>Let's run through one more, a little more complicated: Marcus. Marcus mows lawns over the summer and expects to earn about $300 total. He wants $50 always available for gas and small tools (a checking need), $200 growing toward a used bike he wants by next spring (a savings need, where Day 2's Interest = Principal &times; Rate &times; Time would actually make a small but real difference over that many months), and $50 he wants to give to a local food pantry right away (neither a checking nor a savings need &mdash; more of a one-time transfer). Notice that Marcus's $300 doesn't fit neatly into just one account the way Priya's did; it splits three ways, based on three different jobs the money needs to do. That's the real test of this unit: not remembering a vocabulary word, but recognizing which job a specific chunk of money is doing, and picking a tool that fits that job.</p>
+        <p>It's also worth remembering, one last time, that every dollar in Marcus's plan keeps moving after he deposits or spends it. The $200 he saves gets loaned back out by the bank, spent, re-spent, and re-deposited, exactly like the $100 from Day 3 &mdash; and if Marcus buys his gas and tools locally rather than from a big national chain, more of that $50 stays recirculating in his own community too. None of these four days ever really stood alone; a deposit, an account choice, an everyday tool, and where that money ends up are all pieces of the exact same picture.</p>
+        <p>Today's self-check and reflection ask you to reason through a scenario just like Priya's and Marcus's, and the official check-in does the same with a persona and profiles of its own, plus two extra review questions that check your understanding across the whole unit. If any of the vocabulary from this unit still feels shaky &mdash; financial service provider, FDIC/NCUA insurance, checking versus savings, simple interest, or the circular flow of money &mdash; this is the moment to scroll back through Days 1 through 4 before moving on, since everything you need to finish strong is already sitting in those four lessons.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Marcus Splits His Summer Earnings</h4>
+        <p>Marcus earned $300 mowing lawns. He wants $50 always available for gas and tools, $200 growing toward a bike by next spring, and $50 to donate to a food pantry right away. His friend suggests just dropping the whole $300 into one checking account so it's easy to track.</p>
+        <p class="prompt">Walk through Marcus's three goals using everything from this unit &mdash; would one account really serve all three jobs equally well? What would you set up instead, and why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC &mdash; Money Smart for Young People</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/money-smart-young-people" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 4 checkpoint</h3>
+        <div class="quiz-q" data-qid="d5q1">
+          <p class="quiz-question">1. Why isn't an online-only bank automatically less safe than a bank with branches?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">FDIC/NCUA insurance protects deposits the same way, whether or not the bank has a branch</button>
+            <button class="quiz-opt" data-correct="false">Online-only banks aren't insured at all</button>
+            <button class="quiz-opt" data-correct="false">Online-only banks are always riskier by definition</button>
+            <button class="quiz-opt" data-correct="false">Deposit insurance only applies to credit unions</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>FDIC and NCUA insurance protect deposits up to $250,000 regardless of whether the institution has a physical branch &mdash; safety isn't about branch count.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q2">
+          <p class="quiz-question">2. Which combination best summarizes this unit's key skills, all working together?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Choosing the right institution, matching accounts to goals, understanding the circular flow of money, and using products wisely</button>
+            <button class="quiz-opt" data-correct="false">Only memorizing ATM fee amounts</button>
+            <button class="quiz-opt" data-correct="false">Only listing bank names</button>
+            <button class="quiz-opt" data-correct="false">Only depositing money without any further decisions</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This unit builds one skill on the next &mdash; every piece from Days 1&ndash;4 works together when someone actually picks and uses a financial institution.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q3">
+          <p class="quiz-question">3. A friend says, "My savings and checking accounts are basically the same thing, so it doesn't matter which one I use." How would you respond?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Explain that checking is built for frequent everyday access, while savings is built to grow money toward a goal over time</button>
+            <button class="quiz-opt" data-correct="false">Agree completely &mdash; they really are identical</button>
+            <button class="quiz-opt" data-correct="false">Say checking accounts always pay more interest</button>
+            <button class="quiz-opt" data-correct="false">Say savings accounts have no real purpose</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Checking and savings are built for different jobs &mdash; frequent access versus growing money toward a goal &mdash; and the right choice depends on which job you need done.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q4">
+          <p class="quiz-question">4. Marcus splits his $300 into $50 for spending, $200 for a bike he wants next spring, and $50 to donate right away. Why doesn't one single checking account serve all three parts equally well?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Only the $200 saved toward a longer-term goal benefits from earning interest, which a checking account usually doesn't pay</button>
+            <button class="quiz-opt" data-correct="false">Checking accounts can't legally hold more than $50</button>
+            <button class="quiz-opt" data-correct="false">All three goals are actually identical, so it wouldn't matter</button>
+            <button class="quiz-opt" data-correct="false">Donations can only be made in cash, never from an account</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The $200 growing toward a months-away goal is exactly the kind of money that benefits from sitting in an interest-earning savings account, while the $50 for everyday spending fits checking &mdash; one account can't optimize for both jobs at once.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q5">
+          <p class="quiz-question">5. Which statement best ties together this entire unit's four days?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Choosing a provider, matching accounts to goals, understanding how deposits move through the economy, and using everyday tools wisely are all connected decisions, not separate facts</button>
+            <button class="quiz-opt" data-correct="false">Only the interest rate matters; everything else from this unit is unrelated</button>
+            <button class="quiz-opt" data-correct="false">Banks keep every deposit locked in a vault and never lend any of it out</button>
+            <button class="quiz-opt" data-correct="false">Fees and safety don't affect which financial institution someone should choose</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This unit builds one connected skill across four days &mdash; choosing a provider, matching accounts to goals, understanding the circular flow of money, and using products wisely all work together in a single real decision.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back across this whole unit, if you were choosing a financial institution and account today, which would you pick and why &mdash; considering fees, safety, and your own goals?</p>
+        <textarea data-reflection="5" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 5 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress &mdash; a Choose-a-Bank scenario plus 2 extra review questions covering the whole unit.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfIegF2ee4zVTPo4rRv04iOc8f5Yds4U1QS8f7e5H8CEE2u3g/viewform">Open Day 5 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="5">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="5" disabled>Mark Day 5 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 4 complete 🌱</h3>
+        <p>You've covered choosing a financial institution, matching accounts to goals, the circular flow of money, and using financial products wisely &mdash; the same standards your classmates covered in class (NJSLS 9.1.8.FI.1&ndash;3, EG.6). Show your teacher this page or your notebook reflections, and check in about Unit 5.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 4 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u4-selfstudy-v1';
+  var TOTAL_DAYS = 5;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, goal: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function goalCompleteForDay2(){
+    var g = state.goal;
+    return !!(g.what && g.cost && g.source && g.amount && g.deadline);
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && goalCompleteForDay2();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  function renderGoalSummary(){
+    var g = state.goal;
+    var summaryEl = document.getElementById('goalSummary');
+    var textEl = document.getElementById('goalSummaryText');
+    if (g.what && g.cost && g.source && g.amount && g.deadline){
+      textEl.textContent = 'Goal: ' + g.what + '. Account: ' + g.cost + '. Institution: ' + g.source + '. Starting balance: ' + g.amount + ', reaching it in ' + g.deadline + '.';
+      summaryEl.hidden = false;
+    } else { summaryEl.hidden = true; }
+  }
+
+  function restoreGoal(){
+    document.querySelectorAll('[data-goal]').forEach(function(input){
+      var key = input.dataset.goal;
+      if (state.goal[key]) input.value = state.goal[key];
+      input.addEventListener('input', function(){
+        state.goal[key] = input.value;
+        saveState();
+        renderGoalSummary();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+      });
+    });
+    renderGoalSummary();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '2' && !goalCompleteForDay2()){
+          var hint = document.querySelector('[data-hint-for="2"]');
+          if (hint) hint.textContent = 'Fill in all five fields of your savings plan above, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreGoal();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+<script>
+(function(){
+  // Additive enhancement only — does not read or write any existing state object,
+  // does not touch goalCompleteForDay2() or any other existing function.
+  function updateBankCoach(){
+    var startInput = document.getElementById('bankStarting');
+    var interestInput = document.getElementById('bankInterestEstimate');
+    var note = document.getElementById('bankCoachNote');
+    if (!startInput || !interestInput || !note) return;
+    if (startInput.value.trim() && interestInput.value.trim()){
+      note.hidden = false;
+      note.textContent = 'Nice work estimating that — even a small amount of interest adds up faster the earlier you start and the longer you leave it alone.';
+    } else {
+      note.hidden = true;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var startInput = document.getElementById('bankStarting');
+    var interestInput = document.getElementById('bankInterestEstimate');
+    if (startInput) startInput.addEventListener('input', updateBankCoach);
+    if (interestInput) interestInput.addEventListener('input', updateBankCoach);
+    updateBankCoach();
+  });
+})();
+</script>
+
+</body></html>

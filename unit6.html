@@ -1,0 +1,1131 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Credit &amp; Borrowing I</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary.warn{background:transparent; border-color:var(--coral); color:var(--coral);}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .goal-summary.warn b{color:var(--coral);}
+  .goal-summary.whatif{background:var(--surface); border-color:var(--gold); margin-top:12px;}
+  .goal-summary.whatif b{color:var(--gold-deep);}
+  .calc-btn-row{margin-top:16px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(3,1fr);} .goal-grid{grid-template-columns:1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Credit &amp; Borrowing I</h1>
+      </div>
+      <p class="subtitle">Unit 6 — Intro to Credit · 5 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/5"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Credit vs. Debit</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">How Credit Cards Work</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Types of Credit</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Your Credit Score</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+    <button class="day-btn" data-day="5">
+      <span class="num mono">DAY 5</span>
+      <span class="title">Unit Review: Credit Decision</span>
+      <span class="status-pill" data-status-for="5">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Credit vs. Debit: Understanding the Difference</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CDM.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare credit cards and debit cards for specific purchases and identify at least one advantage and one disadvantage of each.</div></div>
+
+      <article class="lesson">
+        <p><strong>Credit</strong> means borrowing money now with a promise to pay it back later — usually with interest if you don't pay it back in full. <strong>Debit</strong> means spending money you already have sitting in a bank account, right now, with no borrowing involved at all. That one difference — whose money you're actually spending — is the root of everything else about these two kinds of cards.</p>
+        <p>A debit card pulls directly from your own checking account balance the moment you swipe it. If there's $40 in the account and you spend $15 on lunch, the account instantly drops to $25 — that's it, no bill arrives later. A credit card works completely differently: the card issuer (a bank or credit card company) fronts the money for you, up to a set <strong>credit limit</strong>, and then sends you a bill — usually once a month — for whatever you spent. Pay that bill in full, and you owe nothing extra. Pay only part of it, and the rest starts collecting interest, which is exactly what Day 2 digs into in detail.</p>
+        <p>Because debit never involves borrowing, it carries zero interest risk — you can't get charged interest on money that was already yours. But debit has a real downside if something goes wrong: if a thief gets your debit card number and drains your checking account, that money is gone from your account immediately while the bank investigates, which can leave you short on cash for groceries or bills in the meantime. Credit cards usually offer stronger protection here, because it's the bank's money at risk in the moment, not yours — many credit card issuers will pause a disputed charge and investigate before you're ever required to pay it. That's the trade: debit is simple and risk-free on interest, but credit often protects you better if your card information gets stolen.</p>
+        <p>Fees are another difference worth knowing about, since neither card is automatically free to use. A credit card can carry a <strong>late fee</strong> — a flat charge added if a payment doesn't arrive by the due date — and some (though not all) charge an <strong>annual fee</strong> just for having the card open, whether or not it's ever used. Debit cards can also come with fees, most commonly an <strong>overdraft fee</strong> if a purchase is made for more money than is actually sitting in the account, which some banks allow to go through anyway and then charge for. Reading the fine print before opening either kind of account — what it costs, and under what conditions — is a habit worth starting now, long before the dollar amounts get bigger.</p>
+        <p>Credit also does something debit can't: it can help build a <strong>credit history</strong> — a track record of borrowing and repaying money responsibly that other lenders can look up later (Day 4 covers exactly how this becomes a credit score). Every time a credit card payment is made on time, that gets reported and added to that history. A debit card never builds this kind of record, no matter how responsibly it's used, because there's never actually any borrowing happening. That doesn't make debit "worse" for building good habits, though — using a debit card responsibly still builds real budgeting skill, like tracking a balance and not spending past what's actually available. It just doesn't get reported anywhere the way credit activity does.</p>
+        <p>Here's the catch that makes credit riskier: because a credit card lets you spend money you don't currently have, it's easy to spend more than you can actually pay back. If that happens, you carry a balance, get charged interest on it, and can end up owing far more than you originally spent. A debit card makes that particular mistake basically impossible, since you're limited to whatever's actually sitting in the account.</p>
+        <p>So which card is "better"? Neither one, always — it depends on the situation. A $4 coffee you can easily afford is a perfect debit purchase: there's no reason to borrow money for something you already have the cash for. But renting a car is a case where many rental counters actually require a credit card, not a debit card, to hold the reservation. A big online purchase might call for a credit card's stronger fraud protection. And if overspending this month is a worry, debit's built-in limit — you literally cannot spend money you don't have — can be the safer choice.</p>
+        <p>A simple three-question checklist can make this decision automatic instead of confusing. First: <em>Is the money already sitting in my account?</em> If not, credit is the only option that even works, and it needs to be paid back deliberately. Second: <em>Could something go wrong with this purchase</em> — a scam, a broken item, a company that never ships it? If the stakes are higher, credit's stronger dispute protection is worth leaning on. Third: <em>Am I confident I can pay this off in full, soon?</em> If the honest answer is no, that's usually a sign to slow down and use debit instead, or wait and save up. Running through those three questions takes seconds, and it's exactly the kind of thinking a responsible adult does automatically before every larger purchase.</p>
+        <p>Try applying all of this to two real people. Priya wants to start building a credit history early, so she uses a credit card only for small, easy-to-afford purchases — like that $4 coffee — and pays the full balance every single month. She never carries a balance, so she never pays a cent of interest, and every on-time payment quietly builds her credit history in the background. Her friend Marcus uses a credit card for a $600 impulse purchase he can't actually afford right now. He can only manage the minimum payment, so the balance sits there collecting interest month after month — turning a $600 purchase into something that costs him considerably more over time, as Day 2 shows in exact numbers. Run Marcus's decision back through the three-question checklist above, and the warning sign was there from the start: he couldn't honestly answer "yes" to paying it off soon. Same tool, two very different outcomes — the card itself isn't the problem or the solution; how it's used is.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The Class Trip T-Shirt</h4>
+        <p>You're ordering a $22 spirit shirt for a class trip through an online store you've never used before. You have exactly $22 in a prepaid debit account, and a family member also offers to let you use their credit card for it just this once, since they trust you to tell them right away.</p>
+        <p class="prompt">Which option would you choose, and what's your reasoning — the amount of money involved, or something else entirely?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Credit Card Basics</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation of how credit cards work or a little extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/credit-cards/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Which statement correctly describes how a debit card works?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It spends money you already have in your bank account, right now</button>
+            <button class="quiz-opt" data-correct="false">It lets you borrow money up to a limit and bills you later</button>
+            <button class="quiz-opt" data-correct="false">It always charges interest immediately on every purchase</button>
+            <button class="quiz-opt" data-correct="false">It works completely differently every time you use it</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Debit spends money you already have, right now — no borrowing involved. Borrowing up to a limit and paying later describes credit instead.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which is a real advantage of using a credit card responsibly — paid in full every month?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It can help build a credit history</button>
+            <button class="quiz-opt" data-correct="false">It always has lower fees than debit</button>
+            <button class="quiz-opt" data-correct="false">It guarantees there's no risk of ever going into debt</button>
+            <button class="quiz-opt" data-correct="false">It removes any need to track your spending</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Paying in full each month is exactly how responsible credit card use builds a credit history — the advantage that debit doesn't offer.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Jordan is buying a $15 lunch and has exactly $15 sitting in their checking account. Which card is generally the simpler choice, and why?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Debit — it spends money already available with no risk of interest</button>
+            <button class="quiz-opt" data-correct="false">Credit — it's always the better choice for every purchase</button>
+            <button class="quiz-opt" data-correct="false">Neither card can be used for a $15 purchase</button>
+            <button class="quiz-opt" data-correct="false">It doesn't matter — both cards work identically in every case</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>When the money's already available and there's no need to build credit history right now, debit avoids interest risk entirely.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. What's a key difference between a credit card's late fee and a debit card's overdraft fee?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A late fee is charged for paying a credit bill after the due date; an overdraft fee is charged for spending more than what's in a debit account</button>
+            <button class="quiz-opt" data-correct="false">They are exactly the same fee, just with two different names</button>
+            <button class="quiz-opt" data-correct="false">Only credit cards can ever charge any kind of fee</button>
+            <button class="quiz-opt" data-correct="false">Only debit cards can ever charge any kind of fee</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Both cards can carry fees, but they're triggered by different things — a late payment on credit, or overspending an available balance on debit.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Deshawn wants to buy sneakers online from a brand-new website he's never heard of, and he's a little unsure if it's trustworthy. He has enough saved in both a debit account and available credit. Using the three-question checklist from today's lesson, which card fits this situation best, and why?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Credit — if something goes wrong with an unfamiliar seller, credit generally offers stronger dispute protection</button>
+            <button class="quiz-opt" data-correct="false">Debit — unfamiliar websites are always safer to pay with debit</button>
+            <button class="quiz-opt" data-correct="false">Neither card can be used to shop online</button>
+            <button class="quiz-opt" data-correct="false">It makes no difference which card he uses in this situation</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>When there's real risk something could go wrong with a purchase, credit's stronger protection against fraud or a dispute is the safer pick.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Think about a card in your own family's wallet — or one you'd want to have someday. Would a credit card or a debit card make more sense for it, and why?</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc7IeJBvVUMT3luxVjLjy8-DfUybyZJvGC3qBDzWPp7_HSgxg/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · How Credit Cards Work: Interest, Fees &amp; the True Cost of Borrowing</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CDM.2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain credit card terminology and calculate the cost of carrying a balance at a given interest rate.</div></div>
+
+      <article class="lesson">
+        <p>A handful of terms explain how a credit card actually costs money. <strong>APR</strong> (annual percentage rate) is the yearly cost of borrowing, charged monthly on any unpaid balance. <strong>Minimum payment</strong> is the smallest amount required to avoid a late fee — usually a small fraction of the balance. <strong>Credit limit</strong> is the maximum you're allowed to borrow. <strong>Grace period</strong> is the time you have to pay your statement balance in full before any interest gets charged. <strong>Statement balance</strong> is simply what you owed at the end of the billing cycle.</p>
+        <p>Here's the trap: if you carry a balance — meaning you don't pay your statement balance off in full by the due date — interest gets charged on whatever's left unpaid, so a large share of every payment goes toward interest instead of actually reducing what you owe. That's why paying only the minimum can take years and end up costing far more than the original purchase ever did.</p>
+        <p>Let's walk through the math with real numbers, so this isn't just a claim — you can see it happen. Say there's a $300 balance on a credit card with a 20% APR. To find the monthly interest rate, divide the yearly rate by 12: 20% ÷ 12 ≈ 1.67% per month. Now suppose the minimum payment is a fixed $25 every month.</p>
+        <p><strong>Month 1:</strong> Interest charged = $300 × 1.67% = $5.01. That gets added to the balance: $300 + $5.01 = $305.01. Then the $25 payment gets subtracted: $305.01 − $25 = <strong>$280.01</strong> — the new balance heading into month 2.</p>
+        <p><strong>Month 2:</strong> Interest charged = $280.01 × 1.67% ≈ $4.68. New balance before payment: $280.01 + $4.68 = $284.69. Subtract the $25 payment: $284.69 − $25 = <strong>$259.69</strong>.</p>
+        <p><strong>Month 3:</strong> Interest charged = $259.69 × 1.67% ≈ $4.34. New balance before payment: $259.69 + $4.34 = $264.03. Subtract the $25 payment: $264.03 − $25 = <strong>$239.03</strong>.</p>
+        <p>Notice what's happening: even though $25 gets paid every single month, the balance only drops by about $20 each time — because roughly $4 to $5 of every payment is being eaten by interest instead of shrinking what's owed. Keep that same pattern going for six months total, and the balance only falls to about $174.94 — meaning $150 was paid in, but only around $125 of the original $300 actually got paid off. The other roughly $25 went straight to interest, and the balance still isn't close to zero.</p>
+        <p>That's the trap in a nutshell: a small monthly payment can feel responsible, but if it's barely bigger than the interest being charged, the balance shrinks agonizingly slowly — and if a payment ever fails to cover even that month's interest, the balance stops shrinking at all and can actually start growing. It's also worth knowing that credit card companies calculate the minimum payment, and they set it low on purpose — a low minimum keeps a balance outstanding for longer, which means more months of interest charges for the company. That's not a conspiracy, just a business fact worth knowing: the minimum payment is designed to be the smallest amount that keeps an account in good standing, not the smartest amount to actually pay.</p>
+        <p>This connects to two other terms from today's vocabulary. The <strong>credit limit</strong> matters here too — a $300 balance on a $1,000 limit is using 30% of what's available, while the same $300 balance on a $350 limit is using nearly all of it. Staying well under the limit, and paying more than the minimum whenever possible, both matter — and both come back around in Day 4, where "amounts owed" turns out to be one of the biggest factors in a credit score. And the <strong>grace period</strong> is the easiest way to avoid this trap entirely: pay the full statement balance before it ends, and none of this interest math ever applies in the first place.</p>
+        <p>The APR itself isn't fixed across every card, either — it depends heavily on the type of credit, which is exactly what Day 3 dives into. Just to preview how much that matters: run that same $300 balance and $25 payment at 28% APR instead of 20% (28% ÷ 12 ≈ 2.33% per month), and month one's interest jumps to $300 × 2.33% ≈ $7.00 — about $2 more than at 20% APR, in the very first month alone. That gap compounds every single month the balance is carried, so a card with a higher APR doesn't just cost "a little more" — it can meaningfully stretch out how long a balance takes to disappear.</p>
+        <p>It's also worth knowing that not every credit card fee is interest. Some cards charge an <strong>annual fee</strong> just for keeping the account open, and a <strong>cash advance</strong> — using a credit card to withdraw cash instead of making a purchase — usually comes with its own separate, often higher fee and interest rate that starts immediately, with no grace period at all. None of these extra charges show up in the balance-and-APR math above, but they're real costs that add on top of it, which is exactly why reading a card's terms before using it matters as much as watching the APR.</p>
+        <p>Now it's your turn: use the Minimum Payment Calculator below to try your own numbers — a starting balance, an APR, and a monthly payment — and see exactly how many months it takes to pay off, and how much total interest gets paid along the way. Try running the same $300 balance at a higher rate, like 28% (typical of a store credit card), or try raising the monthly payment instead — you'll see firsthand why both the type of credit used (Day 3's focus) and the size of the payment change the total cost dramatically. Once you calculate a result, look for the extra "what if you paid double" line next to it — it's a fast way to see just how much a bigger monthly payment can shrink both the payoff time and the total interest.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Sofia's Two Offers</h4>
+        <p>Sofia's family is helping her think through a $250 phone screen repair. Option A is a store credit card the repair shop offers on the spot, at 27% APR, and Option B is waiting two weeks and paying with money she's already saved. She really wants the phone fixed today.</p>
+        <p class="prompt">Using today's vocabulary — APR, minimum payment, grace period — what questions should Sofia ask herself before picking Option A?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Credit Card Tools</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above and in the calculator. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/credit-cards/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. What does APR stand for, and what does it represent?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Annual Percentage Rate — the yearly cost of borrowing, charged monthly on any unpaid balance</button>
+            <button class="quiz-opt" data-correct="false">Automatic Payment Requirement — a rule about how you must pay</button>
+            <button class="quiz-opt" data-correct="false">Average Purchase Range — the typical size of your purchases</button>
+            <button class="quiz-opt" data-correct="false">Account Protection Rate — a fraud-protection fee</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>APR is the annual percentage rate — the yearly cost of borrowing, applied monthly to whatever balance is left unpaid.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. Which best describes a credit card's grace period?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Time to pay your statement balance in full with no interest charged</button>
+            <button class="quiz-opt" data-correct="false">The maximum amount you're allowed to borrow</button>
+            <button class="quiz-opt" data-correct="false">A fee charged specifically for paying late</button>
+            <button class="quiz-opt" data-correct="false">An extra month added before your bill is ever due</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The grace period is your window to pay the full statement balance before any interest is charged at all.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. Why can paying only the minimum payment each month take years and cost far more than the original purchase?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Because a large share of each payment goes toward interest instead of reducing what you owe</button>
+            <button class="quiz-opt" data-correct="false">Because minimum payments always increase the balance owed instantly to zero</button>
+            <button class="quiz-opt" data-correct="false">Because credit cards secretly charge no interest at all</button>
+            <button class="quiz-opt" data-correct="false">Because the minimum payment is always larger than the full balance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>When you carry a balance, interest is charged on what's left — so with minimum-only payments, a big chunk of each payment is just covering interest, not shrinking the debt.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. A cash advance on a credit card is different from a normal purchase because it:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Usually starts charging interest immediately, with no grace period, often at a higher rate</button>
+            <button class="quiz-opt" data-correct="false">Is always completely free, with no fees or interest at all</button>
+            <button class="quiz-opt" data-correct="false">Can only ever be used once per year</button>
+            <button class="quiz-opt" data-correct="false">Automatically lowers the card's APR</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Cash advances typically skip the grace period entirely and start collecting interest — often at a higher rate — the moment the cash is withdrawn.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. Sofia (from today's scenario) is comparing a 27% APR store card against waiting two weeks to pay with savings. Based on today's lesson, what's the strongest reason to be cautious about the store card?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">If she can't pay the statement balance in full, a high APR means a large share of her payments would go toward interest, not the repair itself</button>
+            <button class="quiz-opt" data-correct="false">Store cards never have to be paid back at all</button>
+            <button class="quiz-opt" data-correct="false">A 27% APR guarantees she'll be charged no interest whatsoever</button>
+            <button class="quiz-opt" data-correct="false">There is no downside to using the store card instead of waiting</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A high APR only becomes a problem if a balance is carried — but if it is, a big chunk of every payment goes to interest instead of paying down the actual repair cost.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Minimum Payment Calculator</h3>
+        <p class="prompt">Enter a starting balance, an APR, and a fixed monthly payment to see how long it takes to pay off — and how much total interest you'd pay.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="mpBalance">Starting balance ($)</label>
+            <input id="mpBalance" data-calc="balance" type="number" min="1" step="1" placeholder="e.g., 300">
+          </div>
+          <div class="goal-field">
+            <label for="mpApr">APR (%)</label>
+            <input id="mpApr" data-calc="apr" type="number" min="0" step="0.1" placeholder="e.g., 20">
+          </div>
+          <div class="goal-field">
+            <label for="mpPayment">Monthly payment ($)</label>
+            <input id="mpPayment" data-calc="payment" type="number" min="1" step="1" placeholder="e.g., 15">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="calcBtn" type="button">Calculate</button>
+        </div>
+        <div class="goal-summary" id="calcSummary" hidden>
+          <b>Your result</b>
+          <span id="calcSummaryText"></span>
+        </div>
+        <div class="goal-summary whatif" id="calcWhatIf" hidden>
+          <b>What if you paid double?</b>
+          <span id="calcWhatIfText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">After trying the calculator above, what's one thing that surprised you about how long it takes — or how much interest adds up — when only a small payment is made each month?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, calculator, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfZHLffYfaKNCfaVPj9bA6QJ7z5bPWLLMaLvJFjW50dJWMZ1w/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions and run the calculator above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Types of Credit: Comparing Interest Rates</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CDM.2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare and calculate the interest rates associated with different types of credit.</div></div>
+
+      <article class="lesson">
+        <p>Not all borrowed money costs the same. Typical rate ranges look roughly like this: <strong>credit cards</strong> around 18–25% APR, <strong>store or retail cards</strong> often higher — roughly 25–30% APR, <strong>personal loans</strong> from a bank or credit union often lower — roughly 8–15% APR, <strong>student loans</strong> (just a preview here — Grade 8 covers these in depth), and <strong>payday loans</strong> at extremely high rates, often 300%+ APR when calculated annually. That last one is a serious warning example, not a typical or recommended borrowing option.</p>
+        <p>Rates differ because lenders charge more when lending is riskier for them or less regulated, and less when a loan is secured, government-backed, or the borrower already has strong credit — which is exactly what Day 4's credit score lesson connects to.</p>
+        <p>Numbers make this real. Imagine borrowing $500 for one year, with four different ways to get it. To find what each option actually costs, use one simple formula for a full year of interest: <strong>Interest = Amount borrowed × Rate</strong>. Here's what that looks like for all four types of credit:</p>
+        <p><strong>Credit card, 20% APR:</strong> Interest = $500 × 0.20 = <strong>$100</strong>. Total repaid: $500 + $100 = <strong>$600</strong>.</p>
+        <p><strong>Store/retail card, 28% APR:</strong> Interest = $500 × 0.28 = <strong>$140</strong>. Total repaid: $500 + $140 = <strong>$640</strong>.</p>
+        <p><strong>Personal loan, 10% APR:</strong> Interest = $500 × 0.10 = <strong>$50</strong>. Total repaid: $500 + $50 = <strong>$550</strong>.</p>
+        <p><strong>Payday loan, 300% APR:</strong> Interest = $500 × 3.00 = <strong>$1,500</strong>. Total repaid: $500 + $1,500 = <strong>$2,000</strong>.</p>
+        <p>Look at that spread: borrowing the exact same $500 for the exact same year costs anywhere from $50 to $1,500 in interest alone, depending only on which type of credit is used. The personal loan is cheapest here because banks and credit unions are more tightly regulated and typically check a borrower's ability to repay before lending. The payday loan is catastrophically expensive because it's a short-term, high-risk loan built around borrowers who need cash fast and have few other options — lenders charge extremely high rates to make up for how risky that lending is for them, and because payday loans are less regulated than bank loans in many places.</p>
+        <p>Ranking these four from safest to riskiest for a borrower looks like: personal loan, then credit card, then store card, then payday loan — cheapest and most regulated to most expensive and least regulated. None of this means every use of credit is dangerous. A responsibly used credit card, paid in full, costs nothing extra at all. It means the type of credit matters just as much as whether credit is used at all — comparing rates before borrowing is a real, usable skill, not just a warning.</p>
+        <p>Store cards are a good case study for why the fine print matters. They often get pushed at the checkout counter with a tempting offer — "save 20% on today's purchase if you sign up right now" — and that discount is real. But that same card usually carries one of the higher APRs on this list, so if the balance isn't paid off quickly, the interest charged later can easily erase the discount and then some. A payday loan is an even sharper warning: it's marketed as "fast cash, no credit check," which sounds convenient when money is tight, but the 300%+ APR exists because the lender is taking on very little risk-screening while charging an enormous amount to make up for it. That combination — little screening, sky-high cost — is exactly what regulators in many states have stepped in to limit.</p>
+        <p>The bigger pattern to remember: a lower rate almost always comes with more steps to qualify (a credit check, proof of income, a relationship with a bank), while a higher rate almost always means faster, easier access to cash. Recognizing that trade-off — and doing the multiplication before borrowing, the way the $500 example above did — is the actual skill this lesson is teaching.</p>
+        <p>There's one more wrinkle worth knowing: not every type of credit charges interest the exact same way. A credit card charges interest only on whatever balance is left unpaid after the grace period, the way Day 2 walked through in detail. A personal loan usually works differently — it's often an <strong>installment loan</strong>, meaning the amount borrowed, the interest rate, and the length of time to repay it are all fixed from day one, and the borrower makes the same set payment every month until it's paid off completely. That predictability is actually part of why personal loans tend to carry lower rates: the lender knows exactly when they'll be repaid, which is less risky for them than an open-ended credit card balance that could be carried indefinitely.</p>
+        <p>It also helps to notice that "rate" isn't the only number that matters when comparing credit. A loan with a slightly lower APR but a much longer repayment period can sometimes end up costing more in total interest than a shorter loan at a slightly higher rate — because interest has more months to add up. That's not a reason to ignore APR; it's a reason to look at the total cost, not just the percentage, whenever it's possible to compare both. The $500-for-one-year examples above kept the timeframe the same on purpose, specifically so the rate alone could be compared fairly — real-world comparisons need to account for time too.</p>
+        <p>Try sizing this up for someone else. Malik needs $500 for a school trip deposit and has two options: his family's credit union offers a personal loan at 9% APR, repaid over one year, or a payday lender near his house offers cash today with a fee equivalent to roughly 350% APR, due back in two weeks. Running the numbers the way this lesson taught: the personal loan would cost about $500 × 0.09 = $45 in interest over the full year. The payday loan's cost depends on how quickly it's repaid, but its sky-high annualized rate exists specifically because it's designed around very short repayment windows — miss that window, and the cost can spiral fast through additional fees or a rolled-over loan. Malik's best move is obvious once the numbers are actually written out side by side, which is exactly the habit this lesson is building: never take a lender's word for what something "basically costs" — do the multiplication first.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The Checkout-Counter Discount</h4>
+        <p>A clothing store cashier offers you 20% off today's $60 purchase if you sign up for the store's own credit card right now. The card's APR turns out to be 29%, and you know you probably won't be able to pay the full balance off before the next statement is due.</p>
+        <p class="prompt">Is the 20% discount actually a good deal in this situation? What would you want to know or calculate before deciding?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra practice comparing credit types.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. Which type of credit typically has one of the lowest interest rates?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A personal loan from a bank or credit union</button>
+            <button class="quiz-opt" data-correct="false">A store or retail credit card</button>
+            <button class="quiz-opt" data-correct="false">A payday loan</button>
+            <button class="quiz-opt" data-correct="false">All types of credit charge the exact same rate</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Personal loans from a bank or credit union typically run roughly 8–15% APR — one of the lowest ranges among common credit types.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. Why might a store's own retail credit card charge a higher rate than a bank loan?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Store cards are often riskier or less regulated for the lender, so they charge more</button>
+            <button class="quiz-opt" data-correct="false">Store cards are always the safest option for lenders</button>
+            <button class="quiz-opt" data-correct="false">All lenders are legally required to charge the same rate</button>
+            <button class="quiz-opt" data-correct="false">Retail cards never actually charge any interest</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Lenders charge more when a loan is riskier or less regulated for them — a pattern that explains why rates vary so much across credit types.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. A payday loan is advertised with a fee that works out to over 300% APR when calculated annually. What's the smartest takeaway?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Payday loans are an extremely high-cost way to borrow and should generally be avoided</button>
+            <button class="quiz-opt" data-correct="false">This is a completely typical, safe rate for any type of loan</button>
+            <button class="quiz-opt" data-correct="false">Payday loans always have the lowest rates available</button>
+            <button class="quiz-opt" data-correct="false">APR doesn't apply to payday loans at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A 300%+ annualized rate is an extreme warning example — payday loans are a high-cost, high-risk way to borrow, not a typical option.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. What makes a personal loan's fixed monthly payment different from a credit card's minimum payment?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The personal loan's payment, rate, and payoff timeline are set from the start, while a credit card's balance and time to pay it off can change</button>
+            <button class="quiz-opt" data-correct="false">A personal loan never has to be paid back at all</button>
+            <button class="quiz-opt" data-correct="false">A credit card's minimum payment is always higher than a personal loan payment</button>
+            <button class="quiz-opt" data-correct="false">There is no real difference between the two</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A personal loan is typically fixed and predictable from day one; a credit card balance can be carried indefinitely, which is part of why its rate structure works differently.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. In today's scenario, a store offers 20% off a $60 purchase for signing up for a 29% APR store card, and you likely can't pay it off before the next statement. What's the best next step?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Estimate the interest that would build up on the carried balance and compare it to the size of the discount before deciding</button>
+            <button class="quiz-opt" data-correct="false">Sign up immediately — a discount is always a good deal no matter what</button>
+            <button class="quiz-opt" data-correct="false">Assume the store card has no interest at all</button>
+            <button class="quiz-opt" data-correct="false">Ignore the APR completely since it doesn't matter</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A discount can be erased by interest on a carried balance — doing the math before signing up is exactly the skill this lesson is building.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Which type of credit from today's lesson would you be most cautious about, and why, based on its typical interest rate?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdInycGOIUB-tPbQ6L7UDuyMn_MEvyRc5LiVyO3YFmISg1WZA/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Your Credit Score: What It Is &amp; Why It Matters</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CP.3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain the purpose of a credit score and credit record, and describe the factors and real-world impact of credit scores.</div></div>
+
+      <article class="lesson">
+        <p>A <strong>credit score</strong> is a three-digit number, typically 300–850, that summarizes how reliably a person has borrowed and repaid money. A <strong>credit record (or report)</strong> is the detailed history behind that number — every account, payment, and balance that feeds into the score.</p>
+        <p>Five main factors shape it, and each one carries a different weight. <strong>Payment history</strong> (roughly 35% of the score, the single biggest factor) is simply whether bills have been paid on time. <strong>Amounts owed</strong> (roughly 30%) measures how much of your available credit you're actually using — using a small share of your limit is better than running it close to maxed out. <strong>Length of credit history</strong> (roughly 15%) reflects how long you've had accounts open — a longer, well-managed history helps. <strong>New credit</strong> (roughly 10%) tracks how often you apply for new credit — applying for several accounts in a short window can hurt your score. <strong>Credit mix</strong> (roughly 10%) rewards responsibly managing different types of credit, like a credit card and a loan, rather than just one.</p>
+        <p>Real examples make these five factors much less abstract. Someone who pays every bill on time for two years is building strong <em>payment history</em>. Someone who misses a credit card payment by 45 days is hurting that same factor. Someone who maxes out a credit card right up to its limit is hurting <em>amounts owed</em> — while someone who keeps their balance under 10% of the limit is helping it. Someone who opens five new credit accounts in a single month is hurting <em>new credit</em>, while someone who's kept the same account open responsibly for ten years is helping <em>length of credit history</em>. And someone with both a credit card and a personal loan, both paid responsibly, is helping their <em>credit mix</em>. None of these are dramatic events — they're the ordinary, everyday habits from Days 1 through 3 of this unit, adding up over time.</p>
+        <p>A credit score has real, everyday impact. It affects whether someone is approved for a loan or credit card at all, and what interest rate they're offered if approved — better scores usually mean lower rates, connecting straight back to Day 3's rate comparisons. It can even affect renting an apartment or, in some cases, job applications. Scores are generally grouped into tiers: roughly 300–579 is <em>poor</em> (loan applications are often denied, and approved loans usually come with the highest rates); 580–669 is <em>fair</em> (some approval is possible, usually with higher-than-average rates); 670–739 is <em>good</em> (most applications are approved with competitive rates); and 740–850 is <em>excellent</em> (the best approval odds and the lowest available rates).</p>
+        <p>Here's a concrete way to see why that tier gap matters: two people each want to borrow the same amount for the same purchase. One has an excellent score and gets offered a low rate; the other has a poor score and gets offered a much higher rate — meaning the exact same purchase, financed the exact same way, ends up costing the second person noticeably more in interest, purely because of their credit history. (That's the same math from Day 3 — a lower rate always means a lower total cost for the same amount borrowed.) A credit score isn't an abstract, unrelated number — it's built directly out of the everyday habits from Days 1–3: paying on time, keeping balances low, and borrowing carefully.</p>
+        <p>A credit record is kept and updated by companies called credit bureaus, which collect information reported by banks, credit card companies, and lenders. It's worth knowing what's <em>not</em> part of this system, too: a credit score isn't based on age, income, savings, or where someone lives — it's based specifically on borrowing and repayment behavior. That means a person with a modest income who always pays on time and keeps balances low can have an excellent score, while a person with a much higher income who misses payments or maxes out cards can have a poor one. The score reflects reliability as a borrower, not wealth.</p>
+        <p>It's also worth being patient with this idea: a credit score isn't built overnight, and it isn't wrecked overnight by one small slip either — it's the ongoing pattern across all five factors that matters most. Someone just starting to use credit responsibly today is already building toward a stronger score months and years from now, the same way Priya's small, always-paid-in-full purchases from Day 1 were quietly doing exactly that.</p>
+        <p>It's worth being precise about who actually sees a credit report, too. Lenders check it when someone applies for a credit card or loan, and landlords or employers sometimes check a version of it with permission — but a credit report isn't public information anyone can look up freely, and by law a person is entitled to check their own report for free on a regular basis. Reviewing it regularly matters for a reason beyond curiosity: reports can occasionally contain mistakes, like a payment that was actually made on time but got reported late by accident, and catching an error early — before it drags a score down for months — is part of managing credit responsibly.</p>
+        <p>A quick worked comparison makes the score-to-rate connection concrete. Picture two people, each borrowing the same $1,000 for a year. One has a good score and gets offered 10% APR; using the same math from Day 3, that's $1,000 × 0.10 = $100 in interest for the year. The other has a poor score and gets offered 22% APR instead: $1,000 × 0.22 = $220 in interest for the exact same loan. That's a $120 difference — for identical borrowing, on an identical amount, for an identical purpose — created entirely by the gap between the two credit scores. Multiply that same kind of gap across a car loan, or years later a mortgage for a home, and the dollar difference stops being small change and starts being thousands of dollars.</p>
+        <p>None of the five factors work in isolation, either — they interact. Someone who opens a new credit card (touching <em>new credit</em>) right before applying for a car loan could see two effects at once: a small short-term dip from the new inquiry, but also, over time, a lower <em>amounts owed</em> percentage if that new card raises their total available credit while spending stays the same. This is exactly why the goal isn't to memorize one "correct" move — it's to understand the five levers well enough to make sensible decisions, the same skill Day 5's final scenario asks for.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Two Older Cousins, Two Different Paths</h4>
+        <p>Your cousin Elena has had one credit card for four years, always pays on time, and keeps her balance under 10% of her limit. Your other cousin, Theo, opened three new credit cards in the past two months and is currently using about 85% of his total available credit.</p>
+        <p class="prompt">Using today's five factors, which cousin likely has the stronger credit score right now, and which specific factors explain why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Credit Reports &amp; Scores</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation of what shapes a credit score or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. What is a credit score?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A three-digit number, typically 300–850, summarizing how reliably someone has borrowed and repaid money</button>
+            <button class="quiz-opt" data-correct="false">The exact dollar amount currently in someone's bank account</button>
+            <button class="quiz-opt" data-correct="false">A number that only banks are allowed to see, ever</button>
+            <button class="quiz-opt" data-correct="false">A fixed number that never changes once assigned</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A credit score is a three-digit summary, typically 300–850, of how reliably a person has borrowed and repaid money over time.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Which factor is generally considered the single biggest influence on a credit score?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Payment history — paying on time</button>
+            <button class="quiz-opt" data-correct="false">How many credit cards someone owns, regardless of use</button>
+            <button class="quiz-opt" data-correct="false">A person's age</button>
+            <button class="quiz-opt" data-correct="false">Which bank someone uses</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Payment history — consistently paying on time — is the single biggest factor behind a credit score.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. Which of these is a real-world effect of having a strong credit score?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Often being offered a lower interest rate when borrowing</button>
+            <button class="quiz-opt" data-correct="false">Guaranteed approval for absolutely any loan</button>
+            <button class="quiz-opt" data-correct="false">No connection whatsoever to renting an apartment</button>
+            <button class="quiz-opt" data-correct="false">It only matters for credit card applications, nothing else</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Better credit scores usually lead to lower interest rate offers — and can affect approval odds for loans, apartments, and sometimes even jobs.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. Why does it matter for a person to regularly check their own credit report?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">To catch possible mistakes, like a payment misreported as late, before they drag the score down for months</button>
+            <button class="quiz-opt" data-correct="false">Because credit reports are public and anyone can see them anyway</button>
+            <button class="quiz-opt" data-correct="false">Because checking it always lowers the score</button>
+            <button class="quiz-opt" data-correct="false">There's no reason to ever check it</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Reports can contain errors, and catching one early — rather than months later — matters for keeping a score accurate.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. In today's scenario, Theo opened three new cards in two months and is using about 85% of his total available credit. Which two factors from today's lesson does this most directly affect?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">New credit and amounts owed</button>
+            <button class="quiz-opt" data-correct="false">Length of credit history and credit mix only</button>
+            <button class="quiz-opt" data-correct="false">Nothing — opening cards and using credit never affects a score</button>
+            <button class="quiz-opt" data-correct="false">Only payment history, and nothing else</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Opening several accounts quickly affects new credit, and using 85% of available credit affects amounts owed — both work against Theo here.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Name one credit score factor that's easier for a person to control, and one that's harder to control, and explain why.</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeeH5Zw_xR5MZOQSa1EOx6-p7lhHka43c0KvR6aldQ7VyIoDA/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-panel" data-panel="5" hidden>
+      <div class="day-head">
+        <h2>Day 5 · Unit Review &amp; Assessment: Credit Decision Simulation</h2>
+        <span class="standard-badge">Synthesis: CDM.1&ndash;2; CP.3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare credit and debit options, calculate the cost of borrowing, and explain how a choice could affect a credit score over time.</div></div>
+
+      <article class="lesson">
+        <p>Five days ago you started with the basic difference between credit and debit. Since then you've calculated what a balance actually costs when only the minimum gets paid (Day 2), compared interest rates across different types of credit (Day 3), and learned what actually shapes a credit score (Day 4).</p>
+        <p>A few mix-ups worth clearing up before this unit wraps. A credit card is not free money — it's borrowed money, and it costs real interest if not paid in full. A credit limit is a maximum you're allowed to borrow, not a target or recommended amount to spend. And a credit score isn't some distant, unrelated number — it's built directly out of the everyday habits from Days 1–4: paying on time, keeping balances low, and borrowing carefully.</p>
+        <p>Let's put all four days together with one example — the same kind of thinking today's official check-in will ask for. Imagine a friend has a $200 repair bill and three ways to cover it: put it on a credit card at 22% APR and pay it off over a few months, take a payday loan that charges a $75 fee due back in two weeks, or borrow it interest-free from a family member. First, size up that payday loan fee the way Day 3 taught: $75 ÷ $200 = 0.375, or <strong>37.5%</strong> — and that's the cost for just two weeks, not a whole year, which makes it an extraordinarily expensive way to borrow. Compare that to the credit card: at 22% APR, paid down responsibly over a few months, the interest cost would be a small fraction of $200 — nowhere close to $75. The interest-free family loan costs nothing in interest at all, though it depends on having a family member able and willing to help.</p>
+        <p>Which option makes the most sense depends on the details, but the reasoning is what this whole unit was building toward: figure out whose money is actually being spent (Day 1), calculate what borrowing would actually cost in real numbers (Days 2 and 3), and think ahead to how the choice — paid responsibly or not — would affect a credit score down the road (Day 4). That's the same four-step thinking behind every credit decision, whether it's $200 today or a much bigger purchase years from now.</p>
+        <p>Quick vocabulary recap before the checkpoint: <strong>credit</strong> is borrowing money now with a promise to repay later, usually with interest if not paid in full; <strong>debit</strong> is spending money already sitting in a bank account, right now; <strong>APR</strong> is the yearly cost of borrowing; <strong>minimum payment</strong> is the smallest amount required each month to avoid a late fee, not a smart target to aim for; <strong>credit limit</strong> is the maximum allowed to borrow, not a spending goal; and a <strong>credit score</strong> is the three-digit summary, typically 300–850, of how reliably someone has borrowed and repaid money over time, built from payment history, amounts owed, length of credit history, new credit, and credit mix.</p>
+        <p>This unit deliberately stayed introductory — the vocabulary and the mental model. Grade 8 comes back to these exact same ideas with more depth: how to actually build and protect a strong credit profile, and how to manage credit, loans, and debt as the amounts and decisions get bigger. Today's checkpoint and reflection pull this whole unit together into one scenario of your own, just like the official check-in will.</p>
+        <p>One more way to pull the whole unit together: notice how each day actually depended on the one before it. Day 1's core idea — whose money is actually being spent — is what makes Day 2's interest math matter in the first place, since interest only exists because credit involves borrowed money. Day 2's math is what makes Day 3's rate comparisons meaningful, since knowing how interest builds up is exactly what makes a 9% loan clearly cheaper than a 300% payday loan for the identical amount. And Days 1 through 3, taken together, are what actually build the habits — paying on time, keeping balances low, borrowing carefully — that Day 4 showed get reported into a credit score. None of these four days is really separate; they're one connected skill viewed from four angles.</p>
+        <p>Try the full four-step process on one more scenario before the checkpoint. Suppose a classmate is offered a "buy now, pay later" plan for a $120 pair of shoes: no interest if paid off in four installments over six weeks, but a $10 fee automatically added if any installment is late. Step one (Day 1): this is still borrowed money, even though it's not a traditional credit card — the shoes are being paid for before the money is fully available. Step two (Days 2–3): calculate the real cost. If every installment is paid on time, the total cost stays $120 — genuinely $0 in extra cost, which is unusual and worth recognizing when it's true. But miss one payment, and the $10 fee is $10 ÷ $120 ≈ 8.3% added onto just one portion of the purchase — small compared to a payday loan, but not nothing, and avoidable entirely. Step three (Day 4): some buy-now-pay-later plans do report to credit bureaus and some don't, so it's worth checking — because if it's reported, missed payments could affect a score exactly like a missed credit card payment would. Running through those steps takes under a minute and turns a vague "should I do this?" into an actual, informed decision — which is the whole point of this unit.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Amara's Big Decision</h4>
+        <p>Amara, age 13, is helping plan how her family will pay for a $400 group gift for a relative's milestone birthday. Her aunt suggests three options: put it on a credit card at 19% APR and pay it off over a few months, use a payday-style advance app that charges a flat $60 fee due in three weeks, or wait one month and pay entirely with money the family has already saved.</p>
+        <p class="prompt">Walk through this the way the unit taught: whose money is involved in each option, what would each option actually cost in dollars, and how might each choice affect a credit score down the road?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Consumer Tools</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra review before the check-in.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 6 checkpoint</h3>
+        <div class="quiz-q" data-qid="d5q1">
+          <p class="quiz-question">1. A credit card's credit limit is best understood as:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The maximum you're allowed to borrow — not a spending target</button>
+            <button class="quiz-opt" data-correct="false">An amount you should always spend in full each month</button>
+            <button class="quiz-opt" data-correct="false">A number that changes randomly from day to day</button>
+            <button class="quiz-opt" data-correct="false">The exact same number for every single cardholder</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A credit limit is a ceiling, not a goal — spending close to it can hurt a credit score and cost a lot in interest if not paid off in full.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q2">
+          <p class="quiz-question">2. Which combination best summarizes this unit's key skills, all working together?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Comparing credit and debit, understanding the true cost of borrowing, comparing rates across credit types, and knowing what shapes a credit score</button>
+            <button class="quiz-opt" data-correct="false">Only memorizing APR numbers</button>
+            <button class="quiz-opt" data-correct="false">Only listing bank names</button>
+            <button class="quiz-opt" data-correct="false">Only depositing money without any further decisions</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This unit builds one skill on the next — every piece from Days 1&ndash;4 works together when someone actually makes a credit decision.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q3">
+          <p class="quiz-question">3. A friend says, "Credit cards are basically free money." How would you respond?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Explain that credit cards are borrowed money — if not paid in full, they cost real money in interest</button>
+            <button class="quiz-opt" data-correct="false">Agree completely — it really is free money</button>
+            <button class="quiz-opt" data-correct="false">Say credit cards never actually need to be paid back</button>
+            <button class="quiz-opt" data-correct="false">Say only debit cards involve real money</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Credit cards are borrowed money, not free money — the whole unit is built around what that borrowing actually costs when not paid in full.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q4">
+          <p class="quiz-question">4. A "buy now, pay later" plan charges $0 extra if every installment is paid on time, but adds a $10 fee for any late installment. What's the most accurate way to think about this plan?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It's still a form of borrowing, and while it can genuinely cost $0 if paid on time, missing a payment adds a real cost</button>
+            <button class="quiz-opt" data-correct="false">It's exactly the same as a payday loan in every way</button>
+            <button class="quiz-opt" data-correct="false">It can never cost anything under any circumstance</button>
+            <button class="quiz-opt" data-correct="false">It has no connection to borrowing at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>It's borrowed money with a real (if smaller) penalty for late payment — worth understanding rather than assuming it's automatically risk-free or automatically as costly as a payday loan.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q5">
+          <p class="quiz-question">5. In Amara's scenario, which single step from the unit's four-step process would tell her family the actual dollar cost of the payday-style advance app's $60 fee?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Calculating what the fee actually costs compared to the amount borrowed, the way Days 2 and 3 taught</button>
+            <button class="quiz-opt" data-correct="false">Guessing, since there's no way to actually calculate it</button>
+            <button class="quiz-opt" data-correct="false">Assuming every borrowing option costs exactly the same amount</button>
+            <button class="quiz-opt" data-correct="false">Ignoring the fee entirely since it's a flat amount, not a percentage</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Turning any fee into a comparable cost — the way Days 2 and 3 calculated interest and rate comparisons — is exactly the skill that reveals whether a fee is small or enormous relative to what's borrowed.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back across this whole unit, what's one specific credit habit you plan to follow — or avoid — in the future, and why?</p>
+        <textarea data-reflection="5" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 5 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress — a Credit Decision scenario plus 2 extra review questions covering the whole unit.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdAheGzsSmRgET4BybGkL65sg4WvOyljTWoXw5RJntgyFlNyg/viewform">Open Day 5 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="5">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="5" disabled>Mark Day 5 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 6 complete 🌱</h3>
+        <p>You've covered credit vs. debit, the true cost of borrowing, comparing credit types, and what shapes a credit score — the same standards your classmates covered in class (NJSLS 9.1.8.CDM.1&ndash;2, CP.3). Show your teacher this page or your notebook reflections, and check in about Unit 7.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 6 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u6-selfstudy-v1';
+  var TOTAL_DAYS = 5;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, calc: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function calcCompleteForDay2(){
+    return !!(state.calc && typeof state.calc.months !== 'undefined');
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && calcCompleteForDay2();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  function runMinPaymentCalc(){
+    var balanceInput = document.getElementById('mpBalance');
+    var aprInput = document.getElementById('mpApr');
+    var paymentInput = document.getElementById('mpPayment');
+    var balance = parseFloat(balanceInput.value);
+    var apr = parseFloat(aprInput.value);
+    var payment = parseFloat(paymentInput.value);
+
+    var summaryEl = document.getElementById('calcSummary');
+    var textEl = document.getElementById('calcSummaryText');
+
+    if (!(balance > 0) || !(apr >= 0) || !(payment > 0)){
+      summaryEl.hidden = false;
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Fill in a starting balance, an APR, and a monthly payment (all greater than zero) to calculate.';
+      return;
+    }
+
+    var monthlyRate = apr / 100 / 12;
+    var bal = balance;
+    var months = 0;
+    var totalInterest = 0;
+    var neverPaysOff = false;
+    var cap = 600; // 50 years — treat as "never" beyond this
+
+    while (bal > 0 && months < cap){
+      var interest = bal * monthlyRate;
+      if (payment <= interest){ neverPaysOff = true; break; }
+      totalInterest += interest;
+      bal = bal + interest - payment;
+      months++;
+    }
+    if (months >= cap) neverPaysOff = true;
+
+    state.calc = { balance: balance, apr: apr, payment: payment, months: neverPaysOff ? null : months, totalInterest: neverPaysOff ? null : Math.round(totalInterest * 100) / 100, neverPaysOff: neverPaysOff };
+    saveState();
+
+    summaryEl.hidden = false;
+    if (neverPaysOff){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'At $' + payment.toFixed(2) + '/month, this payment doesn\'t even cover the monthly interest on a $' + balance.toFixed(2) + ' balance at ' + apr + '% APR — so the balance never actually goes down. Try a higher monthly payment.';
+    } else {
+      summaryEl.classList.remove('warn');
+      var years = Math.floor(months / 12);
+      var remMonths = months % 12;
+      var yearsPart = years > 0 ? (years + (years === 1 ? ' year' : ' years') + (remMonths > 0 ? ', ' : '')) : '';
+      var monthsPart = remMonths > 0 ? (remMonths + (remMonths === 1 ? ' month' : ' months')) : '';
+      textEl.textContent = 'Paying $' + payment.toFixed(2) + '/month on a $' + balance.toFixed(2) + ' balance at ' + apr + '% APR takes ' + months + ' months (' + yearsPart + monthsPart + ') to pay off, and costs $' + totalInterest.toFixed(2) + ' in total interest — on top of the original $' + balance.toFixed(2) + '.';
+    }
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+  }
+
+  // Additive enhancement — does not alter runMinPaymentCalc(). Reads the same
+  // three inputs and shows a "pay double" comparison in a separate element.
+  function payoffMonthsAndInterest(balance, apr, payment){
+    var monthlyRate = apr / 100 / 12;
+    var bal = balance, months = 0, totalInterest = 0, neverPaysOff = false, cap = 600;
+    while (bal > 0 && months < cap){
+      var interest = bal * monthlyRate;
+      if (payment <= interest){ neverPaysOff = true; break; }
+      totalInterest += interest;
+      bal = bal + interest - payment;
+      months++;
+    }
+    if (months >= cap) neverPaysOff = true;
+    return { months: neverPaysOff ? null : months, totalInterest: neverPaysOff ? null : Math.round(totalInterest * 100) / 100, neverPaysOff: neverPaysOff };
+  }
+
+  function runWhatIfDoublePayment(){
+    var balance = parseFloat(document.getElementById('mpBalance').value);
+    var apr = parseFloat(document.getElementById('mpApr').value);
+    var payment = parseFloat(document.getElementById('mpPayment').value);
+    var whatIfEl = document.getElementById('calcWhatIf');
+    var whatIfText = document.getElementById('calcWhatIfText');
+    if (!whatIfEl || !whatIfText) return;
+    if (!(balance > 0) || !(apr >= 0) || !(payment > 0)){ whatIfEl.hidden = true; return; }
+
+    var doublePayment = payment * 2;
+    var normal = payoffMonthsAndInterest(balance, apr, payment);
+    var doubled = payoffMonthsAndInterest(balance, apr, doublePayment);
+    whatIfEl.hidden = false;
+
+    if (normal.neverPaysOff && doubled.neverPaysOff){
+      whatIfText.textContent = 'Even doubling your payment to $' + doublePayment.toFixed(2) + '/month still wouldn\'t cover the monthly interest here — try a smaller balance or a lower APR to see this comparison.';
+    } else if (normal.neverPaysOff && !doubled.neverPaysOff){
+      whatIfText.textContent = 'At double the payment ($' + doublePayment.toFixed(2) + '/month), this balance would actually pay off — in ' + doubled.months + ' month' + (doubled.months === 1 ? '' : 's') + ', costing $' + doubled.totalInterest.toFixed(2) + ' in total interest, instead of never paying off at all at your original payment.';
+    } else if (doubled.neverPaysOff){
+      whatIfEl.hidden = true;
+    } else {
+      var monthsSaved = normal.months - doubled.months;
+      var interestSaved = Math.round((normal.totalInterest - doubled.totalInterest) * 100) / 100;
+      whatIfText.textContent = 'Paying $' + doublePayment.toFixed(2) + '/month instead of $' + payment.toFixed(2) + '/month would pay this off ' + monthsSaved + ' month' + (monthsSaved === 1 ? '' : 's') + ' sooner and save about $' + interestSaved.toFixed(2) + ' in total interest.';
+    }
+  }
+
+  function restoreCalc(){
+    document.querySelectorAll('[data-calc]').forEach(function(input){
+      var key = input.dataset.calc;
+      if (state.calc && typeof state.calc[key] !== 'undefined' && state.calc[key] !== null) input.value = state.calc[key];
+    });
+    if (state.calc && typeof state.calc.months !== 'undefined'){
+      var summaryEl = document.getElementById('calcSummary');
+      var textEl = document.getElementById('calcSummaryText');
+      summaryEl.hidden = false;
+      if (state.calc.neverPaysOff){
+        summaryEl.classList.add('warn');
+        textEl.textContent = 'At $' + state.calc.payment.toFixed(2) + '/month, this payment doesn\'t even cover the monthly interest on a $' + state.calc.balance.toFixed(2) + ' balance at ' + state.calc.apr + '% APR — so the balance never actually goes down. Try a higher monthly payment.';
+      } else {
+        var months = state.calc.months;
+        var years = Math.floor(months / 12);
+        var remMonths = months % 12;
+        var yearsPart = years > 0 ? (years + (years === 1 ? ' year' : ' years') + (remMonths > 0 ? ', ' : '')) : '';
+        var monthsPart = remMonths > 0 ? (remMonths + (remMonths === 1 ? ' month' : ' months')) : '';
+        textEl.textContent = 'Paying $' + state.calc.payment.toFixed(2) + '/month on a $' + state.calc.balance.toFixed(2) + ' balance at ' + state.calc.apr + '% APR takes ' + months + ' months (' + yearsPart + monthsPart + ') to pay off, and costs $' + state.calc.totalInterest.toFixed(2) + ' in total interest — on top of the original $' + state.calc.balance.toFixed(2) + '.';
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.getElementById('calcBtn').addEventListener('click', runMinPaymentCalc);
+    document.getElementById('calcBtn').addEventListener('click', runWhatIfDoublePayment);
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '2' && !calcCompleteForDay2()){
+          var hint = document.querySelector('[data-hint-for="2"]');
+          if (hint) hint.textContent = 'Run the Minimum Payment Calculator above at least once, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreCalc();
+    runWhatIfDoublePayment();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

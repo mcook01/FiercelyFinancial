@@ -1,0 +1,1615 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>My Financial Foundations Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(1.8rem,4.6vw,2.7rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(auto-fit,minmax(122px,1fr)); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.86rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.5rem,3.6vw,2rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-field select{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary.warn{background:transparent; border-color:var(--coral); color:var(--coral);}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .goal-summary.warn b{color:var(--coral);}
+  .calc-btn-row{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+
+  /* Unit 9 -specific tools */
+  .yag-table{display:flex; flex-direction:column; gap:8px; margin-top:14px;}
+  .yag-row{display:grid; grid-template-columns:1.5fr 1fr 1.4fr; gap:10px; align-items:center;}
+  .yag-row.yag-head{font-weight:700; font-size:.8rem; color:var(--ink-muted); font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.03em;}
+  .yag-unit{font-weight:700; font-size:.92rem;}
+  .yag-row input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:9px 11px; font-family:'Nunito Sans',sans-serif; font-size:.96rem; width:100%;}
+  .yag-row input:focus-visible{border-color:var(--moss);}
+  .value-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .value-chip{padding:8px 14px; border-radius:999px; border:2px solid var(--line); background:var(--surface); color:var(--ink); font-weight:700; font-size:.92rem; cursor:pointer; transition:border-color .12s ease, background .12s ease;}
+  .value-chip.selected{border-color:var(--moss); background:var(--complete-bg); color:var(--moss-deep);}
+  .value-chip[disabled]{opacity:.4; cursor:not-allowed;}
+  .value-count{font-size:.88rem; font-weight:700; color:var(--ink-muted); margin-top:8px;}
+  .smart-check{display:flex; flex-direction:column; gap:7px; margin-top:10px; background:var(--surface-2); border-radius:12px; padding:12px 16px;}
+  .smart-check label{display:flex; align-items:center; gap:9px; font-size:.92rem; font-weight:600;}
+  .smart-check input[type=checkbox]{width:17px; height:17px; accent-color:var(--moss);}
+  .subgoal-label{font-size:.95rem; font-weight:800; color:var(--moss-deep); margin-top:18px; display:block;}
+  .subgoal-label:first-child{margin-top:0;}
+  .consist-q{display:flex; flex-direction:column; gap:8px; background:var(--surface); border:2px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:12px;}
+  .consist-q p{margin:0; font-weight:700; font-size:.98rem;}
+  .yn-row{display:flex; gap:10px;}
+  .yn-btn{flex:1; padding:9px 10px; border-radius:10px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-weight:700; cursor:pointer;}
+  .yn-btn.selected{border-color:var(--moss); background:var(--complete-bg); color:var(--moss-deep);}
+  .plan-part{margin-bottom:16px;}
+  .plan-part label{display:block; font-weight:700; font-size:.98rem; margin-bottom:7px;}
+  .word-count{font-size:.8rem; color:var(--ink-muted); margin-top:5px;}
+
+  @media (max-width:760px){ .goal-grid{grid-template-columns:1fr;} .goal-grid.cols-3{grid-template-columns:1fr;} .topbar{align-items:flex-start;} .yag-row{grid-template-columns:1fr;} .yag-row.yag-head{display:none;} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>My Financial Foundations Portfolio</h1>
+      </div>
+      <p class="subtitle">Unit 9 — Capstone: Portfolio &amp; Year-End Reflection · 7 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/7"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Portfolio Kickoff</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Values &amp; Goals</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Budget &amp; Spending Plan</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Banking &amp; Saving</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+    <button class="day-btn" data-day="5">
+      <span class="num mono">DAY 5</span>
+      <span class="title">Credit, Civic &amp; Protection</span>
+      <span class="status-pill" data-status-for="5">Not started</span>
+    </button>
+    <button class="day-btn" data-day="6">
+      <span class="num mono">DAY 6</span>
+      <span class="title">Assembly &amp; Consistency</span>
+      <span class="status-pill" data-status-for="6">Not started</span>
+    </button>
+    <button class="day-btn" data-day="7">
+      <span class="num mono">DAY 7</span>
+      <span class="title">Reflection &amp; Final Assessment</span>
+      <span class="status-pill" data-status-for="7">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Capstone Kickoff: My Financial Foundations Portfolio</h2>
+        <span class="standard-badge">Synthesis/orientation</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can describe the purpose and required sections of the Financial Foundations Portfolio and begin reflecting on how my thinking about money has changed this year.</div></div>
+
+      <article class="lesson">
+        <p>This unit is different from every unit so far. Units 1 through 8 each taught you something new. Unit 9 doesn't &mdash; instead, it asks you to gather everything you already learned this year and turn it into one finished piece of work: a <strong>Financial Foundations Portfolio</strong>. Over the next several days you'll build four sections, each pulling from specific units earlier in the year, then assemble them, get feedback, revise, and finish with a Year-End Reflection and a cumulative final assessment covering the whole year. Think of Days 2&ndash;6 as revisiting one idea at a time and applying it to your own life, rather than learning something brand new.</p>
+        <p>Here's exactly how the four sections map to the year. <strong>Section 1 &mdash; My Financial Values &amp; Goals</strong> comes from Unit 1: your top values and one short-term and one long-term SMART goal. <strong>Section 2 &mdash; My Income, Budget &amp; Spending Plan</strong> pulls together Units 2, 3, and 5: a full monthly budget built on realistic income, plus a written response to a change in circumstances. <strong>Section 3 &mdash; My Banking &amp; Saving Strategy</strong> comes from Unit 4: choosing a financial institution and account type, then calculating how your savings would actually grow over a year. <strong>Section 4 &mdash; My Credit, Civic &amp; Protection Plan</strong> draws on Units 6, 7, and 8: a three-part personal responsibility plan covering a credit habit, a civic/tax understanding, and fraud-protection habits.</p>
+        <p>Before jumping into Section 1 tomorrow, here's a one-sentence idea from each of the eight units you've already completed, as a quick refresher: <strong>Unit 1</strong> &mdash; financial decisions are shaped by your values and goals, not just math. <strong>Unit 2</strong> &mdash; income comes in different forms, and career and education choices affect long-term earning. <strong>Unit 3</strong> &mdash; a budget allocates income across needs, wants, and savings, and has to adjust when circumstances change. <strong>Unit 4</strong> &mdash; different financial institutions and account types trade off fees, interest, and access differently. <strong>Unit 5</strong> &mdash; advertising uses specific techniques to persuade, and some crosses the line into deception. <strong>Unit 6</strong> &mdash; credit lets you borrow now and pay later, but paying only the minimum lets interest pile up fast. <strong>Unit 7</strong> &mdash; taxes fund shared public services, and paying them is part of civic responsibility. <strong>Unit 8</strong> &mdash; insurance manages risk through pooling, and recognizing fraud red flags protects your money and information.</p>
+        <p>Grading-wise, the whole portfolio is worth 66 points total across all four sections, the Day 6 consistency check and revision, the Year-End Reflection, and the cumulative final assessment &mdash; your teacher has the full breakdown. One more thing worth saying clearly: this portfolio is a genuine <em>baseline</em>, not a final word. Grade 8 will revisit every one of these ideas again at a higher level and in new situations, so there's no pressure for anything here to be perfect &mdash; the goal is showing how much you've actually grown since September.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Deja's Money Year</h4>
+        <p>At the start of 7th grade, Deja thought "budgeting" just meant not spending too much money. Now she can explain the difference between fixed, variable, and periodic expenses, and she just set her first SMART savings goal for a pair of running shoes.</p>
+        <p class="prompt">Which part of Deja's growth do you relate to most &mdash; or, if your own year looked different, describe one specific thing you understand now about money that you didn't understand back in September.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like a refresher on any topic from earlier this year before you start the portfolio.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Year-at-a-Glance review (optional study tool)</h3>
+        <p class="prompt">For each unit, jot down one key term and one key idea you remember, using your notes or handouts from earlier this year if you need them. This is just for your own review &mdash; it isn't submitted anywhere.</p>
+        <div class="yag-table" id="yagTable">
+          <div class="yag-row yag-head"><span>Unit</span><span>Key term</span><span>Key idea</span></div>
+        </div>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Which unit does Portfolio Section 1 (My Financial Values &amp; Goals) draw from?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Unit 1 — Financial Foundations</button>
+            <button class="quiz-opt" data-correct="false">Unit 4 — Saving &amp; Banking I</button>
+            <button class="quiz-opt" data-correct="false">Unit 6 — Credit &amp; Borrowing I</button>
+            <button class="quiz-opt" data-correct="false">Unit 8 — Protecting Yourself</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Section 1 draws directly on Unit 1's values-and-goals content.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which units feed into Portfolio Section 2 (My Income, Budget &amp; Spending Plan)?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Units 2, 3, and 5</button>
+            <button class="quiz-opt" data-correct="false">Units 1 and 4 only</button>
+            <button class="quiz-opt" data-correct="false">Units 6, 7, and 8</button>
+            <button class="quiz-opt" data-correct="false">Unit 9 only — this is new content</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Section 2 combines earning (Unit 2), budgeting (Unit 3), and smart spending (Unit 5) into one income-and-spending plan.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Which units feed into Portfolio Section 4 (My Credit, Civic &amp; Protection Plan)?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Units 6, 7, and 8</button>
+            <button class="quiz-opt" data-correct="false">Units 2, 3, and 5</button>
+            <button class="quiz-opt" data-correct="false">Unit 1 only</button>
+            <button class="quiz-opt" data-correct="false">Unit 4 only</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Section 4 combines credit (Unit 6), civic/tax responsibility (Unit 7), and insurance/fraud protection (Unit 8).</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. A classmate writes a paragraph committing to "always pay more than the minimum due on any credit card I open." Which portfolio section does this belong in?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Section 4 — My Credit, Civic &amp; Protection Plan</button>
+            <button class="quiz-opt" data-correct="false">Section 1 — My Financial Values &amp; Goals</button>
+            <button class="quiz-opt" data-correct="false">Section 2 — My Income, Budget &amp; Spending Plan</button>
+            <button class="quiz-opt" data-correct="false">Section 3 — My Banking &amp; Saving Strategy</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A credit habit commitment is Section 4 content, drawing on Unit 6.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Why does Day 1 avoid introducing brand-new content?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Its job is to activate and organize a full year of prior learning before you apply it across Days 2-6</button>
+            <button class="quiz-opt" data-correct="false">Because there's nothing left to learn about personal finance</button>
+            <button class="quiz-opt" data-correct="false">Because Day 1 is not part of the graded portfolio at all</button>
+            <button class="quiz-opt" data-correct="false">Because new content is saved entirely for Grade 8</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Day 1 is intentionally review-and-orientation, activating everything you'll apply across the rest of the unit.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>"How I've Changed" quick-write</h3>
+        <p class="prompt">Respond to both prompts &mdash; this becomes the opening page of your portfolio. <strong>1)</strong> Describe one specific financial decision you would make differently now than you would have at the start of 7th grade, and why. <strong>2)</strong> Which unit's topic do you think will matter most to you in the next five years, and why?</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; it captures your "How I've Changed" quick-write (3 pts) plus a short response to today's scenario (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfgx4W1HLIoC2LQP1Ywz0RhNl-lkizRTikFc7ho0smB36XnhA/viewform" target="_blank" rel="noopener">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Portfolio Section 1 — My Financial Values &amp; Goals</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.5</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can articulate my personal financial values and set one short-term and one long-term SMART financial goal, explaining how my values shape each one.</div></div>
+
+      <article class="lesson">
+        <p>Back in Unit 1, you learned about financial psychology (9.1.8.FP.5): financial decisions are never purely mathematical. They're shaped by values, emotions, habits, and the influence of family and friends. Recognizing this matters because it helps people make decisions they'll actually stick with, instead of ones that look good on paper but ignore what they genuinely care about. A perfectly logical savings plan that ignores what a person actually values tends to fall apart the first time it gets inconvenient.</p>
+        <p>You also learned the SMART goal framework: a strong goal is <strong>S</strong>pecific, <strong>M</strong>easurable, <strong>A</strong>chievable, <strong>R</strong>elevant, and <strong>T</strong>ime-bound. Here's the classic move from vague to SMART: "I want to save money" says almost nothing useful &mdash; it doesn't say how much, by when, or why. Turned into a SMART goal: "I will save $15/month from my part-time job for 6 months to buy a $90 pair of headphones, because I value having quality tools for my hobby (music)." Every piece is checkable: Specific (headphones, $90), Measurable ($15/month tracked), Achievable (fits a part-time income), Relevant (ties to a stated value &mdash; music), Time-bound (6 months exactly).</p>
+        <p>Notice that last example didn't stop at "Time-bound" &mdash; it explicitly named a value (caring about music/hobby tools) as the reason the goal exists. That's exactly what Portfolio Section 1 asks you to do: name your top 3 financial values, set one short-term goal (within 6 months) and one long-term goal (1+ years) connected to those values, and explain in 2-3 sentences <em>how</em> your values specifically shaped each goal &mdash; not just what the goal is, but why it's genuinely yours.</p>
+        <p>A quick worked example of the full connection: suppose a student's top values include <strong>independence</strong> and <strong>education</strong>. A short-term goal like "save $120 over 3 months toward a used laptop for schoolwork" connects directly to both &mdash; it's a step toward independence (owning a tool rather than always borrowing one) and education (better ability to do schoolwork). A long-term goal like "save $2,000 toward a car over the next 3 years" connects to independence even more directly. The values aren't decoration on top of the goals &mdash; they're the actual reason the goals were chosen in the first place. Try building your own values and goals in the tool below.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Marcus and the Concert Tickets</h4>
+        <p>Marcus wants to buy $120 concert tickets in 8 weeks. He earns $15/week mowing lawns and plans to save all $15 every week toward the tickets: 8 &times; $15 = $120 exactly.</p>
+        <p class="prompt">Check Marcus's goal against all 5 SMART criteria. Is anything missing for it to be fully SMART, even though the math works out exactly? Explain.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB Money as You Grow</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of SMART goals or financial values.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. What does 9.1.8.FP.5 (financial psychology) recognize?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Financial decisions are shaped by values, emotions, habits, and the people around you — not just math</button>
+            <button class="quiz-opt" data-correct="false">Financial decisions should ignore emotions completely</button>
+            <button class="quiz-opt" data-correct="false">Values only matter for long-term goals, never short-term ones</button>
+            <button class="quiz-opt" data-correct="false">Math is the only factor that determines a good financial decision</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Financial psychology recognizes that values, emotions, and habits shape decisions alongside the math.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. What does the "R" in SMART stand for, and what does it require?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Relevant — the goal should connect to something you actually value</button>
+            <button class="quiz-opt" data-correct="false">Realistic — the goal must involve real money, not imaginary money</button>
+            <button class="quiz-opt" data-correct="false">Repeatable — the same goal must be set every year</button>
+            <button class="quiz-opt" data-correct="false">Reduced — the goal amount should always be as small as possible</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Relevant means the goal genuinely connects to something the goal-setter values — not just any goal that happens to be achievable.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. Which of these two goals is actually SMART? Goal A: "I want to save money for stuff." Goal B: "I will save $10/week from babysitting for 10 weeks to buy a $95 bike helmet, because I value safety."</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Goal B — it's specific, measurable, achievable, relevant to a stated value, and time-bound</button>
+            <button class="quiz-opt" data-correct="false">Goal A — it covers more possible purchases</button>
+            <button class="quiz-opt" data-correct="false">Both are equally SMART</button>
+            <button class="quiz-opt" data-correct="false">Neither is SMART without a bank account number attached</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Goal A is vague on every criterion. Goal B checks every SMART box with specific numbers, a deadline, and a stated value.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. A student earns $40/month in allowance and wants to save $60/month toward a goal, leaving nothing for anything else. Which SMART criterion is this goal most likely failing?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Achievable — $60/month isn't possible on $40/month of income</button>
+            <button class="quiz-opt" data-correct="false">Specific — the goal doesn't name an amount</button>
+            <button class="quiz-opt" data-correct="false">Time-bound — the goal has no deadline</button>
+            <button class="quiz-opt" data-correct="false">Measurable — there's no way to track $60/month</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A goal that requires saving more than someone actually earns fails the Achievable test, regardless of how specific or measurable it is.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. Why does Portfolio Section 1 require you to explain HOW your values shaped each goal, not just state the goal itself?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A goal a person is more likely to actually follow through on is one tied to something they genuinely care about, not just a number that looks good on paper</button>
+            <button class="quiz-opt" data-correct="false">Because goals without a values connection are mathematically impossible</button>
+            <button class="quiz-opt" data-correct="false">It's just a formatting requirement with no real purpose</button>
+            <button class="quiz-opt" data-correct="false">Because values and goals are actually unrelated concepts</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Connecting a goal to a genuine value is what financial psychology says makes a goal more likely to actually be followed through on.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>SMART Goal Builder</h3>
+        <p class="prompt">Choose your top 3 values below, then set one short-term (within 6 months) and one long-term (1+ years) goal. Check each goal against all 5 SMART criteria as you go.</p>
+        <div class="value-chips" id="valueChips">
+          <button class="value-chip" type="button" data-value="Family">Family</button>
+          <button class="value-chip" type="button" data-value="Security">Security</button>
+          <button class="value-chip" type="button" data-value="Adventure/Travel">Adventure/Travel</button>
+          <button class="value-chip" type="button" data-value="Generosity/Giving back">Generosity/Giving back</button>
+          <button class="value-chip" type="button" data-value="Independence">Independence</button>
+          <button class="value-chip" type="button" data-value="Education/Learning">Education/Learning</button>
+          <button class="value-chip" type="button" data-value="Health & wellness">Health &amp; wellness</button>
+          <button class="value-chip" type="button" data-value="Creativity">Creativity</button>
+          <button class="value-chip" type="button" data-value="Community">Community</button>
+          <button class="value-chip" type="button" data-value="Achievement/Success">Achievement/Success</button>
+          <button class="value-chip" type="button" data-value="Fun & enjoyment">Fun &amp; enjoyment</button>
+          <button class="value-chip" type="button" data-value="Helping others">Helping others</button>
+        </div>
+        <p class="value-count" id="valueCount">0 of 3 values selected</p>
+
+        <span class="subgoal-label">Short-term goal (within 6 months)</span>
+        <div class="goal-field">
+          <label for="sgShort">Describe your short-term goal, with a specific amount and deadline</label>
+          <input id="sgShort" type="text" placeholder="e.g., I will save $15/month for 6 months to buy...">
+        </div>
+        <div class="smart-check" data-goal="short">
+          <label><input type="checkbox" data-smart="s"> Specific — exactly what I'll do</label>
+          <label><input type="checkbox" data-smart="m"> Measurable — how I'll know it's done</label>
+          <label><input type="checkbox" data-smart="a"> Achievable — realistic for me</label>
+          <label><input type="checkbox" data-smart="r"> Relevant — connects to one of my top 3 values</label>
+          <label><input type="checkbox" data-smart="t"> Time-bound — has an exact deadline</label>
+        </div>
+
+        <span class="subgoal-label">Long-term goal (1+ years)</span>
+        <div class="goal-field">
+          <label for="sgLong">Describe your long-term goal, with a specific amount and deadline</label>
+          <input id="sgLong" type="text" placeholder="e.g., I will save $2,000 over 3 years to buy...">
+        </div>
+        <div class="smart-check" data-goal="long">
+          <label><input type="checkbox" data-smart="s"> Specific — exactly what I'll do</label>
+          <label><input type="checkbox" data-smart="m"> Measurable — how I'll know it's done</label>
+          <label><input type="checkbox" data-smart="a"> Achievable — realistic for me</label>
+          <label><input type="checkbox" data-smart="r"> Relevant — connects to one of my top 3 values</label>
+          <label><input type="checkbox" data-smart="t"> Time-bound — has an exact deadline</label>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect (personal — not graded)</h3>
+        <p class="prompt">Which of your top 3 values was easiest to explain? Which one was hardest to put into words, and why?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type — for your own use, not submitted with the check-in.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; Portfolio Section 1 (10 pts: values, goals, and the values-to-goals connection) plus today's scenario response (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdIOlm-WNQG2i3RIE4hfT0kvRY2Ew5o9zNGMzdqTPxn6OLjKg/viewform" target="_blank" rel="noopener">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions, select 3 values, and complete both SMART goals above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Portfolio Section 2 — My Income, Budget &amp; Spending Plan</h2>
+        <span class="standard-badge">NJSLS 9.1.8.PB.4; PB.6</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can construct a realistic monthly budget that allocates income across needs, wants, and savings, and explain how I'd adjust it in response to a change in circumstances.</div></div>
+
+      <article class="lesson">
+        <p>Unit 3 introduced budgeting as developing a plan that aligns spending with your goals and values (9.1.8.PB.4), and adjusting that plan when circumstances change (9.1.8.PB.6). Today is the practical bridge between yesterday's values and goals and real monthly numbers &mdash; a budget is where a goal actually turns into a specific dollar amount you commit to setting aside every month.</p>
+        <p>Quick recap of the structure from Unit 3: every budget line falls into <strong>needs</strong> (things you can't reasonably go without &mdash; phone plan, transportation, essentials), <strong>wants</strong> (things that make life more enjoyable but aren't essential &mdash; entertainment, eating out, extra clothes), or <strong>savings</strong> (money set aside for a goal or emergency, rather than spent). And a budget should be built on realistic <em>take-home</em> income &mdash; what actually lands in your pocket after any withholding, not the larger gross figure, a distinction Units 2 and 7 both covered.</p>
+        <p>Here's the worked example Section 2 is modeled on, using a starting monthly income of $600.00. <strong>Needs:</strong> phone plan $30.00, transportation $40.00, personal care/other essentials $20.00 &mdash; subtotal <strong>$90.00</strong>. <strong>Wants:</strong> entertainment/subscriptions $35.00, eating out $35.00, clothes/other wants $40.00 &mdash; subtotal <strong>$110.00</strong>. <strong>Savings:</strong> a goal contribution tied to a Section 1 goal, $25.00, plus general/emergency savings $375.00 &mdash; subtotal <strong>$400.00</strong>. Adding it up: $90.00 + $110.00 + $400.00 = <strong>$600.00</strong>, matching total income exactly. Notice the savings lines connect directly to goals &mdash; that's not optional decoration, it's the whole point of Section 2.</p>
+        <p>The second half of Section 2 is a "Life Happens" scenario &mdash; a change in circumstances you have to respond to using your own budget, referencing specific line items by name rather than a vague "I'd spend less." A strong response also recognizes whether a change is <em>temporary</em> (a one-time repair) or <em>permanent</em> (an ongoing bill increase), since a permanent change needs an ongoing fix, not a one-month patch. Build your own $600.00 budget in the tool below, then respond to today's scenario.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO — LIFE HAPPENS</span>
+        <h4>Your Phone Bill Goes Up</h4>
+        <p>Your phone bill increases by $20/month starting next month &mdash; and this change is ongoing, not a one-time cost.</p>
+        <p class="prompt">Using your budget above, explain exactly how you'd adjust it &mdash; name specific line items by name, and make sure your fix accounts for this being a permanent change rather than a one-time expense.</p>
+        <p class="checkin-note">&#128221; This is today's official Life Happens response &mdash; write it on today's check-in, worth 5 points total (it also serves as today's scenario check).</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of needs/wants/savings budgeting.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. 9.1.8.PB.4 is about:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Developing a budget that aligns spending with your goals and values</button>
+            <button class="quiz-opt" data-correct="false">Calculating simple interest on a savings account</button>
+            <button class="quiz-opt" data-correct="false">Comparing premiums between two insurance plans</button>
+            <button class="quiz-opt" data-correct="false">Filling out a W-4 form</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>PB.4 is specifically about building a budget that aligns with goals and values — the Section 1-to-Section 2 connection.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. 9.1.8.PB.6 is about:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Adjusting a budget in response to changing circumstances</button>
+            <button class="quiz-opt" data-correct="false">Choosing between insurance types</button>
+            <button class="quiz-opt" data-correct="false">Recognizing fraud and scams</button>
+            <button class="quiz-opt" data-correct="false">Reading a pay stub</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>PB.6 is the "Life Happens" standard — adjusting a plan when something changes.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. If total monthly income is $600.00, NEEDS total $90.00, and WANTS total $110.00, what should SAVINGS equal for the budget to balance?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$400.00</button>
+            <button class="quiz-opt" data-correct="false">$200.00</button>
+            <button class="quiz-opt" data-correct="false">$600.00</button>
+            <button class="quiz-opt" data-correct="false">$110.00</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$600.00 − $90.00 − $110.00 = $400.00, so NEEDS + WANTS + SAVINGS = $600.00 exactly.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. A student's phone bill permanently increases by $20/month. Which response best reflects PB.6 reasoning?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Adjust the NEEDS phone line and reduce a WANTS line every month going forward, since the change is ongoing</button>
+            <button class="quiz-opt" data-correct="false">Ignore it since $20 is a small amount</button>
+            <button class="quiz-opt" data-correct="false">Pause the whole budget for one month only, then go back to normal</button>
+            <button class="quiz-opt" data-correct="false">Take the $20 entirely out of savings just this one time</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A permanent change needs an ongoing adjustment, not a one-month patch — that's the key PB.6 distinction.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Why should a budget be built on net (take-home) income rather than gross income?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Net income is what actually lands in your pocket after withholding — budgeting on gross income overestimates what's really available</button>
+            <button class="quiz-opt" data-correct="false">Gross and net income are always exactly the same amount</button>
+            <button class="quiz-opt" data-correct="false">Net income is illegal to use in a personal budget</button>
+            <button class="quiz-opt" data-correct="false">Gross income is always more accurate for budgeting purposes</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Net (take-home) income reflects what's actually available to spend or save, after taxes and other withholding are already taken out.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Budget Builder</h3>
+        <p class="prompt">Allocate your $600.00 monthly income across every line so NEEDS + WANTS + SAVINGS totals exactly $600.00. Tie at least one SAVINGS line to a Section 1 goal.</p>
+        <div class="goal-grid cols-3">
+          <div class="goal-field"><label for="bNeeds1">NEEDS — Phone plan ($)</label><input id="bNeeds1" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bNeeds2">NEEDS — Transportation ($)</label><input id="bNeeds2" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bNeeds3">NEEDS — Personal care/other ($)</label><input id="bNeeds3" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bWants1">WANTS — Entertainment/subscriptions ($)</label><input id="bWants1" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bWants2">WANTS — Eating out ($)</label><input id="bWants2" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bWants3">WANTS — Clothes/other ($)</label><input id="bWants3" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bSave1">SAVINGS — Goal contribution ($)</label><input id="bSave1" type="number" min="0" step="1"></div>
+          <div class="goal-field"><label for="bSave2">SAVINGS — General/emergency ($)</label><input id="bSave2" type="number" min="0" step="1"></div>
+        </div>
+        <div class="goal-field" style="margin-top:14px;">
+          <label for="bGoalTie">Which Section 1 goal does your Goal Contribution line support, and how?</label>
+          <input id="bGoalTie" type="text" placeholder="e.g., My $25/month goes toward my short-term headphones goal">
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="bBtn" type="button">Check my budget</button>
+        </div>
+        <div class="goal-summary" id="bSummary" hidden>
+          <b>Your budget</b>
+          <span id="bSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect (personal — not graded)</h3>
+        <p class="prompt">Which line item was hardest to decide on, and why?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type — for your own use, not submitted with the check-in.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; your budget totals and goal tie-in (6 pts) plus today's Life Happens response (5 pts).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeU50xUOnozU2tY5RjjS9jWCn-6h_w3fjLPcCby3w6kVjoMRA/viewform" target="_blank" rel="noopener">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions and check your budget above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Portfolio Section 3 — My Banking &amp; Saving Strategy</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FI.3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can select and justify a financial institution and account type for my savings plan, and calculate how much my savings would grow over one year.</div></div>
+
+      <article class="lesson">
+        <p>Unit 4 covered choosing among financial institutions and account types (9.1.8.FI.3): banks, credit unions, and online-only banks each offer different trade-offs in fees, interest rates, and accessibility. Today's updated comparison chart adds real numbers to that trade-off. A <strong>traditional bank</strong> typically charges $0&ndash;$12/month (often waived with direct deposit or a minimum balance), pays a very low savings rate of 0.01%&ndash;0.05%, but offers widespread branches and ATMs. A <strong>credit union</strong> is often $0/month, member-owned, usually requires a small membership deposit, pays a somewhat better 0.05%&ndash;0.5% rate, but has fewer branches (though often shares ATM networks) and membership eligibility rules. An <strong>online-only bank</strong> usually charges no monthly fee at all, pays the highest rate of the three &mdash; 0.5%&ndash;4.5%, varying with the market &mdash; but has no physical branches, relying entirely on an app or phone/chat support.</p>
+        <p>Interest connects straight back to Section 1's long-term goal: a savings account with a higher interest rate grows a goal's savings faster over time, even with the exact same monthly contribution. Here's the one-year growth formula: Total Contributed (monthly amount &times; 12) + (Total Contributed &times; interest rate) = Year-End Total. Worked example: a student saves $50.00/month in an online-only savings account at a 2% annual rate. Total Contributed = $50.00 &times; 12 = <strong>$600.00</strong>. Interest Earned = $600.00 &times; 2% = <strong>$12.00</strong>. Year-End Total = $600.00 + $12.00 = <strong>$612.00</strong>. This is simple annual interest for estimation purposes &mdash; real accounts often compound more frequently, which would make the actual total slightly higher, but simple interest is close enough to see the pattern clearly at this level.</p>
+        <p>Section 3 asks you to choose which institution type and account (checking, savings, or both) best fits your Section 2 savings plan, calculate roughly how much your goal would grow in one year at your chosen institution's rate, and justify your choice using at least one specific fee or feature from the comparison chart &mdash; not a vague reason like "it seemed fine."</p>
+        <p>The right choice depends on what a person actually needs. Someone who values in-person help and doesn't mind a lower interest rate might reasonably choose a traditional bank despite its low rate, specifically because of its wide branch network. Someone chasing the fastest possible growth on a long-term goal, and comfortable managing everything through an app, might choose an online-only bank for its much higher rate, accepting the trade-off of no physical branch. Neither choice is automatically "correct" &mdash; the justification is what matters, and it has to cite something specific from the chart.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Leah's Banking Decision</h4>
+        <p>Leah has $30/month she wants to put toward her long-term goal. She's nervous about not having a physical branch nearby if she ever needs in-person help, but she's also heard online-only banks pay much better interest rates.</p>
+        <p class="prompt">Which institution type best fits Leah's situation, and why? Reference at least one specific detail from today's comparison chart.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC Money Smart</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of institution types or simple interest.</p>
+          <a href="https://www.fdic.gov/resources/consumers/money-smart/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. Which institution type generally offers the HIGHEST savings interest rates, based on this unit's comparison chart?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Online-only bank</button>
+            <button class="quiz-opt" data-correct="false">Traditional bank</button>
+            <button class="quiz-opt" data-correct="false">Credit union</button>
+            <button class="quiz-opt" data-correct="false">All three pay identical rates</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Online-only banks generally pay the highest rate (0.5%–4.5%) of the three institution types.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. What's a key trade-off of choosing a credit union over a traditional bank?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Often better rates and fewer fees, but fewer branches and membership eligibility rules may apply</button>
+            <button class="quiz-opt" data-correct="false">Credit unions never charge any fees under any circumstances</button>
+            <button class="quiz-opt" data-correct="false">Credit unions always have more branches than traditional banks</button>
+            <button class="quiz-opt" data-correct="false">There is no meaningful difference between the two</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Credit unions often beat traditional banks on rates and fees, but typically have fewer branches and membership requirements.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. A student saves $40/month at a 3% annual simple interest rate. What is the Year-End Total?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$494.40</button>
+            <button class="quiz-opt" data-correct="false">$480.00</button>
+            <button class="quiz-opt" data-correct="false">$412.00</button>
+            <button class="quiz-opt" data-correct="false">$40.00</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Total Contributed = $40 × 12 = $480.00. Interest = $480.00 × 3% = $14.40. Year-End Total = $480.00 + $14.40 = $494.40.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. A saver wants zero monthly fees and doesn't mind managing everything through an app, with no need for a physical branch. Which institution type best fits?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Online-only bank</button>
+            <button class="quiz-opt" data-correct="false">Traditional bank</button>
+            <button class="quiz-opt" data-correct="false">Neither — this combination doesn't exist</button>
+            <button class="quiz-opt" data-correct="false">A credit union is always required for zero fees</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>An online-only bank typically has no monthly fee and by definition operates entirely without physical branches.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. Why does this unit use simple annual interest instead of compound interest for the growth calculation?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It keeps the math manageable at this level while still showing the pattern — real compounding would make the actual total slightly higher</button>
+            <button class="quiz-opt" data-correct="false">Because compound interest doesn't apply to savings accounts</button>
+            <button class="quiz-opt" data-correct="false">Because simple interest always produces a larger total than compound interest</button>
+            <button class="quiz-opt" data-correct="false">Because banks are legally required to use simple interest</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Simple annual interest is an estimation tool appropriate for this level — real accounts often compound more often, producing a slightly higher actual result.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Banking &amp; Savings Calculator</h3>
+        <p class="prompt">Choose an institution type, enter your Section 2 monthly savings contribution, and calculate your Year-End Total.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="bkInstitution">Institution type</label>
+            <select id="bkInstitution">
+              <option value="">Choose one...</option>
+              <option value="0.03">Traditional bank (~0.03% rate)</option>
+              <option value="0.275">Credit union (~0.275% rate)</option>
+              <option value="2.5">Online-only bank (~2.5% rate)</option>
+            </select>
+          </div>
+          <div class="goal-field">
+            <label for="bkContribution">Monthly savings contribution ($)</label>
+            <input id="bkContribution" type="number" min="1" step="1" placeholder="e.g., 50">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="bkBtn" type="button">Calculate my Year-End Total</button>
+        </div>
+        <div class="goal-summary" id="bkSummary" hidden>
+          <b>Your one-year growth</b>
+          <span id="bkSummaryText"></span>
+        </div>
+        <div class="goal-field" style="margin-top:14px;">
+          <label for="bkJustify">Justify your institution choice, citing at least one specific chart detail</label>
+          <input id="bkJustify" type="text" placeholder="e.g., I chose an online-only bank because of the higher interest rate...">
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect (personal — not graded)</h3>
+        <p class="prompt">What is one fee you're specifically hoping to avoid by picking the institution you picked?</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type — for your own use, not submitted with the check-in.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; your institution choice, interest calculation, and justification (10 pts) plus today's scenario response (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdX8D1TYCU89dztUF5AILh9RMWimyFO0lyQSgu_2L4zc6ZnFA/viewform" target="_blank" rel="noopener">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions and calculate your Year-End Total above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-panel" data-panel="5" hidden>
+      <div class="day-head">
+        <h2>Day 5 · Portfolio Section 4 — My Credit, Civic &amp; Protection Plan</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CDM.1 (synth. CR.1-3, RM.1, EG.9, CR.4)</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain responsible credit use, identify my civic financial responsibilities, and describe personal fraud-protection habits as one unified plan.</div></div>
+
+      <article class="lesson">
+        <p>Unit 6 covered responsible credit and debt management (9.1.8.CDM.1): understanding how credit works, why paying at least the minimum on time matters, and how to avoid debt traps like the minimum-payment trap and payday loans. Here's the key idea worth restating clearly: paying <em>only</em> the minimum due on a credit card lets interest pile up, turning a small purchase into something that takes months or years &mdash; and far more money &mdash; to pay off. A responsible credit habit isn't just "pay the minimum," it's "pay more than the minimum whenever possible."</p>
+        <p>Today connects that idea to two more strands from later in the year. Unit 7's civic financial responsibility (CR.1-3) covers paying taxes and understanding how tax dollars fund shared public services &mdash; schools, roads, safety &mdash; as part of participating responsibly in a community. Unit 8's risk management and fraud awareness (RM.1, EG.9) covers insurance decisions and protecting personal information from scams. All three &mdash; credit, civic responsibility, and fraud protection &mdash; are really different dimensions of the same idea: being a financially responsible adult who looks out for their own money and plays their part in a shared system.</p>
+        <p>A few terms worth having fresh before you write. <strong>Credit score</strong>: a number reflecting how reliably someone repays borrowed money, which affects the interest rates and loan approvals a person qualifies for. <strong>Payroll tax / FICA</strong>: money withheld from every paycheck to fund Social Security and Medicare. <strong>Risk pooling</strong>: insurance works by pooling many people's premiums so the pool can cover the smaller number of people who have a major unplanned loss. <strong>Shared consumer protection</strong> (9.1.8.CR.4): consumers, businesses, and government each hold distinct responsibilities for preventing and responding to fraud.</p>
+        <p>Section 4 asks for a three-part personal responsibility plan, written with real specifics rather than vague statements. <strong>Part 1 &mdash; Credit habit:</strong> one specific habit you commit to (or commit to avoiding), using at least one Unit 6 term, and explaining why it matters. <strong>Part 2 &mdash; Civic/tax understanding:</strong> one specific thing you now understand better about taxes or civic responsibility, and why it matters to a community. <strong>Part 3 &mdash; Fraud-protection/insurance habits:</strong> TWO specific habits you plan to practice, each using at least one Unit 8 term. "I'll be responsible with money" is too vague for any of the three parts &mdash; name an exact habit, term, and reason.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Tomás's Three-Part Promise</h4>
+        <p>For Part 1 of his plan, Tomás writes: "I'll always pay at least the minimum on any credit card I open."</p>
+        <p class="prompt">Tomás's statement repeats a common misconception from Unit 6. What's the flaw in what he wrote, and how should he revise it to actually reflect a responsible credit habit?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Consumer Tools</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of any Unit 6-8 concept before you write your plan.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d5q1">
+          <p class="quiz-question">1. What is the "minimum payment trap"?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Paying only the minimum due lets interest pile up, making a purchase take much longer — and cost much more — to pay off</button>
+            <button class="quiz-opt" data-correct="false">A rule requiring credit cards to have no interest at all</button>
+            <button class="quiz-opt" data-correct="false">A discount for paying your full balance every month</button>
+            <button class="quiz-opt" data-correct="false">A fee charged only when a payment is late</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Paying only the minimum lets interest accumulate, turning a small purchase into a much larger, longer-lasting cost.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q2">
+          <p class="quiz-question">2. Payroll tax (FICA), withheld from every paycheck, funds:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Social Security and Medicare</button>
+            <button class="quiz-opt" data-correct="false">Local road repairs only</button>
+            <button class="quiz-opt" data-correct="false">K-12 public schools only</button>
+            <button class="quiz-opt" data-correct="false">A person's own personal retirement account exclusively</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>FICA specifically funds Social Security and Medicare, distinct from other taxes that fund schools or roads.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q3">
+          <p class="quiz-question">3. Which best describes a consumer's role under 9.1.8.CR.4's shared consumer protection?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Protecting your own personal information, verifying who you're really talking to, and reporting fraud when it happens</button>
+            <button class="quiz-opt" data-correct="false">Regulating the entire market through federal agencies</button>
+            <button class="quiz-opt" data-correct="false">Securing every business's customer databases</button>
+            <button class="quiz-opt" data-correct="false">Nothing — protection is entirely the government's job</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A consumer's own role is protecting their information, verifying contacts, and reporting fraud — a distinct role from business's or government's.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q4">
+          <p class="quiz-question">4. A classmate writes: "I now understand that the sales tax I pay on a purchase helps fund things like roads and schools in my community." Which part of the Section 4 plan does this belong in?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Part 2 — Civic/tax understanding</button>
+            <button class="quiz-opt" data-correct="false">Part 1 — Credit habit</button>
+            <button class="quiz-opt" data-correct="false">Part 3 — Fraud-protection/insurance habits</button>
+            <button class="quiz-opt" data-correct="false">This doesn't belong in the plan at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Understanding what tax dollars fund is exactly Part 2's civic/tax understanding content, drawing on Unit 7.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q5">
+          <p class="quiz-question">5. Why does this unit frame credit, civic responsibility, and fraud protection as connected, rather than three separate unrelated topics?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">They're all different dimensions of being a financially responsible adult who protects their own money and plays their part in a shared community system</button>
+            <button class="quiz-opt" data-correct="false">Because they're actually the exact same topic with different names</button>
+            <button class="quiz-opt" data-correct="false">Because the standards happen to share a similar number, with no deeper connection</button>
+            <button class="quiz-opt" data-correct="false">They aren't connected — grouping them together is arbitrary</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Credit, civic responsibility, and fraud protection are grouped because they're all facets of responsible participation — protecting your own finances and your community's.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>My Personal Financial Responsibility Plan</h3>
+        <p class="prompt">Write all three parts of your plan. Be specific — name an exact habit, term, and reason in each part.</p>
+        <div class="plan-part">
+          <label for="planCredit">Part 1 — Credit habit (use at least one Unit 6 term)</label>
+          <textarea id="planCredit" placeholder="State one specific credit habit you commit to (or commit to avoiding), and why it matters..."></textarea>
+        </div>
+        <div class="plan-part">
+          <label for="planCivic">Part 2 — Civic/tax understanding</label>
+          <textarea id="planCivic" placeholder="State one specific thing you now understand better about taxes or civic responsibility, and why it matters to a community..."></textarea>
+        </div>
+        <div class="plan-part">
+          <label for="planFraud">Part 3 — Fraud-protection/insurance habits (TWO habits, using at least one Unit 8 term each)</label>
+          <textarea id="planFraud" placeholder="State two specific fraud-protection or insurance habits you plan to practice..."></textarea>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect (personal — not graded)</h3>
+        <p class="prompt">Of the three parts of your plan, which do you think will be hardest to actually follow through on as an adult, and why?</p>
+        <textarea data-reflection="5" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type — for your own use, not submitted with the check-in.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 5 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; your three-part responsibility plan (10 pts) plus today's scenario response (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScUXVUbuQoZErw6sVx4xIK1gKUulRsEuqgdVMFRoStANK0G9w/viewform" target="_blank" rel="noopener">Open Day 5 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="5">Answer all 5 self-check questions and fill in all three parts of your plan above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="5" disabled>Mark Day 5 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 6 -->
+    <section class="day-panel" data-panel="6" hidden>
+      <div class="day-head">
+        <h2>Day 6 · Portfolio Assembly, Consistency Check &amp; Revision</h2>
+        <span class="standard-badge">Synthesis of all Grade 7 units</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can assemble a complete, internally consistent portfolio and revise at least one section for clarity and consistency.</div></div>
+
+      <article class="lesson">
+        <p>Today has one job: make sure your four sections actually fit together as one coherent portfolio, not four disconnected worksheets. First, the assembly requirement — in order: a simple cover page (name, "My Financial Foundations Portfolio," grade/date), the Day 1 "How I've Changed" quick-write, then Sections 1 through 4. Every page should have your name on it.</p>
+        <p>Next, the Consistency Check — the real heart of today. Trace your own portfolio and ask four questions honestly: Does at least one Section 2 savings line item connect to a Section 1 goal? Does the Section 3 institution/account choice actually fit the Section 2 savings plan's needs? Does anything in Section 4's plan contradict a value you named in Section 1? And do the Section 2 budget's NEEDS + WANTS + SAVINGS actually add up to your total income? If any answer reveals a problem, that section needs a quick revision before moving on — this is the step where the year's synthesis either genuinely comes together or doesn't.</p>
+        <p>In class, students trade portfolios with a partner for structured "2 stars and a wish" feedback: two specific things the portfolio does well, and one specific, actionable thing that could be clearer or stronger — no vague praise or vague criticism allowed. In this self-study version, you're doing the reviewer's job yourself: read back through your own portfolio as if you were a classmate seeing it for the first time (or, if you have a family member or friend handy, ask them to actually read a section and give you one honest reaction). Either way, the standard is the same &mdash; "Good job!" is not specific enough for a star, and "make it better" is not specific enough for a wish. Name an exact section and detail.</p>
+        <p>Here's why this matters with a concrete example: imagine a portfolio where Section 1's top value is "Education," but none of Section 2's savings lines mention saving for anything school- or skill-related. That's a real inconsistency &mdash; the numbers don't reflect the stated values &mdash; and it's exactly the kind of gap today's Consistency Check tool is designed to catch. Use the tool below, make at least one real revision based on what you find, and note what you changed.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Catching the Gap</h4>
+        <p>Priya's Section 1 top value is "Education," but none of her Section 2 savings lines mention saving for anything school- or skill-related — every savings dollar goes toward a phone upgrade.</p>
+        <p class="prompt">Is this a consistency problem? If so, what's one specific fix Priya could make to her Section 2 budget?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like more examples of giving or receiving specific, actionable feedback.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d6q1">
+          <p class="quiz-question">1. What is the correct order for assembling the portfolio?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Cover page, Day 1 quick-write, then Sections 1 through 4 in order</button>
+            <button class="quiz-opt" data-correct="false">Sections 1 through 4, then the cover page last</button>
+            <button class="quiz-opt" data-correct="false">Any order — order doesn't matter</button>
+            <button class="quiz-opt" data-correct="false">Section 4 first, since it's worth the most points</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The assembly order is: cover page, Day 1 quick-write, then Sections 1-4 in order.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q2">
+          <p class="quiz-question">2. What counts as an acceptable "star" in the 2 stars and a wish protocol?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A specific, genuine strength — naming an exact section and detail</button>
+            <button class="quiz-opt" data-correct="false">A generic compliment like "Good job!"</button>
+            <button class="quiz-opt" data-correct="false">Any comment at all, specific or not</button>
+            <button class="quiz-opt" data-correct="false">A criticism disguised as a compliment</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A star must be specific — naming an exact section and detail, not a generic "good job."</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q3">
+          <p class="quiz-question">3. A portfolio's Section 1 top value is "Independence," and Section 3 justifies choosing an online-only bank partly because it lets the student manage savings entirely on their own without needing a parent to drive them to a branch. Is this consistent?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Yes — the institution choice actually supports the stated value of independence</button>
+            <button class="quiz-opt" data-correct="false">No — banking choices can never relate to personal values</button>
+            <button class="quiz-opt" data-correct="false">No — only Section 1 is allowed to mention values</button>
+            <button class="quiz-opt" data-correct="false">Impossible to tell without seeing every other section</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This is a good example of consistency — the Section 3 reasoning directly reinforces a Section 1 value.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q4">
+          <p class="quiz-question">4. Why is "make it better" not specific enough for a "wish" in the feedback protocol?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">It gives no actionable direction — a useful wish names an exact, specific thing to change</button>
+            <button class="quiz-opt" data-correct="false">Because wishes aren't allowed to suggest any changes at all</button>
+            <button class="quiz-opt" data-correct="false">Because "wish" is only for praise, not suggestions</button>
+            <button class="quiz-opt" data-correct="false">There's no real reason — any wording is equally acceptable</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A vague wish like "make it better" gives no actionable direction — a useful one names something specific to revise.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q5">
+          <p class="quiz-question">5. If a student's Consistency Check reveals that NEEDS + WANTS + SAVINGS does NOT equal their total income, what should they do?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Go back and revise the Section 2 budget math so it actually balances</button>
+            <button class="quiz-opt" data-correct="false">Leave it as is — exact totals don't actually matter</button>
+            <button class="quiz-opt" data-correct="false">Delete Section 2 entirely</button>
+            <button class="quiz-opt" data-correct="false">Change their Section 1 goals instead, leaving the budget math untouched</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A budget that doesn't actually balance needs its math revised — that's exactly what the Consistency Check is designed to catch.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Consistency Check</h3>
+        <p class="prompt">Answer honestly. If any answer reveals a problem, go back and fix that section before moving on.</p>
+        <div class="consist-q" data-cq="1">
+          <p>Does at least one Section 2 savings line item connect to a Section 1 goal?</p>
+          <div class="yn-row"><button class="yn-btn" type="button" data-val="yes">Yes</button><button class="yn-btn" type="button" data-val="no">No — needs a fix</button></div>
+        </div>
+        <div class="consist-q" data-cq="2">
+          <p>Does the Section 3 institution/account choice actually fit the Section 2 savings plan's needs?</p>
+          <div class="yn-row"><button class="yn-btn" type="button" data-val="yes">Yes</button><button class="yn-btn" type="button" data-val="no">No — needs a fix</button></div>
+        </div>
+        <div class="consist-q" data-cq="3">
+          <p>Does anything in Section 4's plan contradict a value you named in Section 1?</p>
+          <div class="yn-row"><button class="yn-btn" type="button" data-val="yes">Yes — needs a fix</button><button class="yn-btn" type="button" data-val="no">No</button></div>
+        </div>
+        <div class="consist-q" data-cq="4">
+          <p>Does your Section 2 budget's NEEDS + WANTS + SAVINGS actually add up to your total income?</p>
+          <div class="yn-row"><button class="yn-btn" type="button" data-val="yes">Yes</button><button class="yn-btn" type="button" data-val="no">No — needs a fix</button></div>
+        </div>
+        <div class="goal-field" style="margin-top:6px;">
+          <label for="revisionNote">One revision I made based on this check</label>
+          <textarea id="revisionNote" placeholder="Describe the one concrete change you made..."></textarea>
+        </div>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 6 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; your four Consistency Check answers and revision note (5 pts) plus today's scenario response (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSesTDBCLjfrTKE_-H9dGdlu5OhGV9_G5jsKIhFTfNCF2ezKow/viewform" target="_blank" rel="noopener">Open Day 6 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="6">Answer all 5 self-check questions, all 4 Consistency Check items, and describe one revision above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="6" disabled>Mark Day 6 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 7 -->
+    <section class="day-panel" data-panel="7" hidden>
+      <div class="day-head">
+        <h2>Day 7 · Gallery Walk, Year-End Reflection &amp; Final Assessment</h2>
+        <span class="standard-badge">Synthesis of all Grade 7 units</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can share my portfolio, complete a written year-end reflection, and demonstrate my understanding of the whole year on the Grade 7 Cumulative Final Assessment.</div></div>
+
+      <article class="lesson">
+        <p>Today closes out Grade 7's entire 45-day sequence. In a classroom, today usually starts with a Gallery Walk: portfolios are displayed around the room, and students circulate reading 4-5 classmates' work, leaving one specific, genuine positive sticky-note comment on each. If you're completing this unit alongside classmates, ask your teacher whether an in-person or virtual gallery walk is happening. If you're working fully independently, consider sharing one section of your portfolio with a family member or friend and asking for one honest reaction &mdash; the point of a gallery walk is simply seeing that other people's financial priorities look different from your own, and that's worth experiencing even outside a classroom.</p>
+        <p>Next is the Year-End Reflection, a short written piece looking back on the whole year. It asks two things: what is the single most useful thing you learned this year, and how do you expect to actually use it in the next few years; and what is one money question you still have that this class didn't fully answer. Answer both honestly &mdash; there's no requirement that this class covered everything, and naming a genuine remaining question is a legitimate, valuable answer.</p>
+        <p>Finally, the Grade 7 Cumulative Final Assessment: 8 multiple-choice questions spanning Units 1 through 8, plus one extended-response question. The extended response asks you to write a short letter of advice to a friend who's about to start their first part-time job, covering what they should know about their paycheck and taxes, how they might build a simple budget, one saving or banking decision to think about, and one habit that helps protect their money or information &mdash; referencing at least three different units by name.</p>
+        <p>Before the real assessment, here's a light checkpoint to warm up. And one last thing worth saying plainly: finishing this portfolio does not mean you're "done" learning about values and goals, budgeting, banking, or credit and protection. Grade 8 will revisit every one of these strands again, at a higher level and in new situations &mdash; this portfolio is a genuine baseline for where you're starting from, not a final word on any of it.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Advice for Jayden's First Job</h4>
+        <p>Jayden just got his first part-time job at a local grocery store and has a lot of questions about his very first paycheck.</p>
+        <p class="prompt">Name one specific thing from any unit this year that you'd want Jayden to know before his first payday, and briefly explain why.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like one more review pass before the final assessment.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 9 checkpoint</h3>
+        <div class="quiz-q" data-qid="d7q1">
+          <p class="quiz-question">1. What is the purpose of the Gallery Walk?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">To see how classmates' financial priorities and portfolios differ, and to give specific, genuine positive feedback</button>
+            <button class="quiz-opt" data-correct="false">To rank portfolios from best to worst</button>
+            <button class="quiz-opt" data-correct="false">To grade every classmate's portfolio yourself</button>
+            <button class="quiz-opt" data-correct="false">To replace the final assessment entirely</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The Gallery Walk is about seeing how others approached the same portfolio differently and giving specific positive feedback.</p>
+        </div>
+        <div class="quiz-q" data-qid="d7q2">
+          <p class="quiz-question">2. What does the Year-End Reflection ask you to think about?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The single most useful thing you learned this year and how you'll use it, plus one money question you still have</button>
+            <button class="quiz-opt" data-correct="false">Only your grade on the final assessment</button>
+            <button class="quiz-opt" data-correct="false">Every single vocabulary word from the entire year</button>
+            <button class="quiz-opt" data-correct="false">A prediction of your career twenty years from now</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The Year-End Reflection has two prompts: the most useful thing learned and how you'll use it, plus a remaining question.</p>
+        </div>
+        <div class="quiz-q" data-qid="d7q3">
+          <p class="quiz-question">3. How many multiple-choice questions are on the Cumulative Final Assessment, and how many units do they span?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">8 multiple-choice questions, spanning Units 1 through 8</button>
+            <button class="quiz-opt" data-correct="false">3 multiple-choice questions, spanning only Unit 9</button>
+            <button class="quiz-opt" data-correct="false">20 multiple-choice questions, spanning only Grade 8 content</button>
+            <button class="quiz-opt" data-correct="false">There are no multiple-choice questions, only an essay</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The Cumulative Final Assessment has 8 multiple-choice questions spanning all 8 prior units, plus one extended-response question.</p>
+        </div>
+        <div class="quiz-q" data-qid="d7q4">
+          <p class="quiz-question">4. The extended-response question asks for advice to a friend starting a first part-time job. Which combination of units would most naturally cover paycheck/taxes, a simple budget, and a saving decision?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Units 2/7 (paycheck &amp; taxes), Unit 3 (budgeting), and Unit 4 (saving/banking)</button>
+            <button class="quiz-opt" data-correct="false">Unit 5 (advertising) only</button>
+            <button class="quiz-opt" data-correct="false">Unit 1 (values) only, since it's the first unit of the year</button>
+            <button class="quiz-opt" data-correct="false">None of the units actually connect to this question</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Paycheck/tax content lives in Units 2 and 7, budgeting in Unit 3, and saving/banking in Unit 4 — a natural combination for this prompt.</p>
+        </div>
+        <div class="quiz-q" data-qid="d7q5">
+          <p class="quiz-question">5. Why doesn't finishing this portfolio mean you're "done learning" about any of these topics?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">This portfolio is a genuine baseline — Grade 8 revisits every strand touched here at a higher level and in new situations</button>
+            <button class="quiz-opt" data-correct="false">Because none of the content in this portfolio was actually correct</button>
+            <button class="quiz-opt" data-correct="false">Because Grade 8 covers entirely unrelated topics</button>
+            <button class="quiz-opt" data-correct="false">Because the portfolio isn't actually graded</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This portfolio is explicitly designed as a baseline — Grade 8 builds on every strand at greater depth, not a final word on any of it.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Year-End Reflection</h3>
+        <p class="prompt">Respond to both prompts — this is graded as part of your official check-in (5 pts). <strong>1)</strong> What is the single most useful thing you learned this year, and how do you expect to actually use it in the next few years? <strong>2)</strong> What is one money question you still have that this class didn't fully answer?</p>
+        <textarea data-reflection="7" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN — FINAL ASSESSMENT</span>
+        <div class="body">
+          <h4>Submit your Day 7 check-in</h4>
+          <p>This is the graded, cumulative final assessment for all of Grade 7 &mdash; your Year-End Reflection (5 pts), 8 multiple-choice questions (8 pts, auto-graded), the extended-response letter (8 pts), and today's scenario response (1 pt).</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd5nHgJUd63BcomgxfoA4T2LDIVGY4GoMguTH1Qe2gUsTJyQg/viewform" target="_blank" rel="noopener">Open Day 7 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — after submitting, come back here and mark the day complete.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="7">Answer all 5 checkpoint questions and complete your Year-End Reflection above to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="7" disabled>Mark Day 7 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Grade 7 complete 🌱</h3>
+        <p>You've built a complete Financial Foundations Portfolio &mdash; your values and goals, an income and budget plan, a banking and saving strategy, and a credit, civic, and protection plan &mdash; and finished all 45 days of Grade 7 Financial Literacy (NJSLS 9.1.8 &amp; 9.2.8, synthesized across Units 1-9). Show your teacher this page, your assembled portfolio, and your notebook reflections. Grade 8 will build on everything you just did.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 9 — the Capstone — for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u9-selfstudy-v1';
+  var TOTAL_DAYS = 7;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, yag: {}, values: [], smart: { short: {}, long: {} }, goals: { short: '', long: '' }, budget: {}, bank: {}, plan: {}, consist: {} };
+
+  var YAG_UNITS = [
+    'Unit 1 — Financial Foundations',
+    'Unit 2 — Earning I',
+    'Unit 3 — Spending & Budgeting I',
+    'Unit 4 — Saving & Banking I',
+    'Unit 5 — Consumer Skills & Media Literacy',
+    'Unit 6 — Credit & Borrowing I',
+    'Unit 7 — Civic Financial Responsibility',
+    'Unit 8 — Protecting Yourself'
+  ];
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+    if (!state.smart) state.smart = { short: {}, long: {} };
+    if (!state.smart.short) state.smart.short = {};
+    if (!state.smart.long) state.smart.long = {};
+    if (!state.goals) state.goals = { short: '', long: '' };
+    if (!state.values) state.values = [];
+    if (!state.budget) state.budget = {};
+    if (!state.bank) state.bank = {};
+    if (!state.plan) state.plan = {};
+    if (!state.consist) state.consist = {};
+    if (!state.yag) state.yag = {};
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  // ---- Day-specific completion checks ----
+  function day2Complete(){
+    if (!state.values || state.values.length !== 3) return false;
+    if (!state.goals.short || !state.goals.long) return false;
+    var s = state.smart.short, l = state.smart.long;
+    var keys = ['s','m','a','r','t'];
+    return keys.every(function(k){ return !!s[k]; }) && keys.every(function(k){ return !!l[k]; });
+  }
+  function day3Complete(){
+    return state.budget && state.budget.total === 600;
+  }
+  function day4Complete(){
+    return !!(state.bank && typeof state.bank.total !== 'undefined');
+  }
+  function day5Complete(){
+    var p = state.plan || {};
+    return !!(p.credit && p.credit.trim().length >= 10 && p.civic && p.civic.trim().length >= 10 && p.fraud && p.fraud.trim().length >= 10);
+  }
+  function day6Complete(){
+    var c = state.consist || {};
+    var answered = ['1','2','3','4'].every(function(k){ return c[k] === 'yes' || c[k] === 'no'; });
+    var note = document.getElementById('revisionNote');
+    return answered && !!(note && note.value.trim().length >= 5);
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && day2Complete();
+    if (day === '3') allAnswered = allAnswered && day3Complete();
+    if (day === '4') allAnswered = allAnswered && day4Complete();
+    if (day === '5') allAnswered = allAnswered && day5Complete();
+    if (day === '6') allAnswered = allAnswered && day6Complete();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  // ---- Day 1: Year-at-a-Glance builder (ungraded, local-only) ----
+  function buildYagTable(){
+    var table = document.getElementById('yagTable');
+    YAG_UNITS.forEach(function(title, idx){
+      var row = document.createElement('div');
+      row.className = 'yag-row';
+      var unitSpan = document.createElement('span');
+      unitSpan.className = 'yag-unit';
+      unitSpan.textContent = title;
+      var termInput = document.createElement('input');
+      termInput.type = 'text';
+      termInput.placeholder = 'key term';
+      termInput.dataset.yagIdx = idx;
+      termInput.dataset.yagField = 'term';
+      var ideaInput = document.createElement('input');
+      ideaInput.type = 'text';
+      ideaInput.placeholder = 'key idea';
+      ideaInput.dataset.yagIdx = idx;
+      ideaInput.dataset.yagField = 'idea';
+      row.appendChild(unitSpan);
+      row.appendChild(termInput);
+      row.appendChild(ideaInput);
+      table.appendChild(row);
+    });
+  }
+  function wireYag(){
+    document.querySelectorAll('[data-yag-idx]').forEach(function(input){
+      var idx = input.dataset.yagIdx, field = input.dataset.yagField;
+      var key = idx + '_' + field;
+      if (state.yag[key]) input.value = state.yag[key];
+      input.addEventListener('input', function(){ state.yag[key] = input.value; saveState(); });
+    });
+  }
+
+  // ---- Day 2: SMART Goal Builder ----
+  function wireValueChips(){
+    var chips = document.querySelectorAll('.value-chip');
+    chips.forEach(function(chip){
+      if (state.values.indexOf(chip.dataset.value) !== -1) chip.classList.add('selected');
+      chip.addEventListener('click', function(){
+        var v = chip.dataset.value;
+        var idx = state.values.indexOf(v);
+        if (idx !== -1){
+          state.values.splice(idx, 1);
+          chip.classList.remove('selected');
+        } else {
+          if (state.values.length >= 3) return;
+          state.values.push(v);
+          chip.classList.add('selected');
+        }
+        renderValueCount();
+        saveState();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+      });
+    });
+    renderValueCount();
+  }
+  function renderValueCount(){
+    var el = document.getElementById('valueCount');
+    if (el) el.textContent = state.values.length + ' of 3 values selected';
+    var atMax = state.values.length >= 3;
+    document.querySelectorAll('.value-chip').forEach(function(chip){
+      if (!chip.classList.contains('selected')) chip.disabled = atMax;
+    });
+  }
+  function wireGoalInputs(){
+    var shortEl = document.getElementById('sgShort');
+    var longEl = document.getElementById('sgLong');
+    if (state.goals.short) shortEl.value = state.goals.short;
+    if (state.goals.long) longEl.value = state.goals.long;
+    shortEl.addEventListener('input', function(){ state.goals.short = shortEl.value; saveState(); updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]')); });
+    longEl.addEventListener('input', function(){ state.goals.long = longEl.value; saveState(); updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]')); });
+  }
+  function wireSmartChecks(){
+    document.querySelectorAll('.smart-check').forEach(function(group){
+      var which = group.dataset.goal; // 'short' or 'long'
+      group.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+        var key = cb.dataset.smart;
+        if (state.smart[which] && state.smart[which][key]) cb.checked = true;
+        cb.addEventListener('change', function(){
+          state.smart[which][key] = cb.checked;
+          saveState();
+          updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+        });
+      });
+    });
+  }
+
+  // ---- Day 3: Budget Builder ----
+  var BUDGET_IDS = ['bNeeds1','bNeeds2','bNeeds3','bWants1','bWants2','bWants3','bSave1','bSave2'];
+  function runBudgetCheck(){
+    var vals = {};
+    var anyInvalid = false;
+    BUDGET_IDS.forEach(function(id){
+      var el = document.getElementById(id);
+      var v = parseFloat(el.value);
+      if (isNaN(v) || v < 0){ anyInvalid = true; v = 0; }
+      vals[id] = v;
+    });
+    var needs = vals.bNeeds1 + vals.bNeeds2 + vals.bNeeds3;
+    var wants = vals.bWants1 + vals.bWants2 + vals.bWants3;
+    var savings = vals.bSave1 + vals.bSave2;
+    var total = Math.round((needs + wants + savings) * 100) / 100;
+    var summaryEl = document.getElementById('bSummary');
+    var textEl = document.getElementById('bSummaryText');
+    summaryEl.hidden = false;
+    if (anyInvalid){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Fill in every field with zero or a positive amount before checking your budget.';
+      return;
+    }
+    if (total === 600){
+      summaryEl.classList.remove('warn');
+      textEl.textContent = 'NEEDS $' + needs.toFixed(2) + ' + WANTS $' + wants.toFixed(2) + ' + SAVINGS $' + savings.toFixed(2) + ' = $' + total.toFixed(2) + ' — your budget balances exactly against your $600.00 income. Nice work.';
+    } else {
+      summaryEl.classList.add('warn');
+      var diff = Math.round((600 - total) * 100) / 100;
+      textEl.textContent = 'NEEDS $' + needs.toFixed(2) + ' + WANTS $' + wants.toFixed(2) + ' + SAVINGS $' + savings.toFixed(2) + ' = $' + total.toFixed(2) + ', which is ' + (diff > 0 ? '$' + diff.toFixed(2) + ' under' : '$' + Math.abs(diff).toFixed(2) + ' over') + ' your $600.00 income. Adjust your line items so everything adds up exactly.';
+    }
+    state.budget = { needs: needs, wants: wants, savings: savings, total: total, values: vals, goalTie: document.getElementById('bGoalTie').value };
+    saveState();
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="3"]'));
+  }
+  function restoreBudget(){
+    var vals = (state.budget && state.budget.values) || {};
+    BUDGET_IDS.forEach(function(id){
+      var el = document.getElementById(id);
+      if (typeof vals[id] !== 'undefined') el.value = vals[id];
+    });
+    var tieEl = document.getElementById('bGoalTie');
+    if (state.budget && state.budget.goalTie) tieEl.value = state.budget.goalTie;
+    tieEl.addEventListener('input', function(){ state.budget.goalTie = tieEl.value; saveState(); });
+    if (state.budget && typeof state.budget.total !== 'undefined'){
+      runBudgetCheck();
+    }
+  }
+
+  // ---- Day 4: Banking & Savings Calculator ----
+  function runBankingCalc(){
+    var rate = parseFloat(document.getElementById('bkInstitution').value);
+    var contribution = parseFloat(document.getElementById('bkContribution').value);
+    var summaryEl = document.getElementById('bkSummary');
+    var textEl = document.getElementById('bkSummaryText');
+    summaryEl.hidden = false;
+    if (isNaN(rate) || !(contribution > 0)){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Choose an institution type and enter a monthly contribution greater than zero.';
+      return;
+    }
+    var totalContributed = Math.round(contribution * 12 * 100) / 100;
+    var interest = Math.round(totalContributed * (rate / 100) * 100) / 100;
+    var yearEnd = Math.round((totalContributed + interest) * 100) / 100;
+    summaryEl.classList.remove('warn');
+    textEl.textContent = 'Total Contributed: $' + contribution.toFixed(2) + ' × 12 = $' + totalContributed.toFixed(2) + '. Interest Earned: $' + totalContributed.toFixed(2) + ' × ' + rate + '% = $' + interest.toFixed(2) + '. Year-End Total: $' + totalContributed.toFixed(2) + ' + $' + interest.toFixed(2) + ' = $' + yearEnd.toFixed(2) + '.';
+    state.bank = { rate: rate, contribution: contribution, totalContributed: totalContributed, interest: interest, total: yearEnd, justify: document.getElementById('bkJustify').value };
+    saveState();
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="4"]'));
+  }
+  function restoreBanking(){
+    if (state.bank && typeof state.bank.rate !== 'undefined') document.getElementById('bkInstitution').value = state.bank.rate;
+    if (state.bank && typeof state.bank.contribution !== 'undefined') document.getElementById('bkContribution').value = state.bank.contribution;
+    var justifyEl = document.getElementById('bkJustify');
+    if (state.bank && state.bank.justify) justifyEl.value = state.bank.justify;
+    justifyEl.addEventListener('input', function(){ state.bank.justify = justifyEl.value; saveState(); });
+    if (state.bank && typeof state.bank.total !== 'undefined') runBankingCalc();
+  }
+
+  // ---- Day 5: Responsibility Plan Builder ----
+  function wirePlanBuilder(){
+    var map = { planCredit: 'credit', planCivic: 'civic', planFraud: 'fraud' };
+    Object.keys(map).forEach(function(id){
+      var el = document.getElementById(id);
+      var key = map[id];
+      if (state.plan[key]) el.value = state.plan[key];
+      el.addEventListener('input', function(){
+        state.plan[key] = el.value;
+        saveState();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="5"]'));
+      });
+    });
+  }
+
+  // ---- Day 6: Consistency Check ----
+  function wireConsistencyCheck(){
+    document.querySelectorAll('.consist-q').forEach(function(group){
+      var qNum = group.dataset.cq;
+      group.querySelectorAll('.yn-btn').forEach(function(btn){
+        if (state.consist[qNum] === btn.dataset.val) btn.classList.add('selected');
+        btn.addEventListener('click', function(){
+          group.querySelectorAll('.yn-btn').forEach(function(b){ b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          state.consist[qNum] = btn.dataset.val;
+          saveState();
+          updateCompleteButton(document.querySelector('.day-panel[data-panel="6"]'));
+        });
+      });
+    });
+    var noteEl = document.getElementById('revisionNote');
+    if (state.consist.note) noteEl.value = state.consist.note;
+    noteEl.addEventListener('input', function(){
+      state.consist.note = noteEl.value;
+      saveState();
+      updateCompleteButton(document.querySelector('.day-panel[data-panel="6"]'));
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    buildYagTable();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    wireYag();
+    wireValueChips();
+    wireGoalInputs();
+    wireSmartChecks();
+    document.getElementById('bBtn').addEventListener('click', runBudgetCheck);
+    document.getElementById('bkBtn').addEventListener('click', runBankingCalc);
+    wirePlanBuilder();
+    wireConsistencyCheck();
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreBudget();
+    restoreBanking();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

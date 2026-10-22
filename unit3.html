@@ -1,0 +1,1167 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Spending &amp; Budgeting I</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(3,1fr);} .goal-grid{grid-template-columns:1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Spending &amp; Budgeting I</h1>
+      </div>
+      <p class="subtitle">Unit 3 — Building Your First Budget · 6 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/6"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Predicting Expenses</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Build Your First Budget</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Comparison Shopping</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Spending Habits &amp; Saving</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+    <button class="day-btn" data-day="5">
+      <span class="num mono">DAY 5</span>
+      <span class="title">Budgeting for Goals</span>
+      <span class="status-pill" data-status-for="5">Not started</span>
+    </button>
+    <button class="day-btn" data-day="6">
+      <span class="num mono">DAY 6</span>
+      <span class="title">Unit Review: Build-a-Budget</span>
+      <span class="status-pill" data-status-for="6">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Predicting Expenses: What Will You Really Spend On?</h2>
+        <span class="standard-badge">NJSLS 9.1.8.PB.1&ndash;2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can predict the fixed, variable, and periodic expenses that belong in a personal budget and explain how life circumstances change what a realistic budget includes.</div></div>
+
+      <article class="lesson">
+        <p>A <strong>budget</strong> is a plan for how money coming in (your <em>income</em>) will be spent, saved, and given over a period of time &mdash; usually a month. A budget isn't a punishment or a way to stop you from having fun; it's simply a plan, written down ahead of time, so your money goes where you actually want it to go instead of quietly disappearing. Before you can build a real budget &mdash; that starts tomorrow, on Day 2 &mdash; you first need to get good at spotting everything that actually belongs in one. And that starts with understanding that expenses don't all behave the same way. They show up in three different timing patterns: fixed, variable, and periodic.</p>
+        <p><strong>Fixed</strong> expenses are the easiest to predict: they cost the same amount, on a regular schedule, no matter what. Rent is the classic example &mdash; if rent is $900 a month, it's $900 every single month, whether the apartment gets used a little or a lot. A cell phone plan, a streaming subscription, and a monthly gym membership are usually fixed too. Because fixed expenses don't change, they're the simplest ones to plan for &mdash; you already know exactly what to set aside.</p>
+        <p><strong>Variable</strong> expenses are still regular &mdash; they show up often &mdash; but the amount changes each time. Groceries are the go-to example: you buy groceries every week, but you might spend $60 one week and $85 the next, depending on what's on sale or what you're cooking. Gas for a car, eating out, and electricity bills (which often creep up in summer or winter) are variable for the same reason: the bill always exists, but the number on it moves around.</p>
+        <p><strong>Periodic</strong> expenses are the trickiest, because they're the ones most likely to catch a budget off guard. They're occasional &mdash; they don't show up every month &mdash; but they are predictable, because you know roughly when they're coming. An annual car registration fee, a yearly membership renewal, holiday or birthday gifts, and back-to-school supplies each fall are all periodic: nothing in July, but a real cost in October. Here's why that matters so much. Imagine a $120 car registration fee that comes due every October. If nobody planned for it, October's budget suddenly has a $120 hole in it that feels like a "surprise" &mdash; except it isn't a surprise at all, because it happens on the same predictable schedule every single year. The fix is simple math: $120 &divide; 12 months = $10 a month. Set aside just $10 a month, all year long, and the October fee is already sitting there waiting, covered, calmly, with zero drama. That's the entire point of recognizing a periodic expense ahead of time &mdash; it turns a once-a-year shock into a small, steady, boring monthly habit. Boring is good when it comes to money.</p>
+        <p>Missing a periodic expense is one of the most common ways real people &mdash; not just middle schoolers &mdash; get blindsided by a cost that was actually predictable the entire time. Learning to spot fixed, variable, and periodic expenses now means you'll rarely be caught flat-footed by one later.</p>
+        <p>Here's the second half of today's lesson: what belongs in a budget isn't the same for every person, because life circumstances change what expenses exist in the first place. Picture two people. A 16-year-old who lives with their parents usually has housing, groceries, and utilities covered by someone else &mdash; their own budget might only need to cover entertainment and personal spending money. Now picture a 22-year-old living alone in their own apartment with a car payment: suddenly rent, utilities, groceries, transportation, and everything else lands on one person's budget, all at once. Neither budget is "wrong" &mdash; both are realistic for the situation they're built for. The 16-year-old isn't better at budgeting because their list is shorter; the list is shorter because fewer expenses currently belong to them.</p>
+        <p>Location changes a budget too. Someone living in a rural area with no public transportation may genuinely need a car &mdash; gas, insurance, and registration become required expenses, not optional ones. Someone living in a city with reliable buses or trains might choose not to own a car at all, trading a car payment for a much smaller weekly fare. Family size matters as well: a household feeding five people has a bigger grocery line than someone living alone, even though "groceries" is the exact same category in both budgets.</p>
+        <p>It helps to separate periodic expenses from a fourth kind of cost that a budget can't fully predict: an unplanned or emergency expense, like a phone screen cracking or a sudden trip to the doctor. A periodic expense repeats on a knowable schedule, so it belongs in the budget's regular categories, spread out ahead of time, the same way the registration fee did above. An emergency expense doesn't have a schedule at all &mdash; nobody can say in advance exactly when a phone will crack. That's precisely why some budgets set aside a small monthly cushion, sometimes called an emergency fund, specifically for costs that can't be predicted the way rent or an annual fee can. You'll build more on this idea in a later unit; for now, just notice that "periodic" and "emergency" aren't two names for the same thing, even though both can feel like a surprise if nobody planned ahead.</p>
+        <p>One more worked example, this time with an expense that repeats more than once a year. Suppose a student plays a school sport with a $60 participation fee due twice a year &mdash; once for the fall season and once for the spring season. Treated correctly as periodic: $60 &times; 2 = $120 a year, and $120 &divide; 12 months = $10 a month set aside, all year long, so both fee due-dates are already covered when they arrive. Treated incorrectly &mdash; ignored until the week it's due &mdash; that same $60 becomes a scramble twice a year instead of a small, steady $10-a-month habit. The math doesn't change; only whether someone planned for it does.</p>
+        <p>Today is intentionally about prediction and awareness, not math &mdash; the real budget-building starts tomorrow, on Day 2. But hang onto today's categories: fixed, variable, periodic, needs, and wants are exactly what you'll be plugging real numbers into next.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The Forgotten Yearbook Fee</h4>
+        <p>Devon's family has been budgeting carefully all year &mdash; rent, groceries, the phone bill, everything is accounted for. Then in May, the school sends home a notice: the yearbook order form is due, and it costs $35. Devon's mom sighs, "Where did that come from? We didn't budget for that." But the yearbook order form comes home every single May, at roughly the same price.</p>
+        <p class="prompt">Is the $35 yearbook fee actually a surprise, or something else? Which category does it belong in, and what could Devon's family have done back in September to keep May from feeling like a scramble?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB &mdash; Money as You Grow</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of budgeting basics or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Which expense is best described as "fixed"?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Rent that costs the same amount every month</button>
+            <button class="quiz-opt" data-correct="false">Groceries that change from week to week</button>
+            <button class="quiz-opt" data-correct="false">A holiday gift expense that comes once a year</button>
+            <button class="quiz-opt" data-correct="false">A repair bill that comes up unexpectedly</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Fixed expenses are the same regular amount every time &mdash; that's what separates rent from variable or periodic costs.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which expense is best described as "periodic"?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">An annual car registration fee</button>
+            <button class="quiz-opt" data-correct="false">Weekly grocery costs</button>
+            <button class="quiz-opt" data-correct="false">Monthly rent</button>
+            <button class="quiz-opt" data-correct="false">A daily coffee habit</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Periodic expenses are occasional but predictable &mdash; an annual fee doesn't show up monthly, but you can plan for it ahead of time.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Which best shows how a life circumstance changes a budget?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A teen moving out of their parents' house into their own apartment suddenly has a rent expense that wasn't there before</button>
+            <button class="quiz-opt" data-correct="false">A teen's favorite color changes from blue to green</button>
+            <button class="quiz-opt" data-correct="false">A teen decides to walk somewhere instead of texting about it</button>
+            <button class="quiz-opt" data-correct="false">A teen's grade in math class goes up</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A real change in living situation adds or removes actual expense categories &mdash; personal preferences or grades don't change a budget the same way.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. A school sports fee of $60 is due every fall and every spring. What's the smartest way to plan for it?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Set aside $10 a month all year, so both $60 due-dates are already covered</button>
+            <button class="quiz-opt" data-correct="false">Wait until the week it's due and figure it out then</button>
+            <button class="quiz-opt" data-correct="false">Treat it as an emergency expense since it feels sudden</button>
+            <button class="quiz-opt" data-correct="false">Assume it will only happen once and ignore the second one</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$60 &times; 2 = $120 a year, and $120 &divide; 12 = $10 a month &mdash; spreading a predictable periodic cost out ahead of time is what turns a scramble into a non-event.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Devon's family forgot to plan for the $35 yearbook fee that comes home every May. What's the best fix going forward?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Recognize it as a periodic expense and set aside a small amount for it each month, starting well before May</button>
+            <button class="quiz-opt" data-correct="false">Treat it as an unpredictable emergency expense</button>
+            <button class="quiz-opt" data-correct="false">Skip buying the yearbook every year to avoid the problem</button>
+            <button class="quiz-opt" data-correct="false">Assume next May it just won't happen again</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Because the fee shows up on a knowable schedule, it's periodic, not an emergency &mdash; dividing it across the months before May turns a "surprise" into a planned, small monthly amount.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Think about your own household, or one you know well. Name two expenses in that budget that are periodic (occasional but predictable) rather than fixed or variable, and explain how you'd plan ahead for one of them.</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSew_AuWnvh8tavZTX00jc9R3PgrZUZGkD6AFm_9vzAwM8kzeQ/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Building Your First Budget</h2>
+        <span class="standard-badge">NJSLS 9.1.8.PB.3&ndash;4</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can construct a simple personal budget from an income and expense categories that aligns with a financial goal.</div></div>
+
+      <article class="lesson">
+        <p>Time to actually build one. A budget comes together in four steps, in this exact order: <strong>(1)</strong> list your income, <strong>(2)</strong> list and total your expenses by category &mdash; needs first, then wants, then savings/goal, <strong>(3)</strong> subtract your total expenses from your income, and <strong>(4)</strong> adjust if spending is more than income. That's the whole process. Every budget you'll ever build, for the rest of your life, is some version of those same four steps.</p>
+        <p>Notice where savings sits in that list: it's part of step 2, grouped in right alongside needs and wants &mdash; not an afterthought squeezed in at the end if anything happens to be left over. A budget that plans for savings the same way it plans for rent or groceries is far more likely to actually reach a goal than one that just hopes there'll be money left at the end of the month. Treat your future goal like a bill you owe yourself.</p>
+        <p>Let's walk through the whole four-step process with real numbers, so you can see exactly how it works before you build your own below. Imagine a student earning <strong>$100 a month</strong> total &mdash; $60 from a weekly allowance and $40 from babysitting.</p>
+        <p><strong>Step 1 &mdash; List income:</strong> $100/month. That's the entire amount available to plan with; nothing gets spent before it's written down here first.</p>
+        <p><strong>Step 2 &mdash; List and total expenses by category, needs first:</strong></p>
+        <p><strong>Needs:</strong> a $10/month add-on to stay on the family phone plan. Needs total: <strong>$10</strong>.<br><strong>Wants:</strong> $20 entertainment, $15 snacks, $15 clothes. Wants total: $20 + $15 + $15 = <strong>$50</strong>.<br><strong>Savings/goal:</strong> $30/month toward a $180 goal, which the math works out to reaching in 6 months (180 &divide; 30 = 6). Savings total: <strong>$30</strong>.<br>Add all three categories together: $10 + $50 + $30 = <strong>$90 total planned spending.</strong></p>
+        <p><strong>Step 3 &mdash; Subtract total expenses from income:</strong> $100 income &minus; $90 total expenses = <strong>$10 left over.</strong></p>
+        <p><strong>Step 4 &mdash; Adjust:</strong> Because income is more than expenses, this budget already balances &mdash; there's nothing urgent to fix. That leftover $10 is a real choice, not a problem: it could go straight into the savings goal (reaching $180 in a little under 5 months instead of 6), get split between savings and a want, or just sit as a small cushion in case a category runs a little over one month. If instead the numbers had come out negative &mdash; say expenses added up to $110 against $100 income &mdash; step 4 would mean going back and lowering a want (not a need) until the budget balanced again, since needs shouldn't be the first thing cut.</p>
+        <p>This connects directly back to earlier units: needs come before wants before goals (that's Unit 1), and Unit 2's income types &mdash; a wage, an allowance, gig income &mdash; are exactly what fills in step 1 of this process. Whatever income sources you identified back then are the real starting number for the budget you're about to build below, using your own numbers instead of the example above.</p>
+        <p>A lot of adults use a rule of thumb to sanity-check a budget once it's built: roughly 50% toward needs, 30% toward wants, and 20% toward savings and goals combined. It's not a law &mdash; the example above had needs at far less than 50%, since a 7th grader's needs list is usually shorter than an adult's paying full rent and utilities &mdash; but the rule is still a useful rough check. If wants are eating up 70% of a budget and savings is stuck at 2%, that's a signal worth noticing, even when the exact numbers don't matter as much as the direction.</p>
+        <p>Let's run the four steps through a second example with different numbers, so the process feels like a tool that works with any income, not just one memorized case. Say a student earns $75 a month from allowance alone, with a goal to save $150 for a new pair of cleats.</p>
+        <p><strong>Step 1:</strong> Income = $75/month.<br><strong>Step 2:</strong> Needs: $5 (a small contribution to a shared family streaming cost). Wants: $10 games + $10 snacks + $5 one movie = $25. Savings: a $150 goal reached in 5 months means $150 &divide; 5 = $30/month. Total planned: $5 + $25 + $30 = <strong>$60</strong>.<br><strong>Step 3:</strong> $75 income &minus; $60 total expenses = <strong>$15 left over.</strong><br><strong>Step 4:</strong> Since income covers expenses with room to spare, this budget balances on the very first try &mdash; that extra $15 could shorten the timeline on the cleats to under 4 months, or simply become a small cushion.</p>
+        <p>Two mistakes are worth watching for as you build your own budget below. The first is forgetting a category entirely &mdash; especially a periodic expense from Day 1 that only shows up once or twice a year, since it's easy to leave off a list built in the moment. The second is listing a want at a size that's really a wish rather than a real number &mdash; writing down $5 for "snacks" when actual spending has been closer to $20 doesn't make a budget more accurate, it just makes it wrong in a way that shows up later. A budget only works as a plan if the numbers inside it are honest ones.</p>
+        <p>Use the builder below to put your first full budget together &mdash; income, needs, wants, and a savings goal that all fit together into one plan, following the same four steps you just walked through.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Your Weekend Job Offer</h4>
+        <p>You just picked up a regular Saturday shift walking dogs for two neighbors, which will add about $28 a week to what you already get from your allowance. Before you touch a single dollar of it, you sit down to update the budget you're about to build below.</p>
+        <p class="prompt">Using the four-step process from today's lesson, what's the very first thing you should do with that new $28/week &mdash; and which step does it belong in before you decide how to spend or save any of it?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of the 4-step budgeting process or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. What is the first step in building a budget?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">List your income</button>
+            <button class="quiz-opt" data-correct="false">Guess how much you'll spend</button>
+            <button class="quiz-opt" data-correct="false">Ask a friend what they spend</button>
+            <button class="quiz-opt" data-correct="false">Buy something you want</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Budgeting starts with knowing what's actually coming in before you plan what goes out.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. In the 4-step budgeting process, what comes right after listing and totaling your expenses by category?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Subtract total expenses from income</button>
+            <button class="quiz-opt" data-correct="false">Immediately spend on wants</button>
+            <button class="quiz-opt" data-correct="false">Delete the needs category</button>
+            <button class="quiz-opt" data-correct="false">Increase your income</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Once income and expenses are both listed, subtracting tells you whether the budget actually balances.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. Priya's budget shows her planned spending is $10 more than her income. What should she do?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Adjust her spending or find more income so the two balance</button>
+            <button class="quiz-opt" data-correct="false">Ignore it &mdash; budgets don't need to balance</button>
+            <button class="quiz-opt" data-correct="false">Stop listing her needs</button>
+            <button class="quiz-opt" data-correct="false">Assume it will fix itself next month</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Step 4 of the budgeting process is exactly this &mdash; adjusting categories so spending never outpaces income.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. Where should a savings/goal amount be placed in the budgeting process?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Listed as its own category in step 2, right alongside needs and wants</button>
+            <button class="quiz-opt" data-correct="false">Decided only after everything else has already been spent</button>
+            <button class="quiz-opt" data-correct="false">Left out of the budget entirely</button>
+            <button class="quiz-opt" data-correct="false">Added only if there happens to be money left over</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Planning savings on purpose, in step 2, makes it far more likely a goal actually gets funded than hoping there's something "left over."</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. You start earning an extra $28/week from a new dog-walking job. Following the four-step process, what should you do first?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Add it to your income total in step 1, before deciding where any of it goes</button>
+            <button class="quiz-opt" data-correct="false">Spend it immediately on whatever you want</button>
+            <button class="quiz-opt" data-correct="false">Ignore it since it's not your main allowance</button>
+            <button class="quiz-opt" data-correct="false">Subtract it from your needs total</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Step 1 is listing income &mdash; new income belongs there first, before any decision gets made about needs, wants, or savings.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Build your first budget</h3>
+        <p class="prompt">Use a realistic monthly income (your own, or one from Unit 2) and fill in the fields below to build your first full budget.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="budgetIncome">Monthly income</label>
+            <input id="budgetIncome" data-goal="what" type="text" placeholder="e.g., $150 from allowance + babysitting">
+          </div>
+          <div class="goal-field">
+            <label for="budgetNeeds">Needs total</label>
+            <input id="budgetNeeds" data-goal="cost" type="text" placeholder="e.g., $40 (phone plan share, lunch)">
+          </div>
+          <div class="goal-field">
+            <label for="budgetWants">Wants total</label>
+            <input id="budgetWants" data-goal="source" type="text" placeholder="e.g., $30 (games, snacks)">
+          </div>
+          <div class="goal-field">
+            <label for="budgetSavings">Savings/goal amount &amp; what it's for</label>
+            <input id="budgetSavings" data-goal="amount" type="text" placeholder="e.g., $50/month toward a bike">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="budgetDeadline">How long until you reach that goal</label>
+            <input id="budgetDeadline" data-goal="deadline" type="text" placeholder="e.g., about 10 weeks">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="budgetBiggest">Bonus: your biggest expense category, and why</label>
+            <input id="budgetBiggest" data-goal="biggest" type="text" placeholder="e.g., wants — I keep buying snacks and games">
+          </div>
+        </div>
+        <div class="goal-summary" id="goalSummary" hidden>
+          <b>Your first budget</b>
+          <span id="goalSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Look back at the budget you just built. Which category was hardest to plan for, and why? If your income went up by $20 next month, where would you put it?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, budget, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfv3Cz69ABdRyd3JcdHEuSFqChINRvwSEiU4uMKcnlUV8IYrg/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions and fill in your first budget above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Comparison Shopping &amp; Smart Spending Strategies</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CP.1 &amp; PB.7</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare total costs across sellers and describe strategies &mdash; comparison shopping, negotiating, and everyday habits &mdash; that lower what I spend.</div></div>
+
+      <article class="lesson">
+        <p><strong>Comparison shopping</strong> means checking price, quality, and total value across more than one seller before buying. The key word is <em>total</em>: the lowest sticker price isn't always the best value once shipping and tax get added in. A $15 item with $5 shipping costs more, in total, than an $18 item with free shipping &mdash; even though $15 looks smaller at first glance. Real comparisons usually involve a third piece too: tax, which most places charge as a percentage of the price.</p>
+        <p>Here's a complete worked example, using a backpack priced differently at three sellers, with New Jersey's 6.625% sales tax factored in wherever it applies.</p>
+        <p><strong>Big-Box Store:</strong> $25.00 price, $0 shipping (in-store pickup), plus 6.625% sales tax.<br>Tax owed: $25.00 &times; 0.06625 = $1.66 (rounded to the nearest cent).<br>Total cost: $25.00 + $1.66 = <strong>$26.66</strong>.</p>
+        <p><strong>Online Marketplace:</strong> $19.99 price, $4.99 shipping, plus 6.625% sales tax on the item price.<br>Tax owed: $19.99 &times; 0.06625 = $1.32 (rounded).<br>Item total with tax: $19.99 + $1.32 = $21.31.<br>Add shipping: $21.31 + $4.99 = <strong>$26.30</strong>.</p>
+        <p><strong>Local Shop:</strong> $28.00 flat price, $0 shipping, no sales tax charged this weekend &mdash; and it comes with a lifetime warranty included.<br>Total cost: <strong>$28.00</strong> (no additional math needed &mdash; there's no tax or shipping to add).</p>
+        <p>Lined up, the totals are Online $26.30, Big-Box $26.66, and Local $28.00. By total cost alone, the Online Marketplace wins &mdash; but only by 36 cents over the Big-Box Store, which is close enough that other factors matter. And the Local Shop, even though it's the most expensive by $1.70, throws in a lifetime warranty &mdash; meaning if the backpack ever rips or breaks, it gets replaced for free, potentially saving far more than $1.70 down the road. This is exactly what "checking quality and total value, not just price" means in practice: the numerically cheapest option isn't automatically the smartest choice once you weigh in what else you're getting for the money.</p>
+        <p>Comparison shopping is one of three techniques that can lower what you actually spend. The second is <strong>negotiating</strong> &mdash; politely asking for a lower price or for extras to be included. It works more often than most people expect, especially on discounted floor-model items with small cosmetic damage, at a yard sale, or when buying more than one of something. A simple, respectful script works better than you'd think: <em>"I noticed this has a small scratch &mdash; would you be able to offer a discount because of that?"</em> or <em>"I'm interested in this, but I was hoping to pay around $___. Would that work?"</em> or <em>"If I bought two of these, would you be able to do a better price?"</em> Politely asking costs nothing, and the worst possible answer is just "no" &mdash; which leaves you exactly where you started.</p>
+        <p>The third technique is <strong>day-to-day expense management</strong>: small, repeatable habits that quietly reduce spending over time without ever requiring a negotiation. Bringing lunch from home instead of buying it, shopping with a list so you don't grab extras on impulse, waiting a few days for something to go on sale, and deciding on a spending limit before you even walk into a store all fall into this category.</p>
+        <p>There's a fourth tool worth knowing alongside comparison shopping, negotiating, and habit awareness: <strong>unit price</strong> &mdash; the cost per single unit of something, like per ounce, per sheet, or per item. Unit price is what makes it possible to compare a big package to a small one fairly. A 12-pack of markers for $6 costs $0.50 each; a 30-pack for $12 costs $0.40 each &mdash; even though the 30-pack costs more money up front, each individual marker is actually cheaper. Many stores post unit price right on the shelf tag, below the regular price in smaller print &mdash; it's worth a glance before assuming "bigger box always costs more" or "smaller box is always the better deal." Neither guess is reliable without checking.</p>
+        <p>Quality and reviews matter just as much as price once total cost is figured out. A cheap item that breaks in a week and needs replacing isn't actually cheap once you count the cost of buying it twice. Before buying something that isn't cheap or throwaway &mdash; shoes, headphones, a backpack &mdash; a quick check of star ratings or a couple of written reviews can catch a problem before it becomes an expensive mistake. This connects right back to the backpack example above: the Local Shop's lifetime warranty was a quality signal every bit as real as its price tag, just a different kind of value.</p>
+        <p>Here's a second worked example, this time with unit price front and center. Suppose two bottles of the same shampoo sit on a shelf: a 12-ounce bottle for $3.60, and a 20-ounce bottle for $5.20. Unit price for the small bottle: $3.60 &divide; 12 = $0.30 per ounce. Unit price for the large bottle: $5.20 &divide; 20 = $0.26 per ounce. The larger bottle costs more overall ($5.20 vs. $3.60) but is actually the better per-ounce value &mdash; a savings of 4 cents an ounce adds up fast if it's a product bought again and again. That's exactly the kind of comparison a total price tag alone would completely miss.</p>
+        <p>None of this is about being pushy, distrustful, or refusing to spend money at all. It's about making sure that the money you do spend actually gets you the best real value for it &mdash; total cost, quality, and all.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Two Tabs Open</h4>
+        <p>Amara is buying a birthday gift online and has two browser tabs open. Tab one: a $22 item with free shipping and no tax charged. Tab two: a $19 item with $4.50 shipping, plus 6.625% sales tax on the item price &mdash; but it also has a coupon code for $2 off.</p>
+        <p class="prompt">Before Amara decides which tab to buy from, what should she actually calculate for each one &mdash; and is the lower sticker price in tab two automatically the better deal?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FTC Consumer.gov</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of smart shopping or some extra practice spotting a good deal.</p>
+          <a href="https://www.consumer.ftc.gov" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. Which shows true comparison shopping?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Checking price, quality, and total cost (including shipping and tax) across more than one seller before buying</button>
+            <button class="quiz-opt" data-correct="false">Buying from the first store you see</button>
+            <button class="quiz-opt" data-correct="false">Buying something because a friend has the same item</button>
+            <button class="quiz-opt" data-correct="false">Buying whichever option costs the most</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Comparison shopping means weighing total value across sellers &mdash; not just grabbing the first or most familiar option.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. An item costs $18 at Store A with free shipping, or $15 at Store B plus $5 shipping. Which is the better value?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Store A &mdash; its total cost ($18) is lower than Store B's total cost ($20)</button>
+            <button class="quiz-opt" data-correct="false">Store B &mdash; its sticker price is lower</button>
+            <button class="quiz-opt" data-correct="false">They cost exactly the same</button>
+            <button class="quiz-opt" data-correct="false">There's not enough information to tell</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Total cost &mdash; price plus shipping and tax &mdash; is what determines real value, not the sticker price alone.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. Which is an example of a respectful negotiation strategy?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Politely asking whether a discount is available on a floor-model item</button>
+            <button class="quiz-opt" data-correct="false">Refusing to pay any price at all</button>
+            <button class="quiz-opt" data-correct="false">Demanding a discount loudly</button>
+            <button class="quiz-opt" data-correct="false">Assuming negotiation is never allowed</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Negotiating well means politely asking &mdash; not demanding, and not assuming it's off the table.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. A 12-pack of markers costs $6 ($0.50 each). A 30-pack costs $12. What's the unit price of the 30-pack, and which is the better per-item value?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$0.40 each &mdash; the 30-pack is the better per-item value</button>
+            <button class="quiz-opt" data-correct="false">$0.60 each &mdash; the 12-pack is the better per-item value</button>
+            <button class="quiz-opt" data-correct="false">$0.50 each &mdash; they're exactly the same value</button>
+            <button class="quiz-opt" data-correct="false">$1.20 each &mdash; the 30-pack is worse value</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$12 &divide; 30 = $0.40 per marker, which is cheaper per item than the 12-pack's $0.50 each &mdash; even though the 30-pack costs more up front.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Amara is comparing a $22 item with free shipping to a $19 item with $4.50 shipping plus sales tax. What should she calculate before deciding?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The total cost of each option &mdash; price plus shipping plus tax &mdash; not just the sticker price</button>
+            <button class="quiz-opt" data-correct="false">Nothing &mdash; the $19 item is automatically the better deal</button>
+            <button class="quiz-opt" data-correct="false">Only the shipping cost, ignoring the item price</button>
+            <button class="quiz-opt" data-correct="false">Whichever seller's website loads faster</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The lower sticker price isn't automatically the better deal once shipping and tax get added in &mdash; total cost is what actually decides it.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Describe one real or realistic situation where comparing prices across more than one seller &mdash; or politely asking about a lower price &mdash; could save you money. What would you actually say or do?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSccRVEXMXbDeRaMNsl3puIxbynvu7DH3IJF8sHsx0MDZXs9Dg/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Spending Habits &amp; the Power to Save</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CP.2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain how everyday spending habits affect a person's ability to save money.</div></div>
+
+      <article class="lesson">
+        <p>Small, frequent purchases add up over time &mdash; and can meaningfully reduce how much a person is able to save, even when each individual purchase feels tiny in the moment. Today's skill is a simple three-step calculation that turns any small habit into its real weekly, monthly, and yearly cost, so you can see the whole picture instead of just one purchase at a time.</p>
+        <p>Here's the full worked example, step by step. Say a student buys a $4 snack after school, three times a week.</p>
+        <p><strong>Step 1 &mdash; Find the weekly cost:</strong> cost per purchase &times; times per week.<br>$4 &times; 3 = <strong>$12 a week.</strong></p>
+        <p><strong>Step 2 &mdash; Find the monthly cost:</strong> weekly cost &times; about 4.3 weeks in a month (a month is usually a little longer than 4 weeks, so 4.3 is the more accurate multiplier than just 4).<br>$12 &times; 4.3 = <strong>about $52 a month.</strong></p>
+        <p><strong>Step 3 &mdash; Find the yearly cost:</strong> the most reliable way is weekly cost &times; the number of weeks in a year (52), since that avoids any rounding error from Step 2.<br>$12 &times; 52 = <strong>$624 a year.</strong></p>
+        <p>Read that last number again: <strong>$624</strong>, from a snack that only ever cost $4 at a time. Not one single purchase in that whole year felt like a big decision &mdash; each one was just $4. But repeated 156 times (3 times a week &times; 52 weeks), it becomes a genuinely significant chunk of money that could instead have funded a big chunk of a savings goal, like the $180 or $210 goals from Day 2's budget scenarios.</p>
+        <p>Frequency matters just as much as size &mdash; sometimes more. Compare two different habits: a $3 item bought <em>every single day</em> versus a $15 item bought <em>once a week</em>. At first glance the $15 purchase looks like the bigger splurge. But run the same math: the daily $3 habit is $3 &times; 7 days = $21 a week, and $21 &times; 52 = <strong>$1,092 a year</strong>. The weekly $15 habit is $15 &times; 52 = <strong>$780 a year</strong>. The "smaller," daily $3 habit actually costs $312 more per year than the "bigger," weekly $15 one &mdash; because it repeats so much more often. That's the whole lesson in one comparison: it's not the size of a single purchase that determines its real impact, it's the size multiplied by how often it happens.</p>
+        <p>This idea has a well-known nickname: some financial writers call it the "latte factor," named after the idea that a daily coffee purchase, multiplied out over a year, adds up to a surprisingly large number. The name isn't really about coffee specifically &mdash; it's shorthand for any small, repeated purchase that's easy to overlook precisely because no single instance of it ever feels expensive.</p>
+        <p>Subscriptions are a modern version of the same pattern, with a twist: they charge automatically, whether or not they actually get used that month. A $9/month app or streaming subscription is $108 a year &mdash; and unlike a snack, it keeps charging even during a month it never gets opened. Checking a bank or account statement every so often for a subscription that quietly kept renewing after interest faded is its own kind of habit awareness &mdash; the same three-step math applies, just aimed at a bill instead of a purchase.</p>
+        <p>There's also a useful way to think about what a redirected habit could become instead, called <strong>opportunity cost</strong> &mdash; what you give up by choosing one use of money over another. Go back to the $624-a-year snack habit from above. That same $624, redirected into a $300 savings goal like the laptop example coming up in Day 5, wouldn't just cover it &mdash; it would cover it more than twice over, with money left for something else entirely. That's not a reason to feel bad about a snack; it's just useful information sitting right there, ready to inform an actual choice.</p>
+        <p>One more worked comparison, using two habits at once. Suppose a student spends $2 on a vending-machine drink most school days (about 5 times a week) and also pays for a $9/month subscription. Drink: $2 &times; 5 = $10/week, &times; 52 = $520/year. Subscription: $9 &times; 12 = $108/year. Combined: $520 + $108 = <strong>$628/year</strong> &mdash; remarkably close to the original snack example, just made of two smaller habits instead of one.</p>
+        <p>None of this is about guilt, and it's not a call to stop buying anything you enjoy. Some small recurring purchases are a perfectly reasonable use of money &mdash; a snack after school, a weekly hangout with friends, a monthly subscription you genuinely use. The goal is <em>informed</em> choice, not deprivation. Once you can see a habit's real weekly, monthly, and yearly cost using the same three steps above, you get to decide on purpose whether it's worth it to you &mdash; instead of never noticing the number at all.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The $2 Habit</h4>
+        <p>You buy a $2 drink from the vending machine most school days &mdash; about 5 times a week. It's never felt like a big deal, since it's just two dollars each time, and you also have a small $5/month app subscription you barely think about anymore.</p>
+        <p class="prompt">Using the three-step math from today's lesson, what's the real yearly cost of the drink habit alone? Once you add the subscription too, is this a habit worth keeping exactly as-is, cutting back on, or redirecting toward a savings goal &mdash; and why?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC &mdash; Money Smart for Young People, Grades 6&ndash;8</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of everyday spending awareness or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/grades-6-8" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. A $4 snack bought 3 times a week adds up to roughly how much over a year?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Over $600</button>
+            <button class="quiz-opt" data-correct="false">About $12</button>
+            <button class="quiz-opt" data-correct="false">About $60</button>
+            <button class="quiz-opt" data-correct="false">About $4</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$4 &times; 3 times a week &times; about 52 weeks comes out to roughly $624 a year &mdash; far more than it feels like purchase by purchase.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Why do small, frequent purchases matter to a budget, even when each one feels tiny?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">They add up significantly over time and can reduce how much a person is able to save</button>
+            <button class="quiz-opt" data-correct="false">They have zero effect on savings</button>
+            <button class="quiz-opt" data-correct="false">They only matter if bought exactly once</button>
+            <button class="quiz-opt" data-correct="false">They automatically become savings</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Repetition is what turns a small purchase into a real number &mdash; the frequency matters as much as the size of any one purchase.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. What's the healthiest way to think about a recurring small purchase?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Make an informed choice about it, without judging yourself for having it</button>
+            <button class="quiz-opt" data-correct="false">Feel guilty about every purchase you make</button>
+            <button class="quiz-opt" data-correct="false">Never spend on anything small, ever</button>
+            <button class="quiz-opt" data-correct="false">Ignore all of your spending completely</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The goal is awareness and informed choice &mdash; not guilt, and not swinging to the opposite extreme of never spending on anything you enjoy.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. Which factor most determines a habit's real yearly cost?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">The price per purchase multiplied by how often it happens</button>
+            <button class="quiz-opt" data-correct="false">Only the price of a single purchase</button>
+            <button class="quiz-opt" data-correct="false">Only how often it happens, regardless of price</button>
+            <button class="quiz-opt" data-correct="false">Whichever number feels bigger at a glance</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The daily $3 vs. weekly $15 comparison showed that frequency and price both matter &mdash; a smaller purchase repeated more often can cost more overall than a bigger, rarer one.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. You buy a $2 vending-machine drink about 5 times a week. About how much does that cost over a year?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">About $520</button>
+            <button class="quiz-opt" data-correct="false">About $104</button>
+            <button class="quiz-opt" data-correct="false">About $10</button>
+            <button class="quiz-opt" data-correct="false">About $2</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$2 &times; 5 times a week = $10/week, and $10 &times; 52 weeks = $520 a year &mdash; the same three-step process used throughout today's lesson.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Identify one of your own regular small purchases. Calculate its approximate monthly cost, and decide &mdash; without guilt &mdash; whether you'd change anything about it, and why.</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSec5luin6U1DaWwsxJvZ3m0RbOHuCDPu8dNsveNOpE7JLG4lA/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-panel" data-panel="5" hidden>
+      <div class="day-head">
+        <h2>Day 5 · Budgeting for Goals: Short-Term, Long-Term &amp; Giving</h2>
+        <span class="standard-badge">NJSLS 9.1.8.PB.6</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can construct a budget that allocates savings toward a short-term goal, a long-term goal, and a giving goal.</div></div>
+
+      <article class="lesson">
+        <p>Up to now, your budget has had one single savings/goal line. Today that one line splits into three, because "savings" isn't really one thing &mdash; it's three different kinds of goals that each work a little differently.</p>
+        <p>A <strong>short-term goal</strong> is achievable in under about 6 months &mdash; something like a video game, a concert ticket, or a small gift for someone. It's close enough that you can picture reaching it soon, which makes it easier to stay motivated. A <strong>long-term goal</strong> takes 6 months or more to reach &mdash; a laptop, a big trip, or eventually a car down payment. Long-term goals take patience precisely because the finish line is further away, but the four-step budgeting process from Day 2 works exactly the same way for a long-term goal as a short-term one: set an amount aside every month, and let it add up. A <strong>charitable/giving goal</strong> means setting aside money, time, or resources on purpose for a cause or person you care about &mdash; big or small amounts both count, and giving is exactly as real a budget category as the other two.</p>
+        <p>Here's a complete worked example of splitting one goal line into three, using the $30/month savings amount from Day 2's worked example (a student earning $100/month, with $10 in needs and $50 in wants, leaving $40 available for everything else &mdash; savings and giving combined).</p>
+        <p><strong>Short-term:</strong> $10/month toward a $60 video game. $60 &divide; $10 = 6 months to reach it &mdash; comfortably short-term.<br><strong>Long-term:</strong> $25/month toward a $300 laptop. $300 &divide; $25 = 12 months, a full year &mdash; solidly long-term, and worth starting now specifically because it takes a while.<br><strong>Giving:</strong> $5/month set aside for a cause the student cares about, or to help out a family member when needed.<br>Add the three together: $10 + $25 + $5 = <strong>$40/month</strong>, which matches exactly what was available. Nothing left over, nothing overspent &mdash; the three goals fit the budget precisely.</p>
+        <p>Notice the trade-off baked into that example: reaching a $300 laptop in 12 months instead of 6 months meant giving the long-term goal less per month, which freed up room for the short-term game <em>and</em> the giving amount to fit in the very same budget. If the student instead wanted the laptop in just 6 months, long-term would need $50/month by itself &mdash; more than the entire $40 available &mdash; so something else would have to shrink or wait. This is exactly what "priorities can shift" means in practice: there's rarely one right split, only trade-offs that match what matters most to you right now.</p>
+        <p>There's no single "correct" split among the three goal types &mdash; but if you're stuck deciding, one reasonable starting point is leaning the biggest share toward whichever goal is closest to being reached, since a nearly-finished goal is often the easiest one to stay motivated about. Once that goal is crossed off, the amount that used to go toward it can shift straight into the next one, without ever changing your total savings amount at all.</p>
+        <p>Here's a second worked example, with different numbers, to show the same three-way split working for a different income and different goals. Suppose a student earns $60 a month, with $8 in needs and $22 in wants, leaving $30 for savings and giving combined. Short-term: $12/month toward a $48 pair of headphones (48 &divide; 12 = 4 months). Long-term: $15/month toward a $180 bike (180 &divide; 15 = 12 months). Giving: $3/month toward a family member's birthday fund. Check the total: $12 + $15 + $3 = <strong>$30</strong>, matching exactly what was available &mdash; the same balancing check from Day 2's step 3, just applied to three goals instead of one.</p>
+        <p>Goals can also be accelerated on purpose, temporarily, without blowing up the whole budget. If that same student decided the headphones mattered enough to want them in 2 months instead of 4, bumping short-term from $12 to $24/month would do it &mdash; but $24 + $15 + $3 = $42, which is $12 more than the $30 available. Step 4 from Day 2 kicks back in here: either a want gets trimmed to free up that $12, or long-term and giving both pause for a couple of months while short-term gets the extra attention. Neither choice is wrong; it's simply a decision about what matters most right now, made on purpose instead of by accident.</p>
+        <p>A well-built budget can work toward more than one goal type at once, even in fairly small amounts, and priorities can shift over time as your life and goals change &mdash; that's expected and healthy, not a sign anything went wrong. Today you'll revisit the budget you built on Day 2 and split its single savings/goal line into all three types, the same way the example above did.</p>
+        <p>One note on giving specifically: it's personal, and there's no required cause. It's completely fine to frame it as "giving to someone I know" &mdash; a family member, a friend going through a hard time &mdash; instead of a formal charity. Amounts should stay small and realistic; a few dollars a month is a completely valid, complete answer.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Priya's Three Jars</h4>
+        <p>Priya has $45 a month left after covering her needs and wants. She wants to save toward a $90 video game, a $270 tablet, and also set aside a little each month to help her grandmother, who is saving for a trip to visit family.</p>
+        <p class="prompt">If Priya wants to reach the video game in about 3 months, how much would that alone require each month &mdash; and how much would that leave for the tablet and for helping her grandmother out of the remaining $45?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of goal-setting or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d5q1">
+          <p class="quiz-question">1. Which is the best example of a short-term goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Saving up for a video game you could afford in about a month</button>
+            <button class="quiz-opt" data-correct="false">Saving for a car over several years</button>
+            <button class="quiz-opt" data-correct="false">Saving for retirement</button>
+            <button class="quiz-opt" data-correct="false">Saving toward a four-year college fund</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Short-term goals are achievable in under about 6 months &mdash; a game you could save for in a month fits that timeframe.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q2">
+          <p class="quiz-question">2. Which is the best example of a long-term goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Saving toward a laptop over the next eight months</button>
+            <button class="quiz-opt" data-correct="false">A snack you'll buy this week</button>
+            <button class="quiz-opt" data-correct="false">A movie ticket for this Friday</button>
+            <button class="quiz-opt" data-correct="false">A goal with no target amount at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Long-term goals take 6 months or more &mdash; eight months of saving toward a laptop fits that definition.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q3">
+          <p class="quiz-question">3. Which best describes a giving/charitable goal in a budget?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Setting aside money on purpose to give to a cause or person you care about</button>
+            <button class="quiz-opt" data-correct="false">Money you simply forgot to spend</button>
+            <button class="quiz-opt" data-correct="false">Money automatically taken out by a bank</button>
+            <button class="quiz-opt" data-correct="false">A goal with no amount attached to it</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Giving is a deliberate, planned category &mdash; set aside on purpose, the same way short-term and long-term goals are.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q4">
+          <p class="quiz-question">4. Which statement about splitting money across short-term, long-term, and giving goals is true?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">There's no single correct split &mdash; it involves trade-offs that match what matters most right now</button>
+            <button class="quiz-opt" data-correct="false">Long-term goals must always get the biggest share</button>
+            <button class="quiz-opt" data-correct="false">Giving must always equal exactly half of savings</button>
+            <button class="quiz-opt" data-correct="false">Only one goal type can be funded at a time</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A budget can work toward all three goal types at once, even in small amounts &mdash; and the exact split is a trade-off, not a fixed rule.</p>
+        </div>
+        <div class="quiz-q" data-qid="d5q5">
+          <p class="quiz-question">5. Priya has $45/month for goals and wants her $90 video game done in about 3 months. How much would that require each month, and how much would be left of the $45 for her other goals?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$30/month for the game, leaving $15 for her other goals</button>
+            <button class="quiz-opt" data-correct="false">$90/month for the game, leaving nothing</button>
+            <button class="quiz-opt" data-correct="false">$9/month for the game, leaving $36</button>
+            <button class="quiz-opt" data-correct="false">$45/month for the game, leaving $0</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>$90 &divide; 3 months = $30/month toward the game, which leaves $45 &minus; $30 = $15 a month for the tablet and helping her grandmother.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Revisit the budget you built on Day 2. Split your savings/goal amount across a short-term goal, a long-term goal, and a giving amount. What trade-off did you have to make to fit all three?</p>
+        <textarea data-reflection="5" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 5 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdGlkBtIaO9qMgep4kqHdcDyOErZSxhAoVbH3wkiw2AXc8PSQ/viewform">Open Day 5 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="5">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="5" disabled>Mark Day 5 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 6 -->
+    <section class="day-panel" data-panel="6" hidden>
+      <div class="day-head">
+        <h2>Day 6 · Unit Review &amp; Assessment: Build-a-Budget</h2>
+        <span class="standard-badge">Synthesis: PB.1&ndash;4, PB.6&ndash;7; CP.1&ndash;2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can build a complete budget from a scenario that uses everything from this unit &mdash; predicting expenses, smart spending, and saving toward multiple goals.</div></div>
+
+      <article class="lesson">
+        <p>Six days ago you started by predicting what belongs in a budget. Since then you've built a full budget from real income (Day 2), learned to compare total costs and negotiate (Day 3), seen how small habits add up (Day 4), and split savings across short-term, long-term, and giving goals (Day 5). Today's job is to pull all five of those skills together into one complete scenario &mdash; exactly what the official check-in will ask you to do.</p>
+        <p>Let's walk through what that looks like, end to end, using one running example. Suppose a student earns <strong>$100 a month</strong> from a part-time job and gift money.</p>
+        <p><strong>Predicting expenses (Day 1):</strong> before assigning a single dollar, the student lists what actually needs covering &mdash; a fixed phone add-on, variable snack and entertainment spending, and no periodic expenses this particular month (though a future birthday gift is worth keeping in mind).</p>
+        <p><strong>Building the budget (Day 2):</strong> Needs: $10 (phone add-on). Wants: $50 (entertainment $20 + snacks $15 + clothes $15). That's $60 committed, leaving $40 for savings and giving &mdash; step 3 of the process (income $100 &minus; expenses so far $60 = $40 remaining to assign).</p>
+        <p><strong>Smart spending (Day 3):</strong> when it's time to actually buy the clothes or entertainment items in that budget, the student checks total cost &mdash; price plus shipping plus tax &mdash; across more than one seller, and isn't afraid to politely ask about a discount on a floor-model or multi-item purchase.</p>
+        <p><strong>Habit awareness (Day 4):</strong> before locking in the $15/month snack budget, the student checks its yearly cost: at roughly $15 &times; 12 = $180 a year, that's real money &mdash; worth keeping, but worth knowing the true size of.</p>
+        <p><strong>Multiple goals (Day 5):</strong> the remaining $40 splits into short-term $10 (a $60 goal reached in 6 months), long-term $25 (a $300 goal reached in 12 months), and giving $5 (set aside monthly for a cause the student cares about) &mdash; adding back up to exactly $40, so the full $100 income is accounted for with nothing overspent.</p>
+        <p>Two mix-ups worth clearing up before this unit wraps. First, needs/wants is a <em>different question</em> from fixed/variable/periodic &mdash; they're two separate ways of describing the same expense, not two names for the same idea. A want can still be a fixed monthly cost (a streaming subscription is a want, but it's fixed &mdash; same price every month). A need can still be variable (groceries are a need, but the amount changes week to week). Don't assume "need" always means "fixed" or "want" always means "variable" &mdash; check each expense on both questions separately. Second, savings should be planned for like any other required expense in step 2 of the budgeting process, not treated as whatever happens to be left over after everything else. A budget that plans savings on purpose is dramatically more likely to actually reach its goal than one that hopes there's money left at the end.</p>
+        <p>Across the unit, most budgeting mistakes trace back to skipping one of the five days' skills rather than getting the math wrong. Forgetting Day 1's periodic expenses turns a predictable cost into a fake emergency. Skipping Day 2's step 4 lets a budget quietly go negative without ever getting fixed. Buying the first option seen instead of running Day 3's total-cost comparison means paying more than necessary for the exact same item. Ignoring Day 4's frequency math lets a "tiny" habit quietly eat a real chunk of a paycheck unnoticed. And treating Day 5's goals as optional extras, instead of planned categories, is how a savings goal never actually gets funded. Every one of these is fixable &mdash; and now you have the tools to fix all five.</p>
+        <p>Before finalizing any budget &mdash; today's, or one you build in real life later &mdash; it helps to run it through five quick questions, one for each day of this unit. Have I predicted every fixed, variable, and periodic expense that actually applies to my situation (Day 1)? Does my total planned spending, including savings, add up to no more than my income (Day 2)? Have I checked total cost &mdash; not just sticker price &mdash; before making a purchase in this budget (Day 3)? Have I checked whether any small recurring purchase is costing more per year than it seems to in the moment (Day 4)? And have I planned savings across more than one goal type on purpose, rather than leaving it as whatever's left over (Day 5)? A budget that can answer "yes" to all five has genuinely used everything this unit taught.</p>
+        <p>A budget also isn't a document you write once and never touch again. Income changes &mdash; a raise, a lost babysitting client, a new job. Expenses change too &mdash; a periodic fee gets added, a subscription gets canceled. Revisiting a budget every so often and adjusting it, the same way step 4 from Day 2 already showed, is a normal, healthy part of using one &mdash; not a sign that the original plan failed.</p>
+        <p>Today's self-check and reflection pull every piece of this unit together into one scenario, just like the official check-in will &mdash; so take your time and use the running example above, and the five-question checklist, as a model for your own thinking.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Your Whole Paycheck</h4>
+        <p>You just earned your first paycheck of $120 from a part-time summer job. It's sitting in an envelope on your desk, and you haven't spent a single dollar of it yet.</p>
+        <p class="prompt">Walking through everything from this unit &mdash; predicting expenses, the four-step budgeting process, smart spending, habit awareness, and multiple goals &mdash; what's the very first thing you should do with that $120, and what order would the rest of your decisions follow?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB &mdash; Money as You Grow</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of any Unit 3 concept or some extra review before the check-in.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 3 checkpoint</h3>
+        <div class="quiz-q" data-qid="d6q1">
+          <p class="quiz-question">1. In a completed budget, why should the savings/goal category be treated like other required expenses instead of "whatever's left over"?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Treating savings as planned, not leftover, makes it far more likely the goal actually gets funded</button>
+            <button class="quiz-opt" data-correct="false">Savings doesn't need any planning at all</button>
+            <button class="quiz-opt" data-correct="false">Leftover money always covers savings anyway</button>
+            <button class="quiz-opt" data-correct="false">A budget can't include goals</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Planning savings on purpose, alongside needs and wants, is what actually gets a goal funded &mdash; "leftover" money has a way of disappearing.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q2">
+          <p class="quiz-question">2. Which combination best summarizes this unit's key skills, all working together?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Predicting real expenses, building an income-based budget, shopping smart, and allocating toward multiple goals</button>
+            <button class="quiz-opt" data-correct="false">Only comparing prices between two stores</button>
+            <button class="quiz-opt" data-correct="false">Only listing your income</button>
+            <button class="quiz-opt" data-correct="false">Only naming your favorite purchases</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This unit builds one skill on the next &mdash; every piece from Days 1&ndash;5 works together in a real budget, not in isolation.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q3">
+          <p class="quiz-question">3. A student's income decreases by 15%. What's the most financially sound response?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Revisit the budget and adjust expense or savings amounts so it still balances</button>
+            <button class="quiz-opt" data-correct="false">Keep spending exactly the same as before</button>
+            <button class="quiz-opt" data-correct="false">Stop budgeting altogether</button>
+            <button class="quiz-opt" data-correct="false">Only ever change the giving category</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A budget isn't a one-time document &mdash; when income changes, revisiting and adjusting it is exactly what keeps it realistic.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q4">
+          <p class="quiz-question">4. Which statement correctly separates needs/wants from fixed/variable/periodic?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">A streaming subscription is a want, but it's also fixed &mdash; the two questions are separate and both apply to every expense</button>
+            <button class="quiz-opt" data-correct="false">Every need is automatically fixed, and every want is automatically variable</button>
+            <button class="quiz-opt" data-correct="false">Needs and wants are just other names for fixed and variable</button>
+            <button class="quiz-opt" data-correct="false">Periodic expenses can never be needs</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Needs/wants asks "is this required?" while fixed/variable/periodic asks "how does the cost show up over time?" &mdash; every expense gets checked on both questions separately.</p>
+        </div>
+        <div class="quiz-q" data-qid="d6q5">
+          <p class="quiz-question">5. You just earned your first $120 paycheck and haven't spent any of it. Following everything from this unit, what should you do first?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">List it as income and plan out needs, wants, and goals before spending any of it</button>
+            <button class="quiz-opt" data-correct="false">Spend it all right away on whatever looks appealing first</button>
+            <button class="quiz-opt" data-correct="false">Ignore it since it's not a regular allowance</button>
+            <button class="quiz-opt" data-correct="false">Give the entire amount away immediately</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Step 1 of the budgeting process is always listing income first &mdash; every other decision, from needs to goals, is built on top of that starting number.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Looking back across all 6 days of this unit, what is one specific change you'll actually make to how you plan your own spending?</p>
+        <textarea data-reflection="6" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 6 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress &mdash; a Build-a-Budget scenario plus 2 extra review questions covering the whole unit.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-xfmTeD-ciIZ7ZKIDuEqI7hYEv_Q39YnKXewD7z54MCdVQ/viewform">Open Day 6 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="6">Answer all 5 checkpoint questions and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="6" disabled>Mark Day 6 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 3 complete 🌱</h3>
+        <p>You've covered expense prediction, budget-building, smart spending, and multi-goal saving &mdash; the same standards your classmates covered in class (NJSLS 9.1.8.PB.1&ndash;4, PB.6&ndash;7, CP.1&ndash;2). Show your teacher this page or your notebook reflections, and check in about Unit 4.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 3 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u3-selfstudy-v1';
+  var TOTAL_DAYS = 6;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, goal: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function goalCompleteForDay2(){
+    var g = state.goal;
+    return !!(g.what && g.cost && g.source && g.amount && g.deadline);
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '2') allAnswered = allAnswered && goalCompleteForDay2();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  function renderGoalSummary(){
+    var g = state.goal;
+    var summaryEl = document.getElementById('goalSummary');
+    var textEl = document.getElementById('goalSummaryText');
+    if (g.what && g.cost && g.source && g.amount && g.deadline){
+      textEl.textContent = 'Income: ' + g.what + '. Needs: ' + g.cost + '. Wants: ' + g.source + '. Savings goal: ' + g.amount + ', reaching it in ' + g.deadline + '.';
+      summaryEl.hidden = false;
+    } else { summaryEl.hidden = true; }
+  }
+
+  function restoreGoal(){
+    document.querySelectorAll('[data-goal]').forEach(function(input){
+      var key = input.dataset.goal;
+      if (state.goal[key]) input.value = state.goal[key];
+      input.addEventListener('input', function(){
+        state.goal[key] = input.value;
+        saveState();
+        renderGoalSummary();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="2"]'));
+      });
+    });
+    renderGoalSummary();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '2' && !goalCompleteForDay2()){
+          var hint = document.querySelector('[data-hint-for="2"]');
+          if (hint) hint.textContent = 'Fill in all five fields of your first budget above, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restoreGoal();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

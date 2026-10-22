@@ -1,0 +1,1139 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Financial Foundations</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* ===== Design system: "Money Garden" — growth-mindset metaphor already
+     in the copy (🌱), carried through color + type. Moss green = the
+     everyday self-check work (growth, learning). Gold = the official
+     check-in — the one action on each page that actually counts. ===== */
+  :root{
+    --paper:#F1F6EA;
+    --surface:#FFFFFF;
+    --surface-2:#E4EFDB;
+    --ink:#1C2B1E;
+    --ink-muted:#57694F;
+    --line:#CFE1C2;
+    --moss:#2F9E5C;
+    --moss-deep:#1F7A46;
+    --moss-contrast:#FFFFFF;
+    --gold:#E8A23A;
+    --gold-deep:#B9791E;
+    --gold-contrast:#2A1B04;
+    --coral:#E15B49;
+    --complete-bg:#DEF0D6;
+    --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E;
+      --surface:#182014;
+      --surface-2:#212C1A;
+      --ink:#EAF1E2;
+      --ink-muted:#A9BC9E;
+      --line:#2E3D26;
+      --moss:#4FC97F;
+      --moss-deep:#6FE29B;
+      --moss-contrast:#0B1409;
+      --gold:#F0B457;
+      --gold-deep:#F7CC85;
+      --gold-contrast:#2A1B04;
+      --coral:#F0806D;
+      --complete-bg:#1C3120;
+      --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E;
+    --surface:#182014;
+    --surface-2:#212C1A;
+    --ink:#EAF1E2;
+    --ink-muted:#A9BC9E;
+    --line:#2E3D26;
+    --moss:#4FC97F;
+    --moss-deep:#6FE29B;
+    --moss-contrast:#0B1409;
+    --gold:#F0B457;
+    --gold-deep:#F7CC85;
+    --gold-contrast:#2A1B04;
+    --coral:#F0806D;
+    --complete-bg:#1C3120;
+    --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;} /* ~18px base — this course is read, not skimmed */
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Nunito Sans',system-ui,-apple-system,sans-serif;
+    font-size:1rem;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Baloo 2',system-ui,sans-serif;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex; flex-wrap:wrap; gap:22px;
+    justify-content:space-between; align-items:flex-end;
+    padding-bottom:22px; margin-bottom:26px;
+    border-bottom:2px solid var(--line);
+  }
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{
+    display:block; font-family:'IBM Plex Mono',monospace;
+    font-size:.85rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold-deep); font-weight:600; margin-bottom:7px;
+  }
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{
+    width:62px; height:62px; border-radius:50%;
+    background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0);
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  .ring::after{
+    content:attr(data-label);
+    width:48px; height:48px; border-radius:50%;
+    background:var(--surface);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:.82rem; font-weight:600;
+  }
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  /* ---------- Day nav ---------- */
+  .day-nav{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+    margin-bottom:28px;
+  }
+  .day-btn{
+    text-align:left; cursor:pointer;
+    background:var(--surface); border:2px solid var(--line); border-radius:16px;
+    padding:14px 16px; display:flex; flex-direction:column; gap:7px;
+    transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+  }
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink-muted); letter-spacing:.06em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.05rem;}
+  .status-pill{
+    align-self:flex-start;
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600;
+    letter-spacing:.03em; text-transform:uppercase;
+    padding:3px 9px; border-radius:999px;
+    background:var(--surface-2); color:var(--ink-muted);
+  }
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  /* ---------- Day panels ---------- */
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;
+    color:var(--moss-deep); background:var(--surface-2);
+    padding:4px 11px; border-radius:8px; letter-spacing:.02em;
+  }
+
+  .objective{
+    background:var(--surface-2); border-radius:14px;
+    padding:18px 20px; font-size:1.08rem; font-weight:600;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .objective::before{
+    content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;
+  }
+  .objective b{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--gold-deep); font-weight:600;
+    display:block; margin-bottom:4px;
+  }
+
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+
+  .callout{
+    background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:20px 22px;
+    font-size:1.02rem;
+  }
+  .callout h3{font-size:1.15rem; margin-bottom:10px; font-weight:700;}
+  .callout ul{margin:10px 0 0; padding-left:1.3em;}
+  .callout li{margin-bottom:6px;}
+
+  article.lesson{
+    max-width:64ch; font-size:1.14rem; line-height:1.75;
+  }
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+
+  .resource-card{
+    display:flex; gap:16px; align-items:flex-start;
+    background:var(--surface); border:2px solid var(--line); border-radius:16px;
+    padding:18px 20px;
+  }
+  .resource-card .icon{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700;
+    color:var(--moss-deep); background:var(--complete-bg);
+    padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;
+  }
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+
+  /* ---------- Official check-in ---------- */
+  .official-card{
+    display:flex; gap:16px; align-items:flex-start;
+    background:var(--surface); border:2.5px solid var(--gold); border-radius:16px;
+    padding:20px 22px;
+  }
+  .official-card .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700;
+    color:var(--gold-contrast); background:var(--gold);
+    padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap;
+    margin-top:2px;
+  }
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+
+  /* ---------- Quiz ---------- */
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{
+    background:var(--surface); border:2px solid var(--line); border-radius:16px;
+    padding:18px 20px; margin-bottom:16px;
+  }
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{
+    text-align:left; padding:12px 14px; border-radius:12px;
+    border:2px solid var(--line); background:var(--paper);
+    color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer;
+    transition:border-color .12s ease, background .12s ease, transform .1s ease;
+  }
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+
+  /* ---------- Reflection ---------- */
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{
+    width:100%; min-height:120px; resize:vertical;
+    background:var(--surface); color:var(--ink);
+    border:2px solid var(--line); border-radius:12px;
+    padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;
+  }
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+
+  /* ---------- SMART goal builder (Day 4) ---------- */
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{
+    background:var(--surface); color:var(--ink); border:2px solid var(--line);
+    border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;
+  }
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{
+    margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss);
+    border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;
+  }
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+
+  /* ---------- Complete bar ---------- */
+  .complete-bar{
+    display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+    background:var(--surface); border:2px solid var(--line); border-radius:16px;
+    padding:16px 20px;
+  }
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{
+    font-family:'Baloo 2',sans-serif;
+    border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem;
+    cursor:pointer; transition:opacity .12s ease, transform .1s ease;
+  }
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+
+  /* ---------- Unit complete banner ---------- */
+  .unit-complete{
+    background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px;
+    padding:24px 26px; text-align:center; display:none;
+  }
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+
+  footer{
+    margin-top:44px; padding-top:22px; border-top:2px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;
+  }
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+
+  @media (max-width:640px){
+    .day-nav{grid-template-columns:repeat(2,1fr);}
+    .goal-grid{grid-template-columns:1fr;}
+    .topbar{align-items:flex-start;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Financial Foundations</h1>
+      </div>
+      <p class="subtitle">Unit 1 — Mindset, Goals &amp; Values · 4 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/4"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Your Money Mindset</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Needs, Wants &amp; Values</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Money &amp; Emotions</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">SMART Goals &amp; Wrap-Up</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Your Money Mindset</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain what "financial literacy" means and describe how my mindset about money shapes the choices I make.</div></div>
+
+      <div class="callout">
+        <h3>How this self-study course works</h3>
+        <p>You're completing this unit on your own instead of in class — that's completely fine. Each day takes about 40&ndash;50 minutes and includes the same content your classmates are covering, just in a format you can work through independently:</p>
+        <ul>
+          <li>A short reading that explains the day's idea (no video required, though one is linked if you'd like it)</li>
+          <li>An optional outside link at the bottom of each lesson, in case you'd like another explanation or some extra practice — you don't need it to finish the lesson</li>
+          <li>A quick self-check with instant feedback, so you know if an idea needs a second look</li>
+          <li>A short reflection question — keep your answers in a notebook or type them here; this page saves what you type automatically in this browser</li>
+        </ul>
+        <p>Grab paper or a notebook for your reflections, then come back to Day 2 next class period. If anything is confusing, jot down your question so you can ask your teacher.</p>
+      </div>
+
+      <article class="lesson">
+        <p><strong>Financial literacy</strong> is the knowledge and skills you need to make informed decisions about earning, spending, saving, and managing money — not just now, but for the rest of your life. It's not about how much money you have. A person with very little money and a person with a lot of money both need financial literacy; it's the difference between money happening <em>to</em> you and you making decisions <em>about</em> your money.</p>
+        <p>Before we get into budgets or bank accounts, this course starts somewhere most personal-finance classes skip: your <strong>money mindset</strong> — the beliefs and attitudes about money you've already picked up, often without realizing it. Maybe you've heard "money doesn't grow on trees," or watched a family member stress about bills, or noticed an influencer flaunting purchases online. All of that shapes how you think about money before you've even earned your first paycheck.</p>
+        <p>Psychologists sometimes call these absorbed beliefs "money scripts." Two common ones sound like this: <em>"Money is stressful and I'd rather not think about it,"</em> versus <em>"Money is a tool, and I can learn to use it well."</em> Neither reaction makes you a good or bad person — but the second one is a skill you can build, regardless of where you're starting from. That's really the whole point of this course: not to tell you how to feel about money, but to give you tools so that, whatever your mindset, you're making choices on purpose instead of by accident.</p>
+        <p>Here's what that difference looks like in real life. Imagine two 7th graders, Jordan and Priya, each get a $40 birthday gift from a grandparent on the same afternoon. Jordan's money script says, <em>"money is stressful, so don't overthink it — just enjoy it while it's here."</em> Jordan spends the whole $40 that same day on snacks and a mobile-game purchase, and a week later can barely remember where it went. Priya's money script says, <em>"money is a tool, and I get to decide how to use it."</em> Priya takes a few minutes to think it over, puts $15 toward something she's been wanting, and drops the other $25 into a jar she's saving toward a bigger goal. Neither of them is a "better" person because of this — but notice that only one of them actually made a decision. The other one just let the money disappear on autopilot. That's the real difference a mindset makes: it's not about which purchase is "correct," it's about whether you're choosing on purpose or letting the choice happen to you.</p>
+        <p>You may have also heard the terms <strong>fixed mindset</strong> and <strong>growth mindset</strong> applied to school subjects like math — the same idea applies directly to money. A fixed money mindset sounds like, "I'm just bad with money, that's who I am," as if your money skills are permanently set in stone. A growth money mindset sounds like, "I'm not great at this yet, but I can learn." The growth version isn't naive optimism — it's just realistic. Budgeting, saving, and spending wisely are skills, the same way shooting a free throw or reading music are skills: nobody is born already good at them, and everyone improves with practice and the right information. That's the entire premise of this course, and it's true no matter which of the two money scripts above sounds more like you right now.</p>
+        <p>Here's a way to see how much a mindset shift is actually worth, in real numbers. Imagine two students who each decide to set aside $5 a week — about the cost of one snack run. A student who half-believes saving "isn't really worth it for someone my age" tends to skip the habit whenever the week gets busy or boring, realistically banking that $5 only every other week. Over a 36-week school year, that's about 18 weeks banked — $90 saved. A student who treats saving as a skill worth practicing, even when it's not exciting, sticks with it most weeks; over that same 36-week year, that's closer to $180 — exactly double, from the exact same $5 and the exact same number of weeks. Nothing about the amount changed. What changed was whether the habit survived a boring week — and that's really what a mindset controls: not how much money shows up, but whether you keep doing the small thing that adds up.</p>
+        <p>So how do you actually change a script you didn't choose in the first place? One simple three-step habit works for almost any money script: <strong>catch it, name it, choose it.</strong> <em>Catch it</em> means noticing the moment right before you spend or decide not to save — that's usually when the script is loudest. <em>Name it</em> means putting words to the thought, even just in your head: "this is the 'don't overthink it' voice again," or "this is the 'I'm just bad with money' voice." <em>Choose it</em> means deciding, on purpose, whether to follow that voice this time or try something different. This isn't about silencing the thought — you'll probably keep hearing it for a while. It's about making sure the thought doesn't get to make the decision by itself, every single time, without you noticing it happened.</p>
+        <p>You don't have to figure out your entire money mindset today — just start noticing it. Over the next few days, pay attention to the story running through your head right before you spend or save something: is it closer to Jordan's ("don't overthink it, just enjoy it") or Priya's ("I get to decide how to use this")? Neither story is permanent. The whole point of naming it is that once you can actually hear it in the moment, you get to choose whether to follow it or write a different one.</p>
+        <p>Over the next four days you'll look at what you value, how emotions influence spending, and how to set a real goal for your own money. Think of today as setting the foundation everything else gets built on.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The $20 Birthday Card</h4>
+        <p>You open a birthday card from your aunt and $20 falls out. Your first thought is, <em>"money like this never lasts anyway, I might as well spend it before it disappears somehow."</em> You almost put it straight into your pocket to spend at lunch tomorrow without really deciding anything.</p>
+        <p class="prompt">What money script is showing up in that first thought — and what would "catching it, naming it, and choosing it" look like before you decide what to do with the $20?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Money Milestones for School-Age Children &amp; Preteens</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/school-age-children-preteens/money-milestones/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Financial literacy means...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Being naturally good at math class</button>
+            <button class="quiz-opt" data-correct="true">Having the knowledge and skills to make informed decisions about earning, spending, saving, and managing money</button>
+            <button class="quiz-opt" data-correct="false">Having a lot of money already saved</button>
+            <button class="quiz-opt" data-correct="false">Working a full-time job</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Financial literacy isn't about how much money you have — it's about the skills and knowledge to make good decisions with whatever money you do have.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. A "money mindset" is best described as...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The exact amount of money in your wallet right now</button>
+            <button class="quiz-opt" data-correct="false">A math skill you're born with</button>
+            <button class="quiz-opt" data-correct="true">The beliefs and attitudes about money you've picked up from family, friends, and experience</button>
+            <button class="quiz-opt" data-correct="false">A type of bank account</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>We absorb ideas about money — often without noticing — from the people and messages around us. Recognizing your mindset is the first step toward building money skills on purpose.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. Which statement reflects a growth mindset about money?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">"I'm just bad with money — that's who I am."</button>
+            <button class="quiz-opt" data-correct="true">"I can learn skills that help me make better money decisions over time."</button>
+            <button class="quiz-opt" data-correct="false">"Money is too complicated for someone my age to understand."</button>
+            <button class="quiz-opt" data-correct="false">"There's no point planning — I'll never have enough for it to matter."</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A growth mindset means believing your money skills can improve with practice — exactly what this course is here to help you build.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. In the $5-a-week example, both students saved the same weekly amount over the same 36-week year, but one ended up with double the total. What actually caused the difference?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">One of them got a bigger allowance than the other</button>
+            <button class="quiz-opt" data-correct="false">One of them found a better bank account</button>
+            <button class="quiz-opt" data-correct="true">One of them kept the habit going most weeks, while the other skipped it whenever the week got busy or boring</button>
+            <button class="quiz-opt" data-correct="false">The two students didn't actually save the same amount per week</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The weekly amount was identical — $5. The only difference was consistency: skipping the habit roughly half the time cut the total in half, which shows how much a mindset that treats saving as "worth sticking with" is actually worth over time.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. You catch yourself thinking, "money never lasts anyway, so why bother deciding what to do with it?" right before you spend a $20 birthday gift. Using "catch it, name it, choose it," what's the best next step?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Ignore the thought completely and spend the money immediately, since noticing it won't change anything</button>
+            <button class="quiz-opt" data-correct="false">Assume the thought is a fact about how money works and act on it right away</button>
+            <button class="quiz-opt" data-correct="true">Name the thought as a money script you noticed, then decide on purpose whether to follow it or do something different with the $20</button>
+            <button class="quiz-opt" data-correct="false">Wait for someone else to decide what to do with the money for you</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Catching a money script doesn't mean the thought disappears — it means you get to choose, on purpose, whether to follow it, instead of letting it make the decision automatically.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Where do you think you first learned ideas about money — from family, friends, ads, or social media? Give one specific example of a money "rule" or belief you grew up hearing.</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdXKZuZhRXUqPTweAufit4ft_1u5kNf85PzYEIodQtzY1r2YQ/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Needs, Wants &amp; Values</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.2&ndash;3</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can distinguish needs from wants and explain how my personal values influence my spending choices.</div></div>
+
+      <article class="lesson">
+        <p>Every spending decision starts with a question, even if you don't say it out loud: <em>is this a need or a want?</em> A <strong>need</strong> is something required for your health, safety, or basic functioning — food, shelter, required school supplies, a winter coat when it's cold. A <strong>want</strong> makes life more fun, comfortable, or exciting, but you could live without it — the newest game, a second pair of sneakers, extra snacks.</p>
+        <p>Most real decisions aren't that clean, though. Take a smartphone: for a teen who needs it to reach a job or coordinate with family, it functions like a need. For the same phone used only for games and social media, it's closer to a want. Context — your situation, your responsibilities — changes the category.</p>
+        <p>That's where <strong>values</strong> come in: the things that matter most to you, like family, security, creativity, adventure, generosity, or belonging. Two people can have the exact same amount of money and spend it completely differently, and neither is "wrong" — they're making choices that reflect what they value. A student who values creativity might spend a gift card on art supplies; a student who values long-term security might save the same amount toward something bigger. Knowing your own values in advance makes spending decisions easier, because you're comparing a purchase to what actually matters to you — not guessing in the moment.</p>
+        <p>Let's walk through a real "depends" decision step by step, since those are the trickiest. Say your backpack's zipper finally breaks and you need a new one — that part is a clear need; you can't carry your books without a working bag. But when you go shopping, you find two options: a plain backpack for $28 that holds everything you need, and a backpack from your favorite brand for $75 with the exact same capacity. Which one is the "need"? Neither, exactly — the need is simply <em>a working backpack</em>, and the $28 option already covers that completely. The extra $47 is a want, and whether it's worth spending depends entirely on your values. If one of your top values is fitting in with your friend group or expressing yourself through what you own, that extra cost might genuinely be worth it to you. If your top value is security, or you're saving toward something bigger, you'd probably skip it and keep the difference. Notice what didn't change: the backpack does the exact same job either way. What changed was which value was doing the deciding — and that's a completely reasonable way to make the call, as long as you're doing it on purpose instead of out of habit.</p>
+        <p>A quick three-question test can help you sort tricky "depends" cases like this one whenever you run into them: <strong>(1)</strong> Would going without this cause a real problem for my health, safety, or ability to function — not just disappointment? <strong>(2)</strong> Does my specific situation change the answer (a phone that's required for a job versus a phone used only for games)? <strong>(3)</strong> If it's genuinely a "depends," which of my values is doing the deciding, and how much is that value actually worth to me in dollars? Running an item through these three questions turns a vague feeling — "I really want this" — into a decision you could explain out loud and still agree with a week later.</p>
+        <p>Getting this distinction right matters beyond card sorts and quizzes. Later in this course, when you build an actual budget, needs get covered first, because skipping them causes real problems — a missed bus pass can mean being late to school, and skipped groceries mean going hungry. Wants get whatever money is left over after needs are handled, and that's exactly where your values earn their keep: they help you decide which wants are genuinely worth the money to <em>you</em>, instead of just buying whatever happens to be in front of you.</p>
+        <p>There's a name worth knowing for this kind of trade-off: economists call it <strong>opportunity cost</strong> — the value of what you give up when you choose to spend money on one thing instead of something else. Say you have $60 total this month. If you spend $47 extra on the brand-name backpack from the earlier example, that same $47 is no longer available for, say, a $45 outing with your two closest friends next month — even though time with friends might rank higher on your values list than a backpack logo would, once you actually stop to compare them. Opportunity cost isn't a reason to never buy the want; it's a reminder that every want you buy is quietly competing against every other want you haven't bought yet, whether you think about it that way or not.</p>
+        <p>Values also don't stay fixed, and they can differ even within the same family. A sibling who values excitement might spend most of their money on outings and experiences, while another sibling who values security might rather watch a savings balance grow — same household, same rules about money, completely different spending patterns, and neither one is copying the "correct" answer from the other. As you get older and take on more responsibility — a part-time job, transportation, eventually rent — your needs list grows too, and some of today's "wants" quietly become tomorrow's "needs." The three-question test from above doesn't expire at the end of 7th grade; it's a tool you'll keep using for the rest of your life, just with bigger numbers attached each time.</p>
+        <p>Today's self-check will ask you to sort a few examples into needs and wants, and think about how your own values would show up in a spending decision.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Marcus and the Graphing Calculator</h4>
+        <p>Marcus's older sibling gives him $130 to spend before school starts. His math teacher says he's required to have a graphing calculator this year — that part is a clear need. At the store he finds two options that both meet the class requirement: a basic model for $18, and a flashier model with extra features (plus a few built-in games) for $95.</p>
+        <p class="prompt">Using the three-question test, how much of Marcus's $130 is really going toward his need, and how much of the $95 option is a want? If security is one of Marcus's top values, what would you guess he does with the leftover money — and what might he do differently if creativity were his top value instead?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. Which of these is closest to a "need" rather than a "want" for most 7th graders?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The newest gaming console</button>
+            <button class="quiz-opt" data-correct="true">A winter coat when it's cold outside</button>
+            <button class="quiz-opt" data-correct="false">Name-brand sneakers</button>
+            <button class="quiz-opt" data-correct="false">A second phone</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Needs are things required for health, safety, or basic functioning — wants make life more fun or comfortable but aren't required.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. Two students each get a $30 gift card. One buys art supplies; the other saves it toward a bike. What does this best show?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">One of them is spending "wrong"</button>
+            <button class="quiz-opt" data-correct="false">Gift cards can only be used one way</button>
+            <button class="quiz-opt" data-correct="true">People's spending choices often reflect what they personally value</button>
+            <button class="quiz-opt" data-correct="false">Saving is always the better choice</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Neither choice is "wrong" — different people prioritize different things (creativity vs. a longer-term goal), and that's normal.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. A smartphone is best described as...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Always a need for everyone</button>
+            <button class="quiz-opt" data-correct="false">Always a want for everyone</button>
+            <button class="quiz-opt" data-correct="true">A need or want depending on someone's situation and how they use it</button>
+            <button class="quiz-opt" data-correct="false">Neither a need nor a want</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Context matters — a phone someone needs to reach a job or family can function like a need, while the same phone used only for entertainment is more of a want.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. "Opportunity cost" refers to...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">The sales tax added on top of a purchase</button>
+            <button class="quiz-opt" data-correct="false">The discount you get during a sale</button>
+            <button class="quiz-opt" data-correct="true">The value of what you give up by choosing to spend money on one thing instead of something else</button>
+            <button class="quiz-opt" data-correct="false">The cost of shipping an online order</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Every dollar spent on one thing is a dollar unavailable for anything else — that trade-off, not a tax or fee, is what "opportunity cost" describes.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. Marcus spends $95 on the fancier calculator instead of the $18 basic model that meets the same class requirement. Six weeks later, a friend invites him on a $60 outing he'd really like to join, but he doesn't have enough saved. What best explains what happened?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Marcus made a math mistake, not a spending choice</button>
+            <button class="quiz-opt" data-correct="false">The outing was never really something Marcus valued</button>
+            <button class="quiz-opt" data-correct="true">Marcus experienced opportunity cost — the extra $77 he spent on calculator features was no longer available for the outing</button>
+            <button class="quiz-opt" data-correct="false">Nothing but bad luck was involved</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The $77 difference between the two calculators wasn't just spent on features — it was also, quietly, money no longer available for whatever came up next, like the outing.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">List your top 3 things you value most — not objects you own, but ideas like family, adventure, security, creativity, or helping others. How might those values affect how you'd spend $50?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfTQP5X6gUoqIcrRvIliQj861k4Ru3dSxaPqlWnOsBfJYsNAA/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Money &amp; Emotions</h2>
+        <span class="standard-badge">NJSLS 9.1.8.FP.4</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can identify how emotions influence spending decisions and describe a strategy for pausing before I spend.</div></div>
+
+      <article class="lesson">
+        <p>Not every purchase is a careful decision — a lot of spending happens because of how we feel in the moment. <strong>Emotional spending</strong> shows up in a few familiar patterns: buying something because you're bored, buying something because "everyone else has it," or buying something because an ad made you feel like you'd miss out if you waited.</p>
+        <p>Does any of this sound familiar? Maybe it's opening a shopping app "just to look" on a boring afternoon and, an hour later, having added $35 of clothes to a cart you didn't plan on filling. Or it's agreeing to spend $30 on a mini-golf outing you didn't really want to go to, just because your three closest friends were all going and you didn't want to be the one who said no. In neither case is the decision really about the clothes or the mini-golf — it's about boredom in the first case, and about not wanting to feel left out in the second. That's exactly what makes emotional spending tricky to catch in the moment: it feels like it's about the item, when it's actually about the feeling underneath it.</p>
+        <p>Ads and apps are also built to trigger exactly this kind of fast, feelings-first decision on purpose. They often use <strong>urgency</strong> — "flash sale, 2 hours only," a countdown timer, "only 3 left in stock" — specifically to get you to decide before you've had time to think it over. That's not an accident; it's a marketing technique, and recognizing it for what it is makes it far easier to not fall for it every time. Companies spend enormous amounts of time and money studying exactly which words, colors, and countdown timers make people click "buy" faster — urgency and messages like "14 people are looking at this right now" are deliberately designed, not accidents. None of that makes you weak for feeling the pull; it means the pull was engineered. Recognizing the design is what lets you decide whether a purchase is really worth it to <em>you</em>, instead of worth it to the company selling it.</p>
+        <p>Here's why pausing actually works, with real numbers. Say you're saving for wireless headphones that cost $150, and you've committed to putting away $12 a week — an amount that's realistic because it's what you'd have left over if you skipped a $4 snack three times a week. At $12 a week, it takes $150 &divide; $12 &asymp; 12.5, so about <strong>13 weeks</strong> to reach your goal. Now imagine you start caving to that same $4 snack one extra time a week — not every day, just once more than planned. Your savings drop from $12 to $8 a week. At $8 a week, $150 &divide; $8 &asymp; 18.75, so it now takes about <strong>19 weeks</strong> instead of 13 — six extra weeks, from one small emotional purchase repeated weekly. Neither $12 nor $8 a week is a "bad" number by itself — the math simply shows how much a small, repeated habit actually costs you in time toward something you said you wanted more.</p>
+        <p>None of this means feelings don't belong in spending decisions — wanting something isn't a problem. The goal is just to notice when a decision is happening <em>fast</em> and give yourself a moment to catch up. One simple tool: before a purchase that isn't small, ask three questions — <strong>Do I need it? Can I afford it without giving up something else I want more? Will I still want it in a week?</strong> Even just waiting 24 hours before buying something non-urgent gives your slower, more thoughtful thinking a chance to weigh in alongside the initial excitement — which, as the headphones example shows, can be the difference between reaching a goal in 13 weeks or 19.</p>
+        <p>Try tracking it for just one week and the pattern often becomes obvious fast. Suppose you keep a simple note on your phone, and next to every purchase you jot one word: "planned" or "in-the-moment." After a week you add up the "in-the-moment" purchases and find they total $22 out of $40 spent — more than half. That's not a reason to feel bad about yourself; it's information. Once you can see the pattern written down instead of just remembering it vaguely, it gets much easier to notice which specific triggers keep showing up — is it boredom on the bus ride home, seeing a friend post about a purchase, or a particular app you open whenever you're stressed? Naming the actual trigger is usually more useful than just telling yourself to "have more willpower," because it lets you plan around the real moment instead of fighting an urge you can't quite see.</p>
+        <p>Ads aren't the only source of pressure to spend fast — sometimes it comes from friends instead of a company. Being the only person in a group who says "I'll pass" on a $15 group activity can feel uncomfortable in the moment, even when skipping it is the more sensible choice for your own goals right now. It helps to have a low-key way to say no that doesn't turn into a whole conversation — something like "I'm saving for something right now, next time for sure" usually works, and most friends respect it more than you'd expect. Just like with an ad's countdown timer, the discomfort of pausing before agreeing to spend is real, but it's temporary — and it's a much smaller cost than repeatedly saying yes to spending you didn't actually plan for.</p>
+        <p>This isn't about never buying anything you want — it's about making sure the decision is actually yours, and not just the ad's, or the group's. The more often you catch the pause working — noticing you're about to buy something out of boredom or FOMO, waiting a day, and finding the urge has faded — the easier it gets to trust the process next time, even when the countdown timer is telling you there's no time to think.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Aaliyah's Bus-Stop Scroll</h4>
+        <p>Aaliyah opens a shopping app "just to look" while waiting for the bus. A banner at the top says "collection ends in 47 minutes." She wasn't thinking about anything specific she needed — she's just bored, and the ride is 12 minutes long. By the time the bus pulls up, her thumb is already halfway to the checkout button on a $24 hoodie.</p>
+        <p class="prompt">What's actually driving this purchase — the hoodie itself, or something else? If Aaliyah ran it through the three-question pause (Do I need it? Can I afford it without giving up something else? Will I still want it in a week?), what do you think would happen to the countdown-fueled urge to buy right now?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>FDIC — Money Smart for Young People, Grades 6&ndash;8</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.fdic.gov/consumer-resource-center/grades-6-8" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. You see a "flash sale — 2 hours only!" ad for something you don't need. This is an example of...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A needs-based purchase</button>
+            <button class="quiz-opt" data-correct="true">A marketing technique designed to create urgency so you skip thinking it over</button>
+            <button class="quiz-opt" data-correct="false">A SMART goal</button>
+            <button class="quiz-opt" data-correct="false">Financial literacy in action</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Countdown timers and "limited time" messages are designed to make you decide fast, before you've had a chance to think it through.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. Which strategy can help you make a more thoughtful spending decision?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Buying it immediately so you don't miss out</button>
+            <button class="quiz-opt" data-correct="false">Asking a friend to buy it for you instead</button>
+            <button class="quiz-opt" data-correct="true">Waiting 24 hours and asking whether you'll still want it later</button>
+            <button class="quiz-opt" data-correct="false">Ignoring the price</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A short pause gives your more thoughtful thinking time to catch up with your feelings — it doesn't mean you can never buy something you want.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. Feeling bored and buying something online to feel better is an example of...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">A SMART goal</button>
+            <button class="quiz-opt" data-correct="true">Emotional spending</button>
+            <button class="quiz-opt" data-correct="false">A need</button>
+            <button class="quiz-opt" data-correct="false">Delayed gratification</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Spending to change how you feel, rather than because you planned to buy something, is a common emotional-spending pattern worth noticing in yourself.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. Keeping a one-week note that labels each purchase "planned" or "in-the-moment" is useful mainly because it...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Guarantees you'll never make an in-the-moment purchase again</button>
+            <button class="quiz-opt" data-correct="false">Is required by most banks before you can open an account</button>
+            <button class="quiz-opt" data-correct="true">Helps you actually see your own patterns and triggers instead of just guessing at them</button>
+            <button class="quiz-opt" data-correct="false">Automatically saves the money for you</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Writing purchases down turns a vague feeling ("I probably spend too much sometimes") into something specific you can actually see and plan around — like noticing boredom on the bus ride home is a recurring trigger.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Aaliyah is about to buy a $24 hoodie from a countdown-timer sale mostly because she's bored on the bus, not because she planned to buy anything. What would the three-question pause most likely help her do?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Buy it immediately, since the timer means the deal truly won't exist again</button>
+            <button class="quiz-opt" data-correct="false">Ask a friend to decide for her instead</button>
+            <button class="quiz-opt" data-correct="true">Notice the urge is coming from boredom and the timer, not an actual need, and decide on purpose instead of on impulse</button>
+            <button class="quiz-opt" data-correct="false">Feel guilty about wanting the hoodie at all</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>The pause doesn't tell Aaliyah "no" — it just slows the decision down long enough for her to notice what's actually driving it (boredom + urgency) before she acts on it.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Describe a time you bought something (or really wanted to) because of how you felt in the moment. Looking back, would you make the same choice? Why or why not?</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe7PLzQoEs-rV-IqCB_pFmQ5DkiOyDE6cpA6066ZR2QMcLWmQ/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · SMART Goals &amp; Wrap-Up</h2>
+        <span class="standard-badge">NJSLS 9.1.8.PB.5</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can write a SMART financial goal and explain the steps I'd take to reach it.</div></div>
+
+      <article class="lesson">
+        <p>Over the last three days you've thought about your money mindset, what you value, and how emotions affect spending. Today those ideas come together into one practical skill: setting a goal you can actually reach.</p>
+        <p>A <strong>SMART goal</strong> is Specific, Measurable, Achievable, Relevant, and Time-bound. Compare these two goals: <em>"I want to save up for headphones"</em> versus <em>"I'll save $60 for headphones by putting away $10 a week from allowance and dog-walking money for 6 weeks."</em> The second one is Specific (headphones, $60), Measurable ($10/week), Achievable (from money you actually have coming in), Relevant (something you genuinely want), and Time-bound (6 weeks). It also does something the first version doesn't: it tells you exactly what to do this week.</p>
+        <p>Goals can be short-term (saving for a game over a month) or longer-term (saving toward a car over several years) — the SMART structure works for both. And this is where Days 1&ndash;3 matter: your mindset affects whether you believe the goal is worth trying, your values affect what you choose to save for, and your emotional-spending awareness affects whether you actually stick to the plan when something tempting comes along in week 3.</p>
+        <p>Let's build a second SMART goal from scratch so you can see exactly how each letter earns its place. Start with a weak, wishy-washy version: <em>"I want new sneakers."</em> That's a want, but it isn't a plan — it doesn't tell you what to actually do this week. Now SMART-ify it, one letter at a time. <strong>Specific</strong> means naming the exact thing, not a vague category — not "shoes," but a particular pair of sneakers that costs $90. <strong>Measurable</strong> means picking a number you can track — total dollars saved toward that $90. <strong>Achievable</strong> means checking that the money realistically exists: say you babysit most weekends and can set aside $15 a week without giving up something else that matters more to you. <strong>Relevant</strong> means the goal actually connects to one of your values — maybe independence, self-expression, or fitting in with people who matter to you — rather than being a random impulse. And <strong>Time-bound</strong> means doing the math to set a real deadline: $90 &divide; $15 per week = 6, so 6 weeks from today.</p>
+        <p>Put all five pieces together and the weak goal becomes: <em>"I will save $90 for sneakers by putting away $15 a week from babysitting money for 6 weeks."</em> That sentence tells you exactly what to do this Saturday — save $15 — while "I want new sneakers" told you nothing to do at all. That's the entire value of the SMART framework: it turns a feeling into a plan you can actually follow, one week at a time.</p>
+        <p>Before you lock in any goal, it's worth sanity-checking the "Achievable" part with simple math, because an unrealistic pace — not a lack of willpower — is the most common reason goals fail. Suppose you wanted those same $90 sneakers in just 2 weeks instead of 6: that's $90 &divide; 2 = $45 a week, which is a lot to find from babysitting or allowance in such a short window for most 7th graders. Stretching the timeline back out to 6 weeks brings it down to a far more realistic $15 a week. The item and the value behind it don't change — only the pace does. When a plan doesn't feel doable, the fix is almost never to want the thing less; it's to adjust the number of weeks until the weekly amount actually fits your real life.</p>
+        <p>Once you've written a goal, double-check it yourself by running back through all five letters like a checklist: Does it name one specific thing? Does it have a number attached? Is the weekly or monthly amount something you can realistically get? Does it connect to something you actually value? And does it have an exact deadline, not just "eventually"? If you can answer yes to all five, you've written a real plan — not just a wish.</p>
+        <p>Even a well-built SMART goal runs into real life eventually. Say partway through your six weeks toward the $90 sneakers, a friend invites you to a $20 movie night on the same week you were supposed to save your $15. Do you skip movie night, skip that one week of saving and accept a slightly longer timeline, or find an extra $5 somewhere else to cover both? None of those answers is automatically "correct" — but goals that survive real obstacles are usually the ones where you thought about a bump in the road ahead of time, instead of being caught off guard by it. That's exactly why the goal builder below asks you to name one likely obstacle and a plan for it, not just the goal itself.</p>
+        <p>Notice how everything from the last three days shows up here. Your money mindset from Day 1 affects whether you believe $15 a week is worth sticking with once it stops feeling new. Your values from Day 2 affect which goal you even choose — sneakers, savings, a gift for someone else, or something else entirely. And your emotional-spending awareness from Day 3 is exactly what helps the goal survive the week a countdown-timer sale or a spontaneous invite tries to pull that $15 somewhere else. A SMART goal isn't a replacement for those three ideas — it's the tool that turns them into a plan you can actually follow, one week at a time.</p>
+        <p>Use the builder below to write your own SMART goal for something you want in the next couple of months.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Laser Tag on Saving Day</h4>
+        <p>You're two weeks into your plan to save $15 a week toward $90 sneakers — $30 saved, $60 to go, right on schedule. Then your friend group chat blows up: everyone's going to a $20 laser-tag night this Saturday, the same day you'd planned to add another $15.</p>
+        <p class="prompt">Using ideas from Days 1&ndash;3 (mindset, values, and pausing before you spend), what are two different ways you could handle this obstacle without automatically abandoning either the sneakers goal or the friend hangout?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB — Money as You Grow</h4>
+          <p>You don't need this to finish today's lesson — everything you need is already above. Open it if you'd like another explanation or some extra practice.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. Which of these is a SMART financial goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">"I want to have more money someday."</button>
+            <button class="quiz-opt" data-correct="true">"I'll save $40 for a new game by putting away $10 a week for 4 weeks from my allowance."</button>
+            <button class="quiz-opt" data-correct="false">"I should probably start saving at some point."</button>
+            <button class="quiz-opt" data-correct="false">"I want to be rich."</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>This goal is Specific ($40 for a game), Measurable ($10/week), Achievable (from allowance), Relevant (something they want), and Time-bound (4 weeks).</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. In SMART goals, the "M" stands for...</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Money</button>
+            <button class="quiz-opt" data-correct="true">Measurable</button>
+            <button class="quiz-opt" data-correct="false">Mindset</button>
+            <button class="quiz-opt" data-correct="false">Motivational</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Measurable means you can track your progress with a number — like a dollar amount or a deadline — so you know how close you are.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. Why is it useful to set a deadline (the "Time-bound" part) for a savings goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">It's legally required</button>
+            <button class="quiz-opt" data-correct="true">It gives you a target to plan around and helps you notice if you need to adjust your plan</button>
+            <button class="quiz-opt" data-correct="false">It guarantees you'll reach the goal</button>
+            <button class="quiz-opt" data-correct="false">It has no real effect</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A deadline doesn't guarantee success, but it helps you plan concrete steps — like saving $10/week — and notice early if you need to adjust.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. Why is it useful to name one likely obstacle before you start working toward a SMART goal?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">It isn't useful — SMART goals never run into obstacles once they're written down</button>
+            <button class="quiz-opt" data-correct="false">It's required by the SMART framework's official rules</button>
+            <button class="quiz-opt" data-correct="true">Goals that survive real life are usually the ones planned around a bump in the road ahead of time, instead of being caught off guard by it</button>
+            <button class="quiz-opt" data-correct="false">It guarantees the obstacle will never actually happen</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Thinking through an obstacle in advance — like a friend's invite landing on a saving day — means you already have a plan instead of being caught by surprise mid-goal.</p>
+        </div>
+
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. You're two weeks into saving $15/week toward $90 sneakers when a friend invites you to a $20 laser-tag night on your scheduled saving day. Which response best reflects the ideas from this whole unit, rather than an all-or-nothing reaction?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="false">Immediately quit the sneakers goal since something got in the way</button>
+            <button class="quiz-opt" data-correct="false">Skip the friend hangout without thinking it over, no matter what</button>
+            <button class="quiz-opt" data-correct="true">Decide on purpose — for example, skip saving just that one week and add a week to the deadline, or find another way to cover both</button>
+            <button class="quiz-opt" data-correct="false">Ignore the situation and hope it resolves itself</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>A SMART goal is a flexible plan, not an all-or-nothing contract — adjusting the timeline or finding a middle path uses mindset, values, and pausing-before-spending together, instead of abandoning either the goal or the friendship.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Build your SMART goal</h3>
+        <p class="prompt">Fill in each field below. This is your unit wrap-up task — take your time.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="goalWhat">What do you want?</label>
+            <input id="goalWhat" data-goal="what" type="text" placeholder="e.g., wireless headphones">
+          </div>
+          <div class="goal-field">
+            <label for="goalCost">Estimated cost</label>
+            <input id="goalCost" data-goal="cost" type="text" placeholder="e.g., $60">
+          </div>
+          <div class="goal-field">
+            <label for="goalSource">Where will the money come from?</label>
+            <input id="goalSource" data-goal="source" type="text" placeholder="e.g., allowance + dog-walking">
+          </div>
+          <div class="goal-field">
+            <label for="goalAmount">Amount you'll save, and how often</label>
+            <input id="goalAmount" data-goal="amount" type="text" placeholder="e.g., $10 per week">
+          </div>
+          <div class="goal-field">
+            <label for="goalObstacle">One thing that might get in the way — and your plan for it</label>
+            <input id="goalObstacle" data-goal="obstacle" type="text" placeholder="e.g., a friend invites me out on a saving day — I'll skip that week and add a week to my deadline">
+          </div>
+          <div class="goal-field" style="grid-column:1 / -1;">
+            <label for="goalDeadline">Your deadline</label>
+            <input id="goalDeadline" data-goal="deadline" type="text" placeholder="e.g., 6 weeks from today">
+          </div>
+        </div>
+        <div class="goal-summary" id="goalSummary" hidden>
+          <b>Your SMART goal</b>
+          <span id="goalSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress — separate from the self-check above. It also collects your SMART goal, so have it ready before you start.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSctMG6Lls7reazae2KQsv6PdzpNRnyva1b1f2XXmnakgcwbFg/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 self-check questions and fill in your SMART goal to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 1 complete 🌱</h3>
+        <p>You've covered your money mindset, needs vs. wants and values, emotional spending, and how to set a SMART goal — the same standards your classmates covered in class (NJSLS 9.1.8.FP.1&ndash;4, PB.5). Show your teacher this page or your notebook reflections, and check in about Unit 2.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 1 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. It's a pilot for the self-study format — more units will follow the same model. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u1-selfstudy-v1';
+  var TOTAL_DAYS = 4;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, goal: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        state = Object.assign(state, parsed);
+      }
+    }catch(e){ /* storage unavailable — proceed with in-memory defaults */ }
+  }
+  function saveState(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){ /* ignore */ }
+  }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){
+      p.hidden = (parseInt(p.dataset.panel,10) !== n);
+    });
+    document.querySelectorAll('.day-btn').forEach(function(b){
+      var isCurrent = parseInt(b.dataset.day,10) === n;
+      b.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+    });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = {
+      selectedIndex: opts.indexOf(btn),
+      correct: btn.dataset.correct === 'true'
+    };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == 4){
+      document.getElementById('unitComplete').classList.add('show');
+    }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[4]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){
+        state.reflections[key] = ta.value;
+        saveState();
+      });
+    });
+  }
+
+  function renderGoalSummary(){
+    var g = state.goal;
+    var summaryEl = document.getElementById('goalSummary');
+    var textEl = document.getElementById('goalSummaryText');
+    if (g.what && g.cost && g.source && g.amount && g.deadline){
+      textEl.textContent = 'I will save ' + g.cost + ' for ' + g.what + ' by saving ' + g.amount + ' from ' + g.source + ', reaching my goal by ' + g.deadline + '.';
+      summaryEl.hidden = false;
+    } else {
+      summaryEl.hidden = true;
+    }
+  }
+
+  function restoreGoal(){
+    document.querySelectorAll('[data-goal]').forEach(function(input){
+      var key = input.dataset.goal;
+      if (state.goal[key]) input.value = state.goal[key];
+      input.addEventListener('input', function(){
+        state.goal[key] = input.value;
+        saveState();
+        renderGoalSummary();
+        updateCompleteButton(document.querySelector('.day-panel[data-panel="4"]'));
+      });
+    });
+    renderGoalSummary();
+  }
+
+  function goalComplete(){
+    var g = state.goal;
+    return !!(g.what && g.cost && g.source && g.amount && g.deadline);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+
+    document.querySelectorAll('.day-btn').forEach(function(b){
+      b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); });
+    });
+
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){
+      btn.addEventListener('click', onQuizOptionClick);
+    });
+
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '4' && !goalComplete()){
+          var hint = document.querySelector('[data-hint-for="4"]');
+          if (hint) hint.textContent = 'Fill in all five fields of your SMART goal above, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+
+    restoreReflections();
+    restoreGoal();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>

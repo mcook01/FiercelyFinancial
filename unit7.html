@@ -1,0 +1,1042 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Taxes &amp; Community</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F6EA; --surface:#FFFFFF; --surface-2:#E4EFDB;
+    --ink:#1C2B1E; --ink-muted:#57694F; --line:#CFE1C2;
+    --moss:#2F9E5C; --moss-deep:#1F7A46; --moss-contrast:#FFFFFF;
+    --gold:#E8A23A; --gold-deep:#B9791E; --gold-contrast:#2A1B04;
+    --coral:#E15B49; --complete-bg:#DEF0D6; --locked:#9AA893;
+    --shadow: 0 2px 3px rgba(28,43,30,0.06), 0 14px 30px -16px rgba(28,43,30,0.24);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+      --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+      --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+      --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+      --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+      --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10160E; --surface:#182014; --surface-2:#212C1A;
+    --ink:#EAF1E2; --ink-muted:#A9BC9E; --line:#2E3D26;
+    --moss:#4FC97F; --moss-deep:#6FE29B; --moss-contrast:#0B1409;
+    --gold:#F0B457; --gold-deep:#F7CC85; --gold-contrast:#2A1B04;
+    --coral:#F0806D; --complete-bg:#1C3120; --locked:#526049;
+    --shadow: 0 2px 4px rgba(0,0,0,0.35), 0 16px 34px -16px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{font-size:112.5%;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,-apple-system,sans-serif; font-size:1rem; line-height:1.6;}
+  h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+  a{color:var(--moss-deep); text-underline-offset:2px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px;}
+  button{font-family:inherit;}
+  .app{max-width:960px; margin:0 auto; padding:28px 20px 72px;}
+
+  .topbar{display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:flex-end; padding-bottom:22px; margin-bottom:26px; border-bottom:2px solid var(--line);}
+  .title-row{display:flex; align-items:center; gap:12px;}
+  .sprout-mark{flex:none; width:44px; height:44px;}
+  .eyebrow{display:block; font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; margin-bottom:7px;}
+  .topbar h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:800; letter-spacing:-.01em;}
+  .subtitle{margin:6px 0 0; color:var(--ink-muted); font-size:1.15rem; font-weight:600;}
+  .progress-summary{display:flex; align-items:center; gap:14px;}
+  .ring{width:62px; height:62px; border-radius:50%; background:conic-gradient(var(--moss) calc(var(--pct,0)*1%), var(--surface-2) 0); display:flex; align-items:center; justify-content:center; flex:none;}
+  .ring::after{content:attr(data-label); width:48px; height:48px; border-radius:50%; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;}
+  .progress-text{font-size:.95rem; font-weight:600; color:var(--ink-muted); max-width:12ch;}
+
+  .day-nav{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:28px;}
+  .day-btn{text-align:left; cursor:pointer; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:12px 13px; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;}
+  .day-btn:hover{border-color:var(--moss); transform:translateY(-2px); box-shadow:var(--shadow);}
+  .day-btn[aria-current="true"]{border-color:var(--moss); box-shadow:0 0 0 2px var(--moss);}
+  .day-btn .num{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); letter-spacing:.05em; font-weight:600;}
+  .day-btn .title{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:.9rem;}
+  .status-pill{align-self:flex-start; font-family:'IBM Plex Mono',monospace; font-size:.64rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:999px; background:var(--surface-2); color:var(--ink-muted);}
+  .status-pill.current{background:transparent; color:var(--moss-deep); border:1.5px solid var(--moss);}
+  .status-pill.complete{background:var(--complete-bg); color:var(--moss-deep);}
+
+  .day-panel{display:flex; flex-direction:column; gap:26px;}
+  .day-panel[hidden]{display:none;}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;}
+  .day-head h2{font-size:clamp(1.6rem,4vw,2.15rem); font-weight:700;}
+  .standard-badge{font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600; color:var(--moss-deep); background:var(--surface-2); padding:4px 11px; border-radius:8px; letter-spacing:.02em;}
+  .objective{background:var(--surface-2); border-radius:14px; padding:18px 20px; font-size:1.08rem; font-weight:600; display:flex; gap:14px; align-items:flex-start;}
+  .objective::before{content:"🌱"; font-size:1.4rem; line-height:1; flex:none; margin-top:2px;}
+  .objective b{font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold-deep); font-weight:600; display:block; margin-bottom:4px;}
+  .scenario-card{background:var(--surface); border:2px solid var(--moss); border-left:6px solid var(--moss); border-radius:16px; padding:20px 22px; display:flex; flex-direction:column; gap:10px;}
+  .scenario-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-contrast); background:var(--moss); padding:4px 10px; border-radius:7px; align-self:flex-start; letter-spacing:.04em;}
+  .scenario-card h4{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.15rem;}
+  .scenario-card p{margin:0; font-size:1.05rem; line-height:1.7; color:var(--ink);}
+  .scenario-card p.prompt{font-weight:700; color:var(--moss-deep);}
+  .scenario-card .checkin-note{margin:2px 0 0; font-size:.85rem; font-style:italic; font-weight:600; color:var(--ink-muted);}
+  article.lesson{max-width:64ch; font-size:1.14rem; line-height:1.75;}
+  article.lesson p{margin:0 0 16px;}
+  article.lesson p:last-child{margin-bottom:0;}
+  article.lesson strong{color:var(--moss-deep); font-weight:800;}
+  .resource-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px;}
+  .resource-card .icon{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--moss-deep); background:var(--complete-bg); padding:4px 9px; border-radius:7px; flex:none; letter-spacing:.03em; margin-top:2px;}
+  .resource-card .body h4{margin:0 0 5px; font-size:1.1rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .resource-card .body p{margin:0 0 10px; font-size:1rem; color:var(--ink-muted);}
+  .resource-card .body a{font-size:1rem; font-weight:700;}
+  .official-card{display:flex; gap:16px; align-items:flex-start; background:var(--surface); border:2.5px solid var(--gold); border-radius:16px; padding:20px 22px;}
+  .official-card .tag{font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:700; color:var(--gold-contrast); background:var(--gold); padding:5px 10px; border-radius:7px; flex:none; letter-spacing:.03em; white-space:nowrap; margin-top:2px;}
+  .official-card .body h4{margin:0 0 6px; font-size:1.18rem; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .official-card .body p{margin:0 0 14px; font-size:1rem; color:var(--ink-muted); max-width:56ch;}
+  .official-card .body a.btn{display:inline-block; text-decoration:none;}
+  .quiz-block h3{font-size:1.2rem; margin-bottom:14px; font-weight:700;}
+  .quiz-q{background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .quiz-question{font-weight:700; margin:0 0 14px; font-size:1.1rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-opt{text-align:left; padding:12px 14px; border-radius:12px; border:2px solid var(--line); background:var(--paper); color:var(--ink); font-size:1.02rem; font-weight:600; cursor:pointer; transition:border-color .12s ease, background .12s ease, transform .1s ease;}
+  .quiz-opt:hover{border-color:var(--moss); transform:translateX(2px);}
+  .quiz-opt.selected{border-color:var(--moss);}
+  .quiz-opt.correct{background:var(--complete-bg); border-color:var(--moss); color:var(--moss-deep); font-weight:800;}
+  .quiz-opt.incorrect{background:transparent; border-color:var(--coral); color:var(--coral); text-decoration:line-through; opacity:.75;}
+  .quiz-feedback{margin:12px 0 0; font-weight:800; font-size:1rem;}
+  .quiz-feedback.is-correct{color:var(--moss-deep);}
+  .quiz-feedback.is-incorrect{color:var(--coral);}
+  .quiz-explain{margin:5px 0 0; font-size:.98rem; color:var(--ink-muted); line-height:1.6;}
+  .reflection h3{font-size:1.2rem; margin-bottom:10px; font-weight:700;}
+  .reflection p.prompt{font-size:1.05rem; color:var(--ink-muted); margin:0 0 12px; max-width:66ch; font-weight:600;}
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:12px; padding:14px 16px; font-family:'Nunito Sans',sans-serif; font-size:1.05rem;}
+  textarea:focus-visible{border-color:var(--moss);}
+  .save-note{font-size:.85rem; color:var(--ink-muted); margin-top:7px;}
+  .goal-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .goal-grid.cols-5{grid-template-columns:1fr 1fr 1fr 1fr 1fr;}
+  .goal-field{display:flex; flex-direction:column; gap:6px;}
+  .goal-field label{font-size:.88rem; font-weight:700; color:var(--ink-muted);}
+  .goal-field input{background:var(--surface); color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:11px 13px; font-family:'Nunito Sans',sans-serif; font-size:1.02rem;}
+  .goal-field input:focus-visible{border-color:var(--moss);}
+  .goal-summary{margin-top:16px; background:var(--complete-bg); border:2px solid var(--moss); border-radius:14px; padding:18px 20px; font-size:1.05rem; color:var(--ink); line-height:1.6;}
+  .goal-summary.warn{background:transparent; border-color:var(--coral); color:var(--coral);}
+  .goal-summary b{color:var(--moss-deep); font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; display:block; margin-bottom:7px;}
+  .goal-summary.warn b{color:var(--coral);}
+  .calc-btn-row{margin-top:16px;}
+  .complete-bar{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; background:var(--surface); border:2px solid var(--line); border-radius:16px; padding:16px 20px;}
+  .complete-bar .hint{font-size:.98rem; font-weight:600; color:var(--ink-muted);}
+  .btn{font-family:'Baloo 2',sans-serif; border:none; border-radius:12px; padding:12px 22px; font-weight:700; font-size:1.02rem; cursor:pointer; transition:opacity .12s ease, transform .1s ease;}
+  .btn:hover{opacity:.92; transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--moss-contrast);}
+  .btn-primary[disabled]{background:var(--locked); color:var(--surface); cursor:not-allowed; transform:none;}
+  .btn-primary.done{background:var(--moss-deep);}
+  .official-card .btn-primary{background:var(--gold); color:var(--gold-contrast);}
+  .btn-ghost{background:transparent; border:2px solid var(--line); color:var(--ink-muted);}
+  .unit-complete{background:var(--complete-bg); border:2px solid var(--moss); border-radius:18px; padding:24px 26px; text-align:center; display:none;}
+  .unit-complete.show{display:block;}
+  .unit-complete h3{color:var(--moss-deep); margin-bottom:8px; font-size:1.35rem;}
+  .unit-complete p{font-size:1.05rem; line-height:1.65;}
+  footer{margin-top:44px; padding-top:22px; border-top:2px solid var(--line); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-start;}
+  footer .about{font-size:.95rem; color:var(--ink-muted); max-width:56ch; line-height:1.6;}
+  footer .about strong{color:var(--ink);}
+  @media (max-width:760px){ .day-nav{grid-template-columns:repeat(2,1fr);} .goal-grid{grid-template-columns:1fr;} .goal-grid.cols-5{grid-template-columns:1fr 1fr;} .topbar{align-items:flex-start;} }
+  @media (max-width:460px){ .day-nav{grid-template-columns:repeat(2,1fr);} .goal-grid.cols-5{grid-template-columns:1fr;} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">Grade 7 · Self-Study Edition</span>
+      <div class="title-row">
+        <svg class="sprout-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 44V24" stroke="var(--moss-deep)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 26C24 26 10 26 8 12C8 12 24 8 24 26Z" fill="var(--moss)"/>
+          <path d="M24 22C24 22 38 22 40 10C40 10 24 6 24 22Z" fill="var(--gold)"/>
+          <circle cx="24" cy="42" r="3" fill="var(--gold-deep)"/>
+        </svg>
+        <h1>Taxes &amp; Community</h1>
+      </div>
+      <p class="subtitle">Unit 7 — Civic Financial Responsibility · 4 days</p>
+    </div>
+    <div class="progress-summary">
+      <div class="ring" id="progressRing" data-label="0/4"></div>
+      <span class="progress-text" id="progressText">Let's get started — pick Day 1 below.</span>
+    </div>
+  </header>
+
+  <nav class="day-nav" id="dayNav" aria-label="Course days">
+    <button class="day-btn" data-day="1" aria-current="true">
+      <span class="num mono">DAY 1</span>
+      <span class="title">Taxes &amp; Your Paycheck</span>
+      <span class="status-pill current" data-status-for="1">Start here</span>
+    </button>
+    <button class="day-btn" data-day="2">
+      <span class="num mono">DAY 2</span>
+      <span class="title">Types of Taxes &amp; Gov't</span>
+      <span class="status-pill" data-status-for="2">Not started</span>
+    </button>
+    <button class="day-btn" data-day="3">
+      <span class="num mono">DAY 3</span>
+      <span class="title">Giving Back</span>
+      <span class="status-pill" data-status-for="3">Not started</span>
+    </button>
+    <button class="day-btn" data-day="4">
+      <span class="num mono">DAY 4</span>
+      <span class="title">Unit Review: Community Budget</span>
+      <span class="status-pill" data-status-for="4">Not started</span>
+    </button>
+  </nav>
+
+  <main id="dayPanels">
+
+    <!-- DAY 1 -->
+    <section class="day-panel" data-panel="1">
+      <div class="day-head">
+        <h2>Day 1 · Taxes &amp; Your Paycheck: Gross vs. Net Income</h2>
+        <span class="standard-badge">NJSLS 9.1.8.EG.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain how taxes affect disposable income and describe the difference between gross income and net income.</div></div>
+
+      <article class="lesson">
+        <p>If a job posting says it pays $15 an hour, does the paycheck you actually receive equal exactly hours worked times $15? It doesn't &mdash; and today's lesson is about exactly why, using two numbers that never match: <strong>gross income</strong> (total earnings before anything is taken out &mdash; the number on the job offer, or hours worked times pay rate) and <strong>net income</strong>, also called take-home pay (what's actually deposited into your account, after taxes and other withholdings are subtracted). Every single paycheck has both numbers, and they are almost never the same.</p>
+        <p>The gap between them is called <strong>withholding</strong>: the portion of each paycheck an employer is legally required to hold back and send to the government on your behalf, before you ever see it. Three kinds of withholding make up that gap. <strong>Federal income tax</strong> is withheld by every employer in the country. <strong>State income tax</strong> is withheld too, in most states (a few states don't collect one, but most &mdash; including New Jersey &mdash; do). And <strong>payroll tax</strong>, often labeled <strong>FICA</strong> on a pay stub, is withheld specifically to fund Social Security and Medicare &mdash; it usually shows up as two separate lines, Social Security and Medicare, even though both fall under the FICA umbrella.</p>
+        <p>Here's a complete worked example, using a real pay stub. Someone works 80 hours over a two-week (biweekly) pay period at $16.00 an hour. <strong>Gross pay:</strong> 80 &times; $16.00 = <strong>$1,280.00</strong>. Now the withholding, one line at a time. <strong>Federal income tax (10%):</strong> $1,280.00 &times; 0.10 = $128.00. <strong>State income tax (3%):</strong> $1,280.00 &times; 0.03 = $38.40. <strong>Social Security (6.2%):</strong> $1,280.00 &times; 0.062 = $79.36. <strong>Medicare (1.45%):</strong> $1,280.00 &times; 0.0145 = $18.56. Add those four withholding lines together: $128.00 + $38.40 + $79.36 + $18.56 = <strong>$264.32</strong> in total withholding. Subtract that from gross pay: $1,280.00 &minus; $264.32 = <strong>$1,015.68</strong> &mdash; the actual net pay deposited into the account. Gross pay and net pay are different numbers precisely because of that $264.32 gap, made up entirely of the four withholding lines above.</p>
+        <p>Net pay still isn't the number that matters most for budgeting, though &mdash; that's <strong>disposable income</strong> (9.1.8.EG.1): the money left after taxes that a person can actually spend, save, or give, once typical essential expenses are covered too. This is the bridge straight back to Unit 3's budgeting worksheets, where "needs" got covered before anything else. Here's a second worked example showing that last step. Someone's net pay for a period comes to $753.82. Their essential expenses for that same period &mdash; a share of housing/utilities ($300.00), phone ($45.00), transportation ($60.00), and food ($150.00) &mdash; add up to $555.00. Disposable income = net pay &minus; essential expenses = $753.82 &minus; $555.00 = <strong>$198.82</strong>. That $198.82 is the number that actually determines what's available for a Unit 3-style savings goal, a want, or a giving contribution &mdash; not the $950.00 gross pay this person started with, and not even the $753.82 net pay before expenses were covered.</p>
+        <p>It's worth being precise about what withholding is <em>for</em>. Federal and state income tax fund the wide range of public services Day 2 digs into in detail &mdash; everything from roads to schools to national defense. The Social Security and Medicare withholding is different: that money is set aside specifically to fund retirement benefits and healthcare coverage for older and disabled Americans, including, eventually, the same worker whose paycheck it's withheld from today. None of it disappears into nothing &mdash; every withheld dollar is funding something specific, even though it can feel invisible on a random Tuesday paycheck.</p>
+        <p>Not every deduction on a pay stub is a tax, though, and the difference matters. A paycheck might also show money taken out for <strong>health insurance premiums</strong> or a <strong>retirement contribution</strong> (like a 401(k)). Those look similar to tax withholding &mdash; they also reduce net pay &mdash; but they work completely differently: they're voluntary (an employee usually chooses to enroll), the money isn't sent to the government at all, and it stays connected to that specific employee &mdash; a retirement contribution keeps growing in that person's own retirement account, and a health insurance premium buys that person's own coverage. A tax withholding, by contrast, is required by law and funds shared public programs and services rather than something that comes directly back to the one person who paid it.</p>
+        <p>Understanding this chain &mdash; gross income minus withholding equals net income, and net income minus essential expenses equals disposable income &mdash; is what prevents an unpleasant surprise the first time a real paycheck arrives. A $15/hour job posting was never going to turn into exactly $15 an hour landing in an account; now you know precisely why, and exactly how to calculate what will actually show up instead. Try it yourself with the Paycheck Calculator below.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Jordan's First Paycheck</h4>
+        <p>Jordan sees a job posting advertising $14.50 an hour and works 15 hours over a two-week period, so Jordan expects a paycheck of exactly 15 &times; $14.50 = $217.50. When the direct deposit arrives, it's for less than that &mdash; and Jordan is confused, since no one at the job explained why.</p>
+        <p class="prompt">Using today's vocabulary, explain to Jordan why the deposit is smaller than $217.50, and name at least two specific withholding lines Jordan should expect to see listed on the pay stub.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>St. Louis Fed &mdash; Econ Lowdown</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of gross vs. net income or some extra practice.</p>
+          <a href="https://www.stlouisfed.org/education" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d1q1">
+          <p class="quiz-question">1. Gross income is best described as:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Total earnings before anything is taken out</button>
+            <button class="quiz-opt" data-correct="false">Money left after taxes</button>
+            <button class="quiz-opt" data-correct="false">Money spent on essential expenses</button>
+            <button class="quiz-opt" data-correct="false">A type of tax</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Gross income is the total before anything is withheld &mdash; the "hours &times; pay rate" number, or what a job offer advertises.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q2">
+          <p class="quiz-question">2. Which group of withholding lines is often labeled "FICA" on a pay stub?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Social Security and Medicare</button>
+            <button class="quiz-opt" data-correct="false">Federal and state income tax</button>
+            <button class="quiz-opt" data-correct="false">Health insurance and a retirement contribution</button>
+            <button class="quiz-opt" data-correct="false">Sales tax and property tax</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>FICA specifically refers to the payroll tax withheld for Social Security and Medicare &mdash; a separate category from income tax withholding.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q3">
+          <p class="quiz-question">3. A worker earns $1,280.00 in gross pay and has $264.32 in total withholding. What is the net pay?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$1,015.68</button>
+            <button class="quiz-opt" data-correct="false">$1,280.00</button>
+            <button class="quiz-opt" data-correct="false">$264.32</button>
+            <button class="quiz-opt" data-correct="false">$1,544.32</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Net pay = gross pay &minus; total withholding: $1,280.00 &minus; $264.32 = $1,015.68 &mdash; the amount actually deposited.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q4">
+          <p class="quiz-question">4. A retirement contribution and a health insurance premium are different from tax withholding mainly because they:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Are voluntary and stay connected to that same employee, rather than being required by law and funding shared public programs</button>
+            <button class="quiz-opt" data-correct="false">Are actually types of income tax</button>
+            <button class="quiz-opt" data-correct="false">Never reduce a paycheck's net pay</button>
+            <button class="quiz-opt" data-correct="false">Are exactly the same thing as payroll tax</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Tax withholding is required by law and funds shared public services; a retirement contribution or insurance premium is a voluntary deduction that stays tied to that one employee.</p>
+        </div>
+        <div class="quiz-q" data-qid="d1q5">
+          <p class="quiz-question">5. Maya's net pay for a period is $700, and her essential expenses (housing, phone, food, transportation) for that period total $520. What is her disposable income?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">$180</button>
+            <button class="quiz-opt" data-correct="false">$700</button>
+            <button class="quiz-opt" data-correct="false">$520</button>
+            <button class="quiz-opt" data-correct="false">$1,220</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Disposable income = net pay &minus; essential expenses: $700 &minus; $520 = $180 &mdash; the number actually available to spend, save, or give.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Paycheck Calculator</h3>
+        <p class="prompt">Enter a gross pay amount and your typical essential expenses for that period to see the full breakdown &mdash; every withholding line, net pay, and disposable income.</p>
+        <div class="goal-grid">
+          <div class="goal-field">
+            <label for="pcGross">Gross pay ($)</label>
+            <input id="pcGross" data-calc="gross" type="number" min="1" step="1" placeholder="e.g., 1280">
+          </div>
+          <div class="goal-field">
+            <label for="pcExpenses">Essential expenses for this period ($)</label>
+            <input id="pcExpenses" data-calc="expenses" type="number" min="0" step="1" placeholder="e.g., 555">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="pcBtn" type="button">Calculate my paycheck</button>
+        </div>
+        <div class="goal-summary" id="pcSummary" hidden>
+          <b>Your paycheck breakdown</b>
+          <span id="pcSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Think about the last time you (or someone in your family) looked closely at gross pay versus what actually got deposited. What surprised you, or what would you want to double-check on your own future pay stub?</p>
+        <textarea data-reflection="1" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 1 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, calculator, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdtyqMan_tgNwx-vRafib3Ukxnbxlaf1uKJvGvMEU0QYmuf7Q/viewform">Open Day 1 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="1">Answer all 5 self-check questions and run the calculator above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="1" disabled>Mark Day 1 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-panel" data-panel="2" hidden>
+      <div class="day-head">
+        <h2>Day 2 · Types of Taxes &amp; How Government Uses Them</h2>
+        <span class="standard-badge">NJSLS 9.1.8.EG.2&ndash;3; SS 6.3.8.CivicsPI.1</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can explain why various sources of income are taxed differently and evaluate how local, state, and federal governments use taxes to fund public services.</div></div>
+
+      <article class="lesson">
+        <p>Name three things in your town that are paid for with tax dollars, even though no one hands over cash for them directly &mdash; a paved road, a working streetlight, a fire truck that shows up when called. None of those are free to provide; they're funded by one of four main types of taxes, each collected differently and each funding something a little different.</p>
+        <p><strong>Income tax</strong> is a percentage of what a person earns, collected by the federal government and, in most states, the state government too &mdash; and it's often structured so that different income levels are taxed at different rates, a policy choice tied to ideas about fairness that Day 1's withholding math already showed in action. <strong>Sales tax</strong> is a percentage added to the price of a purchase at checkout, and critically, the <em>same rate applies to everyone</em> regardless of income &mdash; a family ordering a $40 pizza and a family earning ten times as much both pay the identical percentage on that same $40 purchase. Using an example rate of 6%: $40 &times; 0.06 = $2.40 in sales tax, for a total of $42.40 &mdash; and that math comes out exactly the same for every buyer, no matter their income. (Real sales tax rates vary by state.) <strong>Property tax</strong> is based on the value of real estate someone owns &mdash; a home, a store, an apartment building &mdash; and it largely funds local schools and services. <strong>Payroll tax</strong>, already introduced Day 1 as FICA, funds Social Security and Medicare specifically.</p>
+        <p>That "same rate for everyone" feature is exactly what separates sales tax from income tax, and it's worth sitting with for a second. Income tax can vary by how much a person earns, which is a deliberate government policy choice. Sales tax, by design, does not vary by income at all &mdash; it's a flat percentage tied only to the price of what's being bought, not to who's buying it. (Some other kinds of income, like certain investment gains, can be taxed at yet another set of rates &mdash; a topic Grade 8 covers in more depth. For now, the key distinction is simply that not all income is taxed identically, and that's a policy choice too.)</p>
+        <p>Here's exactly how governments use what gets collected. <strong>Federal taxes</strong> fund things like national defense, Social Security, and federal highways (think interstate highways that cross state lines). <strong>State taxes</strong> fund things like state highways and public universities. <strong>Local taxes</strong> &mdash; overwhelmingly property tax &mdash; fund things like public schools, local police and fire departments, libraries, and parks. Matching a real list of services makes the pattern click fast: public schools (local), interstate highways (federal), a local fire department (local), national parks (federal), Social Security checks (federal), a city library (local), a public university (state), neighborhood road repaving (local), national defense (federal), and the local police department (local). Notice how many everyday, close-to-home services &mdash; schools, police, fire, the library, road repaving &mdash; are funded locally, mostly through property tax, while the largest, most far-reaching programs &mdash; national defense, Social Security, interstate highways &mdash; are funded federally.</p>
+        <p>This connects directly back to Day 1: the income tax and payroll tax withheld from a paycheck don't vanish into an abstract place called "the government." Income tax withholding flows toward the federal (and often state) programs listed above, and payroll tax withholding flows specifically toward Social Security and Medicare. Property tax works differently &mdash; it isn't withheld from a paycheck at all, since it's collected directly from whoever owns real estate, which is exactly why a family that rents an apartment still benefits from property-tax-funded schools and services even without paying that tax bill themselves &mdash; their landlord factors that cost into the rent.</p>
+        <p>This is also a good moment to be precise about what today's lesson is, and isn't, about. Understanding <em>how</em> the tax system funds specific public services is factual, civic knowledge (SS 6.3.8.CivicsPI.1) &mdash; not a judgment about whether any particular tax rate is too high, too low, or exactly right. Reasonable people disagree about tax policy, and that's a legitimate, ongoing conversation; today's goal is simply understanding how the system currently works, which is the necessary first step before anyone can meaningfully weigh in on that conversation at all.</p>
+        <p>Put it all together with one more example. A student rides a school bus down a freshly repaved neighborhood street, past a public library, on the way to a public school &mdash; three services in one short trip, and all three funded primarily by local property tax. That same student's family might later drive on an interstate highway on a road trip &mdash; funded federally &mdash; or visit a state university campus on a tour &mdash; funded by the state. Nearly everything a household touches in a normal week connects back to one of these four tax types and one of these three levels of government, whether or not anyone ever notices the connection.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>The New Playground</h4>
+        <p>The Ortiz family doesn't have young children anymore, but their town just used local property tax revenue to build a new playground at the community park. A neighbor grumbles, "Why should I help pay for that? My kids are grown, and I'll never use it."</p>
+        <p class="prompt">Using what you learned today about how local taxes fund shared community priorities, how would you respond to the neighbor?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of tax types or government funding, or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d2q1">
+          <p class="quiz-question">1. Priya buys a $30 pair of headphones at a store. Which type of tax is added to that purchase at checkout?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Sales tax</button>
+            <button class="quiz-opt" data-correct="false">Property tax</button>
+            <button class="quiz-opt" data-correct="false">Payroll tax</button>
+            <button class="quiz-opt" data-correct="false">Purchases are never taxed</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Sales tax is a percentage added to the price of a purchase at checkout, charged at the same rate to every buyer regardless of income.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q2">
+          <p class="quiz-question">2. A family's yearly tax bill is based on the value of the house they own. Which type of tax is this, and what does it primarily fund?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Property tax &mdash; largely funds local schools and services</button>
+            <button class="quiz-opt" data-correct="false">Income tax &mdash; funds federal defense spending</button>
+            <button class="quiz-opt" data-correct="false">Sales tax &mdash; funds state universities</button>
+            <button class="quiz-opt" data-correct="false">Payroll tax &mdash; funds interstate highways</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Property tax is based on real estate value and collected by local government, where it largely funds local schools and services.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q3">
+          <p class="quiz-question">3. Which public service is most directly funded at the federal level?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">National defense</button>
+            <button class="quiz-opt" data-correct="false">A city public library</button>
+            <button class="quiz-opt" data-correct="false">Neighborhood road repaving</button>
+            <button class="quiz-opt" data-correct="false">The local police department</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>National defense is a federal responsibility &mdash; unlike a local library, road repaving, or police department, which are funded locally, mostly through property tax.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q4">
+          <p class="quiz-question">4. Why is sales tax described as "the same rate for everyone," while income tax is not?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Sales tax is a flat percentage tied only to the purchase price, while income tax can be structured to tax different income levels differently</button>
+            <button class="quiz-opt" data-correct="false">Income tax is always the same for every single person</button>
+            <button class="quiz-opt" data-correct="false">Sales tax changes based on the buyer's income</button>
+            <button class="quiz-opt" data-correct="false">There is no real difference between the two</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Sales tax is a flat rate applied to a purchase regardless of who's buying; income tax can vary by income level, a deliberate policy choice.</p>
+        </div>
+        <div class="quiz-q" data-qid="d2q5">
+          <p class="quiz-question">5. A family rents an apartment and never personally pays a property tax bill. Based on today's lesson, why do they still benefit from property-tax-funded services like local schools?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Property tax is paid by whoever owns the real estate (their landlord), but the services it funds &mdash; schools, police, fire &mdash; still benefit everyone in the community, including renters</button>
+            <button class="quiz-opt" data-correct="false">Renters are legally barred from using any local services</button>
+            <button class="quiz-opt" data-correct="false">Local services are actually funded entirely by federal tax</button>
+            <button class="quiz-opt" data-correct="false">Property tax has nothing to do with local schools</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Property tax is collected from property owners, but the local services it funds serve the whole community &mdash; renters included, even though they don't pay the tax bill directly.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Pick one public service you or your family uses often &mdash; a school, a park, a road, a library. Which level of government most likely funds it, and which type of tax is most directly responsible?</p>
+        <textarea data-reflection="2" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 2 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSebRX0oRsnghxKalikzXxNPQVIxfgQJ8BAu1pBPfL1alWOF7A/viewform">Open Day 2 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="2">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="2" disabled>Mark Day 2 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-panel" data-panel="3" hidden>
+      <div class="day-head">
+        <h2>Day 3 · Giving Back: Philanthropy, Volunteering &amp; Civic Responsibility</h2>
+        <span class="standard-badge">NJSLS 9.1.8.CR.1&ndash;2</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can compare philanthropy, charity, volunteering, and advocacy, and identify realistic ways to give back based on my own strengths and passions.</div></div>
+
+      <article class="lesson">
+        <p>Besides donating money, name at least one other way a person could "give back" to their community. If an answer came to mind quickly, today's lesson will put a name to it &mdash; because giving back to a community takes several distinct forms, and money is only one of them.</p>
+        <p><strong>Philanthropy</strong> is often larger-scale giving, sometimes through foundations, aimed at long-term community impact &mdash; funding a new community center is a classic example. <strong>Charity</strong> is organizations or giving that address specific, often immediate needs, like food, shelter, or emergency relief. <strong>Volunteering</strong> means donating time and skills rather than money &mdash; tutoring, coaching, cleaning up a park, serving at a food pantry. And <strong>advocacy</strong> means using your voice to support a cause or push for change &mdash; writing letters, raising awareness, organizing petitions. The four overlap in spirit (all of them strengthen a community) but differ in exactly what's being given: philanthropy and charity typically give money or resources at different scales, while volunteering gives time and skill, and advocacy gives voice and attention.</p>
+        <p>Giving-back traditions exist across many cultures, and while the specific practices differ, they all serve the same underlying purpose: strengthening community and quality of life. <strong>Tzedakah</strong> is a Jewish tradition in which giving to those in need is considered a moral obligation and an act of justice, not just an optional kindness. <strong>Zakat</strong> is one of the Five Pillars of Islam &mdash; giving a set portion of one's wealth each year to those in need. <strong>Mutual aid and "barn-raising"</strong> describes a tradition, especially in many rural and farming communities historically, of neighbors pooling labor and resources to help each other complete big tasks. <strong>Corporate philanthropy and matching-gift programs</strong> are a modern giving tradition where companies donate directly to causes or match the charitable donations their own employees make. And <strong>community-centered giving networks</strong>, rooted in a range of cultures &mdash; including many East Asian communities &mdash; emphasize family and community responsibility, expressed through structured mutual-support and volunteer networks. Five very different traditions, five very different specific practices &mdash; and every one of them is built around the same core idea: a community is stronger when its members look out for each other on purpose.</p>
+        <p>The most useful idea from today (9.1.8.CR.2) is this: giving back can be matched to a person's own strengths, passions, and available resources. Nobody needs money to contribute meaningfully &mdash; time, skills, and voice all count just as much. A simple "Find Your Fit" framework sorts every give-back option into four categories. <strong>Time:</strong> tutoring a younger student, walking dogs at an animal shelter. <strong>Skills:</strong> teaching a friend a skill for free, building a website for a local nonprofit. <strong>Money:</strong> donating part of an allowance, organizing a fundraiser or supply drive. <strong>Voice:</strong> posting to raise awareness for a cause, writing to a local official about an issue. Almost anyone has at least one of these four available, even on a week with no spare money at all.</p>
+        <p>Here's a worked example of matching strengths to a give-back option. Amara has no extra money to give this month, but she's patient, organized, and good at explaining math to people who are stuck. Running her situation through the four categories: money is out for now, but skills and time are both wide open &mdash; she could tutor a younger student in math after school (time + skills at once), which costs her nothing financially but genuinely helps someone and uses exactly what she's already good at. Notice that "I don't have money to give" was never actually a dead end here &mdash; it just meant looking at the other three categories instead of stopping at the first one.</p>
+        <p>It's worth directly naming a misconception this lesson often runs into: the idea that civic giving requires money. It doesn't. A person with zero dollars to spare can still volunteer, still use a skill to help someone, and still advocate for a cause they care about &mdash; all three are complete, legitimate ways to give back, not lesser substitutes for a cash donation. The goal isn't ranking these traditions or options against each other; it's recognizing that "giving back" is bigger and more flexible than just writing a check, and that everyone has at least one realistic way in. Day 4 picks this idea back up directly, when a Community Giving-Back Fund becomes one of the categories in this unit's culminating budget task &mdash; a reminder that even government-level budgeting treats giving back as a real, ongoing priority, not an afterthought.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Amara's Situation</h4>
+        <p>Amara loves working with younger kids, is good at explaining math, and has about two hours a week free after school &mdash; but she has no money to spare this month, and she isn't especially comfortable speaking in front of a group or posting on social media.</p>
+        <p class="prompt">Using the "Find Your Fit" categories from today (time, skills, money, voice), name at least one realistic way Amara could give back, and explain which category or categories it uses.</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>NGPF Middle School Course</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of giving back or some extra practice.</p>
+          <a href="https://www.ngpf.org/courses/middle-school-course/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Self-check</h3>
+        <div class="quiz-q" data-qid="d3q1">
+          <p class="quiz-question">1. Jamal doesn't have extra money to donate, but he's a strong reader and enjoys helping younger kids. Which way of giving back best fits his situation?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Volunteering &mdash; donating time and skills rather than money</button>
+            <button class="quiz-opt" data-correct="false">Philanthropy &mdash; large-scale foundation giving</button>
+            <button class="quiz-opt" data-correct="false">He has no realistic way to give back</button>
+            <button class="quiz-opt" data-correct="false">Advocacy is the only option available to him</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Volunteering means donating time and skills instead of money &mdash; exactly the kind of contribution that fits someone with time and ability to help but no money to give.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q2">
+          <p class="quiz-question">2. A company donates directly to a cause and matches the charitable donations its employees make. This is an example of:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Corporate philanthropy and matching gifts</button>
+            <button class="quiz-opt" data-correct="false">Zakat</button>
+            <button class="quiz-opt" data-correct="false">Mutual aid and barn-raising</button>
+            <button class="quiz-opt" data-correct="false">Advocacy</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Corporate philanthropy and matching-gift programs are a modern giving tradition where a company donates directly and matches employee giving.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q3">
+          <p class="quiz-question">3. Which best describes advocacy as a way to give back?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Using your voice to support a cause or push for change</button>
+            <button class="quiz-opt" data-correct="false">Always requires a large financial donation</button>
+            <button class="quiz-opt" data-correct="false">Only counts if a formal organization is involved</button>
+            <button class="quiz-opt" data-correct="false">The same thing as volunteering</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Advocacy means using your voice &mdash; speaking up, raising awareness, organizing &mdash; to support a cause, distinct from donating time (volunteering) or money.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q4">
+          <p class="quiz-question">4. Tzedakah, Zakat, mutual aid, corporate matching-gift programs, and community-centered giving networks are all examples of:</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Giving-back traditions that take different forms across cultures but share the same underlying purpose of strengthening community</button>
+            <button class="quiz-opt" data-correct="false">The exact same tradition, just with different names</button>
+            <button class="quiz-opt" data-correct="false">A ranking from best to worst way to give back</button>
+            <button class="quiz-opt" data-correct="false">Traditions that only exist in one specific culture</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>These traditions differ in their specific practices but share the same underlying purpose &mdash; strengthening community &mdash; without one being "better" than another.</p>
+        </div>
+        <div class="quiz-q" data-qid="d3q5">
+          <p class="quiz-question">5. Amara (from today's scenario) has time and math-tutoring skill but no spare money and isn't comfortable speaking to a group. What's the most accurate conclusion?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">She still has a real, meaningful way to give back &mdash; through time and skills, even without money or public speaking</button>
+            <button class="quiz-opt" data-correct="false">Without money, she has no way to contribute at all</button>
+            <button class="quiz-opt" data-correct="false">She would have to become comfortable with public speaking first</button>
+            <button class="quiz-opt" data-correct="false">Only advocacy would work for her situation</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Giving back matches a person's actual strengths and resources &mdash; time and skill are just as real a contribution as money or public voice.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">Using the "Find Your Fit" idea from today (time, skills, money, voice), name at least two realistic ways you could give back that match your own strengths and available resources.</p>
+        <textarea data-reflection="3" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 3 check-in</h4>
+          <p>This is the graded assessment your teacher uses to track your progress &mdash; separate from the self-check above. Complete it after finishing today's reading, self-check, and reflection.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe-6CzMxqygaFe448s8EjI_nDm1FIxH2HH8GmbfkzUb4pZn6A/viewform">Open Day 3 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="3">Answer all 5 self-check questions above to mark today complete.</span>
+        <button class="btn btn-primary" data-complete-btn="3" disabled>Mark Day 3 complete</button>
+      </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-panel" data-panel="4" hidden>
+      <div class="day-head">
+        <h2>Day 4 · Unit Review &amp; Assessment: Community Budget Simulation</h2>
+        <span class="standard-badge">Synthesis: EG.1&ndash;3; CR.1&ndash;3; SS 6.3.8</span>
+      </div>
+      <div class="objective"><div><b>Today's goal</b>I can demonstrate understanding of taxes, disposable income, public funding, and civic responsibility by allocating a simplified local budget and justifying my choices.</div></div>
+
+      <article class="lesson">
+        <p>Three days ago you started with a single paycheck and the gap between gross and net pay. Since then you've learned which type of tax funds which level of government (Day 2), and seen that giving back doesn't require money at all (Day 3). Today pulls all three days together into one synthesis idea, and one culminating task: a real community budget.</p>
+        <p>That synthesis idea is <strong>9.1.8.CR.3</strong>: consumers, businesses, and government all share responsibility for a healthy economy and community. <strong>Consumers</strong> hold up their share through everyday spending choices and civic participation &mdash; the same disposable-income decisions from Day 1, plus things like voting and staying informed. <strong>Businesses</strong> hold up their share through fair practices and local investment &mdash; paying workers fairly, following the law, and reinvesting in the community they operate in. <strong>Government</strong> holds up its share by using tax dollars wisely on shared community priorities &mdash; exactly what Day 2's federal/state/local funding map showed in action. None of the three carries the whole load alone; a healthy community depends on all three doing their part.</p>
+        <p>Two misconceptions are worth clearing up directly before the performance task below. First: taxes don't just fund "government" in some abstract sense &mdash; they fund the specific, everyday services from Day 2's list: the school bus route, the library, the repaved street, the fire department that shows up when called. Second: civic giving doesn't require money, as Day 3 showed clearly &mdash; time, skills, and voice are just as real a contribution as a cash donation.</p>
+        <p>Here's the task. A town collected <strong>$500,000</strong> in local tax revenue this year. As the town's budget committee, your job is to allocate the full amount across five categories: <strong>Public Schools</strong>, <strong>Roads &amp; Infrastructure</strong>, <strong>Parks &amp; Recreation</strong>, <strong>Public Safety (Police/Fire)</strong>, and a <strong>Community Giving-Back Fund</strong>. Two rules: every category must receive at least $50,000, and your allocations must add up to exactly $500,000. There is no single "correct" split &mdash; a budget gets evaluated on the reasoning behind it, not on hitting one specific number.</p>
+        <p>Here's a fully worked example allocation, to model exactly what a strong answer looks like. Schools: $200,000. Roads &amp; Infrastructure: $120,000. Parks &amp; Recreation: $60,000. Public Safety: $90,000. Community Giving-Back Fund: $30,000. Check the total: $200,000 + $120,000 + $60,000 + $90,000 + $30,000 = <strong>$500,000</strong> exactly, and every category clears the $50,000 minimum. A justification for this split might read: "Schools got the largest share because they're a service every family in town relies on directly, largely funded by the same local property tax that pays this budget. Public Safety came next because police and fire protection are core local responsibility, funded the same way. The Community Giving-Back Fund stayed at the $50,000-plus minimum rather than zero, because government sharing responsibility for the community (CR.3) means treating civic giving as a real budget priority, not an afterthought — the same idea Day 3 covered. Meanwhile, residents and local businesses still carry their own share of community responsibility through the spending, hiring, and civic participation choices this budget alone can't cover." Notice what that justification does: it references at least two specific public services, connects them to a specific tax type or funding level from Day 2, and explicitly addresses how consumers, businesses, and government all share responsibility &mdash; exactly what today's task and official assessment ask for.</p>
+        <p>Use the Community Budget Allocator below to build and check your own practice allocation before completing the official version on your check-in form &mdash; it will tell you instantly whether your numbers hit exactly $500,000 with every category at or above the $50,000 minimum.</p>
+      </article>
+
+      <div class="scenario-card">
+        <span class="tag">TRY IT: SCENARIO</span>
+        <h4>Two Town Councils</h4>
+        <p>Riverside puts most of its local budget into parks, libraries, and community programs, keeping police/fire and roads funded right at the minimum. Fairview does the opposite &mdash; heavy on roads and public safety, with parks and the giving-back fund right at the minimum. Both towns balance their books at exactly $500,000.</p>
+        <p class="prompt">Is either town's budget "wrong"? What should a strong justification focus on, regardless of which categories a town prioritizes?</p>
+        <p class="checkin-note">&#128221; You'll write a sentence or two about this on today's official check-in &mdash; no right or wrong answer, just your thinking.</p>
+      </div>
+
+      <div class="resource-card">
+        <span class="icon">OPTIONAL</span>
+        <div class="body">
+          <h4>CFPB &mdash; Consumer Tools</h4>
+          <p>You don't need this to finish today's lesson &mdash; everything you need is already above. Open it if you'd like another explanation of any Unit 7 concept or some extra review before the check-in.</p>
+          <a href="https://www.consumerfinance.gov/consumer-tools/" target="_blank" rel="noopener">Open resource &rarr;</a>
+        </div>
+      </div>
+
+      <div class="quiz-block">
+        <h3>Unit 7 checkpoint</h3>
+        <div class="quiz-q" data-qid="d4q1">
+          <p class="quiz-question">1. Which number is the one that actually matters most for budgeting &mdash; the money left after both taxes and essential expenses?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Disposable income</button>
+            <button class="quiz-opt" data-correct="false">Gross income</button>
+            <button class="quiz-opt" data-correct="false">Total withholding</button>
+            <button class="quiz-opt" data-correct="false">Sales tax</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Disposable income &mdash; net pay minus essential expenses &mdash; is what's actually available to spend, save, or give.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q2">
+          <p class="quiz-question">2. Why is sales tax the same rate for everyone, while income tax is not?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Sales tax is a flat percentage tied to a purchase price; income tax can be structured to tax income levels differently</button>
+            <button class="quiz-opt" data-correct="false">Sales tax actually changes based on income</button>
+            <button class="quiz-opt" data-correct="false">Income tax is identical for every person</button>
+            <button class="quiz-opt" data-correct="false">There's no real difference between them</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Sales tax is a flat rate on a purchase price regardless of buyer; income tax can vary by income level, a deliberate policy choice.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q3">
+          <p class="quiz-question">3. Which is a real way to give back to a community without donating any money?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Volunteering time and skills, or using your voice through advocacy</button>
+            <button class="quiz-opt" data-correct="false">There is no way to give back without money</button>
+            <button class="quiz-opt" data-correct="false">Only large foundations can give back</button>
+            <button class="quiz-opt" data-correct="false">Paying property tax is the only form of giving back</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Volunteering (time and skills) and advocacy (voice) are complete, legitimate ways to give back that require no money at all.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q4">
+          <p class="quiz-question">4. A public school is primarily funded by which tax, collected at which level of government?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Property tax, collected locally</button>
+            <button class="quiz-opt" data-correct="false">Sales tax, collected federally</button>
+            <button class="quiz-opt" data-correct="false">Payroll tax, collected by the state</button>
+            <button class="quiz-opt" data-correct="false">Income tax, collected only nationally</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>Public schools are largely funded by local property tax &mdash; one of the clearest examples of local government funding a service families use directly.</p>
+        </div>
+        <div class="quiz-q" data-qid="d4q5">
+          <p class="quiz-question">5. A budget committee spends every dollar of a town's tax revenue on roads, leaving nothing for a community giving-back fund, and argues residents and businesses can cover community needs on their own. What does 9.1.8.CR.3 suggest is missing from that reasoning?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-correct="true">Government sharing responsibility for the community means treating shared priorities like civic giving as part of its own budget, not leaving the whole job to consumers and businesses</button>
+            <button class="quiz-opt" data-correct="false">Nothing is missing &mdash; roads are the only thing a town budget should ever fund</button>
+            <button class="quiz-opt" data-correct="false">Consumers and businesses have no responsibility for the community at all</button>
+            <button class="quiz-opt" data-correct="false">Government has no role in a healthy community</button>
+          </div>
+          <p class="quiz-feedback" hidden></p>
+          <p class="quiz-explain" hidden>CR.3 describes a shared responsibility across consumers, businesses, and government &mdash; not one where government opts out of shared priorities entirely and leaves everything to the other two.</p>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Community Budget Allocator</h3>
+        <p class="prompt">Allocate the town's $500,000 across all five categories. Every category needs at least $50,000, and your numbers must total exactly $500,000.</p>
+        <div class="goal-grid cols-5">
+          <div class="goal-field">
+            <label for="cbSchools">Public Schools ($)</label>
+            <input id="cbSchools" data-cb="schools" type="number" min="0" step="1000" placeholder="e.g., 200000">
+          </div>
+          <div class="goal-field">
+            <label for="cbRoads">Roads &amp; Infrastructure ($)</label>
+            <input id="cbRoads" data-cb="roads" type="number" min="0" step="1000" placeholder="e.g., 120000">
+          </div>
+          <div class="goal-field">
+            <label for="cbParks">Parks &amp; Recreation ($)</label>
+            <input id="cbParks" data-cb="parks" type="number" min="0" step="1000" placeholder="e.g., 60000">
+          </div>
+          <div class="goal-field">
+            <label for="cbSafety">Public Safety ($)</label>
+            <input id="cbSafety" data-cb="safety" type="number" min="0" step="1000" placeholder="e.g., 90000">
+          </div>
+          <div class="goal-field">
+            <label for="cbGiving">Community Giving-Back Fund ($)</label>
+            <input id="cbGiving" data-cb="giving" type="number" min="0" step="1000" placeholder="e.g., 30000">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="btn btn-primary" id="cbBtn" type="button">Check my budget</button>
+        </div>
+        <div class="goal-summary" id="cbSummary" hidden>
+          <b>Your budget check</b>
+          <span id="cbSummaryText"></span>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <h3>Reflect</h3>
+        <p class="prompt">After building your practice budget above, what was the hardest trade-off you had to make between categories, and how did you justify it?</p>
+        <textarea data-reflection="4" placeholder="Type your answer here..."></textarea>
+        <p class="save-note">Saved automatically in this browser as you type.</p>
+      </div>
+
+      <div class="official-card">
+        <span class="tag">OFFICIAL CHECK-IN</span>
+        <div class="body">
+          <h4>Submit your Day 4 check-in</h4>
+          <p>This is the graded, unit-synthesis assessment your teacher uses to track your progress &mdash; multiple-choice and short-answer questions plus the full Community Budget performance task with written justification.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfuwHvOKzvYjTtVvVt9W5XzAhWeVhjIggtuJgOQ1ebvAVUUAg/viewform">Open Day 4 check-in &rarr;</a>
+          <p class="save-note">Opens in this tab — your progress here is saved automatically, so use the back button to return to today's lesson after you submit.</p>
+        </div>
+      </div>
+
+      <div class="complete-bar">
+        <span class="hint" data-hint-for="4">Answer all 5 checkpoint questions, run the Community Budget Allocator, and complete your reflection to finish the unit.</span>
+        <button class="btn btn-primary" data-complete-btn="4" disabled>Mark Day 4 complete</button>
+      </div>
+
+      <div class="unit-complete" id="unitComplete">
+        <h3>Unit 7 complete 🌱</h3>
+        <p>You've covered taxes and your paycheck, how governments fund public services, ways to give back to your community, and how consumers, businesses, and government share responsibility for a healthy community &mdash; the same standards your classmates covered in class (NJSLS 9.1.8.EG.1&ndash;3, CR.1&ndash;3, SS 6.3.8.CivicsPI.1). Show your teacher this page or your notebook reflections, and check in about Unit 8.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="about"><strong>About this course.</strong> This is a self-study version of Grade 7 Unit 7 for students who can't attend the in-class lesson, built to the same standards as the classroom unit. Questions about content or standards alignment go to your teacher.</p>
+    <button class="btn btn-ghost" id="resetBtn">Reset my progress</button>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'finlit-g7-u7-selfstudy-v1';
+  var TOTAL_DAYS = 4;
+  var state = { activeDay: 1, completedDays: {}, quiz: {}, reflections: {}, pc: {}, cb: {} };
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { var parsed = JSON.parse(raw); state = Object.assign(state, parsed); }
+    }catch(e){}
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function switchDay(n){
+    state.activeDay = n;
+    document.querySelectorAll('.day-panel').forEach(function(p){ p.hidden = (parseInt(p.dataset.panel,10) !== n); });
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.setAttribute('aria-current', parseInt(b.dataset.day,10) === n ? 'true' : 'false'); });
+    renderNavStatuses();
+    saveState();
+  }
+
+  function dayStatusLabel(n){
+    if (state.completedDays[n]) return 'complete';
+    if (n === state.activeDay) return 'current';
+    return 'not-started';
+  }
+
+  function renderNavStatuses(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      var pill = document.querySelector('[data-status-for="'+n+'"]');
+      if (!pill) continue;
+      var status = dayStatusLabel(n);
+      pill.classList.remove('current','complete');
+      if (status === 'complete'){ pill.classList.add('complete'); pill.textContent = 'Complete'; }
+      else if (status === 'current'){ pill.classList.add('current'); pill.textContent = 'In progress'; }
+      else { pill.textContent = 'Not started'; }
+    }
+    renderProgress();
+  }
+
+  function renderProgress(){
+    var done = Object.keys(state.completedDays).filter(function(k){ return state.completedDays[k]; }).length;
+    var pct = Math.round((done / TOTAL_DAYS) * 100);
+    var ring = document.getElementById('progressRing');
+    ring.style.setProperty('--pct', pct);
+    ring.setAttribute('data-label', done + '/' + TOTAL_DAYS);
+    var text = document.getElementById('progressText');
+    if (done === 0) text.textContent = "Let's get started — pick Day 1 below.";
+    else if (done === TOTAL_DAYS) text.textContent = 'Unit complete — nice work!';
+    else text.textContent = done + ' of ' + TOTAL_DAYS + ' days complete';
+  }
+
+  function restoreQuizUI(){
+    document.querySelectorAll('.quiz-q').forEach(function(container){
+      var qid = container.dataset.qid;
+      var saved = state.quiz[qid];
+      if (!saved) return;
+      var opts = container.querySelectorAll('.quiz-opt');
+      var selected = opts[saved.selectedIndex];
+      if (!selected) return;
+      applyQuizFeedback(container, selected);
+    });
+  }
+
+  function applyQuizFeedback(container, selectedBtn){
+    container.querySelectorAll('.quiz-opt').forEach(function(o){ o.classList.remove('selected','correct','incorrect'); });
+    selectedBtn.classList.add('selected');
+    var correct = selectedBtn.dataset.correct === 'true';
+    selectedBtn.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct){
+      var correctBtn = container.querySelector('.quiz-opt[data-correct="true"]');
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+    var feedback = container.querySelector('.quiz-feedback');
+    feedback.hidden = false;
+    feedback.textContent = correct ? 'Correct!' : "Not quite — here's the answer:";
+    feedback.className = 'quiz-feedback ' + (correct ? 'is-correct' : 'is-incorrect');
+    container.querySelector('.quiz-explain').hidden = false;
+  }
+
+  function onQuizOptionClick(e){
+    var btn = e.currentTarget;
+    var container = btn.closest('.quiz-q');
+    applyQuizFeedback(container, btn);
+    var opts = Array.from(container.querySelectorAll('.quiz-opt'));
+    state.quiz[container.dataset.qid] = { selectedIndex: opts.indexOf(btn), correct: btn.dataset.correct === 'true' };
+    saveState();
+    updateCompleteButton(container.closest('.day-panel'));
+  }
+
+  function pcCompleteForDay1(){
+    return !!(state.pc && typeof state.pc.netPay !== 'undefined');
+  }
+  function cbCompleteForDay4(){
+    return !!(state.cb && typeof state.cb.total !== 'undefined');
+  }
+
+  function updateCompleteButton(panel){
+    var day = panel.dataset.panel;
+    var quizzes = panel.querySelectorAll('.quiz-q');
+    var allAnswered = Array.from(quizzes).every(function(q){ return !!state.quiz[q.dataset.qid]; });
+    if (day === '1') allAnswered = allAnswered && pcCompleteForDay1();
+    if (day === '4') allAnswered = allAnswered && cbCompleteForDay4();
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    if (!btn) return;
+    btn.disabled = !allAnswered;
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (allAnswered && hint){
+      hint.textContent = state.completedDays[day] ? 'Day ' + day + ' complete — great work.' : 'Ready — click the button to mark today complete.';
+    }
+  }
+
+  function markComplete(day){
+    state.completedDays[day] = true;
+    saveState();
+    var panel = document.querySelector('.day-panel[data-panel="'+day+'"]');
+    var btn = panel.querySelector('[data-complete-btn="'+day+'"]');
+    btn.textContent = 'Day ' + day + ' complete ✓';
+    btn.classList.add('done');
+    var hint = panel.querySelector('[data-hint-for="'+day+'"]');
+    if (hint) hint.textContent = 'Day ' + day + ' complete — great work.';
+    renderNavStatuses();
+    if (day == TOTAL_DAYS){ document.getElementById('unitComplete').classList.add('show'); }
+  }
+
+  function restoreCompletedUI(){
+    for (var n=1; n<=TOTAL_DAYS; n++){
+      if (!state.completedDays[n]) continue;
+      var panel = document.querySelector('.day-panel[data-panel="'+n+'"]');
+      var btn = panel.querySelector('[data-complete-btn="'+n+'"]');
+      if (btn){ btn.textContent = 'Day ' + n + ' complete ✓'; btn.classList.add('done'); btn.disabled = false; }
+    }
+    if (state.completedDays[TOTAL_DAYS]) document.getElementById('unitComplete').classList.add('show');
+  }
+
+  function restoreReflections(){
+    document.querySelectorAll('[data-reflection]').forEach(function(ta){
+      var key = ta.dataset.reflection;
+      if (state.reflections[key]) ta.value = state.reflections[key];
+      ta.addEventListener('input', function(){ state.reflections[key] = ta.value; saveState(); });
+    });
+  }
+
+  // ---- Day 1: Paycheck Calculator ----
+  function runPaycheckCalc(){
+    var gross = parseFloat(document.getElementById('pcGross').value);
+    var expenses = parseFloat(document.getElementById('pcExpenses').value);
+    var summaryEl = document.getElementById('pcSummary');
+    var textEl = document.getElementById('pcSummaryText');
+
+    if (!(gross > 0) || isNaN(expenses) || expenses < 0){
+      summaryEl.hidden = false;
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Fill in a gross pay amount (greater than zero) and your essential expenses (zero or more) to calculate.';
+      return;
+    }
+
+    var federal = Math.round(gross * 0.10 * 100) / 100;
+    var state_ = Math.round(gross * 0.03 * 100) / 100;
+    var ss = Math.round(gross * 0.062 * 100) / 100;
+    var medicare = Math.round(gross * 0.0145 * 100) / 100;
+    var totalWithholding = Math.round((federal + state_ + ss + medicare) * 100) / 100;
+    var netPay = Math.round((gross - totalWithholding) * 100) / 100;
+    var disposable = Math.round((netPay - expenses) * 100) / 100;
+
+    state.pc = { gross: gross, expenses: expenses, federal: federal, state_: state_, ss: ss, medicare: medicare, totalWithholding: totalWithholding, netPay: netPay, disposable: disposable };
+    saveState();
+
+    summaryEl.hidden = false;
+    summaryEl.classList.remove('warn');
+    textEl.textContent =
+      'Federal Income Tax (10%): $' + federal.toFixed(2) +
+      '. State Income Tax (3%): $' + state_.toFixed(2) +
+      '. Social Security (6.2%): $' + ss.toFixed(2) +
+      '. Medicare (1.45%): $' + medicare.toFixed(2) +
+      '. Total Withholdings: $' + totalWithholding.toFixed(2) +
+      '. Net Pay: $' + netPay.toFixed(2) +
+      '. Disposable Income (Net Pay − Essential Expenses of $' + expenses.toFixed(2) + '): $' + disposable.toFixed(2) +
+      (disposable < 0 ? ' — that\'s a negative number, meaning essential expenses are actually running higher than net pay this period.' : '.');
+
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="1"]'));
+  }
+
+  function restorePaycheckCalc(){
+    var g = document.getElementById('pcGross'), ex = document.getElementById('pcExpenses');
+    if (state.pc && typeof state.pc.gross !== 'undefined' && g) g.value = state.pc.gross;
+    if (state.pc && typeof state.pc.expenses !== 'undefined' && ex) ex.value = state.pc.expenses;
+    if (state.pc && typeof state.pc.netPay !== 'undefined'){
+      var summaryEl = document.getElementById('pcSummary');
+      var textEl = document.getElementById('pcSummaryText');
+      summaryEl.hidden = false;
+      textEl.textContent =
+        'Federal Income Tax (10%): $' + state.pc.federal.toFixed(2) +
+        '. State Income Tax (3%): $' + state.pc.state_.toFixed(2) +
+        '. Social Security (6.2%): $' + state.pc.ss.toFixed(2) +
+        '. Medicare (1.45%): $' + state.pc.medicare.toFixed(2) +
+        '. Total Withholdings: $' + state.pc.totalWithholding.toFixed(2) +
+        '. Net Pay: $' + state.pc.netPay.toFixed(2) +
+        '. Disposable Income (Net Pay − Essential Expenses of $' + state.pc.expenses.toFixed(2) + '): $' + state.pc.disposable.toFixed(2) +
+        (state.pc.disposable < 0 ? ' — that\'s a negative number, meaning essential expenses are actually running higher than net pay this period.' : '.');
+    }
+  }
+
+  // ---- Day 4: Community Budget Allocator ----
+  function runBudgetCheck(){
+    var schools = parseFloat(document.getElementById('cbSchools').value) || 0;
+    var roads = parseFloat(document.getElementById('cbRoads').value) || 0;
+    var parks = parseFloat(document.getElementById('cbParks').value) || 0;
+    var safety = parseFloat(document.getElementById('cbSafety').value) || 0;
+    var giving = parseFloat(document.getElementById('cbGiving').value) || 0;
+    var summaryEl = document.getElementById('cbSummary');
+    var textEl = document.getElementById('cbSummaryText');
+
+    var vals = { schools: schools, roads: roads, parks: parks, safety: safety, giving: giving };
+    var labels = { schools: 'Public Schools', roads: 'Roads & Infrastructure', parks: 'Parks & Recreation', safety: 'Public Safety', giving: 'Community Giving-Back Fund' };
+    var total = schools + roads + parks + safety + giving;
+    var target = 500000;
+    var minEach = 50000;
+
+    state.cb = { schools: schools, roads: roads, parks: parks, safety: safety, giving: giving, total: total };
+    saveState();
+
+    summaryEl.hidden = false;
+
+    var underMin = Object.keys(vals).filter(function(k){ return vals[k] < minEach; });
+    var diff = Math.round((target - total) * 100) / 100;
+
+    if (underMin.length){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + '. ' + underMin.map(function(k){ return labels[k]; }).join(', ') + (underMin.length === 1 ? ' is' : ' are') + ' below the $50,000 minimum — raise ' + (underMin.length === 1 ? 'it' : 'them') + ' to at least $50,000 each.';
+    } else if (diff > 0){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + ', which is $' + diff.toLocaleString() + ' short of $500,000. Every category clears the $50,000 minimum — you just need to allocate $' + diff.toLocaleString() + ' more somewhere.';
+    } else if (diff < 0){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + ', which is $' + Math.abs(diff).toLocaleString() + ' over $500,000. Trim your allocations so the total comes down to exactly $500,000.';
+    } else {
+      summaryEl.classList.remove('warn');
+      textEl.textContent = 'Total: $' + total.toLocaleString() + ' — exactly $500,000, and every category meets the $50,000 minimum. Now write a justification referencing at least two specific public services from this unit, and how consumers, businesses, and government each share responsibility for the community.';
+    }
+
+    updateCompleteButton(document.querySelector('.day-panel[data-panel="4"]'));
+  }
+
+  function restoreBudgetCheck(){
+    var map = { schools: 'cbSchools', roads: 'cbRoads', parks: 'cbParks', safety: 'cbSafety', giving: 'cbGiving' };
+    Object.keys(map).forEach(function(k){
+      var el = document.getElementById(map[k]);
+      if (el && state.cb && typeof state.cb[k] !== 'undefined') el.value = state.cb[k];
+    });
+    if (state.cb && typeof state.cb.total !== 'undefined'){
+      runBudgetCheckDisplayOnly();
+    }
+  }
+
+  function runBudgetCheckDisplayOnly(){
+    var summaryEl = document.getElementById('cbSummary');
+    var textEl = document.getElementById('cbSummaryText');
+    var vals = { schools: state.cb.schools, roads: state.cb.roads, parks: state.cb.parks, safety: state.cb.safety, giving: state.cb.giving };
+    var labels = { schools: 'Public Schools', roads: 'Roads & Infrastructure', parks: 'Parks & Recreation', safety: 'Public Safety', giving: 'Community Giving-Back Fund' };
+    var total = state.cb.total;
+    var target = 500000, minEach = 50000;
+    summaryEl.hidden = false;
+    var underMin = Object.keys(vals).filter(function(k){ return vals[k] < minEach; });
+    var diff = Math.round((target - total) * 100) / 100;
+    if (underMin.length){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + '. ' + underMin.map(function(k){ return labels[k]; }).join(', ') + (underMin.length === 1 ? ' is' : ' are') + ' below the $50,000 minimum — raise ' + (underMin.length === 1 ? 'it' : 'them') + ' to at least $50,000 each.';
+    } else if (diff > 0){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + ', which is $' + diff.toLocaleString() + ' short of $500,000. Every category clears the $50,000 minimum — you just need to allocate $' + diff.toLocaleString() + ' more somewhere.';
+    } else if (diff < 0){
+      summaryEl.classList.add('warn');
+      textEl.textContent = 'Total so far: $' + total.toLocaleString() + ', which is $' + Math.abs(diff).toLocaleString() + ' over $500,000. Trim your allocations so the total comes down to exactly $500,000.';
+    } else {
+      summaryEl.classList.remove('warn');
+      textEl.textContent = 'Total: $' + total.toLocaleString() + ' — exactly $500,000, and every category meets the $50,000 minimum. Now write a justification referencing at least two specific public services from this unit, and how consumers, businesses, and government each share responsibility for the community.';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    document.querySelectorAll('.day-btn').forEach(function(b){ b.addEventListener('click', function(){ switchDay(parseInt(b.dataset.day,10)); }); });
+    document.querySelectorAll('.quiz-opt').forEach(function(btn){ btn.addEventListener('click', onQuizOptionClick); });
+    document.getElementById('pcBtn').addEventListener('click', runPaycheckCalc);
+    document.getElementById('cbBtn').addEventListener('click', runBudgetCheck);
+    document.querySelectorAll('[data-complete-btn]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var day = btn.getAttribute('data-complete-btn');
+        if (day === '1' && !pcCompleteForDay1()){
+          var hint1 = document.querySelector('[data-hint-for="1"]');
+          if (hint1) hint1.textContent = 'Run the Paycheck Calculator above at least once, then mark today complete.';
+          return;
+        }
+        if (day === '4' && !cbCompleteForDay4()){
+          var hint4 = document.querySelector('[data-hint-for="4"]');
+          if (hint4) hint4.textContent = 'Run the Community Budget Allocator above at least once, then mark today complete.';
+          return;
+        }
+        markComplete(day);
+      });
+    });
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (!confirm('This clears all your saved answers and progress on this device. Continue?')) return;
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      location.reload();
+    });
+    restoreReflections();
+    restorePaycheckCalc();
+    restoreBudgetCheck();
+    restoreQuizUI();
+    document.querySelectorAll('.day-panel').forEach(function(panel){ updateCompleteButton(panel); });
+    restoreCompletedUI();
+    switchDay(state.activeDay || 1);
+  });
+})();
+</script>
+
+</body></html>
